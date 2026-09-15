@@ -1,0 +1,1 @@
+-L "unisims_ver" -L "secureip" -debug "typical" --snapshot "netsim" "tb_conv_netlist" "glbl" 

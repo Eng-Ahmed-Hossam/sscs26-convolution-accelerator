@@ -1,0 +1,24 @@
+{
+  "N": 3,
+  "W": 32,
+  "asset": null,
+  "banks": [
+    0
+  ],
+  "name": "identity",
+  "num_kernels": 1,
+  "outputs_per_bank": 900,
+  "random_kernels": false,
+  "relu_default": 0,
+  "relu_modes": [
+    0,
+    1
+  ],
+  "seed": 2031982833,
+  "shift": 0,
+  "tags": [
+    "directed",
+    "identity"
+  ],
+  "why": "identity kernel: output must equal the image interior exactly"
+}

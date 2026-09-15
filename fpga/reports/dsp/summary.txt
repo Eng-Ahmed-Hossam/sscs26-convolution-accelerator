@@ -1,0 +1,13 @@
+variant      dsp
+use_dsp      1
+part         xc7z020clg400-1
+period_ns    8.000
+luts         377
+lut_cells    466
+ffs          606
+srls         20
+dsps         9
+brams        0
+wns_ns       1.377
+tns_ns       0.000
+failing_eps  0

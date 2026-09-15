@@ -1,0 +1,7 @@
+0.6
+2018.2
+Jun 14 2018
+20:41:02
+C:/Xilinx/Vivado/2018.2/data/verilog/src/glbl.v,1529022455,verilog,,,,,,,,,,,,
+D:/Digital_IC_Design/SSCS_Design_Competition/fpga/reports/dsp/sim/conv_top_funcsim.v,1789465984,verilog,,C:/Xilinx/Vivado/2018.2/data/verilog/src/glbl.v,,adder_tree;conv_top;ctrl_fsm;glbl;kernel_regfile;line_window;mac_array;normalize,,,,,,,,
+D:/Digital_IC_Design/SSCS_Design_Competition/tb/tb_conv_netlist.sv,1789465071,systemVerilog,,,,tb_conv_netlist,,,,,,,,

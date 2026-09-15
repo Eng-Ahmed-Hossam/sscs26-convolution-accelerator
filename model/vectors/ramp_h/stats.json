@@ -1,0 +1,98 @@
+{
+  "b0_relu0": {
+    "acc_headroom_bits": 13,
+    "acc_max": -56,
+    "acc_min": -56,
+    "acc_peak_abs": 56,
+    "acc_width_declared": 20,
+    "acc_width_used": 7,
+    "level_peaks": [
+      434,
+      434,
+      392,
+      217,
+      56
+    ],
+    "out_max": -56,
+    "out_min": -56,
+    "outputs": 900,
+    "prod_peak_abs": 434,
+    "prod_width_declared": 17,
+    "prod_width_used": 10,
+    "relu_clips": 0,
+    "sat_neg": 0,
+    "sat_pos": 0
+  },
+  "b0_relu1": {
+    "acc_headroom_bits": 13,
+    "acc_max": -56,
+    "acc_min": -56,
+    "acc_peak_abs": 56,
+    "acc_width_declared": 20,
+    "acc_width_used": 7,
+    "level_peaks": [
+      434,
+      434,
+      392,
+      217,
+      56
+    ],
+    "out_max": 0,
+    "out_min": 0,
+    "outputs": 900,
+    "prod_peak_abs": 434,
+    "prod_width_declared": 17,
+    "prod_width_used": 10,
+    "relu_clips": 900,
+    "sat_neg": 0,
+    "sat_pos": 0
+  },
+  "b1_relu0": {
+    "acc_headroom_bits": 19,
+    "acc_max": 0,
+    "acc_min": 0,
+    "acc_peak_abs": 0,
+    "acc_width_declared": 20,
+    "acc_width_used": 1,
+    "level_peaks": [
+      420,
+      623,
+      840,
+      217,
+      0
+    ],
+    "out_max": 0,
+    "out_min": 0,
+    "outputs": 900,
+    "prod_peak_abs": 420,
+    "prod_width_declared": 17,
+    "prod_width_used": 10,
+    "relu_clips": 0,
+    "sat_neg": 0,
+    "sat_pos": 0
+  },
+  "b1_relu1": {
+    "acc_headroom_bits": 19,
+    "acc_max": 0,
+    "acc_min": 0,
+    "acc_peak_abs": 0,
+    "acc_width_declared": 20,
+    "acc_width_used": 1,
+    "level_peaks": [
+      420,
+      623,
+      840,
+      217,
+      0
+    ],
+    "out_max": 0,
+    "out_min": 0,
+    "outputs": 900,
+    "prod_peak_abs": 420,
+    "prod_width_declared": 17,
+    "prod_width_used": 10,
+    "relu_clips": 0,
+    "sat_neg": 0,
+    "sat_pos": 0
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "N": 3,
+  "W": 32,
+  "asset": null,
+  "banks": [
+    0
+  ],
+  "name": "all_255",
+  "num_kernels": 1,
+  "outputs_per_bank": 900,
+  "random_kernels": false,
+  "relu_default": 0,
+  "relu_modes": [
+    0,
+    1
+  ],
+  "seed": 1255856871,
+  "shift": 0,
+  "tags": [
+    "directed",
+    "dc"
+  ],
+  "why": "DC gain = 9*255 = 2295 on a uniform field"
+}

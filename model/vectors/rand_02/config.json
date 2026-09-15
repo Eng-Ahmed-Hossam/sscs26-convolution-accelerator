@@ -1,0 +1,23 @@
+{
+  "N": 3,
+  "W": 32,
+  "asset": null,
+  "banks": [
+    0
+  ],
+  "name": "rand_02",
+  "num_kernels": 1,
+  "outputs_per_bank": 900,
+  "random_kernels": true,
+  "relu_default": 0,
+  "relu_modes": [
+    0,
+    1
+  ],
+  "seed": 998152335,
+  "shift": 4,
+  "tags": [
+    "random"
+  ],
+  "why": "uniform-random image, random kernels, random shift and bank count"
+}

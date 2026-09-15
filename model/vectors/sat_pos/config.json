@@ -1,0 +1,24 @@
+{
+  "N": 3,
+  "W": 32,
+  "asset": null,
+  "banks": [
+    0
+  ],
+  "name": "sat_pos",
+  "num_kernels": 1,
+  "outputs_per_bank": 900,
+  "random_kernels": false,
+  "relu_default": 0,
+  "relu_modes": [
+    0,
+    1
+  ],
+  "seed": 1891066542,
+  "shift": 0,
+  "tags": [
+    "directed",
+    "saturation"
+  ],
+  "why": "positive saturation must fire: acc +291465 clamps to +32767"
+}

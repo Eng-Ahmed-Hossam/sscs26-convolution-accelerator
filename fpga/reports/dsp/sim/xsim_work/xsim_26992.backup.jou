@@ -1,0 +1,13 @@
+#-----------------------------------------------------------
+# xsim v2018.2 (64-bit)
+# SW Build 2258646 on Thu Jun 14 20:03:12 MDT 2018
+# IP Build 2256618 on Thu Jun 14 22:10:49 MDT 2018
+# Start of session at: Tue Sep 15 12:53:16 2026
+# Process ID: 26992
+# Current directory: D:/Digital_IC_Design/SSCS_Design_Competition/fpga/reports/dsp/sim/xsim_work
+# Command line: xsim.exe -mode tcl -source {xsim.dir/netsim/xsim_script.tcl}
+# Log file: D:/Digital_IC_Design/SSCS_Design_Competition/fpga/reports/dsp/sim/xsim_work/xsim.log
+# Journal file: D:/Digital_IC_Design/SSCS_Design_Competition/fpga/reports/dsp/sim/xsim_work\xsim.jou
+#-----------------------------------------------------------
+source xsim.dir/netsim/xsim_script.tcl
+source pass1.tcl

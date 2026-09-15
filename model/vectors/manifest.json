@@ -1,0 +1,335 @@
+{
+  "N": 3,
+  "W": 32,
+  "master_seed": 20260915,
+  "outputs_per_bank": 900,
+  "real_family_included": false,
+  "total_runs": 140,
+  "total_vectors": 31,
+  "vectors": [
+    {
+      "name": "impulse",
+      "num_kernels": 2,
+      "runs": 4,
+      "seed": 1946471720,
+      "shift": 0,
+      "tags": [
+        "directed",
+        "orientation"
+      ]
+    },
+    {
+      "name": "all_zero",
+      "num_kernels": 2,
+      "runs": 4,
+      "seed": 1818706617,
+      "shift": 0,
+      "tags": [
+        "directed",
+        "quiescent",
+        "kernel_zero"
+      ]
+    },
+    {
+      "name": "all_255",
+      "num_kernels": 1,
+      "runs": 2,
+      "seed": 1255856871,
+      "shift": 0,
+      "tags": [
+        "directed",
+        "dc"
+      ]
+    },
+    {
+      "name": "checkerboard",
+      "num_kernels": 1,
+      "runs": 2,
+      "seed": 1096142980,
+      "shift": 0,
+      "tags": [
+        "directed",
+        "highfreq"
+      ]
+    },
+    {
+      "name": "ramp",
+      "num_kernels": 2,
+      "runs": 4,
+      "seed": 23753797,
+      "shift": 0,
+      "tags": [
+        "directed",
+        "gradient",
+        "multibank"
+      ]
+    },
+    {
+      "name": "ramp_h",
+      "num_kernels": 2,
+      "runs": 4,
+      "seed": 1229439918,
+      "shift": 0,
+      "tags": [
+        "directed",
+        "gradient"
+      ]
+    },
+    {
+      "name": "ramp_v",
+      "num_kernels": 2,
+      "runs": 4,
+      "seed": 1229439932,
+      "shift": 0,
+      "tags": [
+        "directed",
+        "gradient"
+      ]
+    },
+    {
+      "name": "identity",
+      "num_kernels": 1,
+      "runs": 2,
+      "seed": 2031982833,
+      "shift": 0,
+      "tags": [
+        "directed",
+        "identity"
+      ]
+    },
+    {
+      "name": "laplacian",
+      "num_kernels": 2,
+      "runs": 4,
+      "seed": 1290849174,
+      "shift": 0,
+      "tags": [
+        "directed",
+        "edge"
+      ]
+    },
+    {
+      "name": "sat_pos",
+      "num_kernels": 1,
+      "runs": 2,
+      "seed": 1891066542,
+      "shift": 0,
+      "tags": [
+        "directed",
+        "saturation"
+      ]
+    },
+    {
+      "name": "sat_neg",
+      "num_kernels": 1,
+      "runs": 2,
+      "seed": 1891064298,
+      "shift": 0,
+      "tags": [
+        "directed",
+        "saturation",
+        "relu"
+      ]
+    },
+    {
+      "name": "rand_00",
+      "num_kernels": 2,
+      "runs": 4,
+      "seed": 998152333,
+      "shift": 0,
+      "tags": [
+        "random"
+      ]
+    },
+    {
+      "name": "rand_01",
+      "num_kernels": 1,
+      "runs": 2,
+      "seed": 998152334,
+      "shift": 0,
+      "tags": [
+        "random"
+      ]
+    },
+    {
+      "name": "rand_02",
+      "num_kernels": 1,
+      "runs": 2,
+      "seed": 998152335,
+      "shift": 4,
+      "tags": [
+        "random"
+      ]
+    },
+    {
+      "name": "rand_03",
+      "num_kernels": 3,
+      "runs": 6,
+      "seed": 998152336,
+      "shift": 7,
+      "tags": [
+        "random"
+      ]
+    },
+    {
+      "name": "rand_04",
+      "num_kernels": 3,
+      "runs": 6,
+      "seed": 998152337,
+      "shift": 0,
+      "tags": [
+        "random"
+      ]
+    },
+    {
+      "name": "rand_05",
+      "num_kernels": 3,
+      "runs": 6,
+      "seed": 998152338,
+      "shift": 4,
+      "tags": [
+        "random"
+      ]
+    },
+    {
+      "name": "rand_06",
+      "num_kernels": 3,
+      "runs": 6,
+      "seed": 998152339,
+      "shift": 0,
+      "tags": [
+        "random"
+      ]
+    },
+    {
+      "name": "rand_07",
+      "num_kernels": 4,
+      "runs": 8,
+      "seed": 998152340,
+      "shift": 0,
+      "tags": [
+        "random"
+      ]
+    },
+    {
+      "name": "rand_08",
+      "num_kernels": 2,
+      "runs": 4,
+      "seed": 998152341,
+      "shift": 4,
+      "tags": [
+        "random"
+      ]
+    },
+    {
+      "name": "rand_09",
+      "num_kernels": 1,
+      "runs": 2,
+      "seed": 998152342,
+      "shift": 4,
+      "tags": [
+        "random"
+      ]
+    },
+    {
+      "name": "rand_10",
+      "num_kernels": 1,
+      "runs": 2,
+      "seed": 998152364,
+      "shift": 4,
+      "tags": [
+        "random"
+      ]
+    },
+    {
+      "name": "rand_11",
+      "num_kernels": 1,
+      "runs": 2,
+      "seed": 998152365,
+      "shift": 0,
+      "tags": [
+        "random"
+      ]
+    },
+    {
+      "name": "rand_12",
+      "num_kernels": 4,
+      "runs": 8,
+      "seed": 998152366,
+      "shift": 7,
+      "tags": [
+        "random"
+      ]
+    },
+    {
+      "name": "rand_13",
+      "num_kernels": 2,
+      "runs": 4,
+      "seed": 998152367,
+      "shift": 4,
+      "tags": [
+        "random"
+      ]
+    },
+    {
+      "name": "rand_14",
+      "num_kernels": 4,
+      "runs": 8,
+      "seed": 998152368,
+      "shift": 4,
+      "tags": [
+        "random"
+      ]
+    },
+    {
+      "name": "rand_15",
+      "num_kernels": 4,
+      "runs": 8,
+      "seed": 998152369,
+      "shift": 7,
+      "tags": [
+        "random"
+      ]
+    },
+    {
+      "name": "rand_16",
+      "num_kernels": 3,
+      "runs": 6,
+      "seed": 998152370,
+      "shift": 0,
+      "tags": [
+        "random"
+      ]
+    },
+    {
+      "name": "rand_17",
+      "num_kernels": 4,
+      "runs": 8,
+      "seed": 998152371,
+      "shift": 0,
+      "tags": [
+        "random"
+      ]
+    },
+    {
+      "name": "rand_18",
+      "num_kernels": 4,
+      "runs": 8,
+      "seed": 998152372,
+      "shift": 7,
+      "tags": [
+        "random"
+      ]
+    },
+    {
+      "name": "rand_19",
+      "num_kernels": 3,
+      "runs": 6,
+      "seed": 998152373,
+      "shift": 0,
+      "tags": [
+        "random"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "N": 3,
+  "W": 32,
+  "asset": null,
+  "banks": [
+    0,
+    1
+  ],
+  "name": "all_zero",
+  "num_kernels": 2,
+  "outputs_per_bank": 900,
+  "random_kernels": false,
+  "relu_default": 0,
+  "relu_modes": [
+    0,
+    1
+  ],
+  "seed": 1818706617,
+  "shift": 0,
+  "tags": [
+    "directed",
+    "quiescent",
+    "kernel_zero"
+  ],
+  "why": "quiescent baseline; every output exactly 0 with the most negative kernel (bank 0) and with the all-zero kernel (bank 1), which is the zero kernel value class required by docs/05 s6 coverage"
+}

@@ -1,0 +1,34 @@
+Vivado Simulator 2018.2
+Copyright 1986-1999, 2001-2018 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2018.2/bin/unwrapped/win64.o/xelab.exe -L unisims_ver -L secureip -debug typical --snapshot netsim tb_conv_netlist glbl 
+Multi-threading is on. Using 10 slave threads.
+Starting static elaboration
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module unisims_ver.FDCE_default
+Compiling module unisims_ver.x_lut3_mux8
+Compiling module unisims_ver.LUT3
+Compiling module unisims_ver.LUT4
+Compiling module unisims_ver.LUT6
+Compiling module unisims_ver.LUT5
+Compiling module unisims_ver.CARRY4
+Compiling module unisims_ver.x_lut2_mux4
+Compiling module unisims_ver.LUT2
+Compiling module unisims_ver.x_lut1_mux2
+Compiling module unisims_ver.LUT1
+Compiling module work.adder_tree
+Compiling module unisims_ver.SRL16E_default
+Compiling module unisims_ver.FDRE_default
+Compiling module work.ctrl_fsm
+Compiling module work.kernel_regfile
+Compiling module unisims_ver.SRLC32E_default
+Compiling module work.line_window
+Compiling module unisims_ver.DSP48E1(ACASCREG=0,ALUMODEREG=0,...
+Compiling module work.mac_array
+Compiling module work.normalize
+Compiling module work.conv_top
+Compiling module work.tb_conv_netlist
+Compiling module work.glbl
+Built simulation snapshot netsim

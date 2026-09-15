@@ -1,0 +1,7 @@
+Running: xsim.dir/netsim/xsimk.exe -simmode gui -testplusarg image=D:/Digital_IC_Design/SSCS_Design_Competition/model/vectors/rand_00/image.txt -testplusarg kernel0=D:/Digital_IC_Design/SSCS_Design_Competition/model/vectors/rand_00/kernel_b0.txt -testplusarg expected0=D:/Digital_IC_Design/SSCS_Design_Competition/model/vectors/rand_00/expected_b0_relu0.txt -testplusarg relu=0 -testplusarg shift=0 -wdb netsim.wdb -simrunnum 0 -socket 65393
+Design successfully loaded
+Design Loading Memory Usage: 15996 KB (Peak: 15996 KB)
+Design Loading CPU Usage: 30 ms
+Simulation completed
+Simulation Memory Usage: 21000 KB (Peak: 21000 KB)
+Simulation CPU Usage: 1592 ms
