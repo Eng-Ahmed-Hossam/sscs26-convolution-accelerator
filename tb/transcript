@@ -1,0 +1,220 @@
+# //  Questa Sim-64
+# //  Version 2021.1 win64 Jan 19 2021
+# //
+# //  Copyright 1991-2021 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  QuestaSim and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# vsim . 
+# Start time: 17:23:48 on Sep 15,2026
+# ** Error (suppressible): (vsim-19) Failed to access library '' at "".
+# Invalid argument. (errno = EINVAL)
+# Error loading design
+# End time: 17:23:51 on Sep 15,2026, Elapsed time: 0:00:03
+# Errors: 1, Warnings: 0
+vsim -voptargs=+acc work.tb_conv_top
+# vsim -voptargs="+acc" work.tb_conv_top 
+# Start time: 17:24:44 on Sep 15,2026
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Note: (vopt-143) Recognized 1 FSM in module "ctrl_fsm(fast)".
+# ** Warning: ../rtl/mac_array.sv(41): (vopt-13314) Defaulting port 'win' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+# ** Warning: ../rtl/mac_array.sv(42): (vopt-13314) Defaulting port 'coef' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+# ** Warning: ../rtl/adder_tree.sv(45): (vopt-13314) Defaulting port 'prod' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=3.
+# Loading sv_std.std
+# Loading work.pkg_params(fast)
+# Loading work.tb_conv_top(fast)
+# Loading work.conv_top(fast)
+# Loading work.ctrl_fsm(fast)
+# Loading work.kernel_regfile(fast)
+# Loading work.line_window(fast)
+# Loading work.mac_array(fast)
+# Loading work.adder_tree(fast)
+# Loading work.normalize(fast)
+add wave -position end  sim:/tb_conv_top/win_adv_q
+add wave -position end  sim:/tb_conv_top/valid_cnt_bank
+add wave -position end  sim:/tb_conv_top/use_bubbles
+add wave -position end  sim:/tb_conv_top/TBW
+add wave -position end  sim:/tb_conv_top/T_FIRST
+add wave -position end  sim:/tb_conv_top/shift_cfg
+add wave -position end  sim:/tb_conv_top/sat_lo
+add wave -position end  sim:/tb_conv_top/sat_hi
+add wave -position end  sim:/tb_conv_top/sat_flag
+add wave -position end  sim:/tb_conv_top/s_kern
+add wave -position end  sim:/tb_conv_top/s_image
+add wave -position end  sim:/tb_conv_top/s_hwout
+add wave -position end  sim:/tb_conv_top/s_exp
+add wave -position end  sim:/tb_conv_top/rst_n
+add wave -position end  sim:/tb_conv_top/relu_cfg
+add wave -position end  sim:/tb_conv_top/px_valid
+add wave -position end  sim:/tb_conv_top/px_last
+add wave -position end  sim:/tb_conv_top/px_data
+add wave -position end  sim:/tb_conv_top/prop_name
+add wave -position end  sim:/tb_conv_top/prop_fail
+add wave -position end  sim:/tb_conv_top/prev_win
+add wave -position end  sim:/tb_conv_top/prev_valid
+add wave -position end  sim:/tb_conv_top/prev_res
+add wave -position end  sim:/tb_conv_top/prev_prod
+add wave -position end  sim:/tb_conv_top/prev_p8a1
+add wave -position end  sim:/tb_conv_top/prev_out_last
+add wave -position end  sim:/tb_conv_top/prev_acc
+add wave -position end  sim:/tb_conv_top/PIXELS
+add wave -position end  sim:/tb_conv_top/OUTS
+add wave -position end  sim:/tb_conv_top/out_valid
+add wave -position end  sim:/tb_conv_top/out_last
+add wave -position end  sim:/tb_conv_top/out_data
+add wave -position end  sim:/tb_conv_top/out_bank
+add wave -position end  sim:/tb_conv_top/NPROP
+add wave -position end  sim:/tb_conv_top/n_read
+add wave -position end  sim:/tb_conv_top/n_out
+add wave -position end  sim:/tb_conv_top/kl_valid
+add wave -position end  sim:/tb_conv_top/kl_coef
+add wave -position end  sim:/tb_conv_top/kl_bank
+add wave -position end  sim:/tb_conv_top/kl_addr
+add wave -position end  sim:/tb_conv_top/kern
+add wave -position end  sim:/tb_conv_top/inclusive_cyc
+add wave -position end  sim:/tb_conv_top/image
+add wave -position end  sim:/tb_conv_top/hw_out
+add wave -position end  sim:/tb_conv_top/guard
+add wave -position end  sim:/tb_conv_top/first_valid_cyc
+add wave -position end  sim:/tb_conv_top/expect_
+add wave -position end  sim:/tb_conv_top/exp_idx
+add wave -position end  sim:/tb_conv_top/exp_data_v
+add wave -position end  sim:/tb_conv_top/exp_bank_v
+add wave -position end  sim:/tb_conv_top/exp_bank
+add wave -position end  sim:/tb_conv_top/errors
+add wave -position end  sim:/tb_conv_top/done
+add wave -position end  sim:/tb_conv_top/cov_state
+add wave -position end  sim:/tb_conv_top/cov_shift
+add wave -position end  sim:/tb_conv_top/cov_sat_pos
+add wave -position end  sim:/tb_conv_top/cov_sat_neg
+add wave -position end  sim:/tb_conv_top/cov_relu_clip
+add wave -position end  sim:/tb_conv_top/cov_relu
+add wave -position end  sim:/tb_conv_top/cov_nbanks
+add wave -position end  sim:/tb_conv_top/cov_kzero
+add wave -position end  sim:/tb_conv_top/cov_kmixed
+add wave -position end  sim:/tb_conv_top/cov_kmaxpos
+add wave -position end  sim:/tb_conv_top/cov_kmaxneg
+add wave -position end  sim:/tb_conv_top/cov_bubble
+add wave -position end  sim:/tb_conv_top/cov_bank
+add wave -position end  sim:/tb_conv_top/counting
+add wave -position end  sim:/tb_conv_top/clk
+add wave -position end  sim:/tb_conv_top/check_lat
+add wave -position end  sim:/tb_conv_top/cfg_start
+add wave -position end  sim:/tb_conv_top/cfg_relu_en
+add wave -position end  sim:/tb_conv_top/cfg_out_shift
+add wave -position end  sim:/tb_conv_top/cfg_num_kernels
+add wave -position end  sim:/tb_conv_top/busy
+add wave -position end  sim:/tb_conv_top/banks_used
+run
+# ** Fatal: tb_conv_top: +image=<path> is required
+#    Time: 0 ps  Scope: tb_conv_top File: tb_conv_top.sv Line: 398
+# ** Note: $finish    : tb_conv_top.sv(398)
+#    Time: 0 ps  Iteration: 0  Instance: /tb_conv_top
+# 1
+# Break in Module tb_conv_top at tb_conv_top.sv line 398
+restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=3.
+# Loading work.pkg_params(fast)
+# Loading work.tb_conv_top(fast)
+# Loading work.conv_top(fast)
+# Loading work.ctrl_fsm(fast)
+# Loading work.kernel_regfile(fast)
+# Loading work.line_window(fast)
+# Loading work.mac_array(fast)
+# Loading work.adder_tree(fast)
+# Loading work.normalize(fast)
+run
+# ** Fatal: tb_conv_top: +image=<path> is required
+#    Time: 0 ps  Scope: tb_conv_top File: tb_conv_top.sv Line: 398
+# ** Note: $finish    : tb_conv_top.sv(398)
+#    Time: 0 ps  Iteration: 0  Instance: /tb_conv_top
+# 1
+# Break in Module tb_conv_top at tb_conv_top.sv line 398
+vsim -voptargs=+acc work.tb_conv_directed
+# End time: 17:26:54 on Sep 15,2026, Elapsed time: 0:02:10
+# Errors: 1, Warnings: 3
+# vsim -voptargs="+acc" work.tb_conv_directed 
+# Start time: 17:26:55 on Sep 15,2026
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Note: (vopt-143) Recognized 1 FSM in module "ctrl_fsm(fast)".
+# ** Warning: ../rtl/mac_array.sv(41): (vopt-13314) Defaulting port 'win' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+# ** Warning: ../rtl/mac_array.sv(42): (vopt-13314) Defaulting port 'coef' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+# ** Warning: ../rtl/adder_tree.sv(45): (vopt-13314) Defaulting port 'prod' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=3.
+# Loading sv_std.std
+# Loading work.pkg_params(fast)
+# Loading work.tb_conv_directed(fast)
+# Loading work.conv_top(fast)
+# Loading work.ctrl_fsm(fast)
+# Loading work.kernel_regfile(fast)
+# Loading work.line_window(fast)
+# Loading work.mac_array(fast)
+# Loading work.adder_tree(fast)
+# Loading work.normalize(fast)
+add wave -position end  sim:/tb_conv_directed/TBW
+add wave -position end  sim:/tb_conv_directed/sat_flag
+add wave -position end  sim:/tb_conv_directed/s_kern
+add wave -position end  sim:/tb_conv_directed/s_image
+add wave -position end  sim:/tb_conv_directed/s_exp
+add wave -position end  sim:/tb_conv_directed/rst_n
+add wave -position end  sim:/tb_conv_directed/px_valid
+add wave -position end  sim:/tb_conv_directed/px_last
+add wave -position end  sim:/tb_conv_directed/px_data
+add wave -position end  sim:/tb_conv_directed/PIXELS
+add wave -position end  sim:/tb_conv_directed/OUTS
+add wave -position end  sim:/tb_conv_directed/out_valid
+add wave -position end  sim:/tb_conv_directed/out_last
+add wave -position end  sim:/tb_conv_directed/out_data
+add wave -position end  sim:/tb_conv_directed/out_bank
+add wave -position end  sim:/tb_conv_directed/OEDGE
+add wave -position end  sim:/tb_conv_directed/n_read
+add wave -position end  sim:/tb_conv_directed/n_out
+add wave -position end  sim:/tb_conv_directed/kl_valid
+add wave -position end  sim:/tb_conv_directed/kl_coef
+add wave -position end  sim:/tb_conv_directed/kl_bank
+add wave -position end  sim:/tb_conv_directed/kl_addr
+add wave -position end  sim:/tb_conv_directed/kern
+add wave -position end  sim:/tb_conv_directed/image
+add wave -position end  sim:/tb_conv_directed/got
+add wave -position end  sim:/tb_conv_directed/expect_
+add wave -position end  sim:/tb_conv_directed/exp_v2
+add wave -position end  sim:/tb_conv_directed/exp_v
+add wave -position end  sim:/tb_conv_directed/errors
+add wave -position end  sim:/tb_conv_directed/done
+add wave -position end  sim:/tb_conv_directed/collect
+add wave -position end  sim:/tb_conv_directed/clk
+add wave -position end  sim:/tb_conv_directed/cfg_start
+add wave -position end  sim:/tb_conv_directed/cfg_relu_en
+add wave -position end  sim:/tb_conv_directed/cfg_out_shift
+add wave -position end  sim:/tb_conv_directed/cfg_num_kernels
+add wave -position end  sim:/tb_conv_directed/busy
+restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-8009) Loading existing optimized design _opt1
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=3.
+# Loading work.pkg_params(fast)
+# Loading work.tb_conv_directed(fast)
+# Loading work.conv_top(fast)
+# Loading work.ctrl_fsm(fast)
+# Loading work.kernel_regfile(fast)
+# Loading work.line_window(fast)
+# Loading work.mac_array(fast)
+# Loading work.adder_tree(fast)
+# Loading work.normalize(fast)
+run
+# ** Fatal: +image= required
+#    Time: 0 ps  Scope: tb_conv_directed File: tb_conv_directed.sv Line: 177
+# ** Note: $finish    : tb_conv_directed.sv(177)
+#    Time: 0 ps  Iteration: 0  Instance: /tb_conv_directed
+# 1
+# Break in Module tb_conv_directed at tb_conv_directed.sv line 177
