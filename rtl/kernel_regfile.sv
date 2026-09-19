@@ -15,7 +15,7 @@
 //                {kl_bank, kl_addr}. Writes to a NON-active bank are legal at
 //                any time, which is what makes the multi-kernel bonus work
 //                without a shadow register file.
-//   Read port  : combinational, the whole active bank at once, selected by
+//   Read port  : registered, the whole active bank at once, selected by
 //                bank_sel from ctrl_fsm (which changes only in FLUSH).
 //
 //   coef[r*N+c] pairs with window tap win[r][c] (docs/04 s3).
@@ -27,9 +27,10 @@
 //   the active bank untouched, which is the property the protocol relies on.
 //
 // LATENCY / THROUGHPUT / FOOTPRINT
-//   Write latency 1 cycle; read is combinational (0 cycles, contributes 0 to
-//   P_PIPE). NUM_BANKS * N*N * COEF_W = 4*9*8 = 288 flip-flops plus the
-//   read mux; no DSP, no BRAM.
+//   Write latency 1 cycle; read latency 1 cycle.  The read register is a static
+//   side input to the MAC rather than a stage in the pixel-data path, so it
+//   contributes 0 to P_PIPE.  Storage is (NUM_BANKS+1) * N*N * COEF_W =
+//   5*9*8 = 360 flip-flops plus the read mux; no DSP, no BRAM.
 // ---------------------------------------------------------------------------
 `timescale 1ns / 1ps
 
@@ -43,7 +44,7 @@ module kernel_regfile
   input  logic [BANK_W-1:0]        kl_bank,
   input  logic [KADDR_W-1:0]       kl_addr,
   input  logic signed [COEF_W-1:0] kl_coef,
-  // Active bank selection and combinational read
+  // Active bank selection and registered full-bank read
   input  logic [BANK_W-1:0]        bank_sel,
   output logic signed [COEF_W-1:0] coef [0:N*N-1]
 );
@@ -70,16 +71,21 @@ module kernel_regfile
   end
 
   // -------------------------------------------------------------------------
-  // Combinational full-bank read: all N*N coefficients of the active bank are
-  // presented at once, because all N*N multipliers consume them in the same
-  // cycle.
+  // Registered full-bank read.  This breaks the bank_sel -> bank mux -> LUT
+  // multiplier path without adding a pixel-data pipeline stage.  bank_sel is
+  // stable for an entire frame; at FLUSH->RUN the old bank is captured once,
+  // then the new bank is present before any qualified window can reach the
+  // MAC.  All N*N coefficients switch atomically on a clock edge.
   // -------------------------------------------------------------------------
-  genvar i;
-  generate
-    for (i = 0; i < N*N; i++) begin : g_read
-      assign coef[i] = bank[bank_sel][i];
+  always_ff @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+      for (int i = 0; i < N*N; i++)
+        coef[i] <= '0;
+    end else begin
+      for (int i = 0; i < N*N; i++)
+        coef[i] <= bank[bank_sel][i];
     end
-  endgenerate
+  end
 
 `ifndef SYNTHESIS
   initial begin

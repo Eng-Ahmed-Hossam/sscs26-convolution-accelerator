@@ -1,0 +1,50 @@
+{
+  "b0_relu0": {
+    "acc_peak_abs": 665,
+    "out_max": 665,
+    "out_min": -657,
+    "relu_clips": 0,
+    "sat_neg": 0,
+    "sat_pos": 0
+  },
+  "b0_relu1": {
+    "acc_peak_abs": 665,
+    "out_max": 665,
+    "out_min": 0,
+    "relu_clips": 32306,
+    "sat_neg": 0,
+    "sat_pos": 0
+  },
+  "b1_relu0": {
+    "acc_peak_abs": 787,
+    "out_max": 766,
+    "out_min": -787,
+    "relu_clips": 0,
+    "sat_neg": 0,
+    "sat_pos": 0
+  },
+  "b1_relu1": {
+    "acc_peak_abs": 787,
+    "out_max": 766,
+    "out_min": 0,
+    "relu_clips": 32177,
+    "sat_neg": 0,
+    "sat_pos": 0
+  },
+  "b2_relu0": {
+    "acc_peak_abs": 255,
+    "out_max": 255,
+    "out_min": 17,
+    "relu_clips": 0,
+    "sat_neg": 0,
+    "sat_pos": 0
+  },
+  "b2_relu1": {
+    "acc_peak_abs": 255,
+    "out_max": 255,
+    "out_min": 17,
+    "relu_clips": 0,
+    "sat_neg": 0,
+    "sat_pos": 0
+  }
+}

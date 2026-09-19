@@ -1,0 +1,36 @@
+{
+  "N": 3,
+  "W": 32,
+  "asset": "camera_detail32",
+  "banks": [
+    0
+  ],
+  "crop_origin": [
+    345,
+    268
+  ],
+  "name": "real_camera_detail32_blur",
+  "num_kernels": 1,
+  "outputs_per_bank": 900,
+  "random_kernels": false,
+  "relu_default": 0,
+  "relu_modes": [
+    0,
+    1
+  ],
+  "resized": false,
+  "seed": null,
+  "shift": 4,
+  "source_image": "camera",
+  "source_resolution": [
+    512,
+    512
+  ],
+  "tags": [
+    "real",
+    "blur",
+    "w32"
+  ],
+  "toggle_density_milli": 464,
+  "why": "real-image blur vector from crop camera_detail32"
+}

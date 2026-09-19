@@ -9,7 +9,8 @@
 //      (bank, address) so a bank-select or address-decode error cannot alias;
 //   2. bank isolation --- writing one bank leaves the other three unchanged,
 //      which is the property assumption A2 relies on for multi-kernel runs;
-//   3. bank_sel selects the whole active bank combinationally, in one cycle;
+//   3. bank_sel selects the whole active bank through a registered read: the
+//      output holds before the edge and the complete new bank appears after it;
 //   4. kl_valid low is a no-op;
 //   5. out-of-range kl_addr (N*N .. 2^KADDR_W-1) is ignored, not aliased onto
 //      a real coefficient;
@@ -67,7 +68,8 @@ module tb_kernel_regfile
     logic signed [COEF_W-1:0] want;
     @(negedge clk);
     bank_sel = b[BANK_W-1:0];
-    #1;                                   // combinational read settles
+    @(posedge clk);
+    #1;                                   // registered read settles
     checked++;
     for (int i = 0; i < N*N; i++) begin
       want = ref_coef(b, i);
@@ -83,6 +85,7 @@ module tb_kernel_regfile
   task automatic check_bank_zero(input int b, input string what);
     @(negedge clk);
     bank_sel = b[BANK_W-1:0];
+    @(posedge clk);
     #1;
     for (int i = 0; i < N*N; i++)
       if (coef[i] !== '0) begin
@@ -115,6 +118,38 @@ module tb_kernel_regfile
     $display("ok    wrote and read back %0d banks x %0d coefficients",
              NUM_BANKS, N*N);
 
+    // A bank swap is synchronous: the selected coefficients must remain
+    // stable before the active edge, then all switch together after it.  A
+    // combinational bank mux fails this check and recreates the timing path
+    // from bank_sel through the multiplier into the product register.
+    check_bank(0, "registered-read setup");
+    @(negedge clk);
+    bank_sel = 2'd2;
+    #1;
+    for (int i = 0; i < N*N; i++) begin
+      logic signed [COEF_W-1:0] want_old;
+      want_old = ref_coef(0, i);
+      if (coef[i] !== want_old) begin
+        errors++;
+        if (errors <= 12)
+          $display("FAIL  registered read changed before clock: coef[%0d] = %0d, expected old bank value %0d",
+                   i, coef[i], want_old);
+      end
+    end
+    @(posedge clk);
+    #1;
+    for (int i = 0; i < N*N; i++) begin
+      logic signed [COEF_W-1:0] want_new;
+      want_new = ref_coef(2, i);
+      if (coef[i] !== want_new) begin
+        errors++;
+        if (errors <= 12)
+          $display("FAIL  registered read did not update after clock: coef[%0d] = %0d, expected new bank value %0d",
+                   i, coef[i], want_new);
+      end
+    end
+    $display("ok    registered bank read switches atomically on the clock edge");
+
     // --- 2. bank isolation: rewrite bank 1, others must not move ----------
     for (int i = 0; i < N*N; i++)
       write_coef(1, i, ref_coef(1, i));          // same values, but exercised
@@ -125,7 +160,7 @@ module tb_kernel_regfile
       write_coef(1, i, COEF_MAX);
     for (int b = 0; b < NUM_BANKS; b++)
       if (b != 1) check_bank(b, "isolation (after perturbing bank 1)");
-    @(negedge clk); bank_sel = 2'd1; #1;
+    @(negedge clk); bank_sel = 2'd1; @(posedge clk); #1;
     cmax_v = COEF_MAX;
     for (int i = 0; i < N*N; i++)
       if (coef[i] !== cmax_v) begin

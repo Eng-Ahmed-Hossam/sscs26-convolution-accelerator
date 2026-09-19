@@ -1,7 +1,7 @@
 // Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
-// Date        : Tue Sep 15 12:53:04 2026
+// Date        : Sat Sep 19 21:33:34 2026
 // Host        : Eng_Ahmed running 64-bit major release  (build 9200)
 // Command     : write_verilog -force -mode funcsim
 //               D:/Digital_IC_Design/SSCS_Design_Competition/fpga/reports/dsp/sim/conv_top_funcsim.v
@@ -24,7 +24,7 @@ module adder_tree
     P,
     \p8_a1_reg[16]_i_2 ,
     p_0_out__6,
-    \FSM_sequential_state_reg[0] ,
+    shift_en,
     clk,
     \prod[4] ,
     p_0_out__3,
@@ -52,7 +52,7 @@ module adder_tree
   input [16:0]P;
   input \p8_a1_reg[16]_i_2 ;
   input [15:0]p_0_out__6;
-  input \FSM_sequential_state_reg[0] ;
+  input shift_en;
   input clk;
   input [15:0]\prod[4] ;
   input [0:0]p_0_out__3;
@@ -71,7 +71,6 @@ module adder_tree
   input rst_n_1;
 
   wire [16:0]D;
-  wire \FSM_sequential_state_reg[0] ;
   wire [0:0]O;
   wire [16:0]P;
   wire [6:0]Q;
@@ -397,6 +396,7 @@ module adder_tree
   wire \s2_reg[1][7]_i_1_n_6 ;
   wire \s2_reg[1][7]_i_1_n_7 ;
   wire [18:0]\s2_reg[1]_2 ;
+  wire shift_en;
   wire [2:0]\NLW_acc_reg[11]_i_1_CO_UNCONNECTED ;
   wire [2:0]\NLW_acc_reg[15]_i_1_CO_UNCONNECTED ;
   wire [3:0]\NLW_acc_reg[19]_i_1_CO_UNCONNECTED ;
@@ -769,7 +769,7 @@ module adder_tree
     .INIT(1'b0)) 
     \acc_reg[0] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_1),
         .D(\acc_reg[3]_i_1_n_7 ),
         .Q(Q[0]));
@@ -777,7 +777,7 @@ module adder_tree
     .INIT(1'b0)) 
     \acc_reg[10] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_1),
         .D(\acc_reg[11]_i_1_n_5 ),
         .Q(acc[10]));
@@ -785,7 +785,7 @@ module adder_tree
     .INIT(1'b0)) 
     \acc_reg[11] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_1),
         .D(\acc_reg[11]_i_1_n_4 ),
         .Q(acc[11]));
@@ -800,7 +800,7 @@ module adder_tree
     .INIT(1'b0)) 
     \acc_reg[12] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_1),
         .D(\acc_reg[15]_i_1_n_7 ),
         .Q(acc[12]));
@@ -808,7 +808,7 @@ module adder_tree
     .INIT(1'b0)) 
     \acc_reg[13] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_1),
         .D(\acc_reg[15]_i_1_n_6 ),
         .Q(acc[13]));
@@ -816,7 +816,7 @@ module adder_tree
     .INIT(1'b0)) 
     \acc_reg[14] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_1),
         .D(\acc_reg[15]_i_1_n_5 ),
         .Q(acc[14]));
@@ -824,7 +824,7 @@ module adder_tree
     .INIT(1'b0)) 
     \acc_reg[15] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_1),
         .D(\acc_reg[15]_i_1_n_4 ),
         .Q(acc[15]));
@@ -839,7 +839,7 @@ module adder_tree
     .INIT(1'b0)) 
     \acc_reg[16] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_1),
         .D(\acc_reg[19]_i_1_n_7 ),
         .Q(acc[16]));
@@ -847,7 +847,7 @@ module adder_tree
     .INIT(1'b0)) 
     \acc_reg[17] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_1),
         .D(\acc_reg[19]_i_1_n_6 ),
         .Q(acc[17]));
@@ -855,7 +855,7 @@ module adder_tree
     .INIT(1'b0)) 
     \acc_reg[18] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_1),
         .D(\acc_reg[19]_i_1_n_5 ),
         .Q(acc[18]));
@@ -863,7 +863,7 @@ module adder_tree
     .INIT(1'b0)) 
     \acc_reg[19] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_1),
         .D(\acc_reg[19]_i_1_n_4 ),
         .Q(acc[19]));
@@ -878,7 +878,7 @@ module adder_tree
     .INIT(1'b0)) 
     \acc_reg[1] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_1),
         .D(\acc_reg[3]_i_1_n_6 ),
         .Q(Q[1]));
@@ -886,7 +886,7 @@ module adder_tree
     .INIT(1'b0)) 
     \acc_reg[2] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_1),
         .D(\acc_reg[3]_i_1_n_5 ),
         .Q(Q[2]));
@@ -894,7 +894,7 @@ module adder_tree
     .INIT(1'b0)) 
     \acc_reg[3] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_1),
         .D(\acc_reg[3]_i_1_n_4 ),
         .Q(Q[3]));
@@ -909,7 +909,7 @@ module adder_tree
     .INIT(1'b0)) 
     \acc_reg[4] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_1),
         .D(\acc_reg[7]_i_1_n_7 ),
         .Q(Q[4]));
@@ -917,7 +917,7 @@ module adder_tree
     .INIT(1'b0)) 
     \acc_reg[5] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_1),
         .D(\acc_reg[7]_i_1_n_6 ),
         .Q(Q[5]));
@@ -925,7 +925,7 @@ module adder_tree
     .INIT(1'b0)) 
     \acc_reg[6] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_1),
         .D(\acc_reg[7]_i_1_n_5 ),
         .Q(Q[6]));
@@ -933,7 +933,7 @@ module adder_tree
     .INIT(1'b0)) 
     \acc_reg[7] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_1),
         .D(\acc_reg[7]_i_1_n_4 ),
         .Q(acc[7]));
@@ -948,7 +948,7 @@ module adder_tree
     .INIT(1'b0)) 
     \acc_reg[8] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_1),
         .D(\acc_reg[11]_i_1_n_7 ),
         .Q(acc[8]));
@@ -956,7 +956,7 @@ module adder_tree
     .INIT(1'b0)) 
     \acc_reg[9] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_1),
         .D(\acc_reg[11]_i_1_n_6 ),
         .Q(acc[9]));
@@ -964,7 +964,7 @@ module adder_tree
     .INIT(1'b0)) 
     \p8_a1_reg[0] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_0),
         .D(D[0]),
         .Q(p8_a1[0]));
@@ -972,7 +972,7 @@ module adder_tree
     .INIT(1'b0)) 
     \p8_a1_reg[10] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_0),
         .D(D[10]),
         .Q(p8_a1[10]));
@@ -980,7 +980,7 @@ module adder_tree
     .INIT(1'b0)) 
     \p8_a1_reg[11] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_0),
         .D(D[11]),
         .Q(p8_a1[11]));
@@ -988,7 +988,7 @@ module adder_tree
     .INIT(1'b0)) 
     \p8_a1_reg[12] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_0),
         .D(D[12]),
         .Q(p8_a1[12]));
@@ -996,7 +996,7 @@ module adder_tree
     .INIT(1'b0)) 
     \p8_a1_reg[13] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_0),
         .D(D[13]),
         .Q(p8_a1[13]));
@@ -1004,7 +1004,7 @@ module adder_tree
     .INIT(1'b0)) 
     \p8_a1_reg[14] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_0),
         .D(D[14]),
         .Q(p8_a1[14]));
@@ -1012,7 +1012,7 @@ module adder_tree
     .INIT(1'b0)) 
     \p8_a1_reg[15] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_0),
         .D(D[15]),
         .Q(p8_a1[15]));
@@ -1020,7 +1020,7 @@ module adder_tree
     .INIT(1'b0)) 
     \p8_a1_reg[16] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_0),
         .D(D[16]),
         .Q(p8_a1[16]));
@@ -1028,7 +1028,7 @@ module adder_tree
     .INIT(1'b0)) 
     \p8_a1_reg[1] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_0),
         .D(D[1]),
         .Q(p8_a1[1]));
@@ -1036,7 +1036,7 @@ module adder_tree
     .INIT(1'b0)) 
     \p8_a1_reg[2] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_0),
         .D(D[2]),
         .Q(p8_a1[2]));
@@ -1044,7 +1044,7 @@ module adder_tree
     .INIT(1'b0)) 
     \p8_a1_reg[3] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_0),
         .D(D[3]),
         .Q(p8_a1[3]));
@@ -1052,7 +1052,7 @@ module adder_tree
     .INIT(1'b0)) 
     \p8_a1_reg[4] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_0),
         .D(D[4]),
         .Q(p8_a1[4]));
@@ -1060,7 +1060,7 @@ module adder_tree
     .INIT(1'b0)) 
     \p8_a1_reg[5] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_0),
         .D(D[5]),
         .Q(p8_a1[5]));
@@ -1068,7 +1068,7 @@ module adder_tree
     .INIT(1'b0)) 
     \p8_a1_reg[6] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_0),
         .D(D[6]),
         .Q(p8_a1[6]));
@@ -1076,7 +1076,7 @@ module adder_tree
     .INIT(1'b0)) 
     \p8_a1_reg[7] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_0),
         .D(D[7]),
         .Q(p8_a1[7]));
@@ -1084,7 +1084,7 @@ module adder_tree
     .INIT(1'b0)) 
     \p8_a1_reg[8] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_0),
         .D(D[8]),
         .Q(p8_a1[8]));
@@ -1092,7 +1092,7 @@ module adder_tree
     .INIT(1'b0)) 
     \p8_a1_reg[9] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_0),
         .D(D[9]),
         .Q(p8_a1[9]));
@@ -1100,7 +1100,7 @@ module adder_tree
     .INIT(1'b0)) 
     \p8_a2_reg[0] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_0),
         .D(p8_a1[0]),
         .Q(p8_a2[0]));
@@ -1108,7 +1108,7 @@ module adder_tree
     .INIT(1'b0)) 
     \p8_a2_reg[10] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_0),
         .D(p8_a1[10]),
         .Q(p8_a2[10]));
@@ -1116,7 +1116,7 @@ module adder_tree
     .INIT(1'b0)) 
     \p8_a2_reg[11] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_0),
         .D(p8_a1[11]),
         .Q(p8_a2[11]));
@@ -1124,7 +1124,7 @@ module adder_tree
     .INIT(1'b0)) 
     \p8_a2_reg[12] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_0),
         .D(p8_a1[12]),
         .Q(p8_a2[12]));
@@ -1132,7 +1132,7 @@ module adder_tree
     .INIT(1'b0)) 
     \p8_a2_reg[13] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_0),
         .D(p8_a1[13]),
         .Q(p8_a2[13]));
@@ -1140,7 +1140,7 @@ module adder_tree
     .INIT(1'b0)) 
     \p8_a2_reg[14] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_0),
         .D(p8_a1[14]),
         .Q(p8_a2[14]));
@@ -1148,7 +1148,7 @@ module adder_tree
     .INIT(1'b0)) 
     \p8_a2_reg[15] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_0),
         .D(p8_a1[15]),
         .Q(p8_a2[15]));
@@ -1156,7 +1156,7 @@ module adder_tree
     .INIT(1'b0)) 
     \p8_a2_reg[16] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_0),
         .D(p8_a1[16]),
         .Q(p8_a2[16]));
@@ -1164,7 +1164,7 @@ module adder_tree
     .INIT(1'b0)) 
     \p8_a2_reg[1] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_0),
         .D(p8_a1[1]),
         .Q(p8_a2[1]));
@@ -1172,7 +1172,7 @@ module adder_tree
     .INIT(1'b0)) 
     \p8_a2_reg[2] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_0),
         .D(p8_a1[2]),
         .Q(p8_a2[2]));
@@ -1180,7 +1180,7 @@ module adder_tree
     .INIT(1'b0)) 
     \p8_a2_reg[3] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_0),
         .D(p8_a1[3]),
         .Q(p8_a2[3]));
@@ -1188,7 +1188,7 @@ module adder_tree
     .INIT(1'b0)) 
     \p8_a2_reg[4] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_0),
         .D(p8_a1[4]),
         .Q(p8_a2[4]));
@@ -1196,7 +1196,7 @@ module adder_tree
     .INIT(1'b0)) 
     \p8_a2_reg[5] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_0),
         .D(p8_a1[5]),
         .Q(p8_a2[5]));
@@ -1204,7 +1204,7 @@ module adder_tree
     .INIT(1'b0)) 
     \p8_a2_reg[6] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_0),
         .D(p8_a1[6]),
         .Q(p8_a2[6]));
@@ -1212,7 +1212,7 @@ module adder_tree
     .INIT(1'b0)) 
     \p8_a2_reg[7] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_0),
         .D(p8_a1[7]),
         .Q(p8_a2[7]));
@@ -1220,7 +1220,7 @@ module adder_tree
     .INIT(1'b0)) 
     \p8_a2_reg[8] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_0),
         .D(p8_a1[8]),
         .Q(p8_a2[8]));
@@ -1228,7 +1228,7 @@ module adder_tree
     .INIT(1'b0)) 
     \p8_a2_reg[9] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(rst_n_0),
         .D(p8_a1[9]),
         .Q(p8_a2[9]));
@@ -1748,7 +1748,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[0][0] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[0][3]_i_1_n_7 ),
         .Q(\s1_reg[0]_4 [0]));
@@ -1756,7 +1756,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[0][10] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[0][11]_i_1_n_5 ),
         .Q(\s1_reg[0]_4 [10]));
@@ -1764,7 +1764,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[0][11] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[0][11]_i_1_n_4 ),
         .Q(\s1_reg[0]_4 [11]));
@@ -1779,7 +1779,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[0][12] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[0][15]_i_1_n_7 ),
         .Q(\s1_reg[0]_4 [12]));
@@ -1787,7 +1787,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[0][13] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[0][15]_i_1_n_6 ),
         .Q(\s1_reg[0]_4 [13]));
@@ -1795,7 +1795,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[0][14] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[0][15]_i_1_n_5 ),
         .Q(\s1_reg[0]_4 [14]));
@@ -1803,7 +1803,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[0][15] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[0][15]_i_1_n_4 ),
         .Q(\s1_reg[0]_4 [15]));
@@ -1818,7 +1818,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[0][16] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[0][17]_i_1_n_7 ),
         .Q(\s1_reg[0]_4 [16]));
@@ -1826,7 +1826,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[0][17] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[0][17]_i_1_n_6 ),
         .Q(\s1_reg[0]_4 [17]));
@@ -1841,7 +1841,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[0][1] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[0][3]_i_1_n_6 ),
         .Q(\s1_reg[0]_4 [1]));
@@ -1849,7 +1849,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[0][2] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[0][3]_i_1_n_5 ),
         .Q(\s1_reg[0]_4 [2]));
@@ -1857,7 +1857,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[0][3] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[0][3]_i_1_n_4 ),
         .Q(\s1_reg[0]_4 [3]));
@@ -1872,7 +1872,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[0][4] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[0][7]_i_1_n_7 ),
         .Q(\s1_reg[0]_4 [4]));
@@ -1880,7 +1880,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[0][5] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[0][7]_i_1_n_6 ),
         .Q(\s1_reg[0]_4 [5]));
@@ -1888,7 +1888,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[0][6] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[0][7]_i_1_n_5 ),
         .Q(\s1_reg[0]_4 [6]));
@@ -1896,7 +1896,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[0][7] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[0][7]_i_1_n_4 ),
         .Q(\s1_reg[0]_4 [7]));
@@ -1911,7 +1911,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[0][8] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[0][11]_i_1_n_7 ),
         .Q(\s1_reg[0]_4 [8]));
@@ -1919,7 +1919,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[0][9] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[0][11]_i_1_n_6 ),
         .Q(\s1_reg[0]_4 [9]));
@@ -1927,7 +1927,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[1][0] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[1][3]_i_1_n_7 ),
         .Q(\s1_reg[1]_3 [0]));
@@ -1935,7 +1935,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[1][10] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[1][11]_i_1_n_5 ),
         .Q(\s1_reg[1]_3 [10]));
@@ -1943,7 +1943,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[1][11] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[1][11]_i_1_n_4 ),
         .Q(\s1_reg[1]_3 [11]));
@@ -1958,7 +1958,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[1][12] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[1][15]_i_1_n_7 ),
         .Q(\s1_reg[1]_3 [12]));
@@ -1966,7 +1966,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[1][13] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[1][15]_i_1_n_6 ),
         .Q(\s1_reg[1]_3 [13]));
@@ -1974,7 +1974,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[1][14] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[1][15]_i_1_n_5 ),
         .Q(\s1_reg[1]_3 [14]));
@@ -1982,7 +1982,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[1][15] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[1][15]_i_1_n_4 ),
         .Q(\s1_reg[1]_3 [15]));
@@ -1997,7 +1997,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[1][16] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[1][17]_i_1_n_7 ),
         .Q(\s1_reg[1]_3 [16]));
@@ -2005,7 +2005,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[1][17] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[1][17]_i_1_n_6 ),
         .Q(\s1_reg[1]_3 [17]));
@@ -2020,7 +2020,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[1][1] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[1][3]_i_1_n_6 ),
         .Q(\s1_reg[1]_3 [1]));
@@ -2028,7 +2028,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[1][2] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[1][3]_i_1_n_5 ),
         .Q(\s1_reg[1]_3 [2]));
@@ -2036,7 +2036,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[1][3] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[1][3]_i_1_n_4 ),
         .Q(\s1_reg[1]_3 [3]));
@@ -2051,7 +2051,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[1][4] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[1][7]_i_1_n_7 ),
         .Q(\s1_reg[1]_3 [4]));
@@ -2059,7 +2059,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[1][5] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[1][7]_i_1_n_6 ),
         .Q(\s1_reg[1]_3 [5]));
@@ -2067,7 +2067,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[1][6] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[1][7]_i_1_n_5 ),
         .Q(\s1_reg[1]_3 [6]));
@@ -2075,7 +2075,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[1][7] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[1][7]_i_1_n_4 ),
         .Q(\s1_reg[1]_3 [7]));
@@ -2090,7 +2090,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[1][8] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[1][11]_i_1_n_7 ),
         .Q(\s1_reg[1]_3 [8]));
@@ -2098,7 +2098,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[1][9] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[1][11]_i_1_n_6 ),
         .Q(\s1_reg[1]_3 [9]));
@@ -2106,7 +2106,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[2][0] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[2][3]_i_1_n_7 ),
         .Q(\s1_reg[2]_1 [0]));
@@ -2114,7 +2114,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[2][10] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[2][11]_i_1_n_5 ),
         .Q(\s1_reg[2]_1 [10]));
@@ -2122,7 +2122,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[2][11] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[2][11]_i_1_n_4 ),
         .Q(\s1_reg[2]_1 [11]));
@@ -2137,7 +2137,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[2][12] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[2][15]_i_1_n_7 ),
         .Q(\s1_reg[2]_1 [12]));
@@ -2145,7 +2145,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[2][13] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[2][15]_i_1_n_6 ),
         .Q(\s1_reg[2]_1 [13]));
@@ -2153,7 +2153,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[2][14] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[2][15]_i_1_n_5 ),
         .Q(\s1_reg[2]_1 [14]));
@@ -2161,7 +2161,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[2][15] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[2][15]_i_1_n_4 ),
         .Q(\s1_reg[2]_1 [15]));
@@ -2176,7 +2176,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[2][16] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[2][17]_i_1_n_7 ),
         .Q(\s1_reg[2]_1 [16]));
@@ -2184,7 +2184,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[2][17] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[2][17]_i_1_n_6 ),
         .Q(\s1_reg[2]_1 [17]));
@@ -2199,7 +2199,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[2][1] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[2][3]_i_1_n_6 ),
         .Q(\s1_reg[2]_1 [1]));
@@ -2207,7 +2207,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[2][2] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[2][3]_i_1_n_5 ),
         .Q(\s1_reg[2]_1 [2]));
@@ -2215,7 +2215,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[2][3] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[2][3]_i_1_n_4 ),
         .Q(\s1_reg[2]_1 [3]));
@@ -2230,7 +2230,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[2][4] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[2][7]_i_1_n_7 ),
         .Q(\s1_reg[2]_1 [4]));
@@ -2238,7 +2238,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[2][5] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[2][7]_i_1_n_6 ),
         .Q(\s1_reg[2]_1 [5]));
@@ -2246,7 +2246,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[2][6] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[2][7]_i_1_n_5 ),
         .Q(\s1_reg[2]_1 [6]));
@@ -2254,7 +2254,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[2][7] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[2][7]_i_1_n_4 ),
         .Q(\s1_reg[2]_1 [7]));
@@ -2269,7 +2269,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[2][8] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[2][11]_i_1_n_7 ),
         .Q(\s1_reg[2]_1 [8]));
@@ -2277,7 +2277,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[2][9] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s1_reg[2][11]_i_1_n_6 ),
         .Q(\s1_reg[2]_1 [9]));
@@ -2285,7 +2285,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[3][0] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(p_0_in[0]),
         .Q(\s1_reg[3]_0 [0]));
@@ -2293,7 +2293,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[3][10] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(p_0_in[10]),
         .Q(\s1_reg[3]_0 [10]));
@@ -2301,7 +2301,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[3][11] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(p_0_in[11]),
         .Q(\s1_reg[3]_0 [11]));
@@ -2316,7 +2316,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[3][12] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(p_0_in[12]),
         .Q(\s1_reg[3]_0 [12]));
@@ -2324,7 +2324,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[3][13] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(p_0_in[13]),
         .Q(\s1_reg[3]_0 [13]));
@@ -2332,7 +2332,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[3][14] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(p_0_in[14]),
         .Q(\s1_reg[3]_0 [14]));
@@ -2340,7 +2340,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[3][15] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(p_0_in[15]),
         .Q(\s1_reg[3]_0 [15]));
@@ -2355,7 +2355,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[3][16] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(p_0_in[16]),
         .Q(\s1_reg[3]_0 [16]));
@@ -2363,7 +2363,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[3][17] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(p_0_in[17]),
         .Q(\s1_reg[3]_0 [17]));
@@ -2378,7 +2378,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[3][1] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(p_0_in[1]),
         .Q(\s1_reg[3]_0 [1]));
@@ -2386,7 +2386,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[3][2] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(p_0_in[2]),
         .Q(\s1_reg[3]_0 [2]));
@@ -2394,7 +2394,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[3][3] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(p_0_in[3]),
         .Q(\s1_reg[3]_0 [3]));
@@ -2409,7 +2409,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[3][4] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(p_0_in[4]),
         .Q(\s1_reg[3]_0 [4]));
@@ -2417,7 +2417,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[3][5] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(p_0_in[5]),
         .Q(\s1_reg[3]_0 [5]));
@@ -2425,7 +2425,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[3][6] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(p_0_in[6]),
         .Q(\s1_reg[3]_0 [6]));
@@ -2433,7 +2433,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[3][7] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(p_0_in[7]),
         .Q(\s1_reg[3]_0 [7]));
@@ -2448,7 +2448,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[3][8] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(p_0_in[8]),
         .Q(\s1_reg[3]_0 [8]));
@@ -2456,7 +2456,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s1_reg[3][9] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(p_0_in[9]),
         .Q(\s1_reg[3]_0 [9]));
@@ -2690,7 +2690,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s2_reg[0][0] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s2_reg[0][3]_i_1_n_7 ),
         .Q(\s2_reg[0]_5 [0]));
@@ -2698,7 +2698,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s2_reg[0][10] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s2_reg[0][11]_i_1_n_5 ),
         .Q(\s2_reg[0]_5 [10]));
@@ -2706,7 +2706,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s2_reg[0][11] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s2_reg[0][11]_i_1_n_4 ),
         .Q(\s2_reg[0]_5 [11]));
@@ -2721,7 +2721,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s2_reg[0][12] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s2_reg[0][15]_i_1_n_7 ),
         .Q(\s2_reg[0]_5 [12]));
@@ -2729,7 +2729,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s2_reg[0][13] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s2_reg[0][15]_i_1_n_6 ),
         .Q(\s2_reg[0]_5 [13]));
@@ -2737,7 +2737,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s2_reg[0][14] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s2_reg[0][15]_i_1_n_5 ),
         .Q(\s2_reg[0]_5 [14]));
@@ -2745,7 +2745,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s2_reg[0][15] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s2_reg[0][15]_i_1_n_4 ),
         .Q(\s2_reg[0]_5 [15]));
@@ -2760,7 +2760,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s2_reg[0][16] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s2_reg[0][18]_i_1_n_7 ),
         .Q(\s2_reg[0]_5 [16]));
@@ -2768,7 +2768,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s2_reg[0][17] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s2_reg[0][18]_i_1_n_6 ),
         .Q(\s2_reg[0]_5 [17]));
@@ -2776,7 +2776,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s2_reg[0][18] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s2_reg[0][18]_i_1_n_5 ),
         .Q(\s2_reg[0]_5 [18]));
@@ -2791,7 +2791,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s2_reg[0][1] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s2_reg[0][3]_i_1_n_6 ),
         .Q(\s2_reg[0]_5 [1]));
@@ -2799,7 +2799,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s2_reg[0][2] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s2_reg[0][3]_i_1_n_5 ),
         .Q(\s2_reg[0]_5 [2]));
@@ -2807,7 +2807,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s2_reg[0][3] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s2_reg[0][3]_i_1_n_4 ),
         .Q(\s2_reg[0]_5 [3]));
@@ -2822,7 +2822,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s2_reg[0][4] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s2_reg[0][7]_i_1_n_7 ),
         .Q(\s2_reg[0]_5 [4]));
@@ -2830,7 +2830,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s2_reg[0][5] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s2_reg[0][7]_i_1_n_6 ),
         .Q(\s2_reg[0]_5 [5]));
@@ -2838,7 +2838,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s2_reg[0][6] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s2_reg[0][7]_i_1_n_5 ),
         .Q(\s2_reg[0]_5 [6]));
@@ -2846,7 +2846,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s2_reg[0][7] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s2_reg[0][7]_i_1_n_4 ),
         .Q(\s2_reg[0]_5 [7]));
@@ -2861,7 +2861,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s2_reg[0][8] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s2_reg[0][11]_i_1_n_7 ),
         .Q(\s2_reg[0]_5 [8]));
@@ -2869,7 +2869,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s2_reg[0][9] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s2_reg[0][11]_i_1_n_6 ),
         .Q(\s2_reg[0]_5 [9]));
@@ -2877,7 +2877,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s2_reg[1][0] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s2_reg[1][3]_i_1_n_7 ),
         .Q(\s2_reg[1]_2 [0]));
@@ -2885,7 +2885,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s2_reg[1][10] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s2_reg[1][11]_i_1_n_5 ),
         .Q(\s2_reg[1]_2 [10]));
@@ -2893,7 +2893,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s2_reg[1][11] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s2_reg[1][11]_i_1_n_4 ),
         .Q(\s2_reg[1]_2 [11]));
@@ -2908,7 +2908,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s2_reg[1][12] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s2_reg[1][15]_i_1_n_7 ),
         .Q(\s2_reg[1]_2 [12]));
@@ -2916,7 +2916,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s2_reg[1][13] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s2_reg[1][15]_i_1_n_6 ),
         .Q(\s2_reg[1]_2 [13]));
@@ -2924,7 +2924,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s2_reg[1][14] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s2_reg[1][15]_i_1_n_5 ),
         .Q(\s2_reg[1]_2 [14]));
@@ -2932,7 +2932,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s2_reg[1][15] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s2_reg[1][15]_i_1_n_4 ),
         .Q(\s2_reg[1]_2 [15]));
@@ -2947,7 +2947,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s2_reg[1][16] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s2_reg[1][18]_i_1_n_7 ),
         .Q(\s2_reg[1]_2 [16]));
@@ -2955,7 +2955,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s2_reg[1][17] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s2_reg[1][18]_i_1_n_6 ),
         .Q(\s2_reg[1]_2 [17]));
@@ -2963,7 +2963,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s2_reg[1][18] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s2_reg[1][18]_i_1_n_5 ),
         .Q(\s2_reg[1]_2 [18]));
@@ -2978,7 +2978,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s2_reg[1][1] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s2_reg[1][3]_i_1_n_6 ),
         .Q(\s2_reg[1]_2 [1]));
@@ -2986,7 +2986,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s2_reg[1][2] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s2_reg[1][3]_i_1_n_5 ),
         .Q(\s2_reg[1]_2 [2]));
@@ -2994,7 +2994,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s2_reg[1][3] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s2_reg[1][3]_i_1_n_4 ),
         .Q(\s2_reg[1]_2 [3]));
@@ -3009,7 +3009,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s2_reg[1][4] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s2_reg[1][7]_i_1_n_7 ),
         .Q(\s2_reg[1]_2 [4]));
@@ -3017,7 +3017,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s2_reg[1][5] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s2_reg[1][7]_i_1_n_6 ),
         .Q(\s2_reg[1]_2 [5]));
@@ -3025,7 +3025,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s2_reg[1][6] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s2_reg[1][7]_i_1_n_5 ),
         .Q(\s2_reg[1]_2 [6]));
@@ -3033,7 +3033,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s2_reg[1][7] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s2_reg[1][7]_i_1_n_4 ),
         .Q(\s2_reg[1]_2 [7]));
@@ -3048,7 +3048,7 @@ module adder_tree
     .INIT(1'b0)) 
     \s2_reg[1][8] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s2_reg[1][11]_i_1_n_7 ),
         .Q(\s2_reg[1]_2 [8]));
@@ -3056,13 +3056,13 @@ module adder_tree
     .INIT(1'b0)) 
     \s2_reg[1][9] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\s1[3][17]_i_2_n_0 ),
         .D(\s2_reg[1][11]_i_1_n_6 ),
         .Q(\s2_reg[1]_2 [9]));
 endmodule
 
-(* ECO_CHECKSUM = "e4bd66b9" *) (* W = "32" *) (* use_dsp = "1" *) 
+(* ECO_CHECKSUM = "fb51ab63" *) (* W = "32" *) (* use_dsp = "1" *) 
 (* NotValidForBitStream *)
 module conv_top
    (clk,
@@ -3107,6 +3107,7 @@ module conv_top
   output done;
 
   wire [6:0]acc;
+  wire advance;
   wire [1:0]bank_sel;
   wire busy;
   wire [2:0]cfg_num_kernels;
@@ -3149,12 +3150,11 @@ module conv_top
   wire [18:0]rounded_q1__0;
   wire rst_n;
   wire sat_flag;
-  wire u_ctrl_fsm_n_1;
-  wire u_ctrl_fsm_n_8;
-  wire u_kernel_regfile_n_72;
-  wire u_kernel_regfile_n_73;
-  wire u_kernel_regfile_n_74;
-  wire u_line_window_n_16;
+  wire shift_en;
+  wire u_kernel_regfile_n_0;
+  wire u_kernel_regfile_n_1;
+  wire u_kernel_regfile_n_2;
+  wire u_kernel_regfile_n_3;
   wire u_mac_array_n_0;
   wire u_mac_array_n_1;
   wire u_mac_array_n_10;
@@ -3296,13 +3296,12 @@ module conv_top
     .INIT(1'b0)) 
     \p8_a1_reg[16]_i_2 
        (.C(clk),
-        .CE(u_ctrl_fsm_n_1),
-        .CLR(u_line_window_n_16),
+        .CE(shift_en),
+        .CLR(u_kernel_regfile_n_0),
         .D(1'b1),
         .Q(\p8_a1_reg[16]_i_2_n_0 ));
   adder_tree u_adder_tree
        (.D(\prod[8] ),
-        .\FSM_sequential_state_reg[0] (u_ctrl_fsm_n_1),
         .O(rounded_q1),
         .P({u_mac_array_n_1,u_mac_array_n_2,u_mac_array_n_3,u_mac_array_n_4,u_mac_array_n_5,u_mac_array_n_6,u_mac_array_n_7,u_mac_array_n_8,u_mac_array_n_9,u_mac_array_n_10,u_mac_array_n_11,u_mac_array_n_12,u_mac_array_n_13,u_mac_array_n_14,u_mac_array_n_15,u_mac_array_n_16,u_mac_array_n_17}),
         .Q(acc),
@@ -3327,13 +3326,14 @@ module conv_top
         .\prod[6] (\prod[6] ),
         .rounded_q1(rounded_q1__0),
         .rst_n(rst_n),
-        .rst_n_0(u_line_window_n_16),
-        .rst_n_1(u_normalize_n_1));
+        .rst_n_0(u_kernel_regfile_n_0),
+        .rst_n_1(u_normalize_n_1),
+        .shift_en(shift_en));
   ctrl_fsm u_ctrl_fsm
        (.D(rounded_d),
         .O(rounded_q1),
         .Q(bank_sel),
-        .advanced_q_reg_0(u_ctrl_fsm_n_1),
+        .advance(advance),
         .busy(busy),
         .cfg_num_kernels(cfg_num_kernels),
         .cfg_out_shift(cfg_out_shift),
@@ -3341,7 +3341,6 @@ module conv_top
         .cfg_start(cfg_start),
         .clk(clk),
         .done(done),
-        .\g_row[0].g_tap[0].taps_reg[0][0][0] (u_ctrl_fsm_n_8),
         .out_bank(out_bank),
         .out_last(out_last),
         .out_valid(out_valid),
@@ -3351,32 +3350,34 @@ module conv_top
         .rounded_q1(rounded_q1__0),
         .\rounded_q_reg[16] (out_shift),
         .rst_n(u_normalize_n_1),
-        .rst_n_0(u_kernel_regfile_n_73),
-        .rst_n_1(u_kernel_regfile_n_74),
-        .rst_n_2(u_kernel_regfile_n_72));
+        .rst_n_0(u_kernel_regfile_n_3),
+        .rst_n_1(u_kernel_regfile_n_1),
+        .rst_n_2(u_kernel_regfile_n_2),
+        .shift_en(shift_en));
   kernel_regfile u_kernel_regfile
        (.Q(bank_sel),
-        .\bank_reg[0][3][7]_0 (u_kernel_regfile_n_74),
-        .\bank_reg[1][2][2]_0 (u_kernel_regfile_n_73),
-        .\bank_reg[1][8][0]_0 (u_kernel_regfile_n_72),
+        .\bank_reg[0][2][3]_0 (u_kernel_regfile_n_2),
+        .\bank_reg[0][3][4]_0 (u_kernel_regfile_n_3),
+        .\bank_reg[0][8][0]_0 (u_kernel_regfile_n_1),
         .clk(clk),
-        .\coef[0] (\coef[0] ),
-        .\coef[1] (\coef[1] ),
-        .\coef[2] (\coef[2] ),
-        .\coef[3] (\coef[3] ),
-        .\coef[4] (\coef[4] ),
-        .\coef[5] (\coef[5] ),
-        .\coef[6] (\coef[6] ),
-        .\coef[7] (\coef[7] ),
-        .\coef[8] (\coef[8] ),
+        .\coef_reg[8][7]_0 (u_kernel_regfile_n_0),
         .kl_addr(kl_addr),
         .kl_bank(kl_bank),
         .kl_coef(kl_coef),
         .kl_valid(kl_valid),
+        .p_0_out(\coef[0] ),
+        .p_0_out__0(\coef[1] ),
+        .p_0_out__1(\coef[2] ),
+        .p_0_out__2(\coef[3] ),
+        .p_0_out__3(\coef[4] ),
+        .p_0_out__4(\coef[5] ),
+        .p_0_out__5(\coef[6] ),
+        .p_0_out__6(\coef[7] ),
+        .p_0_out__7(\coef[8] ),
         .rst_n(rst_n));
   line_window u_line_window
-       (.\FSM_sequential_state_reg[0] (u_ctrl_fsm_n_8),
-        .Q(\win[2][0] ),
+       (.Q(\win[2][0] ),
+        .advance(advance),
         .clk(clk),
         .\g_row[0].g_tap[0].taps_reg[0][0][7]_0 (\win[0][1] ),
         .\g_row[0].g_tap[1].taps_reg[0][1][7]_0 (\win[0][2] ),
@@ -3384,25 +3385,23 @@ module conv_top
         .\g_row[1].g_tap[1].taps_reg[1][1][7]_0 (\win[1][2] ),
         .\g_row[2].g_tap[0].taps_reg[2][0][7]_0 (\win[2][1] ),
         .\g_row[2].g_tap[1].taps_reg[2][1][7]_0 (\win[2][2] ),
-        .\g_row[2].taps_reg[2][2][0]_0 (u_line_window_n_16),
         .p_0_out(\win[0][0] ),
         .p_0_out__2(\win[1][0] ),
         .px_data(px_data),
-        .rst_n(rst_n));
+        .rst_n(u_kernel_regfile_n_0));
   mac_array u_mac_array
        (.D(\prod[8] ),
-        .\FSM_sequential_state_reg[0] (u_ctrl_fsm_n_1),
         .P({u_mac_array_n_1,u_mac_array_n_2,u_mac_array_n_3,u_mac_array_n_4,u_mac_array_n_5,u_mac_array_n_6,u_mac_array_n_7,u_mac_array_n_8,u_mac_array_n_9,u_mac_array_n_10,u_mac_array_n_11,u_mac_array_n_12,u_mac_array_n_13,u_mac_array_n_14,u_mac_array_n_15,u_mac_array_n_16,u_mac_array_n_17}),
         .clk(clk),
-        .\coef[0] (\coef[0] ),
-        .\coef[1] (\coef[1] ),
-        .\coef[2] (\coef[2] ),
-        .\coef[3] (\coef[3] ),
-        .\coef[4] (\coef[4] ),
-        .\coef[5] (\coef[5] ),
-        .\coef[6] (\coef[6] ),
-        .\coef[7] (\coef[7] ),
-        .\coef[8] (\coef[8] ),
+        .\coef_reg[0][7] (\coef[0] ),
+        .\coef_reg[1][7] (\coef[1] ),
+        .\coef_reg[2][7] (\coef[2] ),
+        .\coef_reg[3][7] (\coef[3] ),
+        .\coef_reg[4][7] (\coef[4] ),
+        .\coef_reg[5][7] (\coef[5] ),
+        .\coef_reg[6][7] (\coef[6] ),
+        .\coef_reg[7][7] (\coef[7] ),
+        .\coef_reg[8][7] (\coef[8] ),
         .\p8_a1_reg[16]_i_2 (\p8_a1_reg[16]_i_2_n_0 ),
         .\prod[0] (\prod[0] ),
         .\prod[2] (\prod[2] ),
@@ -3419,6 +3418,7 @@ module conv_top
         .\s1_reg[2][17]_0 ({u_mac_array_n_19,u_mac_array_n_20,u_mac_array_n_21,u_mac_array_n_22,u_mac_array_n_23,u_mac_array_n_24,u_mac_array_n_25,u_mac_array_n_26,u_mac_array_n_27,u_mac_array_n_28,u_mac_array_n_29,u_mac_array_n_30,u_mac_array_n_31,u_mac_array_n_32,u_mac_array_n_33,u_mac_array_n_34,u_mac_array_n_35}),
         .\s1_reg[3][15] ({u_mac_array_n_201,u_mac_array_n_202,u_mac_array_n_203,u_mac_array_n_204,u_mac_array_n_205,u_mac_array_n_206,u_mac_array_n_207,u_mac_array_n_208,u_mac_array_n_209,u_mac_array_n_210,u_mac_array_n_211,u_mac_array_n_212,u_mac_array_n_213,u_mac_array_n_214,u_mac_array_n_215,u_mac_array_n_216}),
         .\s1_reg[3][17] (u_mac_array_n_0),
+        .shift_en(shift_en),
         .\win[0][0] (\win[0][0] ),
         .\win[0][1] (\win[0][1] ),
         .\win[0][2] (\win[0][2] ),
@@ -3430,7 +3430,6 @@ module conv_top
         .\win[2][2] (\win[2][2] ));
   normalize u_normalize
        (.D({rounded_q1,rounded_d}),
-        .\FSM_sequential_state_reg[0] (u_ctrl_fsm_n_1),
         .Q(acc),
         .S({u_normalize_n_18,u_normalize_n_19,u_normalize_n_20,u_normalize_n_21}),
         .clk(clk),
@@ -3440,17 +3439,18 @@ module conv_top
         .\res_reg[15]_0 (u_normalize_n_1),
         .\rounded_q_reg[6]_0 ({u_normalize_n_22,u_normalize_n_23,u_normalize_n_24}),
         .rst_n(rst_n),
-        .sat_flag(sat_flag));
+        .sat_flag(sat_flag),
+        .shift_en(shift_en));
 endmodule
 
 module ctrl_fsm
    (relu_en,
-    advanced_q_reg_0,
+    shift_en,
     done,
     busy,
     out_bank,
     Q,
-    \g_row[0].g_tap[0].taps_reg[0][0][0] ,
+    advance,
     \rounded_q_reg[16] ,
     out_valid,
     out_last,
@@ -3458,23 +3458,23 @@ module ctrl_fsm
     cfg_relu_en,
     clk,
     rst_n,
+    rst_n_0,
     px_valid,
     cfg_start,
     px_last,
     cfg_num_kernels,
-    rst_n_0,
     rst_n_1,
     rst_n_2,
     cfg_out_shift,
     O,
     rounded_q1);
   output relu_en;
-  output advanced_q_reg_0;
+  output shift_en;
   output done;
   output busy;
   output [1:0]out_bank;
   output [1:0]Q;
-  output \g_row[0].g_tap[0].taps_reg[0][0][0] ;
+  output advance;
   output [2:0]\rounded_q_reg[16] ;
   output out_valid;
   output out_last;
@@ -3482,11 +3482,11 @@ module ctrl_fsm
   input cfg_relu_en;
   input clk;
   input rst_n;
+  input rst_n_0;
   input px_valid;
   input cfg_start;
   input px_last;
   input [2:0]cfg_num_kernels;
-  input rst_n_0;
   input rst_n_1;
   input rst_n_2;
   input [2:0]cfg_out_shift;
@@ -3496,20 +3496,23 @@ module ctrl_fsm
   wire [18:0]D;
   wire \FSM_sequential_state[0]_i_1_n_0 ;
   wire \FSM_sequential_state[1]_i_1_n_0 ;
+  wire \FSM_sequential_state[1]_i_2_n_0 ;
   wire \FSM_sequential_state[2]_i_1_n_0 ;
+  wire \FSM_sequential_state[2]_i_2_n_0 ;
   wire \FSM_sequential_state[2]_i_3_n_0 ;
   wire \FSM_sequential_state[2]_i_4_n_0 ;
+  wire \FSM_sequential_state[2]_i_5_n_0 ;
+  wire \FSM_sequential_state[2]_i_6_n_0 ;
   wire [0:0]O;
   wire [1:0]Q;
+  wire accepted;
+  wire advance;
   wire advanced_q;
-  wire advanced_q_reg_0;
   wire \bank_sel[0]_i_1_n_0 ;
   wire \bank_sel[1]_i_1_n_0 ;
   wire busy;
   wire busy0;
   wire busy_i_1_n_0;
-  wire busy_i_2_n_0;
-  wire busy_i_3_n_0;
   wire [2:0]cfg_num_kernels;
   wire [2:0]cfg_out_shift;
   wire cfg_relu_en;
@@ -3522,21 +3525,21 @@ module ctrl_fsm
   wire \col_cnt[3]_i_1_n_0 ;
   wire \col_cnt[4]_i_1_n_0 ;
   wire \col_cnt[4]_i_2_n_0 ;
-  wire \col_cnt[4]_i_4_n_0 ;
-  wire \col_cnt[4]_i_5_n_0 ;
+  wire \col_cnt[4]_i_3_n_0 ;
   wire done;
   wire done_i_2_n_0;
+  wire done_i_3_n_0;
   wire \flush_cnt[0]_i_1_n_0 ;
   wire \flush_cnt[1]_i_1_n_0 ;
   wire \flush_cnt[2]_i_1_n_0 ;
   wire \flush_cnt_reg_n_0_[0] ;
   wire \flush_cnt_reg_n_0_[1] ;
   wire \flush_cnt_reg_n_0_[2] ;
-  wire \g_row[0].g_tap[0].taps_reg[0][0][0] ;
   wire kernel_cnt;
   wire \kernel_cnt[0]_i_1_n_0 ;
   wire \kernel_cnt[1]_i_1_n_0 ;
   wire \kernel_cnt[2]_i_2_n_0 ;
+  wire \kernel_cnt[2]_i_3_n_0 ;
   wire \kernel_cnt_reg_n_0_[0] ;
   wire \kernel_cnt_reg_n_0_[1] ;
   wire \kernel_cnt_reg_n_0_[2] ;
@@ -3549,7 +3552,6 @@ module ctrl_fsm
   wire \meta_last_reg[3]_srl5_u_ctrl_fsm_meta_valid_reg_c_8_n_0 ;
   wire \meta_last_reg[4]_u_ctrl_fsm_meta_valid_reg_c_9_n_0 ;
   wire meta_last_reg_gate_n_0;
-  wire \meta_valid_reg[3]_srl5_u_ctrl_fsm_meta_valid_reg_c_8_i_2_n_0 ;
   wire \meta_valid_reg[3]_srl5_u_ctrl_fsm_meta_valid_reg_c_8_i_3_n_0 ;
   wire \meta_valid_reg[3]_srl5_u_ctrl_fsm_meta_valid_reg_c_8_n_0 ;
   wire \meta_valid_reg[4]_u_ctrl_fsm_meta_valid_reg_c_9_n_0 ;
@@ -3609,53 +3611,84 @@ module ctrl_fsm
   wire rst_n_0;
   wire rst_n_1;
   wire rst_n_2;
+  wire shift_en;
   (* RTL_KEEP = "yes" *) wire [2:0]state;
 
   LUT4 #(
-    .INIT(16'h06F0)) 
+    .INIT(16'h14AA)) 
     \FSM_sequential_state[0]_i_1 
-       (.I0(state[2]),
+       (.I0(state[0]),
         .I1(state[1]),
-        .I2(state[0]),
-        .I3(\FSM_sequential_state[2]_i_3_n_0 ),
+        .I2(state[2]),
+        .I3(\FSM_sequential_state[2]_i_2_n_0 ),
         .O(\FSM_sequential_state[0]_i_1_n_0 ));
   LUT5 #(
-    .INIT(32'h0C38FF00)) 
+    .INIT(32'h03E0CCCC)) 
     \FSM_sequential_state[1]_i_1 
-       (.I0(busy_i_2_n_0),
-        .I1(state[0]),
-        .I2(state[2]),
-        .I3(state[1]),
-        .I4(\FSM_sequential_state[2]_i_3_n_0 ),
-        .O(\FSM_sequential_state[1]_i_1_n_0 ));
-  LUT4 #(
-    .INIT(16'h01AA)) 
-    \FSM_sequential_state[2]_i_1 
-       (.I0(state[2]),
+       (.I0(\FSM_sequential_state[1]_i_2_n_0 ),
         .I1(state[1]),
         .I2(state[0]),
-        .I3(\FSM_sequential_state[2]_i_3_n_0 ),
+        .I3(state[2]),
+        .I4(\FSM_sequential_state[2]_i_2_n_0 ),
+        .O(\FSM_sequential_state[1]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hEEE8D4444444D4D4)) 
+    \FSM_sequential_state[1]_i_2 
+       (.I0(\kernel_cnt_reg_n_0_[2] ),
+        .I1(cfg_num_kernels[2]),
+        .I2(cfg_num_kernels[1]),
+        .I3(cfg_num_kernels[0]),
+        .I4(\kernel_cnt_reg_n_0_[1] ),
+        .I5(\kernel_cnt_reg_n_0_[0] ),
+        .O(\FSM_sequential_state[1]_i_2_n_0 ));
+  LUT4 #(
+    .INIT(16'h01F0)) 
+    \FSM_sequential_state[2]_i_1 
+       (.I0(state[0]),
+        .I1(state[1]),
+        .I2(state[2]),
+        .I3(\FSM_sequential_state[2]_i_2_n_0 ),
         .O(\FSM_sequential_state[2]_i_1_n_0 ));
   LUT6 #(
-    .INIT(64'hFFFFFFFF88800080)) 
-    \FSM_sequential_state[2]_i_3 
-       (.I0(px_valid),
-        .I1(state[1]),
-        .I2(px_last),
+    .INIT(64'hFFFFFFFF01550100)) 
+    \FSM_sequential_state[2]_i_2 
+       (.I0(state[1]),
+        .I1(\FSM_sequential_state[2]_i_3_n_0 ),
+        .I2(\flush_cnt_reg_n_0_[0] ),
         .I3(state[0]),
-        .I4(\meta_valid_reg[3]_srl5_u_ctrl_fsm_meta_valid_reg_c_8_i_2_n_0 ),
+        .I4(cfg_start),
         .I5(\FSM_sequential_state[2]_i_4_n_0 ),
+        .O(\FSM_sequential_state[2]_i_2_n_0 ));
+  LUT2 #(
+    .INIT(4'h7)) 
+    \FSM_sequential_state[2]_i_3 
+       (.I0(\flush_cnt_reg_n_0_[1] ),
+        .I1(\flush_cnt_reg_n_0_[2] ),
         .O(\FSM_sequential_state[2]_i_3_n_0 ));
   LUT6 #(
-    .INIT(64'hAAABBBBBAAABAAAA)) 
+    .INIT(64'hFAEEAAAAAAEEAAAA)) 
     \FSM_sequential_state[2]_i_4 
        (.I0(state[2]),
-        .I1(state[1]),
-        .I2(\flush_cnt_reg_n_0_[0] ),
-        .I3(\col_cnt[4]_i_5_n_0 ),
-        .I4(state[0]),
-        .I5(cfg_start),
+        .I1(px_last),
+        .I2(\meta_valid_reg[3]_srl5_u_ctrl_fsm_meta_valid_reg_c_8_i_3_n_0 ),
+        .I3(state[0]),
+        .I4(\FSM_sequential_state[2]_i_5_n_0 ),
+        .I5(\FSM_sequential_state[2]_i_6_n_0 ),
         .O(\FSM_sequential_state[2]_i_4_n_0 ));
+  LUT2 #(
+    .INIT(4'h8)) 
+    \FSM_sequential_state[2]_i_5 
+       (.I0(state[1]),
+        .I1(px_valid),
+        .O(\FSM_sequential_state[2]_i_5_n_0 ));
+  LUT4 #(
+    .INIT(16'hFFFE)) 
+    \FSM_sequential_state[2]_i_6 
+       (.I0(col_cnt[2]),
+        .I1(col_cnt[1]),
+        .I2(col_cnt[4]),
+        .I3(col_cnt[3]),
+        .O(\FSM_sequential_state[2]_i_6_n_0 ));
   (* FSM_ENCODED_STATES = "LOAD_KERNEL:100,PRIME:011,FLUSH:001,IDLE:000,RUN:010" *) 
   (* KEEP = "yes" *) 
   FDCE #(
@@ -3692,16 +3725,16 @@ module ctrl_fsm
        (.C(clk),
         .CE(1'b1),
         .CLR(rst_n),
-        .D(advanced_q_reg_0),
+        .D(shift_en),
         .Q(advanced_q));
   LUT5 #(
-    .INIT(32'h55545555)) 
+    .INIT(32'h0000FFFD)) 
     \bank_sel[0]_i_1 
-       (.I0(Q[0]),
-        .I1(state[0]),
+       (.I0(cfg_start),
+        .I1(state[2]),
         .I2(state[1]),
-        .I3(state[2]),
-        .I4(cfg_start),
+        .I3(state[0]),
+        .I4(Q[0]),
         .O(\bank_sel[0]_i_1_n_0 ));
   LUT6 #(
     .INIT(64'h6666666066666666)) 
@@ -3718,7 +3751,7 @@ module ctrl_fsm
     \bank_sel_reg[0] 
        (.C(clk),
         .CE(kernel_cnt),
-        .CLR(rst_n_0),
+        .CLR(rst_n_2),
         .D(\bank_sel[0]_i_1_n_0 ),
         .Q(Q[0]));
   FDCE #(
@@ -3726,117 +3759,95 @@ module ctrl_fsm
     \bank_sel_reg[1] 
        (.C(clk),
         .CE(kernel_cnt),
-        .CLR(rst_n_0),
+        .CLR(rst_n_2),
         .D(\bank_sel[1]_i_1_n_0 ),
         .Q(Q[1]));
-  LUT4 #(
-    .INIT(16'hEFAA)) 
+  LUT6 #(
+    .INIT(64'h5555555D0000000C)) 
     busy_i_1
-       (.I0(relu_en0),
-        .I1(busy_i_2_n_0),
-        .I2(busy_i_3_n_0),
-        .I3(busy),
+       (.I0(busy0),
+        .I1(cfg_start),
+        .I2(state[2]),
+        .I3(state[1]),
+        .I4(state[0]),
+        .I5(busy),
         .O(busy_i_1_n_0));
-  LUT6 #(
-    .INIT(64'hD898FFF788805010)) 
-    busy_i_2
-       (.I0(\kernel_cnt_reg_n_0_[1] ),
-        .I1(\kernel_cnt_reg_n_0_[0] ),
-        .I2(cfg_num_kernels[1]),
-        .I3(cfg_num_kernels[0]),
-        .I4(\kernel_cnt_reg_n_0_[2] ),
-        .I5(cfg_num_kernels[2]),
-        .O(busy_i_2_n_0));
-  LUT6 #(
-    .INIT(64'h0000000010000000)) 
-    busy_i_3
-       (.I0(state[2]),
-        .I1(state[1]),
-        .I2(state[0]),
-        .I3(\flush_cnt_reg_n_0_[2] ),
-        .I4(\flush_cnt_reg_n_0_[1] ),
-        .I5(\flush_cnt_reg_n_0_[0] ),
-        .O(busy_i_3_n_0));
   FDCE #(
     .INIT(1'b0)) 
     busy_reg
        (.C(clk),
         .CE(1'b1),
-        .CLR(rst_n),
+        .CLR(rst_n_0),
         .D(busy_i_1_n_0),
         .Q(busy));
-  (* SOFT_HLUTNM = "soft_lutpair12" *) 
+  (* SOFT_HLUTNM = "soft_lutpair11" *) 
   LUT2 #(
     .INIT(4'h2)) 
     \col_cnt[0]_i_1 
-       (.I0(\col_cnt[4]_i_4_n_0 ),
+       (.I0(\col_cnt[4]_i_3_n_0 ),
         .I1(col_cnt[0]),
         .O(\col_cnt[0]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair12" *) 
+  (* SOFT_HLUTNM = "soft_lutpair11" *) 
   LUT3 #(
     .INIT(8'h28)) 
     \col_cnt[1]_i_1 
-       (.I0(\col_cnt[4]_i_4_n_0 ),
+       (.I0(\col_cnt[4]_i_3_n_0 ),
         .I1(col_cnt[0]),
         .I2(col_cnt[1]),
         .O(\col_cnt[1]_i_1_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair2" *) 
   LUT4 #(
     .INIT(16'h2A80)) 
     \col_cnt[2]_i_1 
-       (.I0(\col_cnt[4]_i_4_n_0 ),
+       (.I0(\col_cnt[4]_i_3_n_0 ),
         .I1(col_cnt[1]),
         .I2(col_cnt[0]),
         .I3(col_cnt[2]),
         .O(\col_cnt[2]_i_1_n_0 ));
+  (* SOFT_HLUTNM = "soft_lutpair2" *) 
   LUT5 #(
-    .INIT(32'h28888888)) 
+    .INIT(32'h2AAA8000)) 
     \col_cnt[3]_i_1 
-       (.I0(\col_cnt[4]_i_4_n_0 ),
-        .I1(col_cnt[3]),
+       (.I0(\col_cnt[4]_i_3_n_0 ),
+        .I1(col_cnt[2]),
         .I2(col_cnt[0]),
         .I3(col_cnt[1]),
-        .I4(col_cnt[2]),
+        .I4(col_cnt[3]),
         .O(\col_cnt[3]_i_1_n_0 ));
   LUT4 #(
-    .INIT(16'h08FF)) 
+    .INIT(16'h40FF)) 
     \col_cnt[4]_i_1 
-       (.I0(state[1]),
-        .I1(px_valid),
-        .I2(state[2]),
-        .I3(\col_cnt[4]_i_4_n_0 ),
+       (.I0(state[2]),
+        .I1(state[1]),
+        .I2(px_valid),
+        .I3(\col_cnt[4]_i_3_n_0 ),
         .O(\col_cnt[4]_i_1_n_0 ));
   LUT6 #(
-    .INIT(64'h6AAAAAAA00000000)) 
+    .INIT(64'h2AAAAAAA80000000)) 
     \col_cnt[4]_i_2 
-       (.I0(col_cnt[4]),
-        .I1(col_cnt[0]),
+       (.I0(\col_cnt[4]_i_3_n_0 ),
+        .I1(col_cnt[3]),
         .I2(col_cnt[1]),
-        .I3(col_cnt[2]),
-        .I4(col_cnt[3]),
-        .I5(\col_cnt[4]_i_4_n_0 ),
+        .I3(col_cnt[0]),
+        .I4(col_cnt[2]),
+        .I5(col_cnt[4]),
         .O(\col_cnt[4]_i_2_n_0 ));
   LUT6 #(
-    .INIT(64'hFFFFFFFFFFFFFC55)) 
-    \col_cnt[4]_i_4 
+    .INIT(64'hFFFFFFFFFFFFDDD1)) 
+    \col_cnt[4]_i_3 
        (.I0(cfg_start),
-        .I1(\flush_cnt_reg_n_0_[0] ),
-        .I2(\col_cnt[4]_i_5_n_0 ),
-        .I3(state[0]),
-        .I4(state[1]),
-        .I5(state[2]),
-        .O(\col_cnt[4]_i_4_n_0 ));
-  LUT2 #(
-    .INIT(4'h7)) 
-    \col_cnt[4]_i_5 
-       (.I0(\flush_cnt_reg_n_0_[2] ),
-        .I1(\flush_cnt_reg_n_0_[1] ),
-        .O(\col_cnt[4]_i_5_n_0 ));
+        .I1(state[0]),
+        .I2(\flush_cnt_reg_n_0_[0] ),
+        .I3(\FSM_sequential_state[2]_i_3_n_0 ),
+        .I4(state[2]),
+        .I5(state[1]),
+        .O(\col_cnt[4]_i_3_n_0 ));
   FDCE #(
     .INIT(1'b0)) 
     \col_cnt_reg[0] 
        (.C(clk),
         .CE(\col_cnt[4]_i_1_n_0 ),
-        .CLR(rst_n),
+        .CLR(rst_n_0),
         .D(\col_cnt[0]_i_1_n_0 ),
         .Q(col_cnt[0]));
   FDCE #(
@@ -3844,7 +3855,7 @@ module ctrl_fsm
     \col_cnt_reg[1] 
        (.C(clk),
         .CE(\col_cnt[4]_i_1_n_0 ),
-        .CLR(rst_n),
+        .CLR(rst_n_0),
         .D(\col_cnt[1]_i_1_n_0 ),
         .Q(col_cnt[1]));
   FDCE #(
@@ -3852,7 +3863,7 @@ module ctrl_fsm
     \col_cnt_reg[2] 
        (.C(clk),
         .CE(\col_cnt[4]_i_1_n_0 ),
-        .CLR(rst_n_1),
+        .CLR(rst_n_0),
         .D(\col_cnt[2]_i_1_n_0 ),
         .Q(col_cnt[2]));
   FDCE #(
@@ -3860,7 +3871,7 @@ module ctrl_fsm
     \col_cnt_reg[3] 
        (.C(clk),
         .CE(\col_cnt[4]_i_1_n_0 ),
-        .CLR(rst_n_1),
+        .CLR(rst_n_0),
         .D(\col_cnt[3]_i_1_n_0 ),
         .Q(col_cnt[3]));
   FDCE #(
@@ -3868,25 +3879,35 @@ module ctrl_fsm
     \col_cnt_reg[4] 
        (.C(clk),
         .CE(\col_cnt[4]_i_1_n_0 ),
-        .CLR(rst_n_1),
+        .CLR(rst_n_0),
         .D(\col_cnt[4]_i_2_n_0 ),
         .Q(col_cnt[4]));
   LUT5 #(
-    .INIT(32'h00004000)) 
+    .INIT(32'h00000080)) 
     done_i_1
-       (.I0(\flush_cnt_reg_n_0_[0] ),
-        .I1(\flush_cnt_reg_n_0_[1] ),
-        .I2(\flush_cnt_reg_n_0_[2] ),
-        .I3(done_i_2_n_0),
-        .I4(busy_i_2_n_0),
+       (.I0(done_i_2_n_0),
+        .I1(\flush_cnt_reg_n_0_[2] ),
+        .I2(\flush_cnt_reg_n_0_[1] ),
+        .I3(\flush_cnt_reg_n_0_[0] ),
+        .I4(done_i_3_n_0),
         .O(busy0));
-  LUT3 #(
-    .INIT(8'h02)) 
+  LUT6 #(
+    .INIT(64'h55573BFF02FF003B)) 
     done_i_2
-       (.I0(state[0]),
-        .I1(state[1]),
-        .I2(state[2]),
+       (.I0(\kernel_cnt_reg_n_0_[0] ),
+        .I1(cfg_num_kernels[1]),
+        .I2(cfg_num_kernels[0]),
+        .I3(cfg_num_kernels[2]),
+        .I4(\kernel_cnt_reg_n_0_[1] ),
+        .I5(\kernel_cnt_reg_n_0_[2] ),
         .O(done_i_2_n_0));
+  LUT3 #(
+    .INIT(8'hEF)) 
+    done_i_3
+       (.I0(state[2]),
+        .I1(state[1]),
+        .I2(state[0]),
+        .O(done_i_3_n_0));
   FDCE #(
     .INIT(1'b0)) 
     done_reg
@@ -3896,34 +3917,34 @@ module ctrl_fsm
         .D(busy0),
         .Q(done));
   LUT6 #(
-    .INIT(64'h0008000000070000)) 
+    .INIT(64'h0200000000020202)) 
     \flush_cnt[0]_i_1 
-       (.I0(\flush_cnt_reg_n_0_[1] ),
-        .I1(\flush_cnt_reg_n_0_[2] ),
+       (.I0(state[0]),
+        .I1(state[1]),
         .I2(state[2]),
-        .I3(state[1]),
-        .I4(state[0]),
+        .I3(\flush_cnt_reg_n_0_[2] ),
+        .I4(\flush_cnt_reg_n_0_[1] ),
         .I5(\flush_cnt_reg_n_0_[0] ),
         .O(\flush_cnt[0]_i_1_n_0 ));
   LUT6 #(
-    .INIT(64'h000000E600000000)) 
+    .INIT(64'h000C000400080008)) 
     \flush_cnt[1]_i_1 
        (.I0(\flush_cnt_reg_n_0_[0] ),
-        .I1(\flush_cnt_reg_n_0_[1] ),
-        .I2(\flush_cnt_reg_n_0_[2] ),
+        .I1(state[0]),
+        .I2(state[1]),
         .I3(state[2]),
-        .I4(state[1]),
-        .I5(state[0]),
+        .I4(\flush_cnt_reg_n_0_[2] ),
+        .I5(\flush_cnt_reg_n_0_[1] ),
         .O(\flush_cnt[1]_i_1_n_0 ));
   LUT6 #(
-    .INIT(64'h000000F800000000)) 
+    .INIT(64'h000C0008000C0000)) 
     \flush_cnt[2]_i_1 
        (.I0(\flush_cnt_reg_n_0_[0] ),
-        .I1(\flush_cnt_reg_n_0_[1] ),
-        .I2(\flush_cnt_reg_n_0_[2] ),
+        .I1(state[0]),
+        .I2(state[1]),
         .I3(state[2]),
-        .I4(state[1]),
-        .I5(state[0]),
+        .I4(\flush_cnt_reg_n_0_[2] ),
+        .I5(\flush_cnt_reg_n_0_[1] ),
         .O(\flush_cnt[2]_i_1_n_0 ));
   FDCE #(
     .INIT(1'b0)) 
@@ -3950,58 +3971,66 @@ module ctrl_fsm
         .D(\flush_cnt[2]_i_1_n_0 ),
         .Q(\flush_cnt_reg_n_0_[2] ));
   LUT6 #(
-    .INIT(64'h00000000FF2A0000)) 
+    .INIT(64'h00FF007000000000)) 
     \g_row[2].taps[2][2][7]_i_1 
-       (.I0(state[0]),
+       (.I0(\flush_cnt_reg_n_0_[1] ),
         .I1(\flush_cnt_reg_n_0_[2] ),
-        .I2(\flush_cnt_reg_n_0_[1] ),
-        .I3(state[1]),
-        .I4(px_valid),
-        .I5(state[2]),
-        .O(\g_row[0].g_tap[0].taps_reg[0][0][0] ));
-  LUT5 #(
-    .INIT(32'h55545555)) 
-    \kernel_cnt[0]_i_1 
-       (.I0(\kernel_cnt_reg_n_0_[0] ),
-        .I1(state[0]),
-        .I2(state[1]),
+        .I2(state[0]),
         .I3(state[2]),
-        .I4(cfg_start),
+        .I4(state[1]),
+        .I5(px_valid),
+        .O(advance));
+  LUT5 #(
+    .INIT(32'h0000FFFD)) 
+    \kernel_cnt[0]_i_1 
+       (.I0(cfg_start),
+        .I1(state[2]),
+        .I2(state[1]),
+        .I3(state[0]),
+        .I4(\kernel_cnt_reg_n_0_[0] ),
         .O(\kernel_cnt[0]_i_1_n_0 ));
   LUT6 #(
-    .INIT(64'h6666666066666666)) 
+    .INIT(64'h0000FEFFFEFF0000)) 
     \kernel_cnt[1]_i_1 
-       (.I0(\kernel_cnt_reg_n_0_[0] ),
-        .I1(\kernel_cnt_reg_n_0_[1] ),
-        .I2(state[0]),
-        .I3(state[1]),
-        .I4(state[2]),
-        .I5(cfg_start),
+       (.I0(state[0]),
+        .I1(state[1]),
+        .I2(state[2]),
+        .I3(cfg_start),
+        .I4(\kernel_cnt_reg_n_0_[0] ),
+        .I5(\kernel_cnt_reg_n_0_[1] ),
         .O(\kernel_cnt[1]_i_1_n_0 ));
   LUT6 #(
-    .INIT(64'hAAAAAAAAEAAAAAAA)) 
+    .INIT(64'h10000000FFFFFFFF)) 
     \kernel_cnt[2]_i_1 
-       (.I0(relu_en0),
-        .I1(busy_i_2_n_0),
-        .I2(done_i_2_n_0),
+       (.I0(done_i_3_n_0),
+        .I1(\flush_cnt_reg_n_0_[0] ),
+        .I2(\flush_cnt_reg_n_0_[1] ),
         .I3(\flush_cnt_reg_n_0_[2] ),
-        .I4(\flush_cnt_reg_n_0_[1] ),
-        .I5(\flush_cnt_reg_n_0_[0] ),
+        .I4(\FSM_sequential_state[1]_i_2_n_0 ),
+        .I5(\kernel_cnt[2]_i_3_n_0 ),
         .O(kernel_cnt));
   LUT4 #(
-    .INIT(16'h1540)) 
+    .INIT(16'h2A80)) 
     \kernel_cnt[2]_i_2 
-       (.I0(relu_en0),
+       (.I0(\kernel_cnt[2]_i_3_n_0 ),
         .I1(\kernel_cnt_reg_n_0_[1] ),
         .I2(\kernel_cnt_reg_n_0_[0] ),
         .I3(\kernel_cnt_reg_n_0_[2] ),
         .O(\kernel_cnt[2]_i_2_n_0 ));
+  LUT4 #(
+    .INIT(16'hFEFF)) 
+    \kernel_cnt[2]_i_3 
+       (.I0(state[0]),
+        .I1(state[1]),
+        .I2(state[2]),
+        .I3(cfg_start),
+        .O(\kernel_cnt[2]_i_3_n_0 ));
   FDCE #(
     .INIT(1'b0)) 
     \kernel_cnt_reg[0] 
        (.C(clk),
         .CE(kernel_cnt),
-        .CLR(rst_n_1),
+        .CLR(rst_n_0),
         .D(\kernel_cnt[0]_i_1_n_0 ),
         .Q(\kernel_cnt_reg_n_0_[0] ));
   FDCE #(
@@ -4009,7 +4038,7 @@ module ctrl_fsm
     \kernel_cnt_reg[1] 
        (.C(clk),
         .CE(kernel_cnt),
-        .CLR(rst_n_1),
+        .CLR(rst_n_0),
         .D(\kernel_cnt[1]_i_1_n_0 ),
         .Q(\kernel_cnt_reg_n_0_[1] ));
   FDCE #(
@@ -4017,7 +4046,7 @@ module ctrl_fsm
     \kernel_cnt_reg[2] 
        (.C(clk),
         .CE(kernel_cnt),
-        .CLR(rst_n_1),
+        .CLR(rst_n_0),
         .D(\kernel_cnt[2]_i_2_n_0 ),
         .Q(\kernel_cnt_reg_n_0_[2] ));
   (* srl_bus_name = "\u_ctrl_fsm/meta_bank_reg[3] " *) 
@@ -4029,7 +4058,7 @@ module ctrl_fsm
         .A1(1'b1),
         .A2(1'b0),
         .A3(1'b0),
-        .CE(advanced_q_reg_0),
+        .CE(shift_en),
         .CLK(clk),
         .D(pending_bank[0]),
         .Q(\meta_bank_reg[3][0]_srl4_u_ctrl_fsm_meta_valid_reg_c_7_n_0 ));
@@ -4042,7 +4071,7 @@ module ctrl_fsm
         .A1(1'b1),
         .A2(1'b0),
         .A3(1'b0),
-        .CE(advanced_q_reg_0),
+        .CE(shift_en),
         .CLK(clk),
         .D(pending_bank[1]),
         .Q(\meta_bank_reg[3][1]_srl4_u_ctrl_fsm_meta_valid_reg_c_7_n_0 ));
@@ -4050,7 +4079,7 @@ module ctrl_fsm
     .INIT(1'b0)) 
     \meta_bank_reg[4][0]_u_ctrl_fsm_meta_valid_reg_c_8 
        (.C(clk),
-        .CE(advanced_q_reg_0),
+        .CE(shift_en),
         .D(\meta_bank_reg[3][0]_srl4_u_ctrl_fsm_meta_valid_reg_c_7_n_0 ),
         .Q(\meta_bank_reg[4][0]_u_ctrl_fsm_meta_valid_reg_c_8_n_0 ),
         .R(1'b0));
@@ -4058,7 +4087,7 @@ module ctrl_fsm
     .INIT(1'b0)) 
     \meta_bank_reg[4][1]_u_ctrl_fsm_meta_valid_reg_c_8 
        (.C(clk),
-        .CE(advanced_q_reg_0),
+        .CE(shift_en),
         .D(\meta_bank_reg[3][1]_srl4_u_ctrl_fsm_meta_valid_reg_c_7_n_0 ),
         .Q(\meta_bank_reg[4][1]_u_ctrl_fsm_meta_valid_reg_c_8_n_0 ),
         .R(1'b0));
@@ -4066,7 +4095,7 @@ module ctrl_fsm
     .INIT(1'b0)) 
     \meta_bank_reg[5][0] 
        (.C(clk),
-        .CE(advanced_q_reg_0),
+        .CE(shift_en),
         .CLR(rst_n),
         .D(meta_bank_reg_gate__0_n_0),
         .Q(out_bank[0]));
@@ -4074,18 +4103,18 @@ module ctrl_fsm
     .INIT(1'b0)) 
     \meta_bank_reg[5][1] 
        (.C(clk),
-        .CE(advanced_q_reg_0),
+        .CE(shift_en),
         .CLR(rst_n),
         .D(meta_bank_reg_gate_n_0),
         .Q(out_bank[1]));
-  (* SOFT_HLUTNM = "soft_lutpair14" *) 
+  (* SOFT_HLUTNM = "soft_lutpair16" *) 
   LUT2 #(
     .INIT(4'h8)) 
     meta_bank_reg_gate
        (.I0(\meta_bank_reg[4][1]_u_ctrl_fsm_meta_valid_reg_c_8_n_0 ),
         .I1(meta_valid_reg_c_8_n_0),
         .O(meta_bank_reg_gate_n_0));
-  (* SOFT_HLUTNM = "soft_lutpair14" *) 
+  (* SOFT_HLUTNM = "soft_lutpair16" *) 
   LUT2 #(
     .INIT(4'h8)) 
     meta_bank_reg_gate__0
@@ -4101,22 +4130,22 @@ module ctrl_fsm
         .A1(1'b0),
         .A2(1'b1),
         .A3(1'b0),
-        .CE(advanced_q_reg_0),
+        .CE(shift_en),
         .CLK(clk),
         .D(pending_last),
         .Q(\meta_last_reg[3]_srl5_u_ctrl_fsm_meta_valid_reg_c_8_n_0 ));
   LUT3 #(
     .INIT(8'h80)) 
     \meta_last_reg[3]_srl5_u_ctrl_fsm_meta_valid_reg_c_8_i_1 
-       (.I0(px_last),
-        .I1(state[1]),
-        .I2(px_valid),
+       (.I0(state[1]),
+        .I1(px_valid),
+        .I2(px_last),
         .O(pending_last));
   FDRE #(
     .INIT(1'b0)) 
     \meta_last_reg[4]_u_ctrl_fsm_meta_valid_reg_c_9 
        (.C(clk),
-        .CE(advanced_q_reg_0),
+        .CE(shift_en),
         .D(\meta_last_reg[3]_srl5_u_ctrl_fsm_meta_valid_reg_c_8_n_0 ),
         .Q(\meta_last_reg[4]_u_ctrl_fsm_meta_valid_reg_c_9_n_0 ),
         .R(1'b0));
@@ -4124,11 +4153,11 @@ module ctrl_fsm
     .INIT(1'b0)) 
     \meta_last_reg[5] 
        (.C(clk),
-        .CE(advanced_q_reg_0),
+        .CE(shift_en),
         .CLR(rst_n),
         .D(meta_last_reg_gate_n_0),
         .Q(p_0_in1_in));
-  (* SOFT_HLUTNM = "soft_lutpair13" *) 
+  (* SOFT_HLUTNM = "soft_lutpair15" *) 
   LUT2 #(
     .INIT(4'h8)) 
     meta_last_reg_gate
@@ -4144,39 +4173,40 @@ module ctrl_fsm
         .A1(1'b0),
         .A2(1'b1),
         .A3(1'b0),
-        .CE(advanced_q_reg_0),
+        .CE(shift_en),
         .CLK(clk),
         .D(pending_valid),
         .Q(\meta_valid_reg[3]_srl5_u_ctrl_fsm_meta_valid_reg_c_8_n_0 ));
-  LUT3 #(
-    .INIT(8'h80)) 
+  LUT6 #(
+    .INIT(64'hAAAAAAA800000000)) 
     \meta_valid_reg[3]_srl5_u_ctrl_fsm_meta_valid_reg_c_8_i_1 
-       (.I0(\meta_valid_reg[3]_srl5_u_ctrl_fsm_meta_valid_reg_c_8_i_2_n_0 ),
-        .I1(state[1]),
-        .I2(px_valid),
-        .O(pending_valid));
-  LUT5 #(
-    .INIT(32'h0000FFFE)) 
-    \meta_valid_reg[3]_srl5_u_ctrl_fsm_meta_valid_reg_c_8_i_2 
-       (.I0(\row_cnt_reg_n_0_[2] ),
-        .I1(\row_cnt_reg_n_0_[3] ),
-        .I2(\row_cnt_reg_n_0_[1] ),
-        .I3(\row_cnt_reg_n_0_[4] ),
-        .I4(\meta_valid_reg[3]_srl5_u_ctrl_fsm_meta_valid_reg_c_8_i_3_n_0 ),
-        .O(\meta_valid_reg[3]_srl5_u_ctrl_fsm_meta_valid_reg_c_8_i_2_n_0 ));
-  LUT4 #(
-    .INIT(16'h0001)) 
-    \meta_valid_reg[3]_srl5_u_ctrl_fsm_meta_valid_reg_c_8_i_3 
-       (.I0(col_cnt[3]),
+       (.I0(accepted),
         .I1(col_cnt[2]),
-        .I2(col_cnt[4]),
-        .I3(col_cnt[1]),
+        .I2(col_cnt[1]),
+        .I3(col_cnt[4]),
+        .I4(col_cnt[3]),
+        .I5(\meta_valid_reg[3]_srl5_u_ctrl_fsm_meta_valid_reg_c_8_i_3_n_0 ),
+        .O(pending_valid));
+  LUT3 #(
+    .INIT(8'h08)) 
+    \meta_valid_reg[3]_srl5_u_ctrl_fsm_meta_valid_reg_c_8_i_2 
+       (.I0(px_valid),
+        .I1(state[1]),
+        .I2(state[2]),
+        .O(accepted));
+  LUT4 #(
+    .INIT(16'hFFFE)) 
+    \meta_valid_reg[3]_srl5_u_ctrl_fsm_meta_valid_reg_c_8_i_3 
+       (.I0(\row_cnt_reg_n_0_[2] ),
+        .I1(\row_cnt_reg_n_0_[1] ),
+        .I2(\row_cnt_reg_n_0_[4] ),
+        .I3(\row_cnt_reg_n_0_[3] ),
         .O(\meta_valid_reg[3]_srl5_u_ctrl_fsm_meta_valid_reg_c_8_i_3_n_0 ));
   FDRE #(
     .INIT(1'b0)) 
     \meta_valid_reg[4]_u_ctrl_fsm_meta_valid_reg_c_9 
        (.C(clk),
-        .CE(advanced_q_reg_0),
+        .CE(shift_en),
         .D(\meta_valid_reg[3]_srl5_u_ctrl_fsm_meta_valid_reg_c_8_n_0 ),
         .Q(\meta_valid_reg[4]_u_ctrl_fsm_meta_valid_reg_c_9_n_0 ),
         .R(1'b0));
@@ -4184,7 +4214,7 @@ module ctrl_fsm
     .INIT(1'b0)) 
     \meta_valid_reg[5] 
        (.C(clk),
-        .CE(advanced_q_reg_0),
+        .CE(shift_en),
         .CLR(rst_n),
         .D(meta_valid_reg_gate_n_0),
         .Q(p_0_in2_in));
@@ -4192,7 +4222,7 @@ module ctrl_fsm
     .INIT(1'b0)) 
     meta_valid_reg_c_5
        (.C(clk),
-        .CE(advanced_q_reg_0),
+        .CE(shift_en),
         .CLR(rst_n),
         .D(pending_valid_reg_c_4_n_0),
         .Q(meta_valid_reg_c_5_n_0));
@@ -4200,7 +4230,7 @@ module ctrl_fsm
     .INIT(1'b0)) 
     meta_valid_reg_c_6
        (.C(clk),
-        .CE(advanced_q_reg_0),
+        .CE(shift_en),
         .CLR(rst_n),
         .D(meta_valid_reg_c_5_n_0),
         .Q(meta_valid_reg_c_6_n_0));
@@ -4208,7 +4238,7 @@ module ctrl_fsm
     .INIT(1'b0)) 
     meta_valid_reg_c_7
        (.C(clk),
-        .CE(advanced_q_reg_0),
+        .CE(shift_en),
         .CLR(rst_n),
         .D(meta_valid_reg_c_6_n_0),
         .Q(meta_valid_reg_c_7_n_0));
@@ -4216,7 +4246,7 @@ module ctrl_fsm
     .INIT(1'b0)) 
     meta_valid_reg_c_8
        (.C(clk),
-        .CE(advanced_q_reg_0),
+        .CE(shift_en),
         .CLR(rst_n),
         .D(meta_valid_reg_c_7_n_0),
         .Q(meta_valid_reg_c_8_n_0));
@@ -4224,11 +4254,11 @@ module ctrl_fsm
     .INIT(1'b0)) 
     meta_valid_reg_c_9
        (.C(clk),
-        .CE(advanced_q_reg_0),
+        .CE(shift_en),
         .CLR(rst_n),
         .D(meta_valid_reg_c_8_n_0),
         .Q(meta_valid_reg_c_9_n_0));
-  (* SOFT_HLUTNM = "soft_lutpair13" *) 
+  (* SOFT_HLUTNM = "soft_lutpair15" *) 
   LUT2 #(
     .INIT(4'h8)) 
     meta_valid_reg_gate
@@ -4275,8 +4305,8 @@ module ctrl_fsm
     .INIT(32'hFFBF0080)) 
     \pending_bank[0]_i_1 
        (.I0(Q[0]),
-        .I1(state[1]),
-        .I2(px_valid),
+        .I1(px_valid),
+        .I2(state[1]),
         .I3(state[2]),
         .I4(pending_bank[0]),
         .O(\pending_bank[0]_i_1_n_0 ));
@@ -4284,8 +4314,8 @@ module ctrl_fsm
     .INIT(32'hFFBF0080)) 
     \pending_bank[1]_i_1 
        (.I0(Q[1]),
-        .I1(state[1]),
-        .I2(px_valid),
+        .I1(px_valid),
+        .I2(state[1]),
         .I3(state[2]),
         .I4(pending_bank[1]),
         .O(\pending_bank[1]_i_1_n_0 ));
@@ -4294,7 +4324,7 @@ module ctrl_fsm
     \pending_bank_reg[0] 
        (.C(clk),
         .CE(1'b1),
-        .CLR(rst_n_1),
+        .CLR(rst_n_2),
         .D(\pending_bank[0]_i_1_n_0 ),
         .Q(pending_bank[0]));
   FDCE #(
@@ -4302,14 +4332,14 @@ module ctrl_fsm
     \pending_bank_reg[1] 
        (.C(clk),
         .CE(1'b1),
-        .CLR(rst_n_1),
+        .CLR(rst_n_2),
         .D(\pending_bank[1]_i_1_n_0 ),
         .Q(pending_bank[1]));
   FDCE #(
     .INIT(1'b0)) 
     pending_valid_reg_c_4
        (.C(clk),
-        .CE(advanced_q_reg_0),
+        .CE(shift_en),
         .CLR(rst_n),
         .D(1'b1),
         .Q(pending_valid_reg_c_4_n_0));
@@ -4330,16 +4360,16 @@ module ctrl_fsm
         .D(cfg_relu_en),
         .Q(relu_en));
   LUT6 #(
-    .INIT(64'h00000000FF2A002A)) 
+    .INIT(64'h00FF002A0000002A)) 
     \res[15]_i_1 
        (.I0(state[0]),
-        .I1(\flush_cnt_reg_n_0_[2] ),
-        .I2(\flush_cnt_reg_n_0_[1] ),
-        .I3(state[1]),
-        .I4(px_valid),
-        .I5(state[2]),
-        .O(advanced_q_reg_0));
-  (* SOFT_HLUTNM = "soft_lutpair3" *) 
+        .I1(\flush_cnt_reg_n_0_[1] ),
+        .I2(\flush_cnt_reg_n_0_[2] ),
+        .I3(state[2]),
+        .I4(state[1]),
+        .I5(px_valid),
+        .O(shift_en));
+  (* SOFT_HLUTNM = "soft_lutpair7" *) 
   LUT3 #(
     .INIT(8'hB8)) 
     \rounded_q[0]_i_1 
@@ -4357,7 +4387,7 @@ module ctrl_fsm
         .I4(\rounded_q_reg[16] [2]),
         .I5(rounded_q1[0]),
         .O(\rounded_q[0]_i_2_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair4" *) 
+  (* SOFT_HLUTNM = "soft_lutpair12" *) 
   LUT3 #(
     .INIT(8'hB8)) 
     \rounded_q[10]_i_1 
@@ -4375,7 +4405,7 @@ module ctrl_fsm
         .I4(\rounded_q_reg[16] [2]),
         .I5(rounded_q1[10]),
         .O(\rounded_q[10]_i_2_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair4" *) 
+  (* SOFT_HLUTNM = "soft_lutpair10" *) 
   LUT3 #(
     .INIT(8'hB8)) 
     \rounded_q[11]_i_1 
@@ -4393,7 +4423,7 @@ module ctrl_fsm
         .I4(\rounded_q_reg[16] [2]),
         .I5(rounded_q1[11]),
         .O(\rounded_q[11]_i_2_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair11" *) 
+  (* SOFT_HLUTNM = "soft_lutpair10" *) 
   LUT3 #(
     .INIT(8'hB8)) 
     \rounded_q[12]_i_1 
@@ -4411,7 +4441,7 @@ module ctrl_fsm
         .I4(\rounded_q_reg[16] [2]),
         .I5(rounded_q1[12]),
         .O(\rounded_q[12]_i_2_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair11" *) 
+  (* SOFT_HLUTNM = "soft_lutpair13" *) 
   LUT3 #(
     .INIT(8'hB8)) 
     \rounded_q[13]_i_1 
@@ -4429,7 +4459,7 @@ module ctrl_fsm
         .I4(\rounded_q_reg[16] [2]),
         .I5(rounded_q1[13]),
         .O(\rounded_q[13]_i_2_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair6" *) 
+  (* SOFT_HLUTNM = "soft_lutpair12" *) 
   LUT3 #(
     .INIT(8'hB8)) 
     \rounded_q[14]_i_1 
@@ -4447,7 +4477,7 @@ module ctrl_fsm
         .I4(\rounded_q_reg[16] [2]),
         .I5(rounded_q1[14]),
         .O(\rounded_q[14]_i_2_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair6" *) 
+  (* SOFT_HLUTNM = "soft_lutpair7" *) 
   LUT3 #(
     .INIT(8'hB8)) 
     \rounded_q[15]_i_1 
@@ -4502,7 +4532,7 @@ module ctrl_fsm
         .I3(\rounded_q_reg[16] [2]),
         .I4(rounded_q1[18]),
         .O(D[18]));
-  (* SOFT_HLUTNM = "soft_lutpair3" *) 
+  (* SOFT_HLUTNM = "soft_lutpair6" *) 
   LUT3 #(
     .INIT(8'hB8)) 
     \rounded_q[1]_i_1 
@@ -4520,7 +4550,7 @@ module ctrl_fsm
         .I4(\rounded_q_reg[16] [2]),
         .I5(rounded_q1[1]),
         .O(\rounded_q[1]_i_2_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair5" *) 
+  (* SOFT_HLUTNM = "soft_lutpair6" *) 
   LUT3 #(
     .INIT(8'hB8)) 
     \rounded_q[2]_i_1 
@@ -4538,7 +4568,7 @@ module ctrl_fsm
         .I4(\rounded_q_reg[16] [2]),
         .I5(rounded_q1[2]),
         .O(\rounded_q[2]_i_2_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair5" *) 
+  (* SOFT_HLUTNM = "soft_lutpair13" *) 
   LUT3 #(
     .INIT(8'hB8)) 
     \rounded_q[3]_i_1 
@@ -4556,7 +4586,7 @@ module ctrl_fsm
         .I4(\rounded_q_reg[16] [2]),
         .I5(rounded_q1[3]),
         .O(\rounded_q[3]_i_2_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair7" *) 
+  (* SOFT_HLUTNM = "soft_lutpair8" *) 
   LUT3 #(
     .INIT(8'hB8)) 
     \rounded_q[4]_i_1 
@@ -4574,7 +4604,7 @@ module ctrl_fsm
         .I4(\rounded_q_reg[16] [2]),
         .I5(rounded_q1[4]),
         .O(\rounded_q[4]_i_2_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair7" *) 
+  (* SOFT_HLUTNM = "soft_lutpair8" *) 
   LUT3 #(
     .INIT(8'hB8)) 
     \rounded_q[5]_i_1 
@@ -4592,7 +4622,7 @@ module ctrl_fsm
         .I4(\rounded_q_reg[16] [2]),
         .I5(rounded_q1[5]),
         .O(\rounded_q[5]_i_2_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair9" *) 
+  (* SOFT_HLUTNM = "soft_lutpair4" *) 
   LUT3 #(
     .INIT(8'hB8)) 
     \rounded_q[6]_i_1 
@@ -4610,7 +4640,7 @@ module ctrl_fsm
         .I4(\rounded_q_reg[16] [2]),
         .I5(rounded_q1[6]),
         .O(\rounded_q[6]_i_2_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair9" *) 
+  (* SOFT_HLUTNM = "soft_lutpair4" *) 
   LUT3 #(
     .INIT(8'hB8)) 
     \rounded_q[7]_i_1 
@@ -4628,7 +4658,7 @@ module ctrl_fsm
         .I4(\rounded_q_reg[16] [2]),
         .I5(rounded_q1[7]),
         .O(\rounded_q[7]_i_2_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair8" *) 
+  (* SOFT_HLUTNM = "soft_lutpair5" *) 
   LUT3 #(
     .INIT(8'hB8)) 
     \rounded_q[8]_i_1 
@@ -4646,7 +4676,7 @@ module ctrl_fsm
         .I4(\rounded_q_reg[16] [2]),
         .I5(rounded_q1[8]),
         .O(\rounded_q[8]_i_2_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair8" *) 
+  (* SOFT_HLUTNM = "soft_lutpair5" *) 
   LUT3 #(
     .INIT(8'hB8)) 
     \rounded_q[9]_i_1 
@@ -4664,18 +4694,18 @@ module ctrl_fsm
         .I4(\rounded_q_reg[16] [2]),
         .I5(rounded_q1[9]),
         .O(\rounded_q[9]_i_2_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair10" *) 
+  (* SOFT_HLUTNM = "soft_lutpair9" *) 
   LUT2 #(
     .INIT(4'h2)) 
     \row_cnt[0]_i_1 
-       (.I0(\col_cnt[4]_i_4_n_0 ),
+       (.I0(\col_cnt[4]_i_3_n_0 ),
         .I1(\row_cnt_reg_n_0_[0] ),
         .O(\row_cnt[0]_i_1_n_0 ));
-  (* SOFT_HLUTNM = "soft_lutpair10" *) 
+  (* SOFT_HLUTNM = "soft_lutpair9" *) 
   LUT3 #(
     .INIT(8'h28)) 
     \row_cnt[1]_i_1 
-       (.I0(\col_cnt[4]_i_4_n_0 ),
+       (.I0(\col_cnt[4]_i_3_n_0 ),
         .I1(\row_cnt_reg_n_0_[0] ),
         .I2(\row_cnt_reg_n_0_[1] ),
         .O(\row_cnt[1]_i_1_n_0 ));
@@ -4683,7 +4713,7 @@ module ctrl_fsm
   LUT4 #(
     .INIT(16'h2A80)) 
     \row_cnt[2]_i_1 
-       (.I0(\col_cnt[4]_i_4_n_0 ),
+       (.I0(\col_cnt[4]_i_3_n_0 ),
         .I1(\row_cnt_reg_n_0_[1] ),
         .I2(\row_cnt_reg_n_0_[0] ),
         .I3(\row_cnt_reg_n_0_[2] ),
@@ -4692,46 +4722,46 @@ module ctrl_fsm
   LUT5 #(
     .INIT(32'h2AAA8000)) 
     \row_cnt[3]_i_1 
-       (.I0(\col_cnt[4]_i_4_n_0 ),
-        .I1(\row_cnt_reg_n_0_[0] ),
-        .I2(\row_cnt_reg_n_0_[1] ),
-        .I3(\row_cnt_reg_n_0_[2] ),
+       (.I0(\col_cnt[4]_i_3_n_0 ),
+        .I1(\row_cnt_reg_n_0_[2] ),
+        .I2(\row_cnt_reg_n_0_[0] ),
+        .I3(\row_cnt_reg_n_0_[1] ),
         .I4(\row_cnt_reg_n_0_[3] ),
         .O(\row_cnt[3]_i_1_n_0 ));
   LUT6 #(
-    .INIT(64'h40000000FFFFFFFF)) 
+    .INIT(64'h10000000FFFFFFFF)) 
     \row_cnt[4]_i_1 
-       (.I0(state[2]),
-        .I1(px_valid),
+       (.I0(\row_cnt[4]_i_4_n_0 ),
+        .I1(state[2]),
         .I2(state[1]),
-        .I3(col_cnt[4]),
-        .I4(\row_cnt[4]_i_4_n_0 ),
-        .I5(\col_cnt[4]_i_4_n_0 ),
+        .I3(px_valid),
+        .I4(col_cnt[4]),
+        .I5(\col_cnt[4]_i_3_n_0 ),
         .O(\row_cnt[4]_i_1_n_0 ));
   LUT6 #(
     .INIT(64'h2AAAAAAA80000000)) 
     \row_cnt[4]_i_2 
-       (.I0(\col_cnt[4]_i_4_n_0 ),
-        .I1(\row_cnt_reg_n_0_[2] ),
+       (.I0(\col_cnt[4]_i_3_n_0 ),
+        .I1(\row_cnt_reg_n_0_[3] ),
         .I2(\row_cnt_reg_n_0_[1] ),
         .I3(\row_cnt_reg_n_0_[0] ),
-        .I4(\row_cnt_reg_n_0_[3] ),
+        .I4(\row_cnt_reg_n_0_[2] ),
         .I5(\row_cnt_reg_n_0_[4] ),
         .O(\row_cnt[4]_i_2_n_0 ));
   LUT4 #(
-    .INIT(16'h8000)) 
+    .INIT(16'h7FFF)) 
     \row_cnt[4]_i_4 
-       (.I0(col_cnt[3]),
-        .I1(col_cnt[2]),
+       (.I0(col_cnt[2]),
+        .I1(col_cnt[0]),
         .I2(col_cnt[1]),
-        .I3(col_cnt[0]),
+        .I3(col_cnt[3]),
         .O(\row_cnt[4]_i_4_n_0 ));
   FDCE #(
     .INIT(1'b0)) 
     \row_cnt_reg[0] 
        (.C(clk),
         .CE(\row_cnt[4]_i_1_n_0 ),
-        .CLR(rst_n_2),
+        .CLR(rst_n_1),
         .D(\row_cnt[0]_i_1_n_0 ),
         .Q(\row_cnt_reg_n_0_[0] ));
   FDCE #(
@@ -4739,7 +4769,7 @@ module ctrl_fsm
     \row_cnt_reg[1] 
        (.C(clk),
         .CE(\row_cnt[4]_i_1_n_0 ),
-        .CLR(rst_n_2),
+        .CLR(rst_n_1),
         .D(\row_cnt[1]_i_1_n_0 ),
         .Q(\row_cnt_reg_n_0_[1] ));
   FDCE #(
@@ -4747,7 +4777,7 @@ module ctrl_fsm
     \row_cnt_reg[2] 
        (.C(clk),
         .CE(\row_cnt[4]_i_1_n_0 ),
-        .CLR(rst_n_2),
+        .CLR(rst_n_1),
         .D(\row_cnt[2]_i_1_n_0 ),
         .Q(\row_cnt_reg_n_0_[2] ));
   FDCE #(
@@ -4755,7 +4785,7 @@ module ctrl_fsm
     \row_cnt_reg[3] 
        (.C(clk),
         .CE(\row_cnt[4]_i_1_n_0 ),
-        .CLR(rst_n_2),
+        .CLR(rst_n_1),
         .D(\row_cnt[3]_i_1_n_0 ),
         .Q(\row_cnt_reg_n_0_[3] ));
   FDCE #(
@@ -4763,24 +4793,25 @@ module ctrl_fsm
     \row_cnt_reg[4] 
        (.C(clk),
         .CE(\row_cnt[4]_i_1_n_0 ),
-        .CLR(rst_n_2),
+        .CLR(rst_n_1),
         .D(\row_cnt[4]_i_2_n_0 ),
         .Q(\row_cnt_reg_n_0_[4] ));
 endmodule
 
 module kernel_regfile
-   (\coef[8] ,
-    \coef[7] ,
-    \coef[6] ,
-    \coef[5] ,
-    \coef[4] ,
-    \coef[3] ,
-    \coef[2] ,
-    \coef[1] ,
-    \coef[0] ,
-    \bank_reg[1][8][0]_0 ,
-    \bank_reg[1][2][2]_0 ,
-    \bank_reg[0][3][7]_0 ,
+   (\coef_reg[8][7]_0 ,
+    \bank_reg[0][8][0]_0 ,
+    \bank_reg[0][2][3]_0 ,
+    \bank_reg[0][3][4]_0 ,
+    p_0_out,
+    p_0_out__0,
+    p_0_out__1,
+    p_0_out__2,
+    p_0_out__3,
+    p_0_out__4,
+    p_0_out__5,
+    p_0_out__6,
+    p_0_out__7,
     Q,
     rst_n,
     kl_coef,
@@ -4788,18 +4819,19 @@ module kernel_regfile
     kl_addr,
     kl_bank,
     kl_valid);
-  output [7:0]\coef[8] ;
-  output [7:0]\coef[7] ;
-  output [7:0]\coef[6] ;
-  output [7:0]\coef[5] ;
-  output [7:0]\coef[4] ;
-  output [7:0]\coef[3] ;
-  output [7:0]\coef[2] ;
-  output [7:0]\coef[1] ;
-  output [7:0]\coef[0] ;
-  output \bank_reg[1][8][0]_0 ;
-  output \bank_reg[1][2][2]_0 ;
-  output \bank_reg[0][3][7]_0 ;
+  output \coef_reg[8][7]_0 ;
+  output \bank_reg[0][8][0]_0 ;
+  output \bank_reg[0][2][3]_0 ;
+  output \bank_reg[0][3][4]_0 ;
+  output [7:0]p_0_out;
+  output [7:0]p_0_out__0;
+  output [7:0]p_0_out__1;
+  output [7:0]p_0_out__2;
+  output [7:0]p_0_out__3;
+  output [7:0]p_0_out__4;
+  output [7:0]p_0_out__5;
+  output [7:0]p_0_out__6;
+  output [7:0]p_0_out__7;
   input [1:0]Q;
   input rst_n;
   input [7:0]kl_coef;
@@ -4850,24 +4882,24 @@ module kernel_regfile
   wire \bank[3][8][7]_i_2_n_0 ;
   wire [7:0]\bank_reg[0][0]_3 ;
   wire [7:0]\bank_reg[0][1]_7 ;
+  wire \bank_reg[0][2][3]_0 ;
   wire [7:0]\bank_reg[0][2]_11 ;
-  wire \bank_reg[0][3][7]_0 ;
+  wire \bank_reg[0][3][4]_0 ;
   wire [7:0]\bank_reg[0][3]_15 ;
   wire [7:0]\bank_reg[0][4]_19 ;
   wire [7:0]\bank_reg[0][5]_23 ;
   wire [7:0]\bank_reg[0][6]_27 ;
   wire [7:0]\bank_reg[0][7]_31 ;
+  wire \bank_reg[0][8][0]_0 ;
   wire [7:0]\bank_reg[0][8]_35 ;
   wire [7:0]\bank_reg[1][0]_2 ;
   wire [7:0]\bank_reg[1][1]_6 ;
-  wire \bank_reg[1][2][2]_0 ;
   wire [7:0]\bank_reg[1][2]_10 ;
   wire [7:0]\bank_reg[1][3]_14 ;
   wire [7:0]\bank_reg[1][4]_18 ;
   wire [7:0]\bank_reg[1][5]_22 ;
   wire [7:0]\bank_reg[1][6]_26 ;
   wire [7:0]\bank_reg[1][7]_30 ;
-  wire \bank_reg[1][8][0]_0 ;
   wire [7:0]\bank_reg[1][8]_34 ;
   wire [7:0]\bank_reg[2][0]_1 ;
   wire [7:0]\bank_reg[2][1]_5 ;
@@ -4888,26 +4920,87 @@ module kernel_regfile
   wire [7:0]\bank_reg[3][7]_28 ;
   wire [7:0]\bank_reg[3][8]_32 ;
   wire clk;
-  wire [7:0]\coef[0] ;
-  wire [7:0]\coef[1] ;
-  wire [7:0]\coef[2] ;
-  wire [7:0]\coef[3] ;
-  wire [7:0]\coef[4] ;
-  wire [7:0]\coef[5] ;
-  wire [7:0]\coef[6] ;
-  wire [7:0]\coef[7] ;
-  wire [7:0]\coef[8] ;
+  wire \coef[1][0]_i_1_n_0 ;
+  wire \coef[1][1]_i_1_n_0 ;
+  wire \coef[1][2]_i_1_n_0 ;
+  wire \coef[1][3]_i_1_n_0 ;
+  wire \coef[1][4]_i_1_n_0 ;
+  wire \coef[1][5]_i_1_n_0 ;
+  wire \coef[1][6]_i_1_n_0 ;
+  wire \coef[1][7]_i_1_n_0 ;
+  wire \coef[2][0]_i_1_n_0 ;
+  wire \coef[2][1]_i_1_n_0 ;
+  wire \coef[2][2]_i_1_n_0 ;
+  wire \coef[2][3]_i_1_n_0 ;
+  wire \coef[2][4]_i_1_n_0 ;
+  wire \coef[2][5]_i_1_n_0 ;
+  wire \coef[2][6]_i_1_n_0 ;
+  wire \coef[2][7]_i_1_n_0 ;
+  wire \coef[3][0]_i_1_n_0 ;
+  wire \coef[3][1]_i_1_n_0 ;
+  wire \coef[3][2]_i_1_n_0 ;
+  wire \coef[3][3]_i_1_n_0 ;
+  wire \coef[3][4]_i_1_n_0 ;
+  wire \coef[3][5]_i_1_n_0 ;
+  wire \coef[3][6]_i_1_n_0 ;
+  wire \coef[3][7]_i_1_n_0 ;
+  wire \coef[4][0]_i_1_n_0 ;
+  wire \coef[4][1]_i_1_n_0 ;
+  wire \coef[4][2]_i_1_n_0 ;
+  wire \coef[4][3]_i_1_n_0 ;
+  wire \coef[4][4]_i_1_n_0 ;
+  wire \coef[4][5]_i_1_n_0 ;
+  wire \coef[4][6]_i_1_n_0 ;
+  wire \coef[4][7]_i_1_n_0 ;
+  wire \coef[5][0]_i_1_n_0 ;
+  wire \coef[5][1]_i_1_n_0 ;
+  wire \coef[5][2]_i_1_n_0 ;
+  wire \coef[5][3]_i_1_n_0 ;
+  wire \coef[5][4]_i_1_n_0 ;
+  wire \coef[5][5]_i_1_n_0 ;
+  wire \coef[5][6]_i_1_n_0 ;
+  wire \coef[5][7]_i_1_n_0 ;
+  wire \coef[6][0]_i_1_n_0 ;
+  wire \coef[6][1]_i_1_n_0 ;
+  wire \coef[6][2]_i_1_n_0 ;
+  wire \coef[6][3]_i_1_n_0 ;
+  wire \coef[6][4]_i_1_n_0 ;
+  wire \coef[6][5]_i_1_n_0 ;
+  wire \coef[6][6]_i_1_n_0 ;
+  wire \coef[6][7]_i_1_n_0 ;
+  wire \coef[7][0]_i_1_n_0 ;
+  wire \coef[7][1]_i_1_n_0 ;
+  wire \coef[7][2]_i_1_n_0 ;
+  wire \coef[7][3]_i_1_n_0 ;
+  wire \coef[7][4]_i_1_n_0 ;
+  wire \coef[7][5]_i_1_n_0 ;
+  wire \coef[7][6]_i_1_n_0 ;
+  wire \coef[7][7]_i_1_n_0 ;
+  wire \coef[8][0]_i_1_n_0 ;
+  wire \coef[8][1]_i_1_n_0 ;
+  wire \coef[8][2]_i_1_n_0 ;
+  wire \coef[8][3]_i_1_n_0 ;
+  wire \coef[8][4]_i_1_n_0 ;
+  wire \coef[8][5]_i_1_n_0 ;
+  wire \coef[8][6]_i_1_n_0 ;
+  wire \coef[8][7]_i_1_n_0 ;
+  wire \coef_reg[8][7]_0 ;
   wire [3:0]kl_addr;
   wire [1:0]kl_bank;
   wire [7:0]kl_coef;
   wire kl_valid;
+  wire [7:0]p_0_in;
+  wire [7:0]p_0_out;
+  wire [7:0]p_0_out__0;
+  wire [7:0]p_0_out__1;
+  wire [7:0]p_0_out__2;
+  wire [7:0]p_0_out__3;
+  wire [7:0]p_0_out__4;
+  wire [7:0]p_0_out__5;
+  wire [7:0]p_0_out__6;
+  wire [7:0]p_0_out__7;
   wire rst_n;
 
-  LUT1 #(
-    .INIT(2'h1)) 
-    \FSM_sequential_state[2]_i_2 
-       (.I0(rst_n),
-        .O(\bank_reg[1][2][2]_0 ));
   LUT5 #(
     .INIT(32'h00010000)) 
     \bank[0][0][7]_i_1 
@@ -5261,7 +5354,7 @@ module kernel_regfile
     \bank_reg[0][0][0] 
        (.C(clk),
         .CE(bank),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[0]),
         .Q(\bank_reg[0][0]_3 [0]));
   FDCE #(
@@ -5269,7 +5362,7 @@ module kernel_regfile
     \bank_reg[0][0][1] 
        (.C(clk),
         .CE(bank),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[1]),
         .Q(\bank_reg[0][0]_3 [1]));
   FDCE #(
@@ -5277,7 +5370,7 @@ module kernel_regfile
     \bank_reg[0][0][2] 
        (.C(clk),
         .CE(bank),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[2]),
         .Q(\bank_reg[0][0]_3 [2]));
   FDCE #(
@@ -5285,7 +5378,7 @@ module kernel_regfile
     \bank_reg[0][0][3] 
        (.C(clk),
         .CE(bank),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[3]),
         .Q(\bank_reg[0][0]_3 [3]));
   FDCE #(
@@ -5293,7 +5386,7 @@ module kernel_regfile
     \bank_reg[0][0][4] 
        (.C(clk),
         .CE(bank),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[4]),
         .Q(\bank_reg[0][0]_3 [4]));
   FDCE #(
@@ -5301,7 +5394,7 @@ module kernel_regfile
     \bank_reg[0][0][5] 
        (.C(clk),
         .CE(bank),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[5]),
         .Q(\bank_reg[0][0]_3 [5]));
   FDCE #(
@@ -5309,7 +5402,7 @@ module kernel_regfile
     \bank_reg[0][0][6] 
        (.C(clk),
         .CE(bank),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[6]),
         .Q(\bank_reg[0][0]_3 [6]));
   FDCE #(
@@ -5317,7 +5410,7 @@ module kernel_regfile
     \bank_reg[0][0][7] 
        (.C(clk),
         .CE(bank),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[7]),
         .Q(\bank_reg[0][0]_3 [7]));
   FDCE #(
@@ -5325,7 +5418,7 @@ module kernel_regfile
     \bank_reg[0][1][0] 
        (.C(clk),
         .CE(\bank[0][1][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[0]),
         .Q(\bank_reg[0][1]_7 [0]));
   FDCE #(
@@ -5333,7 +5426,7 @@ module kernel_regfile
     \bank_reg[0][1][1] 
        (.C(clk),
         .CE(\bank[0][1][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[1]),
         .Q(\bank_reg[0][1]_7 [1]));
   FDCE #(
@@ -5341,7 +5434,7 @@ module kernel_regfile
     \bank_reg[0][1][2] 
        (.C(clk),
         .CE(\bank[0][1][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[2]),
         .Q(\bank_reg[0][1]_7 [2]));
   FDCE #(
@@ -5349,7 +5442,7 @@ module kernel_regfile
     \bank_reg[0][1][3] 
        (.C(clk),
         .CE(\bank[0][1][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[3]),
         .Q(\bank_reg[0][1]_7 [3]));
   FDCE #(
@@ -5357,7 +5450,7 @@ module kernel_regfile
     \bank_reg[0][1][4] 
        (.C(clk),
         .CE(\bank[0][1][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[4]),
         .Q(\bank_reg[0][1]_7 [4]));
   FDCE #(
@@ -5365,7 +5458,7 @@ module kernel_regfile
     \bank_reg[0][1][5] 
        (.C(clk),
         .CE(\bank[0][1][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[5]),
         .Q(\bank_reg[0][1]_7 [5]));
   FDCE #(
@@ -5373,7 +5466,7 @@ module kernel_regfile
     \bank_reg[0][1][6] 
        (.C(clk),
         .CE(\bank[0][1][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[6]),
         .Q(\bank_reg[0][1]_7 [6]));
   FDCE #(
@@ -5381,7 +5474,7 @@ module kernel_regfile
     \bank_reg[0][1][7] 
        (.C(clk),
         .CE(\bank[0][1][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[7]),
         .Q(\bank_reg[0][1]_7 [7]));
   FDCE #(
@@ -5389,7 +5482,7 @@ module kernel_regfile
     \bank_reg[0][2][0] 
        (.C(clk),
         .CE(\bank[0][2][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[0]),
         .Q(\bank_reg[0][2]_11 [0]));
   FDCE #(
@@ -5397,7 +5490,7 @@ module kernel_regfile
     \bank_reg[0][2][1] 
        (.C(clk),
         .CE(\bank[0][2][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[1]),
         .Q(\bank_reg[0][2]_11 [1]));
   FDCE #(
@@ -5405,7 +5498,7 @@ module kernel_regfile
     \bank_reg[0][2][2] 
        (.C(clk),
         .CE(\bank[0][2][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[2]),
         .Q(\bank_reg[0][2]_11 [2]));
   FDCE #(
@@ -5413,7 +5506,7 @@ module kernel_regfile
     \bank_reg[0][2][3] 
        (.C(clk),
         .CE(\bank[0][2][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[3]),
         .Q(\bank_reg[0][2]_11 [3]));
   FDCE #(
@@ -5421,7 +5514,7 @@ module kernel_regfile
     \bank_reg[0][2][4] 
        (.C(clk),
         .CE(\bank[0][2][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[4]),
         .Q(\bank_reg[0][2]_11 [4]));
   FDCE #(
@@ -5429,7 +5522,7 @@ module kernel_regfile
     \bank_reg[0][2][5] 
        (.C(clk),
         .CE(\bank[0][2][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[5]),
         .Q(\bank_reg[0][2]_11 [5]));
   FDCE #(
@@ -5437,7 +5530,7 @@ module kernel_regfile
     \bank_reg[0][2][6] 
        (.C(clk),
         .CE(\bank[0][2][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[6]),
         .Q(\bank_reg[0][2]_11 [6]));
   FDCE #(
@@ -5445,7 +5538,7 @@ module kernel_regfile
     \bank_reg[0][2][7] 
        (.C(clk),
         .CE(\bank[0][2][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[7]),
         .Q(\bank_reg[0][2]_11 [7]));
   FDCE #(
@@ -5453,7 +5546,7 @@ module kernel_regfile
     \bank_reg[0][3][0] 
        (.C(clk),
         .CE(\bank[0][3][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[0]),
         .Q(\bank_reg[0][3]_15 [0]));
   FDCE #(
@@ -5461,7 +5554,7 @@ module kernel_regfile
     \bank_reg[0][3][1] 
        (.C(clk),
         .CE(\bank[0][3][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[1]),
         .Q(\bank_reg[0][3]_15 [1]));
   FDCE #(
@@ -5469,7 +5562,7 @@ module kernel_regfile
     \bank_reg[0][3][2] 
        (.C(clk),
         .CE(\bank[0][3][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[2]),
         .Q(\bank_reg[0][3]_15 [2]));
   FDCE #(
@@ -5477,7 +5570,7 @@ module kernel_regfile
     \bank_reg[0][3][3] 
        (.C(clk),
         .CE(\bank[0][3][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[3]),
         .Q(\bank_reg[0][3]_15 [3]));
   FDCE #(
@@ -5485,7 +5578,7 @@ module kernel_regfile
     \bank_reg[0][3][4] 
        (.C(clk),
         .CE(\bank[0][3][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[4]),
         .Q(\bank_reg[0][3]_15 [4]));
   FDCE #(
@@ -5493,7 +5586,7 @@ module kernel_regfile
     \bank_reg[0][3][5] 
        (.C(clk),
         .CE(\bank[0][3][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[5]),
         .Q(\bank_reg[0][3]_15 [5]));
   FDCE #(
@@ -5501,7 +5594,7 @@ module kernel_regfile
     \bank_reg[0][3][6] 
        (.C(clk),
         .CE(\bank[0][3][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[6]),
         .Q(\bank_reg[0][3]_15 [6]));
   FDCE #(
@@ -5509,7 +5602,7 @@ module kernel_regfile
     \bank_reg[0][3][7] 
        (.C(clk),
         .CE(\bank[0][3][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[7]),
         .Q(\bank_reg[0][3]_15 [7]));
   FDCE #(
@@ -5517,7 +5610,7 @@ module kernel_regfile
     \bank_reg[0][4][0] 
        (.C(clk),
         .CE(\bank[0][4][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[0]),
         .Q(\bank_reg[0][4]_19 [0]));
   FDCE #(
@@ -5525,7 +5618,7 @@ module kernel_regfile
     \bank_reg[0][4][1] 
        (.C(clk),
         .CE(\bank[0][4][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[1]),
         .Q(\bank_reg[0][4]_19 [1]));
   FDCE #(
@@ -5533,7 +5626,7 @@ module kernel_regfile
     \bank_reg[0][4][2] 
        (.C(clk),
         .CE(\bank[0][4][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[2]),
         .Q(\bank_reg[0][4]_19 [2]));
   FDCE #(
@@ -5541,7 +5634,7 @@ module kernel_regfile
     \bank_reg[0][4][3] 
        (.C(clk),
         .CE(\bank[0][4][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[3]),
         .Q(\bank_reg[0][4]_19 [3]));
   FDCE #(
@@ -5549,7 +5642,7 @@ module kernel_regfile
     \bank_reg[0][4][4] 
        (.C(clk),
         .CE(\bank[0][4][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[4]),
         .Q(\bank_reg[0][4]_19 [4]));
   FDCE #(
@@ -5557,7 +5650,7 @@ module kernel_regfile
     \bank_reg[0][4][5] 
        (.C(clk),
         .CE(\bank[0][4][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[5]),
         .Q(\bank_reg[0][4]_19 [5]));
   FDCE #(
@@ -5565,7 +5658,7 @@ module kernel_regfile
     \bank_reg[0][4][6] 
        (.C(clk),
         .CE(\bank[0][4][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[6]),
         .Q(\bank_reg[0][4]_19 [6]));
   FDCE #(
@@ -5573,7 +5666,7 @@ module kernel_regfile
     \bank_reg[0][4][7] 
        (.C(clk),
         .CE(\bank[0][4][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[7]),
         .Q(\bank_reg[0][4]_19 [7]));
   FDCE #(
@@ -5581,7 +5674,7 @@ module kernel_regfile
     \bank_reg[0][5][0] 
        (.C(clk),
         .CE(\bank[0][5][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[0]),
         .Q(\bank_reg[0][5]_23 [0]));
   FDCE #(
@@ -5589,7 +5682,7 @@ module kernel_regfile
     \bank_reg[0][5][1] 
        (.C(clk),
         .CE(\bank[0][5][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[1]),
         .Q(\bank_reg[0][5]_23 [1]));
   FDCE #(
@@ -5597,7 +5690,7 @@ module kernel_regfile
     \bank_reg[0][5][2] 
        (.C(clk),
         .CE(\bank[0][5][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[2]),
         .Q(\bank_reg[0][5]_23 [2]));
   FDCE #(
@@ -5605,7 +5698,7 @@ module kernel_regfile
     \bank_reg[0][5][3] 
        (.C(clk),
         .CE(\bank[0][5][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[3]),
         .Q(\bank_reg[0][5]_23 [3]));
   FDCE #(
@@ -5613,7 +5706,7 @@ module kernel_regfile
     \bank_reg[0][5][4] 
        (.C(clk),
         .CE(\bank[0][5][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[4]),
         .Q(\bank_reg[0][5]_23 [4]));
   FDCE #(
@@ -5621,7 +5714,7 @@ module kernel_regfile
     \bank_reg[0][5][5] 
        (.C(clk),
         .CE(\bank[0][5][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[5]),
         .Q(\bank_reg[0][5]_23 [5]));
   FDCE #(
@@ -5629,7 +5722,7 @@ module kernel_regfile
     \bank_reg[0][5][6] 
        (.C(clk),
         .CE(\bank[0][5][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[6]),
         .Q(\bank_reg[0][5]_23 [6]));
   FDCE #(
@@ -5637,7 +5730,7 @@ module kernel_regfile
     \bank_reg[0][5][7] 
        (.C(clk),
         .CE(\bank[0][5][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[7]),
         .Q(\bank_reg[0][5]_23 [7]));
   FDCE #(
@@ -5645,7 +5738,7 @@ module kernel_regfile
     \bank_reg[0][6][0] 
        (.C(clk),
         .CE(\bank[0][6][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[0]),
         .Q(\bank_reg[0][6]_27 [0]));
   FDCE #(
@@ -5653,7 +5746,7 @@ module kernel_regfile
     \bank_reg[0][6][1] 
        (.C(clk),
         .CE(\bank[0][6][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[1]),
         .Q(\bank_reg[0][6]_27 [1]));
   FDCE #(
@@ -5661,7 +5754,7 @@ module kernel_regfile
     \bank_reg[0][6][2] 
        (.C(clk),
         .CE(\bank[0][6][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[2]),
         .Q(\bank_reg[0][6]_27 [2]));
   FDCE #(
@@ -5669,7 +5762,7 @@ module kernel_regfile
     \bank_reg[0][6][3] 
        (.C(clk),
         .CE(\bank[0][6][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[3]),
         .Q(\bank_reg[0][6]_27 [3]));
   FDCE #(
@@ -5677,7 +5770,7 @@ module kernel_regfile
     \bank_reg[0][6][4] 
        (.C(clk),
         .CE(\bank[0][6][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[4]),
         .Q(\bank_reg[0][6]_27 [4]));
   FDCE #(
@@ -5685,7 +5778,7 @@ module kernel_regfile
     \bank_reg[0][6][5] 
        (.C(clk),
         .CE(\bank[0][6][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[5]),
         .Q(\bank_reg[0][6]_27 [5]));
   FDCE #(
@@ -5693,7 +5786,7 @@ module kernel_regfile
     \bank_reg[0][6][6] 
        (.C(clk),
         .CE(\bank[0][6][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[6]),
         .Q(\bank_reg[0][6]_27 [6]));
   FDCE #(
@@ -5701,7 +5794,7 @@ module kernel_regfile
     \bank_reg[0][6][7] 
        (.C(clk),
         .CE(\bank[0][6][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[7]),
         .Q(\bank_reg[0][6]_27 [7]));
   FDCE #(
@@ -5709,7 +5802,7 @@ module kernel_regfile
     \bank_reg[0][7][0] 
        (.C(clk),
         .CE(\bank[0][7][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[0]),
         .Q(\bank_reg[0][7]_31 [0]));
   FDCE #(
@@ -5717,7 +5810,7 @@ module kernel_regfile
     \bank_reg[0][7][1] 
        (.C(clk),
         .CE(\bank[0][7][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[1]),
         .Q(\bank_reg[0][7]_31 [1]));
   FDCE #(
@@ -5725,7 +5818,7 @@ module kernel_regfile
     \bank_reg[0][7][2] 
        (.C(clk),
         .CE(\bank[0][7][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[2]),
         .Q(\bank_reg[0][7]_31 [2]));
   FDCE #(
@@ -5733,7 +5826,7 @@ module kernel_regfile
     \bank_reg[0][7][3] 
        (.C(clk),
         .CE(\bank[0][7][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[3]),
         .Q(\bank_reg[0][7]_31 [3]));
   FDCE #(
@@ -5741,7 +5834,7 @@ module kernel_regfile
     \bank_reg[0][7][4] 
        (.C(clk),
         .CE(\bank[0][7][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[4]),
         .Q(\bank_reg[0][7]_31 [4]));
   FDCE #(
@@ -5749,7 +5842,7 @@ module kernel_regfile
     \bank_reg[0][7][5] 
        (.C(clk),
         .CE(\bank[0][7][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[5]),
         .Q(\bank_reg[0][7]_31 [5]));
   FDCE #(
@@ -5757,7 +5850,7 @@ module kernel_regfile
     \bank_reg[0][7][6] 
        (.C(clk),
         .CE(\bank[0][7][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[6]),
         .Q(\bank_reg[0][7]_31 [6]));
   FDCE #(
@@ -5765,7 +5858,7 @@ module kernel_regfile
     \bank_reg[0][7][7] 
        (.C(clk),
         .CE(\bank[0][7][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[7]),
         .Q(\bank_reg[0][7]_31 [7]));
   FDCE #(
@@ -5773,7 +5866,7 @@ module kernel_regfile
     \bank_reg[0][8][0] 
        (.C(clk),
         .CE(\bank[0][8][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[0]),
         .Q(\bank_reg[0][8]_35 [0]));
   FDCE #(
@@ -5781,7 +5874,7 @@ module kernel_regfile
     \bank_reg[0][8][1] 
        (.C(clk),
         .CE(\bank[0][8][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[1]),
         .Q(\bank_reg[0][8]_35 [1]));
   FDCE #(
@@ -5789,7 +5882,7 @@ module kernel_regfile
     \bank_reg[0][8][2] 
        (.C(clk),
         .CE(\bank[0][8][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[2]),
         .Q(\bank_reg[0][8]_35 [2]));
   FDCE #(
@@ -5797,7 +5890,7 @@ module kernel_regfile
     \bank_reg[0][8][3] 
        (.C(clk),
         .CE(\bank[0][8][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[3]),
         .Q(\bank_reg[0][8]_35 [3]));
   FDCE #(
@@ -5805,7 +5898,7 @@ module kernel_regfile
     \bank_reg[0][8][4] 
        (.C(clk),
         .CE(\bank[0][8][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[4]),
         .Q(\bank_reg[0][8]_35 [4]));
   FDCE #(
@@ -5813,7 +5906,7 @@ module kernel_regfile
     \bank_reg[0][8][5] 
        (.C(clk),
         .CE(\bank[0][8][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[5]),
         .Q(\bank_reg[0][8]_35 [5]));
   FDCE #(
@@ -5821,7 +5914,7 @@ module kernel_regfile
     \bank_reg[0][8][6] 
        (.C(clk),
         .CE(\bank[0][8][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[6]),
         .Q(\bank_reg[0][8]_35 [6]));
   FDCE #(
@@ -5829,7 +5922,7 @@ module kernel_regfile
     \bank_reg[0][8][7] 
        (.C(clk),
         .CE(\bank[0][8][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[7]),
         .Q(\bank_reg[0][8]_35 [7]));
   FDCE #(
@@ -5837,7 +5930,7 @@ module kernel_regfile
     \bank_reg[1][0][0] 
        (.C(clk),
         .CE(\bank[1][0][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[0]),
         .Q(\bank_reg[1][0]_2 [0]));
   FDCE #(
@@ -5845,7 +5938,7 @@ module kernel_regfile
     \bank_reg[1][0][1] 
        (.C(clk),
         .CE(\bank[1][0][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[1]),
         .Q(\bank_reg[1][0]_2 [1]));
   FDCE #(
@@ -5853,7 +5946,7 @@ module kernel_regfile
     \bank_reg[1][0][2] 
        (.C(clk),
         .CE(\bank[1][0][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[2]),
         .Q(\bank_reg[1][0]_2 [2]));
   FDCE #(
@@ -5861,7 +5954,7 @@ module kernel_regfile
     \bank_reg[1][0][3] 
        (.C(clk),
         .CE(\bank[1][0][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[3]),
         .Q(\bank_reg[1][0]_2 [3]));
   FDCE #(
@@ -5869,7 +5962,7 @@ module kernel_regfile
     \bank_reg[1][0][4] 
        (.C(clk),
         .CE(\bank[1][0][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[4]),
         .Q(\bank_reg[1][0]_2 [4]));
   FDCE #(
@@ -5877,7 +5970,7 @@ module kernel_regfile
     \bank_reg[1][0][5] 
        (.C(clk),
         .CE(\bank[1][0][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[5]),
         .Q(\bank_reg[1][0]_2 [5]));
   FDCE #(
@@ -5885,7 +5978,7 @@ module kernel_regfile
     \bank_reg[1][0][6] 
        (.C(clk),
         .CE(\bank[1][0][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[6]),
         .Q(\bank_reg[1][0]_2 [6]));
   FDCE #(
@@ -5893,7 +5986,7 @@ module kernel_regfile
     \bank_reg[1][0][7] 
        (.C(clk),
         .CE(\bank[1][0][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[7]),
         .Q(\bank_reg[1][0]_2 [7]));
   FDCE #(
@@ -5901,7 +5994,7 @@ module kernel_regfile
     \bank_reg[1][1][0] 
        (.C(clk),
         .CE(\bank[1][1][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[0]),
         .Q(\bank_reg[1][1]_6 [0]));
   FDCE #(
@@ -5909,7 +6002,7 @@ module kernel_regfile
     \bank_reg[1][1][1] 
        (.C(clk),
         .CE(\bank[1][1][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[1]),
         .Q(\bank_reg[1][1]_6 [1]));
   FDCE #(
@@ -5917,7 +6010,7 @@ module kernel_regfile
     \bank_reg[1][1][2] 
        (.C(clk),
         .CE(\bank[1][1][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[2]),
         .Q(\bank_reg[1][1]_6 [2]));
   FDCE #(
@@ -5925,7 +6018,7 @@ module kernel_regfile
     \bank_reg[1][1][3] 
        (.C(clk),
         .CE(\bank[1][1][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[3]),
         .Q(\bank_reg[1][1]_6 [3]));
   FDCE #(
@@ -5933,7 +6026,7 @@ module kernel_regfile
     \bank_reg[1][1][4] 
        (.C(clk),
         .CE(\bank[1][1][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[4]),
         .Q(\bank_reg[1][1]_6 [4]));
   FDCE #(
@@ -5941,7 +6034,7 @@ module kernel_regfile
     \bank_reg[1][1][5] 
        (.C(clk),
         .CE(\bank[1][1][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[5]),
         .Q(\bank_reg[1][1]_6 [5]));
   FDCE #(
@@ -5949,7 +6042,7 @@ module kernel_regfile
     \bank_reg[1][1][6] 
        (.C(clk),
         .CE(\bank[1][1][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[6]),
         .Q(\bank_reg[1][1]_6 [6]));
   FDCE #(
@@ -5957,7 +6050,7 @@ module kernel_regfile
     \bank_reg[1][1][7] 
        (.C(clk),
         .CE(\bank[1][1][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[7]),
         .Q(\bank_reg[1][1]_6 [7]));
   FDCE #(
@@ -5965,7 +6058,7 @@ module kernel_regfile
     \bank_reg[1][2][0] 
        (.C(clk),
         .CE(\bank[1][2][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[0]),
         .Q(\bank_reg[1][2]_10 [0]));
   FDCE #(
@@ -5973,7 +6066,7 @@ module kernel_regfile
     \bank_reg[1][2][1] 
        (.C(clk),
         .CE(\bank[1][2][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[1]),
         .Q(\bank_reg[1][2]_10 [1]));
   FDCE #(
@@ -5981,7 +6074,7 @@ module kernel_regfile
     \bank_reg[1][2][2] 
        (.C(clk),
         .CE(\bank[1][2][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[2]),
         .Q(\bank_reg[1][2]_10 [2]));
   FDCE #(
@@ -5989,7 +6082,7 @@ module kernel_regfile
     \bank_reg[1][2][3] 
        (.C(clk),
         .CE(\bank[1][2][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[3]),
         .Q(\bank_reg[1][2]_10 [3]));
   FDCE #(
@@ -5997,7 +6090,7 @@ module kernel_regfile
     \bank_reg[1][2][4] 
        (.C(clk),
         .CE(\bank[1][2][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[4]),
         .Q(\bank_reg[1][2]_10 [4]));
   FDCE #(
@@ -6005,7 +6098,7 @@ module kernel_regfile
     \bank_reg[1][2][5] 
        (.C(clk),
         .CE(\bank[1][2][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[5]),
         .Q(\bank_reg[1][2]_10 [5]));
   FDCE #(
@@ -6013,7 +6106,7 @@ module kernel_regfile
     \bank_reg[1][2][6] 
        (.C(clk),
         .CE(\bank[1][2][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[6]),
         .Q(\bank_reg[1][2]_10 [6]));
   FDCE #(
@@ -6021,7 +6114,7 @@ module kernel_regfile
     \bank_reg[1][2][7] 
        (.C(clk),
         .CE(\bank[1][2][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[7]),
         .Q(\bank_reg[1][2]_10 [7]));
   FDCE #(
@@ -6029,7 +6122,7 @@ module kernel_regfile
     \bank_reg[1][3][0] 
        (.C(clk),
         .CE(\bank[1][3][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[0]),
         .Q(\bank_reg[1][3]_14 [0]));
   FDCE #(
@@ -6037,7 +6130,7 @@ module kernel_regfile
     \bank_reg[1][3][1] 
        (.C(clk),
         .CE(\bank[1][3][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[1]),
         .Q(\bank_reg[1][3]_14 [1]));
   FDCE #(
@@ -6045,7 +6138,7 @@ module kernel_regfile
     \bank_reg[1][3][2] 
        (.C(clk),
         .CE(\bank[1][3][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[2]),
         .Q(\bank_reg[1][3]_14 [2]));
   FDCE #(
@@ -6053,7 +6146,7 @@ module kernel_regfile
     \bank_reg[1][3][3] 
        (.C(clk),
         .CE(\bank[1][3][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[3]),
         .Q(\bank_reg[1][3]_14 [3]));
   FDCE #(
@@ -6061,7 +6154,7 @@ module kernel_regfile
     \bank_reg[1][3][4] 
        (.C(clk),
         .CE(\bank[1][3][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[4]),
         .Q(\bank_reg[1][3]_14 [4]));
   FDCE #(
@@ -6069,7 +6162,7 @@ module kernel_regfile
     \bank_reg[1][3][5] 
        (.C(clk),
         .CE(\bank[1][3][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[5]),
         .Q(\bank_reg[1][3]_14 [5]));
   FDCE #(
@@ -6077,7 +6170,7 @@ module kernel_regfile
     \bank_reg[1][3][6] 
        (.C(clk),
         .CE(\bank[1][3][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[6]),
         .Q(\bank_reg[1][3]_14 [6]));
   FDCE #(
@@ -6085,7 +6178,7 @@ module kernel_regfile
     \bank_reg[1][3][7] 
        (.C(clk),
         .CE(\bank[1][3][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[7]),
         .Q(\bank_reg[1][3]_14 [7]));
   FDCE #(
@@ -6093,7 +6186,7 @@ module kernel_regfile
     \bank_reg[1][4][0] 
        (.C(clk),
         .CE(\bank[1][4][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[0]),
         .Q(\bank_reg[1][4]_18 [0]));
   FDCE #(
@@ -6101,7 +6194,7 @@ module kernel_regfile
     \bank_reg[1][4][1] 
        (.C(clk),
         .CE(\bank[1][4][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[1]),
         .Q(\bank_reg[1][4]_18 [1]));
   FDCE #(
@@ -6109,7 +6202,7 @@ module kernel_regfile
     \bank_reg[1][4][2] 
        (.C(clk),
         .CE(\bank[1][4][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[2]),
         .Q(\bank_reg[1][4]_18 [2]));
   FDCE #(
@@ -6117,7 +6210,7 @@ module kernel_regfile
     \bank_reg[1][4][3] 
        (.C(clk),
         .CE(\bank[1][4][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[3]),
         .Q(\bank_reg[1][4]_18 [3]));
   FDCE #(
@@ -6125,7 +6218,7 @@ module kernel_regfile
     \bank_reg[1][4][4] 
        (.C(clk),
         .CE(\bank[1][4][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[4]),
         .Q(\bank_reg[1][4]_18 [4]));
   FDCE #(
@@ -6133,7 +6226,7 @@ module kernel_regfile
     \bank_reg[1][4][5] 
        (.C(clk),
         .CE(\bank[1][4][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[5]),
         .Q(\bank_reg[1][4]_18 [5]));
   FDCE #(
@@ -6141,7 +6234,7 @@ module kernel_regfile
     \bank_reg[1][4][6] 
        (.C(clk),
         .CE(\bank[1][4][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[6]),
         .Q(\bank_reg[1][4]_18 [6]));
   FDCE #(
@@ -6149,7 +6242,7 @@ module kernel_regfile
     \bank_reg[1][4][7] 
        (.C(clk),
         .CE(\bank[1][4][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[7]),
         .Q(\bank_reg[1][4]_18 [7]));
   FDCE #(
@@ -6157,7 +6250,7 @@ module kernel_regfile
     \bank_reg[1][5][0] 
        (.C(clk),
         .CE(\bank[1][5][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[0]),
         .Q(\bank_reg[1][5]_22 [0]));
   FDCE #(
@@ -6165,7 +6258,7 @@ module kernel_regfile
     \bank_reg[1][5][1] 
        (.C(clk),
         .CE(\bank[1][5][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[1]),
         .Q(\bank_reg[1][5]_22 [1]));
   FDCE #(
@@ -6173,7 +6266,7 @@ module kernel_regfile
     \bank_reg[1][5][2] 
        (.C(clk),
         .CE(\bank[1][5][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[2]),
         .Q(\bank_reg[1][5]_22 [2]));
   FDCE #(
@@ -6181,7 +6274,7 @@ module kernel_regfile
     \bank_reg[1][5][3] 
        (.C(clk),
         .CE(\bank[1][5][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[3]),
         .Q(\bank_reg[1][5]_22 [3]));
   FDCE #(
@@ -6189,7 +6282,7 @@ module kernel_regfile
     \bank_reg[1][5][4] 
        (.C(clk),
         .CE(\bank[1][5][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[4]),
         .Q(\bank_reg[1][5]_22 [4]));
   FDCE #(
@@ -6197,7 +6290,7 @@ module kernel_regfile
     \bank_reg[1][5][5] 
        (.C(clk),
         .CE(\bank[1][5][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[5]),
         .Q(\bank_reg[1][5]_22 [5]));
   FDCE #(
@@ -6205,7 +6298,7 @@ module kernel_regfile
     \bank_reg[1][5][6] 
        (.C(clk),
         .CE(\bank[1][5][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[6]),
         .Q(\bank_reg[1][5]_22 [6]));
   FDCE #(
@@ -6213,7 +6306,7 @@ module kernel_regfile
     \bank_reg[1][5][7] 
        (.C(clk),
         .CE(\bank[1][5][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[7]),
         .Q(\bank_reg[1][5]_22 [7]));
   FDCE #(
@@ -6221,7 +6314,7 @@ module kernel_regfile
     \bank_reg[1][6][0] 
        (.C(clk),
         .CE(\bank[1][6][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[0]),
         .Q(\bank_reg[1][6]_26 [0]));
   FDCE #(
@@ -6229,7 +6322,7 @@ module kernel_regfile
     \bank_reg[1][6][1] 
        (.C(clk),
         .CE(\bank[1][6][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[1]),
         .Q(\bank_reg[1][6]_26 [1]));
   FDCE #(
@@ -6237,7 +6330,7 @@ module kernel_regfile
     \bank_reg[1][6][2] 
        (.C(clk),
         .CE(\bank[1][6][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[2]),
         .Q(\bank_reg[1][6]_26 [2]));
   FDCE #(
@@ -6245,7 +6338,7 @@ module kernel_regfile
     \bank_reg[1][6][3] 
        (.C(clk),
         .CE(\bank[1][6][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[3]),
         .Q(\bank_reg[1][6]_26 [3]));
   FDCE #(
@@ -6253,7 +6346,7 @@ module kernel_regfile
     \bank_reg[1][6][4] 
        (.C(clk),
         .CE(\bank[1][6][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[4]),
         .Q(\bank_reg[1][6]_26 [4]));
   FDCE #(
@@ -6261,7 +6354,7 @@ module kernel_regfile
     \bank_reg[1][6][5] 
        (.C(clk),
         .CE(\bank[1][6][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[5]),
         .Q(\bank_reg[1][6]_26 [5]));
   FDCE #(
@@ -6269,7 +6362,7 @@ module kernel_regfile
     \bank_reg[1][6][6] 
        (.C(clk),
         .CE(\bank[1][6][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[6]),
         .Q(\bank_reg[1][6]_26 [6]));
   FDCE #(
@@ -6277,7 +6370,7 @@ module kernel_regfile
     \bank_reg[1][6][7] 
        (.C(clk),
         .CE(\bank[1][6][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[7]),
         .Q(\bank_reg[1][6]_26 [7]));
   FDCE #(
@@ -6285,7 +6378,7 @@ module kernel_regfile
     \bank_reg[1][7][0] 
        (.C(clk),
         .CE(\bank[1][7][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[0]),
         .Q(\bank_reg[1][7]_30 [0]));
   FDCE #(
@@ -6293,7 +6386,7 @@ module kernel_regfile
     \bank_reg[1][7][1] 
        (.C(clk),
         .CE(\bank[1][7][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[1]),
         .Q(\bank_reg[1][7]_30 [1]));
   FDCE #(
@@ -6301,7 +6394,7 @@ module kernel_regfile
     \bank_reg[1][7][2] 
        (.C(clk),
         .CE(\bank[1][7][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[2]),
         .Q(\bank_reg[1][7]_30 [2]));
   FDCE #(
@@ -6309,7 +6402,7 @@ module kernel_regfile
     \bank_reg[1][7][3] 
        (.C(clk),
         .CE(\bank[1][7][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[3]),
         .Q(\bank_reg[1][7]_30 [3]));
   FDCE #(
@@ -6317,7 +6410,7 @@ module kernel_regfile
     \bank_reg[1][7][4] 
        (.C(clk),
         .CE(\bank[1][7][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[4]),
         .Q(\bank_reg[1][7]_30 [4]));
   FDCE #(
@@ -6325,7 +6418,7 @@ module kernel_regfile
     \bank_reg[1][7][5] 
        (.C(clk),
         .CE(\bank[1][7][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[5]),
         .Q(\bank_reg[1][7]_30 [5]));
   FDCE #(
@@ -6333,7 +6426,7 @@ module kernel_regfile
     \bank_reg[1][7][6] 
        (.C(clk),
         .CE(\bank[1][7][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[6]),
         .Q(\bank_reg[1][7]_30 [6]));
   FDCE #(
@@ -6341,7 +6434,7 @@ module kernel_regfile
     \bank_reg[1][7][7] 
        (.C(clk),
         .CE(\bank[1][7][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[7]),
         .Q(\bank_reg[1][7]_30 [7]));
   FDCE #(
@@ -6349,7 +6442,7 @@ module kernel_regfile
     \bank_reg[1][8][0] 
        (.C(clk),
         .CE(\bank[1][8][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[0]),
         .Q(\bank_reg[1][8]_34 [0]));
   FDCE #(
@@ -6357,7 +6450,7 @@ module kernel_regfile
     \bank_reg[1][8][1] 
        (.C(clk),
         .CE(\bank[1][8][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[1]),
         .Q(\bank_reg[1][8]_34 [1]));
   FDCE #(
@@ -6365,7 +6458,7 @@ module kernel_regfile
     \bank_reg[1][8][2] 
        (.C(clk),
         .CE(\bank[1][8][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[2]),
         .Q(\bank_reg[1][8]_34 [2]));
   FDCE #(
@@ -6373,7 +6466,7 @@ module kernel_regfile
     \bank_reg[1][8][3] 
        (.C(clk),
         .CE(\bank[1][8][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[3]),
         .Q(\bank_reg[1][8]_34 [3]));
   FDCE #(
@@ -6381,7 +6474,7 @@ module kernel_regfile
     \bank_reg[1][8][4] 
        (.C(clk),
         .CE(\bank[1][8][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[4]),
         .Q(\bank_reg[1][8]_34 [4]));
   FDCE #(
@@ -6389,7 +6482,7 @@ module kernel_regfile
     \bank_reg[1][8][5] 
        (.C(clk),
         .CE(\bank[1][8][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[5]),
         .Q(\bank_reg[1][8]_34 [5]));
   FDCE #(
@@ -6397,7 +6490,7 @@ module kernel_regfile
     \bank_reg[1][8][6] 
        (.C(clk),
         .CE(\bank[1][8][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[6]),
         .Q(\bank_reg[1][8]_34 [6]));
   FDCE #(
@@ -6405,7 +6498,7 @@ module kernel_regfile
     \bank_reg[1][8][7] 
        (.C(clk),
         .CE(\bank[1][8][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[7]),
         .Q(\bank_reg[1][8]_34 [7]));
   FDCE #(
@@ -6413,7 +6506,7 @@ module kernel_regfile
     \bank_reg[2][0][0] 
        (.C(clk),
         .CE(\bank[2][0][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[0]),
         .Q(\bank_reg[2][0]_1 [0]));
   FDCE #(
@@ -6421,7 +6514,7 @@ module kernel_regfile
     \bank_reg[2][0][1] 
        (.C(clk),
         .CE(\bank[2][0][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[1]),
         .Q(\bank_reg[2][0]_1 [1]));
   FDCE #(
@@ -6429,7 +6522,7 @@ module kernel_regfile
     \bank_reg[2][0][2] 
        (.C(clk),
         .CE(\bank[2][0][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[2]),
         .Q(\bank_reg[2][0]_1 [2]));
   FDCE #(
@@ -6437,7 +6530,7 @@ module kernel_regfile
     \bank_reg[2][0][3] 
        (.C(clk),
         .CE(\bank[2][0][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[3]),
         .Q(\bank_reg[2][0]_1 [3]));
   FDCE #(
@@ -6445,7 +6538,7 @@ module kernel_regfile
     \bank_reg[2][0][4] 
        (.C(clk),
         .CE(\bank[2][0][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[4]),
         .Q(\bank_reg[2][0]_1 [4]));
   FDCE #(
@@ -6453,7 +6546,7 @@ module kernel_regfile
     \bank_reg[2][0][5] 
        (.C(clk),
         .CE(\bank[2][0][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[5]),
         .Q(\bank_reg[2][0]_1 [5]));
   FDCE #(
@@ -6461,7 +6554,7 @@ module kernel_regfile
     \bank_reg[2][0][6] 
        (.C(clk),
         .CE(\bank[2][0][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[6]),
         .Q(\bank_reg[2][0]_1 [6]));
   FDCE #(
@@ -6469,7 +6562,7 @@ module kernel_regfile
     \bank_reg[2][0][7] 
        (.C(clk),
         .CE(\bank[2][0][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[7]),
         .Q(\bank_reg[2][0]_1 [7]));
   FDCE #(
@@ -6477,7 +6570,7 @@ module kernel_regfile
     \bank_reg[2][1][0] 
        (.C(clk),
         .CE(\bank[2][1][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[0]),
         .Q(\bank_reg[2][1]_5 [0]));
   FDCE #(
@@ -6485,7 +6578,7 @@ module kernel_regfile
     \bank_reg[2][1][1] 
        (.C(clk),
         .CE(\bank[2][1][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[1]),
         .Q(\bank_reg[2][1]_5 [1]));
   FDCE #(
@@ -6493,7 +6586,7 @@ module kernel_regfile
     \bank_reg[2][1][2] 
        (.C(clk),
         .CE(\bank[2][1][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[2]),
         .Q(\bank_reg[2][1]_5 [2]));
   FDCE #(
@@ -6501,7 +6594,7 @@ module kernel_regfile
     \bank_reg[2][1][3] 
        (.C(clk),
         .CE(\bank[2][1][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[3]),
         .Q(\bank_reg[2][1]_5 [3]));
   FDCE #(
@@ -6509,7 +6602,7 @@ module kernel_regfile
     \bank_reg[2][1][4] 
        (.C(clk),
         .CE(\bank[2][1][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[4]),
         .Q(\bank_reg[2][1]_5 [4]));
   FDCE #(
@@ -6517,7 +6610,7 @@ module kernel_regfile
     \bank_reg[2][1][5] 
        (.C(clk),
         .CE(\bank[2][1][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[5]),
         .Q(\bank_reg[2][1]_5 [5]));
   FDCE #(
@@ -6525,7 +6618,7 @@ module kernel_regfile
     \bank_reg[2][1][6] 
        (.C(clk),
         .CE(\bank[2][1][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[6]),
         .Q(\bank_reg[2][1]_5 [6]));
   FDCE #(
@@ -6533,7 +6626,7 @@ module kernel_regfile
     \bank_reg[2][1][7] 
        (.C(clk),
         .CE(\bank[2][1][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[7]),
         .Q(\bank_reg[2][1]_5 [7]));
   FDCE #(
@@ -6541,7 +6634,7 @@ module kernel_regfile
     \bank_reg[2][2][0] 
        (.C(clk),
         .CE(\bank[2][2][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[0]),
         .Q(\bank_reg[2][2]_9 [0]));
   FDCE #(
@@ -6549,7 +6642,7 @@ module kernel_regfile
     \bank_reg[2][2][1] 
        (.C(clk),
         .CE(\bank[2][2][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[1]),
         .Q(\bank_reg[2][2]_9 [1]));
   FDCE #(
@@ -6557,7 +6650,7 @@ module kernel_regfile
     \bank_reg[2][2][2] 
        (.C(clk),
         .CE(\bank[2][2][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[2]),
         .Q(\bank_reg[2][2]_9 [2]));
   FDCE #(
@@ -6565,7 +6658,7 @@ module kernel_regfile
     \bank_reg[2][2][3] 
        (.C(clk),
         .CE(\bank[2][2][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[3]),
         .Q(\bank_reg[2][2]_9 [3]));
   FDCE #(
@@ -6573,7 +6666,7 @@ module kernel_regfile
     \bank_reg[2][2][4] 
        (.C(clk),
         .CE(\bank[2][2][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[4]),
         .Q(\bank_reg[2][2]_9 [4]));
   FDCE #(
@@ -6581,7 +6674,7 @@ module kernel_regfile
     \bank_reg[2][2][5] 
        (.C(clk),
         .CE(\bank[2][2][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[5]),
         .Q(\bank_reg[2][2]_9 [5]));
   FDCE #(
@@ -6589,7 +6682,7 @@ module kernel_regfile
     \bank_reg[2][2][6] 
        (.C(clk),
         .CE(\bank[2][2][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[6]),
         .Q(\bank_reg[2][2]_9 [6]));
   FDCE #(
@@ -6597,7 +6690,7 @@ module kernel_regfile
     \bank_reg[2][2][7] 
        (.C(clk),
         .CE(\bank[2][2][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[7]),
         .Q(\bank_reg[2][2]_9 [7]));
   FDCE #(
@@ -6605,7 +6698,7 @@ module kernel_regfile
     \bank_reg[2][3][0] 
        (.C(clk),
         .CE(\bank[2][3][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[0]),
         .Q(\bank_reg[2][3]_13 [0]));
   FDCE #(
@@ -6613,7 +6706,7 @@ module kernel_regfile
     \bank_reg[2][3][1] 
        (.C(clk),
         .CE(\bank[2][3][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[1]),
         .Q(\bank_reg[2][3]_13 [1]));
   FDCE #(
@@ -6621,7 +6714,7 @@ module kernel_regfile
     \bank_reg[2][3][2] 
        (.C(clk),
         .CE(\bank[2][3][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[2]),
         .Q(\bank_reg[2][3]_13 [2]));
   FDCE #(
@@ -6629,7 +6722,7 @@ module kernel_regfile
     \bank_reg[2][3][3] 
        (.C(clk),
         .CE(\bank[2][3][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[3]),
         .Q(\bank_reg[2][3]_13 [3]));
   FDCE #(
@@ -6637,7 +6730,7 @@ module kernel_regfile
     \bank_reg[2][3][4] 
        (.C(clk),
         .CE(\bank[2][3][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[4]),
         .Q(\bank_reg[2][3]_13 [4]));
   FDCE #(
@@ -6645,7 +6738,7 @@ module kernel_regfile
     \bank_reg[2][3][5] 
        (.C(clk),
         .CE(\bank[2][3][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[5]),
         .Q(\bank_reg[2][3]_13 [5]));
   FDCE #(
@@ -6653,7 +6746,7 @@ module kernel_regfile
     \bank_reg[2][3][6] 
        (.C(clk),
         .CE(\bank[2][3][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[6]),
         .Q(\bank_reg[2][3]_13 [6]));
   FDCE #(
@@ -6661,7 +6754,7 @@ module kernel_regfile
     \bank_reg[2][3][7] 
        (.C(clk),
         .CE(\bank[2][3][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[7]),
         .Q(\bank_reg[2][3]_13 [7]));
   FDCE #(
@@ -6669,7 +6762,7 @@ module kernel_regfile
     \bank_reg[2][4][0] 
        (.C(clk),
         .CE(\bank[2][4][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[0]),
         .Q(\bank_reg[2][4]_17 [0]));
   FDCE #(
@@ -6677,7 +6770,7 @@ module kernel_regfile
     \bank_reg[2][4][1] 
        (.C(clk),
         .CE(\bank[2][4][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[1]),
         .Q(\bank_reg[2][4]_17 [1]));
   FDCE #(
@@ -6685,7 +6778,7 @@ module kernel_regfile
     \bank_reg[2][4][2] 
        (.C(clk),
         .CE(\bank[2][4][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[2]),
         .Q(\bank_reg[2][4]_17 [2]));
   FDCE #(
@@ -6693,7 +6786,7 @@ module kernel_regfile
     \bank_reg[2][4][3] 
        (.C(clk),
         .CE(\bank[2][4][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[3]),
         .Q(\bank_reg[2][4]_17 [3]));
   FDCE #(
@@ -6701,7 +6794,7 @@ module kernel_regfile
     \bank_reg[2][4][4] 
        (.C(clk),
         .CE(\bank[2][4][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[4]),
         .Q(\bank_reg[2][4]_17 [4]));
   FDCE #(
@@ -6709,7 +6802,7 @@ module kernel_regfile
     \bank_reg[2][4][5] 
        (.C(clk),
         .CE(\bank[2][4][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[5]),
         .Q(\bank_reg[2][4]_17 [5]));
   FDCE #(
@@ -6717,7 +6810,7 @@ module kernel_regfile
     \bank_reg[2][4][6] 
        (.C(clk),
         .CE(\bank[2][4][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[6]),
         .Q(\bank_reg[2][4]_17 [6]));
   FDCE #(
@@ -6725,7 +6818,7 @@ module kernel_regfile
     \bank_reg[2][4][7] 
        (.C(clk),
         .CE(\bank[2][4][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[7]),
         .Q(\bank_reg[2][4]_17 [7]));
   FDCE #(
@@ -6733,7 +6826,7 @@ module kernel_regfile
     \bank_reg[2][5][0] 
        (.C(clk),
         .CE(\bank[2][5][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[0]),
         .Q(\bank_reg[2][5]_21 [0]));
   FDCE #(
@@ -6741,7 +6834,7 @@ module kernel_regfile
     \bank_reg[2][5][1] 
        (.C(clk),
         .CE(\bank[2][5][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[1]),
         .Q(\bank_reg[2][5]_21 [1]));
   FDCE #(
@@ -6749,7 +6842,7 @@ module kernel_regfile
     \bank_reg[2][5][2] 
        (.C(clk),
         .CE(\bank[2][5][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[2]),
         .Q(\bank_reg[2][5]_21 [2]));
   FDCE #(
@@ -6757,7 +6850,7 @@ module kernel_regfile
     \bank_reg[2][5][3] 
        (.C(clk),
         .CE(\bank[2][5][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[3]),
         .Q(\bank_reg[2][5]_21 [3]));
   FDCE #(
@@ -6765,7 +6858,7 @@ module kernel_regfile
     \bank_reg[2][5][4] 
        (.C(clk),
         .CE(\bank[2][5][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[4]),
         .Q(\bank_reg[2][5]_21 [4]));
   FDCE #(
@@ -6773,7 +6866,7 @@ module kernel_regfile
     \bank_reg[2][5][5] 
        (.C(clk),
         .CE(\bank[2][5][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[5]),
         .Q(\bank_reg[2][5]_21 [5]));
   FDCE #(
@@ -6781,7 +6874,7 @@ module kernel_regfile
     \bank_reg[2][5][6] 
        (.C(clk),
         .CE(\bank[2][5][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[6]),
         .Q(\bank_reg[2][5]_21 [6]));
   FDCE #(
@@ -6789,7 +6882,7 @@ module kernel_regfile
     \bank_reg[2][5][7] 
        (.C(clk),
         .CE(\bank[2][5][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[7]),
         .Q(\bank_reg[2][5]_21 [7]));
   FDCE #(
@@ -6797,7 +6890,7 @@ module kernel_regfile
     \bank_reg[2][6][0] 
        (.C(clk),
         .CE(\bank[2][6][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[0]),
         .Q(\bank_reg[2][6]_25 [0]));
   FDCE #(
@@ -6805,7 +6898,7 @@ module kernel_regfile
     \bank_reg[2][6][1] 
        (.C(clk),
         .CE(\bank[2][6][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[1]),
         .Q(\bank_reg[2][6]_25 [1]));
   FDCE #(
@@ -6813,7 +6906,7 @@ module kernel_regfile
     \bank_reg[2][6][2] 
        (.C(clk),
         .CE(\bank[2][6][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[2]),
         .Q(\bank_reg[2][6]_25 [2]));
   FDCE #(
@@ -6821,7 +6914,7 @@ module kernel_regfile
     \bank_reg[2][6][3] 
        (.C(clk),
         .CE(\bank[2][6][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[3]),
         .Q(\bank_reg[2][6]_25 [3]));
   FDCE #(
@@ -6829,7 +6922,7 @@ module kernel_regfile
     \bank_reg[2][6][4] 
        (.C(clk),
         .CE(\bank[2][6][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[4]),
         .Q(\bank_reg[2][6]_25 [4]));
   FDCE #(
@@ -6837,7 +6930,7 @@ module kernel_regfile
     \bank_reg[2][6][5] 
        (.C(clk),
         .CE(\bank[2][6][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[5]),
         .Q(\bank_reg[2][6]_25 [5]));
   FDCE #(
@@ -6845,7 +6938,7 @@ module kernel_regfile
     \bank_reg[2][6][6] 
        (.C(clk),
         .CE(\bank[2][6][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[6]),
         .Q(\bank_reg[2][6]_25 [6]));
   FDCE #(
@@ -6853,7 +6946,7 @@ module kernel_regfile
     \bank_reg[2][6][7] 
        (.C(clk),
         .CE(\bank[2][6][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[7]),
         .Q(\bank_reg[2][6]_25 [7]));
   FDCE #(
@@ -6861,7 +6954,7 @@ module kernel_regfile
     \bank_reg[2][7][0] 
        (.C(clk),
         .CE(\bank[2][7][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[0]),
         .Q(\bank_reg[2][7]_29 [0]));
   FDCE #(
@@ -6869,7 +6962,7 @@ module kernel_regfile
     \bank_reg[2][7][1] 
        (.C(clk),
         .CE(\bank[2][7][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[1]),
         .Q(\bank_reg[2][7]_29 [1]));
   FDCE #(
@@ -6877,7 +6970,7 @@ module kernel_regfile
     \bank_reg[2][7][2] 
        (.C(clk),
         .CE(\bank[2][7][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[2]),
         .Q(\bank_reg[2][7]_29 [2]));
   FDCE #(
@@ -6885,7 +6978,7 @@ module kernel_regfile
     \bank_reg[2][7][3] 
        (.C(clk),
         .CE(\bank[2][7][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[3]),
         .Q(\bank_reg[2][7]_29 [3]));
   FDCE #(
@@ -6893,7 +6986,7 @@ module kernel_regfile
     \bank_reg[2][7][4] 
        (.C(clk),
         .CE(\bank[2][7][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[4]),
         .Q(\bank_reg[2][7]_29 [4]));
   FDCE #(
@@ -6901,7 +6994,7 @@ module kernel_regfile
     \bank_reg[2][7][5] 
        (.C(clk),
         .CE(\bank[2][7][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[5]),
         .Q(\bank_reg[2][7]_29 [5]));
   FDCE #(
@@ -6909,7 +7002,7 @@ module kernel_regfile
     \bank_reg[2][7][6] 
        (.C(clk),
         .CE(\bank[2][7][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[6]),
         .Q(\bank_reg[2][7]_29 [6]));
   FDCE #(
@@ -6917,7 +7010,7 @@ module kernel_regfile
     \bank_reg[2][7][7] 
        (.C(clk),
         .CE(\bank[2][7][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[7]),
         .Q(\bank_reg[2][7]_29 [7]));
   FDCE #(
@@ -6925,7 +7018,7 @@ module kernel_regfile
     \bank_reg[2][8][0] 
        (.C(clk),
         .CE(\bank[2][8][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[0]),
         .Q(\bank_reg[2][8]_33 [0]));
   FDCE #(
@@ -6933,7 +7026,7 @@ module kernel_regfile
     \bank_reg[2][8][1] 
        (.C(clk),
         .CE(\bank[2][8][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[1]),
         .Q(\bank_reg[2][8]_33 [1]));
   FDCE #(
@@ -6941,7 +7034,7 @@ module kernel_regfile
     \bank_reg[2][8][2] 
        (.C(clk),
         .CE(\bank[2][8][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[2]),
         .Q(\bank_reg[2][8]_33 [2]));
   FDCE #(
@@ -6949,7 +7042,7 @@ module kernel_regfile
     \bank_reg[2][8][3] 
        (.C(clk),
         .CE(\bank[2][8][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[3]),
         .Q(\bank_reg[2][8]_33 [3]));
   FDCE #(
@@ -6957,7 +7050,7 @@ module kernel_regfile
     \bank_reg[2][8][4] 
        (.C(clk),
         .CE(\bank[2][8][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[4]),
         .Q(\bank_reg[2][8]_33 [4]));
   FDCE #(
@@ -6965,7 +7058,7 @@ module kernel_regfile
     \bank_reg[2][8][5] 
        (.C(clk),
         .CE(\bank[2][8][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[5]),
         .Q(\bank_reg[2][8]_33 [5]));
   FDCE #(
@@ -6973,7 +7066,7 @@ module kernel_regfile
     \bank_reg[2][8][6] 
        (.C(clk),
         .CE(\bank[2][8][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[6]),
         .Q(\bank_reg[2][8]_33 [6]));
   FDCE #(
@@ -6981,7 +7074,7 @@ module kernel_regfile
     \bank_reg[2][8][7] 
        (.C(clk),
         .CE(\bank[2][8][7]_i_1_n_0 ),
-        .CLR(\bank_reg[0][3][7]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[7]),
         .Q(\bank_reg[2][8]_33 [7]));
   FDCE #(
@@ -6989,7 +7082,7 @@ module kernel_regfile
     \bank_reg[3][0][0] 
        (.C(clk),
         .CE(\bank[3][0][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[0]),
         .Q(\bank_reg[3][0]_0 [0]));
   FDCE #(
@@ -6997,7 +7090,7 @@ module kernel_regfile
     \bank_reg[3][0][1] 
        (.C(clk),
         .CE(\bank[3][0][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[1]),
         .Q(\bank_reg[3][0]_0 [1]));
   FDCE #(
@@ -7005,7 +7098,7 @@ module kernel_regfile
     \bank_reg[3][0][2] 
        (.C(clk),
         .CE(\bank[3][0][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[2]),
         .Q(\bank_reg[3][0]_0 [2]));
   FDCE #(
@@ -7013,7 +7106,7 @@ module kernel_regfile
     \bank_reg[3][0][3] 
        (.C(clk),
         .CE(\bank[3][0][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[3]),
         .Q(\bank_reg[3][0]_0 [3]));
   FDCE #(
@@ -7021,7 +7114,7 @@ module kernel_regfile
     \bank_reg[3][0][4] 
        (.C(clk),
         .CE(\bank[3][0][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[4]),
         .Q(\bank_reg[3][0]_0 [4]));
   FDCE #(
@@ -7029,7 +7122,7 @@ module kernel_regfile
     \bank_reg[3][0][5] 
        (.C(clk),
         .CE(\bank[3][0][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[5]),
         .Q(\bank_reg[3][0]_0 [5]));
   FDCE #(
@@ -7037,7 +7130,7 @@ module kernel_regfile
     \bank_reg[3][0][6] 
        (.C(clk),
         .CE(\bank[3][0][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[6]),
         .Q(\bank_reg[3][0]_0 [6]));
   FDCE #(
@@ -7045,7 +7138,7 @@ module kernel_regfile
     \bank_reg[3][0][7] 
        (.C(clk),
         .CE(\bank[3][0][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[7]),
         .Q(\bank_reg[3][0]_0 [7]));
   FDCE #(
@@ -7053,7 +7146,7 @@ module kernel_regfile
     \bank_reg[3][1][0] 
        (.C(clk),
         .CE(\bank[3][1][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[0]),
         .Q(\bank_reg[3][1]_4 [0]));
   FDCE #(
@@ -7061,7 +7154,7 @@ module kernel_regfile
     \bank_reg[3][1][1] 
        (.C(clk),
         .CE(\bank[3][1][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[1]),
         .Q(\bank_reg[3][1]_4 [1]));
   FDCE #(
@@ -7069,7 +7162,7 @@ module kernel_regfile
     \bank_reg[3][1][2] 
        (.C(clk),
         .CE(\bank[3][1][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[2]),
         .Q(\bank_reg[3][1]_4 [2]));
   FDCE #(
@@ -7077,7 +7170,7 @@ module kernel_regfile
     \bank_reg[3][1][3] 
        (.C(clk),
         .CE(\bank[3][1][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[3]),
         .Q(\bank_reg[3][1]_4 [3]));
   FDCE #(
@@ -7085,7 +7178,7 @@ module kernel_regfile
     \bank_reg[3][1][4] 
        (.C(clk),
         .CE(\bank[3][1][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[4]),
         .Q(\bank_reg[3][1]_4 [4]));
   FDCE #(
@@ -7093,7 +7186,7 @@ module kernel_regfile
     \bank_reg[3][1][5] 
        (.C(clk),
         .CE(\bank[3][1][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[5]),
         .Q(\bank_reg[3][1]_4 [5]));
   FDCE #(
@@ -7101,7 +7194,7 @@ module kernel_regfile
     \bank_reg[3][1][6] 
        (.C(clk),
         .CE(\bank[3][1][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[6]),
         .Q(\bank_reg[3][1]_4 [6]));
   FDCE #(
@@ -7109,7 +7202,7 @@ module kernel_regfile
     \bank_reg[3][1][7] 
        (.C(clk),
         .CE(\bank[3][1][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[7]),
         .Q(\bank_reg[3][1]_4 [7]));
   FDCE #(
@@ -7117,7 +7210,7 @@ module kernel_regfile
     \bank_reg[3][2][0] 
        (.C(clk),
         .CE(\bank[3][2][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[0]),
         .Q(\bank_reg[3][2]_8 [0]));
   FDCE #(
@@ -7125,7 +7218,7 @@ module kernel_regfile
     \bank_reg[3][2][1] 
        (.C(clk),
         .CE(\bank[3][2][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[1]),
         .Q(\bank_reg[3][2]_8 [1]));
   FDCE #(
@@ -7133,7 +7226,7 @@ module kernel_regfile
     \bank_reg[3][2][2] 
        (.C(clk),
         .CE(\bank[3][2][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[2]),
         .Q(\bank_reg[3][2]_8 [2]));
   FDCE #(
@@ -7141,7 +7234,7 @@ module kernel_regfile
     \bank_reg[3][2][3] 
        (.C(clk),
         .CE(\bank[3][2][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[3]),
         .Q(\bank_reg[3][2]_8 [3]));
   FDCE #(
@@ -7149,7 +7242,7 @@ module kernel_regfile
     \bank_reg[3][2][4] 
        (.C(clk),
         .CE(\bank[3][2][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[4]),
         .Q(\bank_reg[3][2]_8 [4]));
   FDCE #(
@@ -7157,7 +7250,7 @@ module kernel_regfile
     \bank_reg[3][2][5] 
        (.C(clk),
         .CE(\bank[3][2][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[5]),
         .Q(\bank_reg[3][2]_8 [5]));
   FDCE #(
@@ -7165,7 +7258,7 @@ module kernel_regfile
     \bank_reg[3][2][6] 
        (.C(clk),
         .CE(\bank[3][2][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[6]),
         .Q(\bank_reg[3][2]_8 [6]));
   FDCE #(
@@ -7173,7 +7266,7 @@ module kernel_regfile
     \bank_reg[3][2][7] 
        (.C(clk),
         .CE(\bank[3][2][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][2][2]_0 ),
+        .CLR(\bank_reg[0][2][3]_0 ),
         .D(kl_coef[7]),
         .Q(\bank_reg[3][2]_8 [7]));
   FDCE #(
@@ -7181,7 +7274,7 @@ module kernel_regfile
     \bank_reg[3][3][0] 
        (.C(clk),
         .CE(\bank[3][3][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[0]),
         .Q(\bank_reg[3][3]_12 [0]));
   FDCE #(
@@ -7189,7 +7282,7 @@ module kernel_regfile
     \bank_reg[3][3][1] 
        (.C(clk),
         .CE(\bank[3][3][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[1]),
         .Q(\bank_reg[3][3]_12 [1]));
   FDCE #(
@@ -7197,7 +7290,7 @@ module kernel_regfile
     \bank_reg[3][3][2] 
        (.C(clk),
         .CE(\bank[3][3][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[2]),
         .Q(\bank_reg[3][3]_12 [2]));
   FDCE #(
@@ -7205,7 +7298,7 @@ module kernel_regfile
     \bank_reg[3][3][3] 
        (.C(clk),
         .CE(\bank[3][3][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[3]),
         .Q(\bank_reg[3][3]_12 [3]));
   FDCE #(
@@ -7213,7 +7306,7 @@ module kernel_regfile
     \bank_reg[3][3][4] 
        (.C(clk),
         .CE(\bank[3][3][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[4]),
         .Q(\bank_reg[3][3]_12 [4]));
   FDCE #(
@@ -7221,7 +7314,7 @@ module kernel_regfile
     \bank_reg[3][3][5] 
        (.C(clk),
         .CE(\bank[3][3][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[5]),
         .Q(\bank_reg[3][3]_12 [5]));
   FDCE #(
@@ -7229,7 +7322,7 @@ module kernel_regfile
     \bank_reg[3][3][6] 
        (.C(clk),
         .CE(\bank[3][3][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[6]),
         .Q(\bank_reg[3][3]_12 [6]));
   FDCE #(
@@ -7237,7 +7330,7 @@ module kernel_regfile
     \bank_reg[3][3][7] 
        (.C(clk),
         .CE(\bank[3][3][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[7]),
         .Q(\bank_reg[3][3]_12 [7]));
   FDCE #(
@@ -7245,7 +7338,7 @@ module kernel_regfile
     \bank_reg[3][4][0] 
        (.C(clk),
         .CE(\bank[3][4][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[0]),
         .Q(\bank_reg[3][4]_16 [0]));
   FDCE #(
@@ -7253,7 +7346,7 @@ module kernel_regfile
     \bank_reg[3][4][1] 
        (.C(clk),
         .CE(\bank[3][4][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[1]),
         .Q(\bank_reg[3][4]_16 [1]));
   FDCE #(
@@ -7261,7 +7354,7 @@ module kernel_regfile
     \bank_reg[3][4][2] 
        (.C(clk),
         .CE(\bank[3][4][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[2]),
         .Q(\bank_reg[3][4]_16 [2]));
   FDCE #(
@@ -7269,7 +7362,7 @@ module kernel_regfile
     \bank_reg[3][4][3] 
        (.C(clk),
         .CE(\bank[3][4][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[3]),
         .Q(\bank_reg[3][4]_16 [3]));
   FDCE #(
@@ -7277,7 +7370,7 @@ module kernel_regfile
     \bank_reg[3][4][4] 
        (.C(clk),
         .CE(\bank[3][4][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[4]),
         .Q(\bank_reg[3][4]_16 [4]));
   FDCE #(
@@ -7285,7 +7378,7 @@ module kernel_regfile
     \bank_reg[3][4][5] 
        (.C(clk),
         .CE(\bank[3][4][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[5]),
         .Q(\bank_reg[3][4]_16 [5]));
   FDCE #(
@@ -7293,7 +7386,7 @@ module kernel_regfile
     \bank_reg[3][4][6] 
        (.C(clk),
         .CE(\bank[3][4][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[6]),
         .Q(\bank_reg[3][4]_16 [6]));
   FDCE #(
@@ -7301,7 +7394,7 @@ module kernel_regfile
     \bank_reg[3][4][7] 
        (.C(clk),
         .CE(\bank[3][4][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[7]),
         .Q(\bank_reg[3][4]_16 [7]));
   FDCE #(
@@ -7309,7 +7402,7 @@ module kernel_regfile
     \bank_reg[3][5][0] 
        (.C(clk),
         .CE(\bank[3][5][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[0]),
         .Q(\bank_reg[3][5]_20 [0]));
   FDCE #(
@@ -7317,7 +7410,7 @@ module kernel_regfile
     \bank_reg[3][5][1] 
        (.C(clk),
         .CE(\bank[3][5][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[1]),
         .Q(\bank_reg[3][5]_20 [1]));
   FDCE #(
@@ -7325,7 +7418,7 @@ module kernel_regfile
     \bank_reg[3][5][2] 
        (.C(clk),
         .CE(\bank[3][5][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[2]),
         .Q(\bank_reg[3][5]_20 [2]));
   FDCE #(
@@ -7333,7 +7426,7 @@ module kernel_regfile
     \bank_reg[3][5][3] 
        (.C(clk),
         .CE(\bank[3][5][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[3]),
         .Q(\bank_reg[3][5]_20 [3]));
   FDCE #(
@@ -7341,7 +7434,7 @@ module kernel_regfile
     \bank_reg[3][5][4] 
        (.C(clk),
         .CE(\bank[3][5][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[4]),
         .Q(\bank_reg[3][5]_20 [4]));
   FDCE #(
@@ -7349,7 +7442,7 @@ module kernel_regfile
     \bank_reg[3][5][5] 
        (.C(clk),
         .CE(\bank[3][5][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[5]),
         .Q(\bank_reg[3][5]_20 [5]));
   FDCE #(
@@ -7357,7 +7450,7 @@ module kernel_regfile
     \bank_reg[3][5][6] 
        (.C(clk),
         .CE(\bank[3][5][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[6]),
         .Q(\bank_reg[3][5]_20 [6]));
   FDCE #(
@@ -7365,7 +7458,7 @@ module kernel_regfile
     \bank_reg[3][5][7] 
        (.C(clk),
         .CE(\bank[3][5][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[7]),
         .Q(\bank_reg[3][5]_20 [7]));
   FDCE #(
@@ -7373,7 +7466,7 @@ module kernel_regfile
     \bank_reg[3][6][0] 
        (.C(clk),
         .CE(\bank[3][6][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[0]),
         .Q(\bank_reg[3][6]_24 [0]));
   FDCE #(
@@ -7381,7 +7474,7 @@ module kernel_regfile
     \bank_reg[3][6][1] 
        (.C(clk),
         .CE(\bank[3][6][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[1]),
         .Q(\bank_reg[3][6]_24 [1]));
   FDCE #(
@@ -7389,7 +7482,7 @@ module kernel_regfile
     \bank_reg[3][6][2] 
        (.C(clk),
         .CE(\bank[3][6][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[2]),
         .Q(\bank_reg[3][6]_24 [2]));
   FDCE #(
@@ -7397,7 +7490,7 @@ module kernel_regfile
     \bank_reg[3][6][3] 
        (.C(clk),
         .CE(\bank[3][6][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[3]),
         .Q(\bank_reg[3][6]_24 [3]));
   FDCE #(
@@ -7405,7 +7498,7 @@ module kernel_regfile
     \bank_reg[3][6][4] 
        (.C(clk),
         .CE(\bank[3][6][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[4]),
         .Q(\bank_reg[3][6]_24 [4]));
   FDCE #(
@@ -7413,7 +7506,7 @@ module kernel_regfile
     \bank_reg[3][6][5] 
        (.C(clk),
         .CE(\bank[3][6][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[5]),
         .Q(\bank_reg[3][6]_24 [5]));
   FDCE #(
@@ -7421,7 +7514,7 @@ module kernel_regfile
     \bank_reg[3][6][6] 
        (.C(clk),
         .CE(\bank[3][6][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[6]),
         .Q(\bank_reg[3][6]_24 [6]));
   FDCE #(
@@ -7429,7 +7522,7 @@ module kernel_regfile
     \bank_reg[3][6][7] 
        (.C(clk),
         .CE(\bank[3][6][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[7]),
         .Q(\bank_reg[3][6]_24 [7]));
   FDCE #(
@@ -7437,7 +7530,7 @@ module kernel_regfile
     \bank_reg[3][7][0] 
        (.C(clk),
         .CE(\bank[3][7][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[0]),
         .Q(\bank_reg[3][7]_28 [0]));
   FDCE #(
@@ -7445,7 +7538,7 @@ module kernel_regfile
     \bank_reg[3][7][1] 
        (.C(clk),
         .CE(\bank[3][7][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[1]),
         .Q(\bank_reg[3][7]_28 [1]));
   FDCE #(
@@ -7453,7 +7546,7 @@ module kernel_regfile
     \bank_reg[3][7][2] 
        (.C(clk),
         .CE(\bank[3][7][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[2]),
         .Q(\bank_reg[3][7]_28 [2]));
   FDCE #(
@@ -7461,7 +7554,7 @@ module kernel_regfile
     \bank_reg[3][7][3] 
        (.C(clk),
         .CE(\bank[3][7][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[3]),
         .Q(\bank_reg[3][7]_28 [3]));
   FDCE #(
@@ -7469,7 +7562,7 @@ module kernel_regfile
     \bank_reg[3][7][4] 
        (.C(clk),
         .CE(\bank[3][7][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[4]),
         .Q(\bank_reg[3][7]_28 [4]));
   FDCE #(
@@ -7477,7 +7570,7 @@ module kernel_regfile
     \bank_reg[3][7][5] 
        (.C(clk),
         .CE(\bank[3][7][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[5]),
         .Q(\bank_reg[3][7]_28 [5]));
   FDCE #(
@@ -7485,7 +7578,7 @@ module kernel_regfile
     \bank_reg[3][7][6] 
        (.C(clk),
         .CE(\bank[3][7][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[6]),
         .Q(\bank_reg[3][7]_28 [6]));
   FDCE #(
@@ -7493,7 +7586,7 @@ module kernel_regfile
     \bank_reg[3][7][7] 
        (.C(clk),
         .CE(\bank[3][7][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][8][0]_0 ),
         .D(kl_coef[7]),
         .Q(\bank_reg[3][7]_28 [7]));
   FDCE #(
@@ -7501,7 +7594,7 @@ module kernel_regfile
     \bank_reg[3][8][0] 
        (.C(clk),
         .CE(\bank[3][8][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[0]),
         .Q(\bank_reg[3][8]_32 [0]));
   FDCE #(
@@ -7509,7 +7602,7 @@ module kernel_regfile
     \bank_reg[3][8][1] 
        (.C(clk),
         .CE(\bank[3][8][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[1]),
         .Q(\bank_reg[3][8]_32 [1]));
   FDCE #(
@@ -7517,7 +7610,7 @@ module kernel_regfile
     \bank_reg[3][8][2] 
        (.C(clk),
         .CE(\bank[3][8][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[2]),
         .Q(\bank_reg[3][8]_32 [2]));
   FDCE #(
@@ -7525,7 +7618,7 @@ module kernel_regfile
     \bank_reg[3][8][3] 
        (.C(clk),
         .CE(\bank[3][8][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[3]),
         .Q(\bank_reg[3][8]_32 [3]));
   FDCE #(
@@ -7533,7 +7626,7 @@ module kernel_regfile
     \bank_reg[3][8][4] 
        (.C(clk),
         .CE(\bank[3][8][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[4]),
         .Q(\bank_reg[3][8]_32 [4]));
   FDCE #(
@@ -7541,7 +7634,7 @@ module kernel_regfile
     \bank_reg[3][8][5] 
        (.C(clk),
         .CE(\bank[3][8][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[5]),
         .Q(\bank_reg[3][8]_32 [5]));
   FDCE #(
@@ -7549,7 +7642,7 @@ module kernel_regfile
     \bank_reg[3][8][6] 
        (.C(clk),
         .CE(\bank[3][8][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[6]),
         .Q(\bank_reg[3][8]_32 [6]));
   FDCE #(
@@ -7557,745 +7650,1330 @@ module kernel_regfile
     \bank_reg[3][8][7] 
        (.C(clk),
         .CE(\bank[3][8][7]_i_1_n_0 ),
-        .CLR(\bank_reg[1][8][0]_0 ),
+        .CLR(\bank_reg[0][3][4]_0 ),
         .D(kl_coef[7]),
         .Q(\bank_reg[3][8]_32 [7]));
   LUT1 #(
     .INIT(2'h1)) 
-    \col_cnt[4]_i_3 
+    \bank_sel[1]_i_2 
        (.I0(rst_n),
-        .O(\bank_reg[0][3][7]_0 ));
-  LUT6 #(
-    .INIT(64'hAAFFCCF0AA00CCF0)) 
-    p_0_out__0_i_1
-       (.I0(\bank_reg[3][1]_4 [7]),
-        .I1(\bank_reg[1][1]_6 [7]),
-        .I2(\bank_reg[0][1]_7 [7]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[2][1]_5 [7]),
-        .O(\coef[1] [7]));
-  LUT6 #(
-    .INIT(64'hAACCF0FFAACCF000)) 
-    p_0_out__0_i_2
-       (.I0(\bank_reg[3][1]_4 [6]),
-        .I1(\bank_reg[1][1]_6 [6]),
-        .I2(\bank_reg[2][1]_5 [6]),
-        .I3(Q[1]),
-        .I4(Q[0]),
-        .I5(\bank_reg[0][1]_7 [6]),
-        .O(\coef[1] [6]));
-  LUT6 #(
-    .INIT(64'hF0FFAACCF000AACC)) 
-    p_0_out__0_i_3
-       (.I0(\bank_reg[1][1]_6 [5]),
-        .I1(\bank_reg[0][1]_7 [5]),
-        .I2(\bank_reg[3][1]_4 [5]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[2][1]_5 [5]),
-        .O(\coef[1] [5]));
-  LUT6 #(
-    .INIT(64'hAACCF0FFAACCF000)) 
-    p_0_out__0_i_4
-       (.I0(\bank_reg[3][1]_4 [4]),
-        .I1(\bank_reg[1][1]_6 [4]),
-        .I2(\bank_reg[2][1]_5 [4]),
-        .I3(Q[1]),
-        .I4(Q[0]),
-        .I5(\bank_reg[0][1]_7 [4]),
-        .O(\coef[1] [4]));
-  LUT6 #(
-    .INIT(64'hAAFFCCF0AA00CCF0)) 
-    p_0_out__0_i_5
-       (.I0(\bank_reg[3][1]_4 [3]),
-        .I1(\bank_reg[1][1]_6 [3]),
-        .I2(\bank_reg[0][1]_7 [3]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[2][1]_5 [3]),
-        .O(\coef[1] [3]));
-  LUT6 #(
-    .INIT(64'hF0FFAACCF000AACC)) 
-    p_0_out__0_i_6
-       (.I0(\bank_reg[1][1]_6 [2]),
-        .I1(\bank_reg[0][1]_7 [2]),
-        .I2(\bank_reg[3][1]_4 [2]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[2][1]_5 [2]),
-        .O(\coef[1] [2]));
-  LUT6 #(
-    .INIT(64'hF0CCAAFFF0CCAA00)) 
-    p_0_out__0_i_7
-       (.I0(\bank_reg[1][1]_6 [1]),
-        .I1(\bank_reg[2][1]_5 [1]),
-        .I2(\bank_reg[3][1]_4 [1]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[0][1]_7 [1]),
-        .O(\coef[1] [1]));
-  LUT6 #(
-    .INIT(64'hF0FFAACCF000AACC)) 
-    p_0_out__0_i_8
-       (.I0(\bank_reg[1][1]_6 [0]),
-        .I1(\bank_reg[0][1]_7 [0]),
-        .I2(\bank_reg[3][1]_4 [0]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[2][1]_5 [0]),
-        .O(\coef[1] [0]));
-  LUT6 #(
-    .INIT(64'hAAFFCCF0AA00CCF0)) 
-    p_0_out__1_i_1
-       (.I0(\bank_reg[3][2]_8 [7]),
-        .I1(\bank_reg[1][2]_10 [7]),
-        .I2(\bank_reg[0][2]_11 [7]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[2][2]_9 [7]),
-        .O(\coef[2] [7]));
-  LUT6 #(
-    .INIT(64'hAACCF0FFAACCF000)) 
-    p_0_out__1_i_2
-       (.I0(\bank_reg[3][2]_8 [6]),
-        .I1(\bank_reg[1][2]_10 [6]),
-        .I2(\bank_reg[2][2]_9 [6]),
-        .I3(Q[1]),
-        .I4(Q[0]),
-        .I5(\bank_reg[0][2]_11 [6]),
-        .O(\coef[2] [6]));
-  LUT6 #(
-    .INIT(64'hF0FFAACCF000AACC)) 
-    p_0_out__1_i_3
-       (.I0(\bank_reg[1][2]_10 [5]),
-        .I1(\bank_reg[0][2]_11 [5]),
-        .I2(\bank_reg[3][2]_8 [5]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[2][2]_9 [5]),
-        .O(\coef[2] [5]));
-  LUT6 #(
-    .INIT(64'hAACCF0FFAACCF000)) 
-    p_0_out__1_i_4
-       (.I0(\bank_reg[3][2]_8 [4]),
-        .I1(\bank_reg[1][2]_10 [4]),
-        .I2(\bank_reg[2][2]_9 [4]),
-        .I3(Q[1]),
-        .I4(Q[0]),
-        .I5(\bank_reg[0][2]_11 [4]),
-        .O(\coef[2] [4]));
-  LUT6 #(
-    .INIT(64'hAAFFCCF0AA00CCF0)) 
-    p_0_out__1_i_5
-       (.I0(\bank_reg[3][2]_8 [3]),
-        .I1(\bank_reg[1][2]_10 [3]),
-        .I2(\bank_reg[0][2]_11 [3]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[2][2]_9 [3]),
-        .O(\coef[2] [3]));
-  LUT6 #(
-    .INIT(64'hF0FFAACCF000AACC)) 
-    p_0_out__1_i_6
-       (.I0(\bank_reg[1][2]_10 [2]),
-        .I1(\bank_reg[0][2]_11 [2]),
-        .I2(\bank_reg[3][2]_8 [2]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[2][2]_9 [2]),
-        .O(\coef[2] [2]));
-  LUT6 #(
-    .INIT(64'hF0CCAAFFF0CCAA00)) 
-    p_0_out__1_i_7
-       (.I0(\bank_reg[1][2]_10 [1]),
-        .I1(\bank_reg[2][2]_9 [1]),
-        .I2(\bank_reg[3][2]_8 [1]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[0][2]_11 [1]),
-        .O(\coef[2] [1]));
-  LUT6 #(
-    .INIT(64'hF0FFAACCF000AACC)) 
-    p_0_out__1_i_8
-       (.I0(\bank_reg[1][2]_10 [0]),
-        .I1(\bank_reg[0][2]_11 [0]),
-        .I2(\bank_reg[3][2]_8 [0]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[2][2]_9 [0]),
-        .O(\coef[2] [0]));
-  LUT6 #(
-    .INIT(64'hAAFFCCF0AA00CCF0)) 
-    p_0_out__2_i_1
-       (.I0(\bank_reg[3][3]_12 [7]),
-        .I1(\bank_reg[1][3]_14 [7]),
-        .I2(\bank_reg[0][3]_15 [7]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[2][3]_13 [7]),
-        .O(\coef[3] [7]));
-  LUT6 #(
-    .INIT(64'hAACCF0FFAACCF000)) 
-    p_0_out__2_i_2
-       (.I0(\bank_reg[3][3]_12 [6]),
-        .I1(\bank_reg[1][3]_14 [6]),
-        .I2(\bank_reg[2][3]_13 [6]),
-        .I3(Q[1]),
-        .I4(Q[0]),
-        .I5(\bank_reg[0][3]_15 [6]),
-        .O(\coef[3] [6]));
-  LUT6 #(
-    .INIT(64'hF0FFAACCF000AACC)) 
-    p_0_out__2_i_3
-       (.I0(\bank_reg[1][3]_14 [5]),
-        .I1(\bank_reg[0][3]_15 [5]),
-        .I2(\bank_reg[3][3]_12 [5]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[2][3]_13 [5]),
-        .O(\coef[3] [5]));
-  LUT6 #(
-    .INIT(64'hAACCF0FFAACCF000)) 
-    p_0_out__2_i_4
-       (.I0(\bank_reg[3][3]_12 [4]),
-        .I1(\bank_reg[1][3]_14 [4]),
-        .I2(\bank_reg[2][3]_13 [4]),
-        .I3(Q[1]),
-        .I4(Q[0]),
-        .I5(\bank_reg[0][3]_15 [4]),
-        .O(\coef[3] [4]));
-  LUT6 #(
-    .INIT(64'hAAFFCCF0AA00CCF0)) 
-    p_0_out__2_i_5
-       (.I0(\bank_reg[3][3]_12 [3]),
-        .I1(\bank_reg[1][3]_14 [3]),
-        .I2(\bank_reg[0][3]_15 [3]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[2][3]_13 [3]),
-        .O(\coef[3] [3]));
-  LUT6 #(
-    .INIT(64'hF0FFAACCF000AACC)) 
-    p_0_out__2_i_6
-       (.I0(\bank_reg[1][3]_14 [2]),
-        .I1(\bank_reg[0][3]_15 [2]),
-        .I2(\bank_reg[3][3]_12 [2]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[2][3]_13 [2]),
-        .O(\coef[3] [2]));
-  LUT6 #(
-    .INIT(64'hF0CCAAFFF0CCAA00)) 
-    p_0_out__2_i_7
-       (.I0(\bank_reg[1][3]_14 [1]),
-        .I1(\bank_reg[2][3]_13 [1]),
-        .I2(\bank_reg[3][3]_12 [1]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[0][3]_15 [1]),
-        .O(\coef[3] [1]));
-  LUT6 #(
-    .INIT(64'hF0FFAACCF000AACC)) 
-    p_0_out__2_i_8
-       (.I0(\bank_reg[1][3]_14 [0]),
-        .I1(\bank_reg[0][3]_15 [0]),
-        .I2(\bank_reg[3][3]_12 [0]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[2][3]_13 [0]),
-        .O(\coef[3] [0]));
-  LUT6 #(
-    .INIT(64'hAAFFCCF0AA00CCF0)) 
-    p_0_out__3_i_1
-       (.I0(\bank_reg[3][4]_16 [7]),
-        .I1(\bank_reg[1][4]_18 [7]),
-        .I2(\bank_reg[0][4]_19 [7]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[2][4]_17 [7]),
-        .O(\coef[4] [7]));
-  LUT6 #(
-    .INIT(64'hAACCF0FFAACCF000)) 
-    p_0_out__3_i_2
-       (.I0(\bank_reg[3][4]_16 [6]),
-        .I1(\bank_reg[1][4]_18 [6]),
-        .I2(\bank_reg[2][4]_17 [6]),
-        .I3(Q[1]),
-        .I4(Q[0]),
-        .I5(\bank_reg[0][4]_19 [6]),
-        .O(\coef[4] [6]));
-  LUT6 #(
-    .INIT(64'hF0FFAACCF000AACC)) 
-    p_0_out__3_i_3
-       (.I0(\bank_reg[1][4]_18 [5]),
-        .I1(\bank_reg[0][4]_19 [5]),
-        .I2(\bank_reg[3][4]_16 [5]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[2][4]_17 [5]),
-        .O(\coef[4] [5]));
-  LUT6 #(
-    .INIT(64'hAACCF0FFAACCF000)) 
-    p_0_out__3_i_4
-       (.I0(\bank_reg[3][4]_16 [4]),
-        .I1(\bank_reg[1][4]_18 [4]),
-        .I2(\bank_reg[2][4]_17 [4]),
-        .I3(Q[1]),
-        .I4(Q[0]),
-        .I5(\bank_reg[0][4]_19 [4]),
-        .O(\coef[4] [4]));
-  LUT6 #(
-    .INIT(64'hAAFFCCF0AA00CCF0)) 
-    p_0_out__3_i_5
-       (.I0(\bank_reg[3][4]_16 [3]),
-        .I1(\bank_reg[1][4]_18 [3]),
-        .I2(\bank_reg[0][4]_19 [3]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[2][4]_17 [3]),
-        .O(\coef[4] [3]));
-  LUT6 #(
-    .INIT(64'hF0FFAACCF000AACC)) 
-    p_0_out__3_i_6
-       (.I0(\bank_reg[1][4]_18 [2]),
-        .I1(\bank_reg[0][4]_19 [2]),
-        .I2(\bank_reg[3][4]_16 [2]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[2][4]_17 [2]),
-        .O(\coef[4] [2]));
-  LUT6 #(
-    .INIT(64'hF0CCAAFFF0CCAA00)) 
-    p_0_out__3_i_7
-       (.I0(\bank_reg[1][4]_18 [1]),
-        .I1(\bank_reg[2][4]_17 [1]),
-        .I2(\bank_reg[3][4]_16 [1]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[0][4]_19 [1]),
-        .O(\coef[4] [1]));
-  LUT6 #(
-    .INIT(64'hF0FFAACCF000AACC)) 
-    p_0_out__3_i_8
-       (.I0(\bank_reg[1][4]_18 [0]),
-        .I1(\bank_reg[0][4]_19 [0]),
-        .I2(\bank_reg[3][4]_16 [0]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[2][4]_17 [0]),
-        .O(\coef[4] [0]));
-  LUT6 #(
-    .INIT(64'hAAFFCCF0AA00CCF0)) 
-    p_0_out__4_i_1
-       (.I0(\bank_reg[3][5]_20 [7]),
-        .I1(\bank_reg[1][5]_22 [7]),
-        .I2(\bank_reg[0][5]_23 [7]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[2][5]_21 [7]),
-        .O(\coef[5] [7]));
-  LUT6 #(
-    .INIT(64'hAACCF0FFAACCF000)) 
-    p_0_out__4_i_2
-       (.I0(\bank_reg[3][5]_20 [6]),
-        .I1(\bank_reg[1][5]_22 [6]),
-        .I2(\bank_reg[2][5]_21 [6]),
-        .I3(Q[1]),
-        .I4(Q[0]),
-        .I5(\bank_reg[0][5]_23 [6]),
-        .O(\coef[5] [6]));
-  LUT6 #(
-    .INIT(64'hF0FFAACCF000AACC)) 
-    p_0_out__4_i_3
-       (.I0(\bank_reg[1][5]_22 [5]),
-        .I1(\bank_reg[0][5]_23 [5]),
-        .I2(\bank_reg[3][5]_20 [5]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[2][5]_21 [5]),
-        .O(\coef[5] [5]));
-  LUT6 #(
-    .INIT(64'hAACCF0FFAACCF000)) 
-    p_0_out__4_i_4
-       (.I0(\bank_reg[3][5]_20 [4]),
-        .I1(\bank_reg[1][5]_22 [4]),
-        .I2(\bank_reg[2][5]_21 [4]),
-        .I3(Q[1]),
-        .I4(Q[0]),
-        .I5(\bank_reg[0][5]_23 [4]),
-        .O(\coef[5] [4]));
-  LUT6 #(
-    .INIT(64'hAAFFCCF0AA00CCF0)) 
-    p_0_out__4_i_5
-       (.I0(\bank_reg[3][5]_20 [3]),
-        .I1(\bank_reg[1][5]_22 [3]),
-        .I2(\bank_reg[0][5]_23 [3]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[2][5]_21 [3]),
-        .O(\coef[5] [3]));
-  LUT6 #(
-    .INIT(64'hF0FFAACCF000AACC)) 
-    p_0_out__4_i_6
-       (.I0(\bank_reg[1][5]_22 [2]),
-        .I1(\bank_reg[0][5]_23 [2]),
-        .I2(\bank_reg[3][5]_20 [2]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[2][5]_21 [2]),
-        .O(\coef[5] [2]));
-  LUT6 #(
-    .INIT(64'hF0CCAAFFF0CCAA00)) 
-    p_0_out__4_i_7
-       (.I0(\bank_reg[1][5]_22 [1]),
-        .I1(\bank_reg[2][5]_21 [1]),
-        .I2(\bank_reg[3][5]_20 [1]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[0][5]_23 [1]),
-        .O(\coef[5] [1]));
-  LUT6 #(
-    .INIT(64'hF0FFAACCF000AACC)) 
-    p_0_out__4_i_8
-       (.I0(\bank_reg[1][5]_22 [0]),
-        .I1(\bank_reg[0][5]_23 [0]),
-        .I2(\bank_reg[3][5]_20 [0]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[2][5]_21 [0]),
-        .O(\coef[5] [0]));
-  LUT6 #(
-    .INIT(64'hAAFFCCF0AA00CCF0)) 
-    p_0_out__5_i_1
-       (.I0(\bank_reg[3][6]_24 [7]),
-        .I1(\bank_reg[1][6]_26 [7]),
-        .I2(\bank_reg[0][6]_27 [7]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[2][6]_25 [7]),
-        .O(\coef[6] [7]));
-  LUT6 #(
-    .INIT(64'hAACCF0FFAACCF000)) 
-    p_0_out__5_i_2
-       (.I0(\bank_reg[3][6]_24 [6]),
-        .I1(\bank_reg[1][6]_26 [6]),
-        .I2(\bank_reg[2][6]_25 [6]),
-        .I3(Q[1]),
-        .I4(Q[0]),
-        .I5(\bank_reg[0][6]_27 [6]),
-        .O(\coef[6] [6]));
-  LUT6 #(
-    .INIT(64'hF0FFAACCF000AACC)) 
-    p_0_out__5_i_3
-       (.I0(\bank_reg[1][6]_26 [5]),
-        .I1(\bank_reg[0][6]_27 [5]),
-        .I2(\bank_reg[3][6]_24 [5]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[2][6]_25 [5]),
-        .O(\coef[6] [5]));
-  LUT6 #(
-    .INIT(64'hAACCF0FFAACCF000)) 
-    p_0_out__5_i_4
-       (.I0(\bank_reg[3][6]_24 [4]),
-        .I1(\bank_reg[1][6]_26 [4]),
-        .I2(\bank_reg[2][6]_25 [4]),
-        .I3(Q[1]),
-        .I4(Q[0]),
-        .I5(\bank_reg[0][6]_27 [4]),
-        .O(\coef[6] [4]));
-  LUT6 #(
-    .INIT(64'hAAFFCCF0AA00CCF0)) 
-    p_0_out__5_i_5
-       (.I0(\bank_reg[3][6]_24 [3]),
-        .I1(\bank_reg[1][6]_26 [3]),
-        .I2(\bank_reg[0][6]_27 [3]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[2][6]_25 [3]),
-        .O(\coef[6] [3]));
-  LUT6 #(
-    .INIT(64'hF0FFAACCF000AACC)) 
-    p_0_out__5_i_6
-       (.I0(\bank_reg[1][6]_26 [2]),
-        .I1(\bank_reg[0][6]_27 [2]),
-        .I2(\bank_reg[3][6]_24 [2]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[2][6]_25 [2]),
-        .O(\coef[6] [2]));
-  LUT6 #(
-    .INIT(64'hF0CCAAFFF0CCAA00)) 
-    p_0_out__5_i_7
-       (.I0(\bank_reg[1][6]_26 [1]),
-        .I1(\bank_reg[2][6]_25 [1]),
-        .I2(\bank_reg[3][6]_24 [1]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[0][6]_27 [1]),
-        .O(\coef[6] [1]));
-  LUT6 #(
-    .INIT(64'hF0FFAACCF000AACC)) 
-    p_0_out__5_i_8
-       (.I0(\bank_reg[1][6]_26 [0]),
-        .I1(\bank_reg[0][6]_27 [0]),
-        .I2(\bank_reg[3][6]_24 [0]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[2][6]_25 [0]),
-        .O(\coef[6] [0]));
-  LUT6 #(
-    .INIT(64'hAAFFCCF0AA00CCF0)) 
-    p_0_out__6_i_1
-       (.I0(\bank_reg[3][7]_28 [7]),
-        .I1(\bank_reg[1][7]_30 [7]),
-        .I2(\bank_reg[0][7]_31 [7]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[2][7]_29 [7]),
-        .O(\coef[7] [7]));
-  LUT6 #(
-    .INIT(64'hAACCF0FFAACCF000)) 
-    p_0_out__6_i_2
-       (.I0(\bank_reg[3][7]_28 [6]),
-        .I1(\bank_reg[1][7]_30 [6]),
-        .I2(\bank_reg[2][7]_29 [6]),
-        .I3(Q[1]),
-        .I4(Q[0]),
-        .I5(\bank_reg[0][7]_31 [6]),
-        .O(\coef[7] [6]));
-  LUT6 #(
-    .INIT(64'hF0FFAACCF000AACC)) 
-    p_0_out__6_i_3
-       (.I0(\bank_reg[1][7]_30 [5]),
-        .I1(\bank_reg[0][7]_31 [5]),
-        .I2(\bank_reg[3][7]_28 [5]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[2][7]_29 [5]),
-        .O(\coef[7] [5]));
-  LUT6 #(
-    .INIT(64'hAACCF0FFAACCF000)) 
-    p_0_out__6_i_4
-       (.I0(\bank_reg[3][7]_28 [4]),
-        .I1(\bank_reg[1][7]_30 [4]),
-        .I2(\bank_reg[2][7]_29 [4]),
-        .I3(Q[1]),
-        .I4(Q[0]),
-        .I5(\bank_reg[0][7]_31 [4]),
-        .O(\coef[7] [4]));
-  LUT6 #(
-    .INIT(64'hAAFFCCF0AA00CCF0)) 
-    p_0_out__6_i_5
-       (.I0(\bank_reg[3][7]_28 [3]),
-        .I1(\bank_reg[1][7]_30 [3]),
-        .I2(\bank_reg[0][7]_31 [3]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[2][7]_29 [3]),
-        .O(\coef[7] [3]));
-  LUT6 #(
-    .INIT(64'hF0FFAACCF000AACC)) 
-    p_0_out__6_i_6
-       (.I0(\bank_reg[1][7]_30 [2]),
-        .I1(\bank_reg[0][7]_31 [2]),
-        .I2(\bank_reg[3][7]_28 [2]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[2][7]_29 [2]),
-        .O(\coef[7] [2]));
-  LUT6 #(
-    .INIT(64'hF0CCAAFFF0CCAA00)) 
-    p_0_out__6_i_7
-       (.I0(\bank_reg[1][7]_30 [1]),
-        .I1(\bank_reg[2][7]_29 [1]),
-        .I2(\bank_reg[3][7]_28 [1]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[0][7]_31 [1]),
-        .O(\coef[7] [1]));
-  LUT6 #(
-    .INIT(64'hF0FFAACCF000AACC)) 
-    p_0_out__6_i_8
-       (.I0(\bank_reg[1][7]_30 [0]),
-        .I1(\bank_reg[0][7]_31 [0]),
-        .I2(\bank_reg[3][7]_28 [0]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[2][7]_29 [0]),
-        .O(\coef[7] [0]));
-  LUT6 #(
-    .INIT(64'hAAFFCCF0AA00CCF0)) 
-    p_0_out__7_i_1
-       (.I0(\bank_reg[3][8]_32 [7]),
-        .I1(\bank_reg[1][8]_34 [7]),
-        .I2(\bank_reg[0][8]_35 [7]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[2][8]_33 [7]),
-        .O(\coef[8] [7]));
-  LUT6 #(
-    .INIT(64'hAACCF0FFAACCF000)) 
-    p_0_out__7_i_2
-       (.I0(\bank_reg[3][8]_32 [6]),
-        .I1(\bank_reg[1][8]_34 [6]),
-        .I2(\bank_reg[2][8]_33 [6]),
-        .I3(Q[1]),
-        .I4(Q[0]),
-        .I5(\bank_reg[0][8]_35 [6]),
-        .O(\coef[8] [6]));
-  LUT6 #(
-    .INIT(64'hF0FFAACCF000AACC)) 
-    p_0_out__7_i_3
-       (.I0(\bank_reg[1][8]_34 [5]),
-        .I1(\bank_reg[0][8]_35 [5]),
-        .I2(\bank_reg[3][8]_32 [5]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[2][8]_33 [5]),
-        .O(\coef[8] [5]));
-  LUT6 #(
-    .INIT(64'hAACCF0FFAACCF000)) 
-    p_0_out__7_i_4
-       (.I0(\bank_reg[3][8]_32 [4]),
-        .I1(\bank_reg[1][8]_34 [4]),
-        .I2(\bank_reg[2][8]_33 [4]),
-        .I3(Q[1]),
-        .I4(Q[0]),
-        .I5(\bank_reg[0][8]_35 [4]),
-        .O(\coef[8] [4]));
-  LUT6 #(
-    .INIT(64'hAAFFCCF0AA00CCF0)) 
-    p_0_out__7_i_5
-       (.I0(\bank_reg[3][8]_32 [3]),
-        .I1(\bank_reg[1][8]_34 [3]),
-        .I2(\bank_reg[0][8]_35 [3]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[2][8]_33 [3]),
-        .O(\coef[8] [3]));
-  LUT6 #(
-    .INIT(64'hF0FFAACCF000AACC)) 
-    p_0_out__7_i_6
-       (.I0(\bank_reg[1][8]_34 [2]),
-        .I1(\bank_reg[0][8]_35 [2]),
-        .I2(\bank_reg[3][8]_32 [2]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[2][8]_33 [2]),
-        .O(\coef[8] [2]));
-  LUT6 #(
-    .INIT(64'hF0CCAAFFF0CCAA00)) 
-    p_0_out__7_i_7
-       (.I0(\bank_reg[1][8]_34 [1]),
-        .I1(\bank_reg[2][8]_33 [1]),
-        .I2(\bank_reg[3][8]_32 [1]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[0][8]_35 [1]),
-        .O(\coef[8] [1]));
-  LUT6 #(
-    .INIT(64'hF0FFAACCF000AACC)) 
-    p_0_out__7_i_8
-       (.I0(\bank_reg[1][8]_34 [0]),
-        .I1(\bank_reg[0][8]_35 [0]),
-        .I2(\bank_reg[3][8]_32 [0]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[2][8]_33 [0]),
-        .O(\coef[8] [0]));
-  LUT6 #(
-    .INIT(64'hAAFFCCF0AA00CCF0)) 
-    p_0_out_i_1
-       (.I0(\bank_reg[3][0]_0 [7]),
-        .I1(\bank_reg[1][0]_2 [7]),
-        .I2(\bank_reg[0][0]_3 [7]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[2][0]_1 [7]),
-        .O(\coef[0] [7]));
-  LUT6 #(
-    .INIT(64'hAACCF0FFAACCF000)) 
-    p_0_out_i_2
-       (.I0(\bank_reg[3][0]_0 [6]),
-        .I1(\bank_reg[1][0]_2 [6]),
-        .I2(\bank_reg[2][0]_1 [6]),
-        .I3(Q[1]),
-        .I4(Q[0]),
-        .I5(\bank_reg[0][0]_3 [6]),
-        .O(\coef[0] [6]));
-  LUT6 #(
-    .INIT(64'hF0FFAACCF000AACC)) 
-    p_0_out_i_3
-       (.I0(\bank_reg[1][0]_2 [5]),
-        .I1(\bank_reg[0][0]_3 [5]),
-        .I2(\bank_reg[3][0]_0 [5]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[2][0]_1 [5]),
-        .O(\coef[0] [5]));
-  LUT6 #(
-    .INIT(64'hAACCF0FFAACCF000)) 
-    p_0_out_i_4
-       (.I0(\bank_reg[3][0]_0 [4]),
-        .I1(\bank_reg[1][0]_2 [4]),
-        .I2(\bank_reg[2][0]_1 [4]),
-        .I3(Q[1]),
-        .I4(Q[0]),
-        .I5(\bank_reg[0][0]_3 [4]),
-        .O(\coef[0] [4]));
-  LUT6 #(
-    .INIT(64'hAAFFCCF0AA00CCF0)) 
-    p_0_out_i_5
-       (.I0(\bank_reg[3][0]_0 [3]),
-        .I1(\bank_reg[1][0]_2 [3]),
-        .I2(\bank_reg[0][0]_3 [3]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[2][0]_1 [3]),
-        .O(\coef[0] [3]));
-  LUT6 #(
-    .INIT(64'hF0FFAACCF000AACC)) 
-    p_0_out_i_6
-       (.I0(\bank_reg[1][0]_2 [2]),
-        .I1(\bank_reg[0][0]_3 [2]),
-        .I2(\bank_reg[3][0]_0 [2]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[2][0]_1 [2]),
-        .O(\coef[0] [2]));
-  LUT6 #(
-    .INIT(64'hF0CCAAFFF0CCAA00)) 
-    p_0_out_i_7
-       (.I0(\bank_reg[1][0]_2 [1]),
-        .I1(\bank_reg[2][0]_1 [1]),
-        .I2(\bank_reg[3][0]_0 [1]),
-        .I3(Q[0]),
-        .I4(Q[1]),
+        .O(\bank_reg[0][2][3]_0 ));
+  LUT1 #(
+    .INIT(2'h1)) 
+    busy_i_2
+       (.I0(rst_n),
+        .O(\bank_reg[0][3][4]_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[0][0]_i_1 
+       (.I0(\bank_reg[3][0]_0 [0]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][0]_1 [0]),
+        .I4(\bank_reg[1][0]_2 [0]),
+        .I5(\bank_reg[0][0]_3 [0]),
+        .O(p_0_in[0]));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[0][1]_i_1 
+       (.I0(\bank_reg[3][0]_0 [1]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][0]_1 [1]),
+        .I4(\bank_reg[1][0]_2 [1]),
         .I5(\bank_reg[0][0]_3 [1]),
-        .O(\coef[0] [1]));
+        .O(p_0_in[1]));
   LUT6 #(
-    .INIT(64'hF0FFAACCF000AACC)) 
-    p_0_out_i_8
-       (.I0(\bank_reg[1][0]_2 [0]),
-        .I1(\bank_reg[0][0]_3 [0]),
-        .I2(\bank_reg[3][0]_0 [0]),
-        .I3(Q[0]),
-        .I4(Q[1]),
-        .I5(\bank_reg[2][0]_1 [0]),
-        .O(\coef[0] [0]));
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[0][2]_i_1 
+       (.I0(\bank_reg[3][0]_0 [2]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][0]_1 [2]),
+        .I4(\bank_reg[1][0]_2 [2]),
+        .I5(\bank_reg[0][0]_3 [2]),
+        .O(p_0_in[2]));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[0][3]_i_1 
+       (.I0(\bank_reg[3][0]_0 [3]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][0]_1 [3]),
+        .I4(\bank_reg[1][0]_2 [3]),
+        .I5(\bank_reg[0][0]_3 [3]),
+        .O(p_0_in[3]));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[0][4]_i_1 
+       (.I0(\bank_reg[3][0]_0 [4]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][0]_1 [4]),
+        .I4(\bank_reg[1][0]_2 [4]),
+        .I5(\bank_reg[0][0]_3 [4]),
+        .O(p_0_in[4]));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[0][5]_i_1 
+       (.I0(\bank_reg[3][0]_0 [5]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][0]_1 [5]),
+        .I4(\bank_reg[1][0]_2 [5]),
+        .I5(\bank_reg[0][0]_3 [5]),
+        .O(p_0_in[5]));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[0][6]_i_1 
+       (.I0(\bank_reg[3][0]_0 [6]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][0]_1 [6]),
+        .I4(\bank_reg[1][0]_2 [6]),
+        .I5(\bank_reg[0][0]_3 [6]),
+        .O(p_0_in[6]));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[0][7]_i_1 
+       (.I0(\bank_reg[3][0]_0 [7]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][0]_1 [7]),
+        .I4(\bank_reg[1][0]_2 [7]),
+        .I5(\bank_reg[0][0]_3 [7]),
+        .O(p_0_in[7]));
+  LUT1 #(
+    .INIT(2'h1)) 
+    \coef[0][7]_i_2 
+       (.I0(rst_n),
+        .O(\coef_reg[8][7]_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[1][0]_i_1 
+       (.I0(\bank_reg[3][1]_4 [0]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][1]_5 [0]),
+        .I4(\bank_reg[1][1]_6 [0]),
+        .I5(\bank_reg[0][1]_7 [0]),
+        .O(\coef[1][0]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[1][1]_i_1 
+       (.I0(\bank_reg[3][1]_4 [1]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][1]_5 [1]),
+        .I4(\bank_reg[1][1]_6 [1]),
+        .I5(\bank_reg[0][1]_7 [1]),
+        .O(\coef[1][1]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[1][2]_i_1 
+       (.I0(\bank_reg[3][1]_4 [2]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][1]_5 [2]),
+        .I4(\bank_reg[1][1]_6 [2]),
+        .I5(\bank_reg[0][1]_7 [2]),
+        .O(\coef[1][2]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[1][3]_i_1 
+       (.I0(\bank_reg[3][1]_4 [3]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][1]_5 [3]),
+        .I4(\bank_reg[1][1]_6 [3]),
+        .I5(\bank_reg[0][1]_7 [3]),
+        .O(\coef[1][3]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[1][4]_i_1 
+       (.I0(\bank_reg[3][1]_4 [4]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][1]_5 [4]),
+        .I4(\bank_reg[1][1]_6 [4]),
+        .I5(\bank_reg[0][1]_7 [4]),
+        .O(\coef[1][4]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[1][5]_i_1 
+       (.I0(\bank_reg[3][1]_4 [5]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][1]_5 [5]),
+        .I4(\bank_reg[1][1]_6 [5]),
+        .I5(\bank_reg[0][1]_7 [5]),
+        .O(\coef[1][5]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[1][6]_i_1 
+       (.I0(\bank_reg[3][1]_4 [6]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][1]_5 [6]),
+        .I4(\bank_reg[1][1]_6 [6]),
+        .I5(\bank_reg[0][1]_7 [6]),
+        .O(\coef[1][6]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[1][7]_i_1 
+       (.I0(\bank_reg[3][1]_4 [7]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][1]_5 [7]),
+        .I4(\bank_reg[1][1]_6 [7]),
+        .I5(\bank_reg[0][1]_7 [7]),
+        .O(\coef[1][7]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[2][0]_i_1 
+       (.I0(\bank_reg[3][2]_8 [0]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][2]_9 [0]),
+        .I4(\bank_reg[1][2]_10 [0]),
+        .I5(\bank_reg[0][2]_11 [0]),
+        .O(\coef[2][0]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[2][1]_i_1 
+       (.I0(\bank_reg[3][2]_8 [1]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][2]_9 [1]),
+        .I4(\bank_reg[1][2]_10 [1]),
+        .I5(\bank_reg[0][2]_11 [1]),
+        .O(\coef[2][1]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[2][2]_i_1 
+       (.I0(\bank_reg[3][2]_8 [2]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][2]_9 [2]),
+        .I4(\bank_reg[1][2]_10 [2]),
+        .I5(\bank_reg[0][2]_11 [2]),
+        .O(\coef[2][2]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[2][3]_i_1 
+       (.I0(\bank_reg[3][2]_8 [3]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][2]_9 [3]),
+        .I4(\bank_reg[1][2]_10 [3]),
+        .I5(\bank_reg[0][2]_11 [3]),
+        .O(\coef[2][3]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[2][4]_i_1 
+       (.I0(\bank_reg[3][2]_8 [4]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][2]_9 [4]),
+        .I4(\bank_reg[1][2]_10 [4]),
+        .I5(\bank_reg[0][2]_11 [4]),
+        .O(\coef[2][4]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[2][5]_i_1 
+       (.I0(\bank_reg[3][2]_8 [5]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][2]_9 [5]),
+        .I4(\bank_reg[1][2]_10 [5]),
+        .I5(\bank_reg[0][2]_11 [5]),
+        .O(\coef[2][5]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[2][6]_i_1 
+       (.I0(\bank_reg[3][2]_8 [6]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][2]_9 [6]),
+        .I4(\bank_reg[1][2]_10 [6]),
+        .I5(\bank_reg[0][2]_11 [6]),
+        .O(\coef[2][6]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[2][7]_i_1 
+       (.I0(\bank_reg[3][2]_8 [7]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][2]_9 [7]),
+        .I4(\bank_reg[1][2]_10 [7]),
+        .I5(\bank_reg[0][2]_11 [7]),
+        .O(\coef[2][7]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[3][0]_i_1 
+       (.I0(\bank_reg[3][3]_12 [0]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][3]_13 [0]),
+        .I4(\bank_reg[1][3]_14 [0]),
+        .I5(\bank_reg[0][3]_15 [0]),
+        .O(\coef[3][0]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[3][1]_i_1 
+       (.I0(\bank_reg[3][3]_12 [1]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][3]_13 [1]),
+        .I4(\bank_reg[1][3]_14 [1]),
+        .I5(\bank_reg[0][3]_15 [1]),
+        .O(\coef[3][1]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[3][2]_i_1 
+       (.I0(\bank_reg[3][3]_12 [2]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][3]_13 [2]),
+        .I4(\bank_reg[1][3]_14 [2]),
+        .I5(\bank_reg[0][3]_15 [2]),
+        .O(\coef[3][2]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[3][3]_i_1 
+       (.I0(\bank_reg[3][3]_12 [3]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][3]_13 [3]),
+        .I4(\bank_reg[1][3]_14 [3]),
+        .I5(\bank_reg[0][3]_15 [3]),
+        .O(\coef[3][3]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[3][4]_i_1 
+       (.I0(\bank_reg[3][3]_12 [4]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][3]_13 [4]),
+        .I4(\bank_reg[1][3]_14 [4]),
+        .I5(\bank_reg[0][3]_15 [4]),
+        .O(\coef[3][4]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[3][5]_i_1 
+       (.I0(\bank_reg[3][3]_12 [5]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][3]_13 [5]),
+        .I4(\bank_reg[1][3]_14 [5]),
+        .I5(\bank_reg[0][3]_15 [5]),
+        .O(\coef[3][5]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[3][6]_i_1 
+       (.I0(\bank_reg[3][3]_12 [6]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][3]_13 [6]),
+        .I4(\bank_reg[1][3]_14 [6]),
+        .I5(\bank_reg[0][3]_15 [6]),
+        .O(\coef[3][6]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[3][7]_i_1 
+       (.I0(\bank_reg[3][3]_12 [7]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][3]_13 [7]),
+        .I4(\bank_reg[1][3]_14 [7]),
+        .I5(\bank_reg[0][3]_15 [7]),
+        .O(\coef[3][7]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[4][0]_i_1 
+       (.I0(\bank_reg[3][4]_16 [0]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][4]_17 [0]),
+        .I4(\bank_reg[1][4]_18 [0]),
+        .I5(\bank_reg[0][4]_19 [0]),
+        .O(\coef[4][0]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[4][1]_i_1 
+       (.I0(\bank_reg[3][4]_16 [1]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][4]_17 [1]),
+        .I4(\bank_reg[1][4]_18 [1]),
+        .I5(\bank_reg[0][4]_19 [1]),
+        .O(\coef[4][1]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[4][2]_i_1 
+       (.I0(\bank_reg[3][4]_16 [2]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][4]_17 [2]),
+        .I4(\bank_reg[1][4]_18 [2]),
+        .I5(\bank_reg[0][4]_19 [2]),
+        .O(\coef[4][2]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[4][3]_i_1 
+       (.I0(\bank_reg[3][4]_16 [3]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][4]_17 [3]),
+        .I4(\bank_reg[1][4]_18 [3]),
+        .I5(\bank_reg[0][4]_19 [3]),
+        .O(\coef[4][3]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[4][4]_i_1 
+       (.I0(\bank_reg[3][4]_16 [4]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][4]_17 [4]),
+        .I4(\bank_reg[1][4]_18 [4]),
+        .I5(\bank_reg[0][4]_19 [4]),
+        .O(\coef[4][4]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[4][5]_i_1 
+       (.I0(\bank_reg[3][4]_16 [5]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][4]_17 [5]),
+        .I4(\bank_reg[1][4]_18 [5]),
+        .I5(\bank_reg[0][4]_19 [5]),
+        .O(\coef[4][5]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[4][6]_i_1 
+       (.I0(\bank_reg[3][4]_16 [6]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][4]_17 [6]),
+        .I4(\bank_reg[1][4]_18 [6]),
+        .I5(\bank_reg[0][4]_19 [6]),
+        .O(\coef[4][6]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[4][7]_i_1 
+       (.I0(\bank_reg[3][4]_16 [7]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][4]_17 [7]),
+        .I4(\bank_reg[1][4]_18 [7]),
+        .I5(\bank_reg[0][4]_19 [7]),
+        .O(\coef[4][7]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[5][0]_i_1 
+       (.I0(\bank_reg[3][5]_20 [0]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][5]_21 [0]),
+        .I4(\bank_reg[1][5]_22 [0]),
+        .I5(\bank_reg[0][5]_23 [0]),
+        .O(\coef[5][0]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[5][1]_i_1 
+       (.I0(\bank_reg[3][5]_20 [1]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][5]_21 [1]),
+        .I4(\bank_reg[1][5]_22 [1]),
+        .I5(\bank_reg[0][5]_23 [1]),
+        .O(\coef[5][1]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[5][2]_i_1 
+       (.I0(\bank_reg[3][5]_20 [2]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][5]_21 [2]),
+        .I4(\bank_reg[1][5]_22 [2]),
+        .I5(\bank_reg[0][5]_23 [2]),
+        .O(\coef[5][2]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[5][3]_i_1 
+       (.I0(\bank_reg[3][5]_20 [3]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][5]_21 [3]),
+        .I4(\bank_reg[1][5]_22 [3]),
+        .I5(\bank_reg[0][5]_23 [3]),
+        .O(\coef[5][3]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[5][4]_i_1 
+       (.I0(\bank_reg[3][5]_20 [4]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][5]_21 [4]),
+        .I4(\bank_reg[1][5]_22 [4]),
+        .I5(\bank_reg[0][5]_23 [4]),
+        .O(\coef[5][4]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[5][5]_i_1 
+       (.I0(\bank_reg[3][5]_20 [5]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][5]_21 [5]),
+        .I4(\bank_reg[1][5]_22 [5]),
+        .I5(\bank_reg[0][5]_23 [5]),
+        .O(\coef[5][5]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[5][6]_i_1 
+       (.I0(\bank_reg[3][5]_20 [6]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][5]_21 [6]),
+        .I4(\bank_reg[1][5]_22 [6]),
+        .I5(\bank_reg[0][5]_23 [6]),
+        .O(\coef[5][6]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[5][7]_i_1 
+       (.I0(\bank_reg[3][5]_20 [7]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][5]_21 [7]),
+        .I4(\bank_reg[1][5]_22 [7]),
+        .I5(\bank_reg[0][5]_23 [7]),
+        .O(\coef[5][7]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[6][0]_i_1 
+       (.I0(\bank_reg[3][6]_24 [0]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][6]_25 [0]),
+        .I4(\bank_reg[1][6]_26 [0]),
+        .I5(\bank_reg[0][6]_27 [0]),
+        .O(\coef[6][0]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[6][1]_i_1 
+       (.I0(\bank_reg[3][6]_24 [1]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][6]_25 [1]),
+        .I4(\bank_reg[1][6]_26 [1]),
+        .I5(\bank_reg[0][6]_27 [1]),
+        .O(\coef[6][1]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[6][2]_i_1 
+       (.I0(\bank_reg[3][6]_24 [2]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][6]_25 [2]),
+        .I4(\bank_reg[1][6]_26 [2]),
+        .I5(\bank_reg[0][6]_27 [2]),
+        .O(\coef[6][2]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[6][3]_i_1 
+       (.I0(\bank_reg[3][6]_24 [3]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][6]_25 [3]),
+        .I4(\bank_reg[1][6]_26 [3]),
+        .I5(\bank_reg[0][6]_27 [3]),
+        .O(\coef[6][3]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[6][4]_i_1 
+       (.I0(\bank_reg[3][6]_24 [4]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][6]_25 [4]),
+        .I4(\bank_reg[1][6]_26 [4]),
+        .I5(\bank_reg[0][6]_27 [4]),
+        .O(\coef[6][4]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[6][5]_i_1 
+       (.I0(\bank_reg[3][6]_24 [5]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][6]_25 [5]),
+        .I4(\bank_reg[1][6]_26 [5]),
+        .I5(\bank_reg[0][6]_27 [5]),
+        .O(\coef[6][5]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[6][6]_i_1 
+       (.I0(\bank_reg[3][6]_24 [6]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][6]_25 [6]),
+        .I4(\bank_reg[1][6]_26 [6]),
+        .I5(\bank_reg[0][6]_27 [6]),
+        .O(\coef[6][6]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[6][7]_i_1 
+       (.I0(\bank_reg[3][6]_24 [7]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][6]_25 [7]),
+        .I4(\bank_reg[1][6]_26 [7]),
+        .I5(\bank_reg[0][6]_27 [7]),
+        .O(\coef[6][7]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[7][0]_i_1 
+       (.I0(\bank_reg[3][7]_28 [0]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][7]_29 [0]),
+        .I4(\bank_reg[1][7]_30 [0]),
+        .I5(\bank_reg[0][7]_31 [0]),
+        .O(\coef[7][0]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[7][1]_i_1 
+       (.I0(\bank_reg[3][7]_28 [1]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][7]_29 [1]),
+        .I4(\bank_reg[1][7]_30 [1]),
+        .I5(\bank_reg[0][7]_31 [1]),
+        .O(\coef[7][1]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[7][2]_i_1 
+       (.I0(\bank_reg[3][7]_28 [2]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][7]_29 [2]),
+        .I4(\bank_reg[1][7]_30 [2]),
+        .I5(\bank_reg[0][7]_31 [2]),
+        .O(\coef[7][2]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[7][3]_i_1 
+       (.I0(\bank_reg[3][7]_28 [3]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][7]_29 [3]),
+        .I4(\bank_reg[1][7]_30 [3]),
+        .I5(\bank_reg[0][7]_31 [3]),
+        .O(\coef[7][3]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[7][4]_i_1 
+       (.I0(\bank_reg[3][7]_28 [4]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][7]_29 [4]),
+        .I4(\bank_reg[1][7]_30 [4]),
+        .I5(\bank_reg[0][7]_31 [4]),
+        .O(\coef[7][4]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[7][5]_i_1 
+       (.I0(\bank_reg[3][7]_28 [5]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][7]_29 [5]),
+        .I4(\bank_reg[1][7]_30 [5]),
+        .I5(\bank_reg[0][7]_31 [5]),
+        .O(\coef[7][5]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[7][6]_i_1 
+       (.I0(\bank_reg[3][7]_28 [6]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][7]_29 [6]),
+        .I4(\bank_reg[1][7]_30 [6]),
+        .I5(\bank_reg[0][7]_31 [6]),
+        .O(\coef[7][6]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[7][7]_i_1 
+       (.I0(\bank_reg[3][7]_28 [7]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][7]_29 [7]),
+        .I4(\bank_reg[1][7]_30 [7]),
+        .I5(\bank_reg[0][7]_31 [7]),
+        .O(\coef[7][7]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[8][0]_i_1 
+       (.I0(\bank_reg[3][8]_32 [0]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][8]_33 [0]),
+        .I4(\bank_reg[1][8]_34 [0]),
+        .I5(\bank_reg[0][8]_35 [0]),
+        .O(\coef[8][0]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[8][1]_i_1 
+       (.I0(\bank_reg[3][8]_32 [1]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][8]_33 [1]),
+        .I4(\bank_reg[1][8]_34 [1]),
+        .I5(\bank_reg[0][8]_35 [1]),
+        .O(\coef[8][1]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[8][2]_i_1 
+       (.I0(\bank_reg[3][8]_32 [2]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][8]_33 [2]),
+        .I4(\bank_reg[1][8]_34 [2]),
+        .I5(\bank_reg[0][8]_35 [2]),
+        .O(\coef[8][2]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[8][3]_i_1 
+       (.I0(\bank_reg[3][8]_32 [3]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][8]_33 [3]),
+        .I4(\bank_reg[1][8]_34 [3]),
+        .I5(\bank_reg[0][8]_35 [3]),
+        .O(\coef[8][3]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[8][4]_i_1 
+       (.I0(\bank_reg[3][8]_32 [4]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][8]_33 [4]),
+        .I4(\bank_reg[1][8]_34 [4]),
+        .I5(\bank_reg[0][8]_35 [4]),
+        .O(\coef[8][4]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[8][5]_i_1 
+       (.I0(\bank_reg[3][8]_32 [5]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][8]_33 [5]),
+        .I4(\bank_reg[1][8]_34 [5]),
+        .I5(\bank_reg[0][8]_35 [5]),
+        .O(\coef[8][5]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[8][6]_i_1 
+       (.I0(\bank_reg[3][8]_32 [6]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][8]_33 [6]),
+        .I4(\bank_reg[1][8]_34 [6]),
+        .I5(\bank_reg[0][8]_35 [6]),
+        .O(\coef[8][6]_i_1_n_0 ));
+  LUT6 #(
+    .INIT(64'hBF8FB383BC8CB080)) 
+    \coef[8][7]_i_1 
+       (.I0(\bank_reg[3][8]_32 [7]),
+        .I1(Q[0]),
+        .I2(Q[1]),
+        .I3(\bank_reg[2][8]_33 [7]),
+        .I4(\bank_reg[1][8]_34 [7]),
+        .I5(\bank_reg[0][8]_35 [7]),
+        .O(\coef[8][7]_i_1_n_0 ));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[0][0] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(p_0_in[0]),
+        .Q(p_0_out[0]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[0][1] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(p_0_in[1]),
+        .Q(p_0_out[1]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[0][2] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(p_0_in[2]),
+        .Q(p_0_out[2]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[0][3] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(p_0_in[3]),
+        .Q(p_0_out[3]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[0][4] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(p_0_in[4]),
+        .Q(p_0_out[4]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[0][5] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(p_0_in[5]),
+        .Q(p_0_out[5]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[0][6] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(p_0_in[6]),
+        .Q(p_0_out[6]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[0][7] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(p_0_in[7]),
+        .Q(p_0_out[7]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[1][0] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[1][0]_i_1_n_0 ),
+        .Q(p_0_out__0[0]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[1][1] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[1][1]_i_1_n_0 ),
+        .Q(p_0_out__0[1]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[1][2] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[1][2]_i_1_n_0 ),
+        .Q(p_0_out__0[2]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[1][3] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[1][3]_i_1_n_0 ),
+        .Q(p_0_out__0[3]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[1][4] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[1][4]_i_1_n_0 ),
+        .Q(p_0_out__0[4]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[1][5] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[1][5]_i_1_n_0 ),
+        .Q(p_0_out__0[5]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[1][6] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[1][6]_i_1_n_0 ),
+        .Q(p_0_out__0[6]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[1][7] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[1][7]_i_1_n_0 ),
+        .Q(p_0_out__0[7]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[2][0] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[2][0]_i_1_n_0 ),
+        .Q(p_0_out__1[0]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[2][1] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[2][1]_i_1_n_0 ),
+        .Q(p_0_out__1[1]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[2][2] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[2][2]_i_1_n_0 ),
+        .Q(p_0_out__1[2]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[2][3] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[2][3]_i_1_n_0 ),
+        .Q(p_0_out__1[3]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[2][4] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[2][4]_i_1_n_0 ),
+        .Q(p_0_out__1[4]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[2][5] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[2][5]_i_1_n_0 ),
+        .Q(p_0_out__1[5]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[2][6] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[2][6]_i_1_n_0 ),
+        .Q(p_0_out__1[6]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[2][7] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[2][7]_i_1_n_0 ),
+        .Q(p_0_out__1[7]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[3][0] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[3][0]_i_1_n_0 ),
+        .Q(p_0_out__2[0]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[3][1] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[3][1]_i_1_n_0 ),
+        .Q(p_0_out__2[1]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[3][2] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[3][2]_i_1_n_0 ),
+        .Q(p_0_out__2[2]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[3][3] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[3][3]_i_1_n_0 ),
+        .Q(p_0_out__2[3]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[3][4] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[3][4]_i_1_n_0 ),
+        .Q(p_0_out__2[4]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[3][5] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[3][5]_i_1_n_0 ),
+        .Q(p_0_out__2[5]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[3][6] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[3][6]_i_1_n_0 ),
+        .Q(p_0_out__2[6]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[3][7] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[3][7]_i_1_n_0 ),
+        .Q(p_0_out__2[7]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[4][0] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[4][0]_i_1_n_0 ),
+        .Q(p_0_out__3[0]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[4][1] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[4][1]_i_1_n_0 ),
+        .Q(p_0_out__3[1]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[4][2] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[4][2]_i_1_n_0 ),
+        .Q(p_0_out__3[2]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[4][3] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[4][3]_i_1_n_0 ),
+        .Q(p_0_out__3[3]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[4][4] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[4][4]_i_1_n_0 ),
+        .Q(p_0_out__3[4]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[4][5] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[4][5]_i_1_n_0 ),
+        .Q(p_0_out__3[5]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[4][6] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[4][6]_i_1_n_0 ),
+        .Q(p_0_out__3[6]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[4][7] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[4][7]_i_1_n_0 ),
+        .Q(p_0_out__3[7]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[5][0] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[5][0]_i_1_n_0 ),
+        .Q(p_0_out__4[0]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[5][1] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[5][1]_i_1_n_0 ),
+        .Q(p_0_out__4[1]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[5][2] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[5][2]_i_1_n_0 ),
+        .Q(p_0_out__4[2]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[5][3] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[5][3]_i_1_n_0 ),
+        .Q(p_0_out__4[3]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[5][4] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[5][4]_i_1_n_0 ),
+        .Q(p_0_out__4[4]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[5][5] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[5][5]_i_1_n_0 ),
+        .Q(p_0_out__4[5]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[5][6] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[5][6]_i_1_n_0 ),
+        .Q(p_0_out__4[6]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[5][7] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[5][7]_i_1_n_0 ),
+        .Q(p_0_out__4[7]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[6][0] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[6][0]_i_1_n_0 ),
+        .Q(p_0_out__5[0]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[6][1] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[6][1]_i_1_n_0 ),
+        .Q(p_0_out__5[1]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[6][2] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[6][2]_i_1_n_0 ),
+        .Q(p_0_out__5[2]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[6][3] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[6][3]_i_1_n_0 ),
+        .Q(p_0_out__5[3]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[6][4] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[6][4]_i_1_n_0 ),
+        .Q(p_0_out__5[4]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[6][5] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[6][5]_i_1_n_0 ),
+        .Q(p_0_out__5[5]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[6][6] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[6][6]_i_1_n_0 ),
+        .Q(p_0_out__5[6]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[6][7] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[6][7]_i_1_n_0 ),
+        .Q(p_0_out__5[7]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[7][0] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[7][0]_i_1_n_0 ),
+        .Q(p_0_out__6[0]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[7][1] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[7][1]_i_1_n_0 ),
+        .Q(p_0_out__6[1]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[7][2] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[7][2]_i_1_n_0 ),
+        .Q(p_0_out__6[2]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[7][3] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[7][3]_i_1_n_0 ),
+        .Q(p_0_out__6[3]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[7][4] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[7][4]_i_1_n_0 ),
+        .Q(p_0_out__6[4]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[7][5] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[7][5]_i_1_n_0 ),
+        .Q(p_0_out__6[5]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[7][6] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[7][6]_i_1_n_0 ),
+        .Q(p_0_out__6[6]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[7][7] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[7][7]_i_1_n_0 ),
+        .Q(p_0_out__6[7]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[8][0] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[8][0]_i_1_n_0 ),
+        .Q(p_0_out__7[0]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[8][1] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[8][1]_i_1_n_0 ),
+        .Q(p_0_out__7[1]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[8][2] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[8][2]_i_1_n_0 ),
+        .Q(p_0_out__7[2]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[8][3] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[8][3]_i_1_n_0 ),
+        .Q(p_0_out__7[3]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[8][4] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[8][4]_i_1_n_0 ),
+        .Q(p_0_out__7[4]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[8][5] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[8][5]_i_1_n_0 ),
+        .Q(p_0_out__7[5]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[8][6] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[8][6]_i_1_n_0 ),
+        .Q(p_0_out__7[6]));
+  FDCE #(
+    .INIT(1'b0)) 
+    \coef_reg[8][7] 
+       (.C(clk),
+        .CE(1'b1),
+        .CLR(\coef_reg[8][7]_0 ),
+        .D(\coef[8][7]_i_1_n_0 ),
+        .Q(p_0_out__7[7]));
   LUT1 #(
     .INIT(2'h1)) 
     \row_cnt[4]_i_3 
        (.I0(rst_n),
-        .O(\bank_reg[1][8][0]_0 ));
+        .O(\bank_reg[0][8][0]_0 ));
 endmodule
 
 module line_window
    (Q,
     p_0_out__2,
-    \g_row[2].taps_reg[2][2][0]_0 ,
     \g_row[2].g_tap[1].taps_reg[2][1][7]_0 ,
     \g_row[2].g_tap[0].taps_reg[2][0][7]_0 ,
     \g_row[1].g_tap[1].taps_reg[1][1][7]_0 ,
@@ -8303,13 +8981,12 @@ module line_window
     \g_row[0].g_tap[1].taps_reg[0][1][7]_0 ,
     \g_row[0].g_tap[0].taps_reg[0][0][7]_0 ,
     p_0_out,
-    \FSM_sequential_state_reg[0] ,
+    advance,
     clk,
-    rst_n,
-    px_data);
+    px_data,
+    rst_n);
   output [7:0]Q;
   output [7:0]p_0_out__2;
-  output \g_row[2].taps_reg[2][2][0]_0 ;
   output [7:0]\g_row[2].g_tap[1].taps_reg[2][1][7]_0 ;
   output [7:0]\g_row[2].g_tap[0].taps_reg[2][0][7]_0 ;
   output [7:0]\g_row[1].g_tap[1].taps_reg[1][1][7]_0 ;
@@ -8317,13 +8994,13 @@ module line_window
   output [7:0]\g_row[0].g_tap[1].taps_reg[0][1][7]_0 ;
   output [7:0]\g_row[0].g_tap[0].taps_reg[0][0][7]_0 ;
   output [7:0]p_0_out;
-  input \FSM_sequential_state_reg[0] ;
+  input advance;
   input clk;
-  input rst_n;
   input [7:0]px_data;
+  input rst_n;
 
-  wire \FSM_sequential_state_reg[0] ;
   wire [7:0]Q;
+  wire advance;
   wire clk;
   wire [7:0]\g_delay[0].srl_reg[28]_1 ;
   wire [7:0]\g_delay[1].srl_reg[28]_0 ;
@@ -8333,7 +9010,6 @@ module line_window
   wire [7:0]\g_row[1].g_tap[1].taps_reg[1][1][7]_0 ;
   wire [7:0]\g_row[2].g_tap[0].taps_reg[2][0][7]_0 ;
   wire [7:0]\g_row[2].g_tap[1].taps_reg[2][1][7]_0 ;
-  wire \g_row[2].taps_reg[2][2][0]_0 ;
   wire [7:0]p_0_out;
   wire [7:0]p_0_out__2;
   wire [7:0]px_data;
@@ -8361,7 +9037,7 @@ module line_window
     .INIT(32'h00000000)) 
     \g_delay[0].srl_reg[28][0]_srl29 
        (.A({1'b1,1'b1,1'b1,1'b0,1'b0}),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(advance),
         .CLK(clk),
         .D(p_0_out__2[0]),
         .Q(\g_delay[0].srl_reg[28]_1 [0]),
@@ -8372,7 +9048,7 @@ module line_window
     .INIT(32'h00000000)) 
     \g_delay[0].srl_reg[28][1]_srl29 
        (.A({1'b1,1'b1,1'b1,1'b0,1'b0}),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(advance),
         .CLK(clk),
         .D(p_0_out__2[1]),
         .Q(\g_delay[0].srl_reg[28]_1 [1]),
@@ -8383,7 +9059,7 @@ module line_window
     .INIT(32'h00000000)) 
     \g_delay[0].srl_reg[28][2]_srl29 
        (.A({1'b1,1'b1,1'b1,1'b0,1'b0}),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(advance),
         .CLK(clk),
         .D(p_0_out__2[2]),
         .Q(\g_delay[0].srl_reg[28]_1 [2]),
@@ -8394,7 +9070,7 @@ module line_window
     .INIT(32'h00000000)) 
     \g_delay[0].srl_reg[28][3]_srl29 
        (.A({1'b1,1'b1,1'b1,1'b0,1'b0}),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(advance),
         .CLK(clk),
         .D(p_0_out__2[3]),
         .Q(\g_delay[0].srl_reg[28]_1 [3]),
@@ -8405,7 +9081,7 @@ module line_window
     .INIT(32'h00000000)) 
     \g_delay[0].srl_reg[28][4]_srl29 
        (.A({1'b1,1'b1,1'b1,1'b0,1'b0}),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(advance),
         .CLK(clk),
         .D(p_0_out__2[4]),
         .Q(\g_delay[0].srl_reg[28]_1 [4]),
@@ -8416,7 +9092,7 @@ module line_window
     .INIT(32'h00000000)) 
     \g_delay[0].srl_reg[28][5]_srl29 
        (.A({1'b1,1'b1,1'b1,1'b0,1'b0}),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(advance),
         .CLK(clk),
         .D(p_0_out__2[5]),
         .Q(\g_delay[0].srl_reg[28]_1 [5]),
@@ -8427,7 +9103,7 @@ module line_window
     .INIT(32'h00000000)) 
     \g_delay[0].srl_reg[28][6]_srl29 
        (.A({1'b1,1'b1,1'b1,1'b0,1'b0}),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(advance),
         .CLK(clk),
         .D(p_0_out__2[6]),
         .Q(\g_delay[0].srl_reg[28]_1 [6]),
@@ -8438,7 +9114,7 @@ module line_window
     .INIT(32'h00000000)) 
     \g_delay[0].srl_reg[28][7]_srl29 
        (.A({1'b1,1'b1,1'b1,1'b0,1'b0}),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(advance),
         .CLK(clk),
         .D(p_0_out__2[7]),
         .Q(\g_delay[0].srl_reg[28]_1 [7]),
@@ -8449,7 +9125,7 @@ module line_window
     .INIT(32'h00000000)) 
     \g_delay[1].srl_reg[28][0]_srl29 
        (.A({1'b1,1'b1,1'b1,1'b0,1'b0}),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(advance),
         .CLK(clk),
         .D(Q[0]),
         .Q(\g_delay[1].srl_reg[28]_0 [0]),
@@ -8460,7 +9136,7 @@ module line_window
     .INIT(32'h00000000)) 
     \g_delay[1].srl_reg[28][1]_srl29 
        (.A({1'b1,1'b1,1'b1,1'b0,1'b0}),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(advance),
         .CLK(clk),
         .D(Q[1]),
         .Q(\g_delay[1].srl_reg[28]_0 [1]),
@@ -8471,7 +9147,7 @@ module line_window
     .INIT(32'h00000000)) 
     \g_delay[1].srl_reg[28][2]_srl29 
        (.A({1'b1,1'b1,1'b1,1'b0,1'b0}),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(advance),
         .CLK(clk),
         .D(Q[2]),
         .Q(\g_delay[1].srl_reg[28]_0 [2]),
@@ -8482,7 +9158,7 @@ module line_window
     .INIT(32'h00000000)) 
     \g_delay[1].srl_reg[28][3]_srl29 
        (.A({1'b1,1'b1,1'b1,1'b0,1'b0}),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(advance),
         .CLK(clk),
         .D(Q[3]),
         .Q(\g_delay[1].srl_reg[28]_0 [3]),
@@ -8493,7 +9169,7 @@ module line_window
     .INIT(32'h00000000)) 
     \g_delay[1].srl_reg[28][4]_srl29 
        (.A({1'b1,1'b1,1'b1,1'b0,1'b0}),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(advance),
         .CLK(clk),
         .D(Q[4]),
         .Q(\g_delay[1].srl_reg[28]_0 [4]),
@@ -8504,7 +9180,7 @@ module line_window
     .INIT(32'h00000000)) 
     \g_delay[1].srl_reg[28][5]_srl29 
        (.A({1'b1,1'b1,1'b1,1'b0,1'b0}),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(advance),
         .CLK(clk),
         .D(Q[5]),
         .Q(\g_delay[1].srl_reg[28]_0 [5]),
@@ -8515,7 +9191,7 @@ module line_window
     .INIT(32'h00000000)) 
     \g_delay[1].srl_reg[28][6]_srl29 
        (.A({1'b1,1'b1,1'b1,1'b0,1'b0}),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(advance),
         .CLK(clk),
         .D(Q[6]),
         .Q(\g_delay[1].srl_reg[28]_0 [6]),
@@ -8526,7 +9202,7 @@ module line_window
     .INIT(32'h00000000)) 
     \g_delay[1].srl_reg[28][7]_srl29 
        (.A({1'b1,1'b1,1'b1,1'b0,1'b0}),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(advance),
         .CLK(clk),
         .D(Q[7]),
         .Q(\g_delay[1].srl_reg[28]_0 [7]),
@@ -8535,581 +9211,576 @@ module line_window
     .INIT(1'b0)) 
     \g_row[0].g_tap[0].taps_reg[0][0][0] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[0].g_tap[0].taps_reg[0][0][7]_0 [0]),
         .Q(p_0_out[0]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[0].g_tap[0].taps_reg[0][0][1] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[0].g_tap[0].taps_reg[0][0][7]_0 [1]),
         .Q(p_0_out[1]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[0].g_tap[0].taps_reg[0][0][2] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[0].g_tap[0].taps_reg[0][0][7]_0 [2]),
         .Q(p_0_out[2]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[0].g_tap[0].taps_reg[0][0][3] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[0].g_tap[0].taps_reg[0][0][7]_0 [3]),
         .Q(p_0_out[3]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[0].g_tap[0].taps_reg[0][0][4] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[0].g_tap[0].taps_reg[0][0][7]_0 [4]),
         .Q(p_0_out[4]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[0].g_tap[0].taps_reg[0][0][5] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[0].g_tap[0].taps_reg[0][0][7]_0 [5]),
         .Q(p_0_out[5]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[0].g_tap[0].taps_reg[0][0][6] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[0].g_tap[0].taps_reg[0][0][7]_0 [6]),
         .Q(p_0_out[6]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[0].g_tap[0].taps_reg[0][0][7] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[0].g_tap[0].taps_reg[0][0][7]_0 [7]),
         .Q(p_0_out[7]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[0].g_tap[1].taps_reg[0][1][0] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[0].g_tap[1].taps_reg[0][1][7]_0 [0]),
         .Q(\g_row[0].g_tap[0].taps_reg[0][0][7]_0 [0]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[0].g_tap[1].taps_reg[0][1][1] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[0].g_tap[1].taps_reg[0][1][7]_0 [1]),
         .Q(\g_row[0].g_tap[0].taps_reg[0][0][7]_0 [1]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[0].g_tap[1].taps_reg[0][1][2] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[0].g_tap[1].taps_reg[0][1][7]_0 [2]),
         .Q(\g_row[0].g_tap[0].taps_reg[0][0][7]_0 [2]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[0].g_tap[1].taps_reg[0][1][3] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[0].g_tap[1].taps_reg[0][1][7]_0 [3]),
         .Q(\g_row[0].g_tap[0].taps_reg[0][0][7]_0 [3]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[0].g_tap[1].taps_reg[0][1][4] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[0].g_tap[1].taps_reg[0][1][7]_0 [4]),
         .Q(\g_row[0].g_tap[0].taps_reg[0][0][7]_0 [4]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[0].g_tap[1].taps_reg[0][1][5] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[0].g_tap[1].taps_reg[0][1][7]_0 [5]),
         .Q(\g_row[0].g_tap[0].taps_reg[0][0][7]_0 [5]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[0].g_tap[1].taps_reg[0][1][6] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[0].g_tap[1].taps_reg[0][1][7]_0 [6]),
         .Q(\g_row[0].g_tap[0].taps_reg[0][0][7]_0 [6]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[0].g_tap[1].taps_reg[0][1][7] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[0].g_tap[1].taps_reg[0][1][7]_0 [7]),
         .Q(\g_row[0].g_tap[0].taps_reg[0][0][7]_0 [7]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[0].taps_reg[0][2][0] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_delay[0].srl_reg[28]_1 [0]),
         .Q(\g_row[0].g_tap[1].taps_reg[0][1][7]_0 [0]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[0].taps_reg[0][2][1] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_delay[0].srl_reg[28]_1 [1]),
         .Q(\g_row[0].g_tap[1].taps_reg[0][1][7]_0 [1]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[0].taps_reg[0][2][2] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_delay[0].srl_reg[28]_1 [2]),
         .Q(\g_row[0].g_tap[1].taps_reg[0][1][7]_0 [2]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[0].taps_reg[0][2][3] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_delay[0].srl_reg[28]_1 [3]),
         .Q(\g_row[0].g_tap[1].taps_reg[0][1][7]_0 [3]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[0].taps_reg[0][2][4] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_delay[0].srl_reg[28]_1 [4]),
         .Q(\g_row[0].g_tap[1].taps_reg[0][1][7]_0 [4]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[0].taps_reg[0][2][5] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_delay[0].srl_reg[28]_1 [5]),
         .Q(\g_row[0].g_tap[1].taps_reg[0][1][7]_0 [5]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[0].taps_reg[0][2][6] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_delay[0].srl_reg[28]_1 [6]),
         .Q(\g_row[0].g_tap[1].taps_reg[0][1][7]_0 [6]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[0].taps_reg[0][2][7] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_delay[0].srl_reg[28]_1 [7]),
         .Q(\g_row[0].g_tap[1].taps_reg[0][1][7]_0 [7]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[1].g_tap[0].taps_reg[1][0][0] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[1].g_tap[0].taps_reg[1][0][7]_0 [0]),
         .Q(p_0_out__2[0]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[1].g_tap[0].taps_reg[1][0][1] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[1].g_tap[0].taps_reg[1][0][7]_0 [1]),
         .Q(p_0_out__2[1]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[1].g_tap[0].taps_reg[1][0][2] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[1].g_tap[0].taps_reg[1][0][7]_0 [2]),
         .Q(p_0_out__2[2]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[1].g_tap[0].taps_reg[1][0][3] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[1].g_tap[0].taps_reg[1][0][7]_0 [3]),
         .Q(p_0_out__2[3]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[1].g_tap[0].taps_reg[1][0][4] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[1].g_tap[0].taps_reg[1][0][7]_0 [4]),
         .Q(p_0_out__2[4]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[1].g_tap[0].taps_reg[1][0][5] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[1].g_tap[0].taps_reg[1][0][7]_0 [5]),
         .Q(p_0_out__2[5]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[1].g_tap[0].taps_reg[1][0][6] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[1].g_tap[0].taps_reg[1][0][7]_0 [6]),
         .Q(p_0_out__2[6]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[1].g_tap[0].taps_reg[1][0][7] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[1].g_tap[0].taps_reg[1][0][7]_0 [7]),
         .Q(p_0_out__2[7]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[1].g_tap[1].taps_reg[1][1][0] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[1].g_tap[1].taps_reg[1][1][7]_0 [0]),
         .Q(\g_row[1].g_tap[0].taps_reg[1][0][7]_0 [0]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[1].g_tap[1].taps_reg[1][1][1] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[1].g_tap[1].taps_reg[1][1][7]_0 [1]),
         .Q(\g_row[1].g_tap[0].taps_reg[1][0][7]_0 [1]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[1].g_tap[1].taps_reg[1][1][2] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[1].g_tap[1].taps_reg[1][1][7]_0 [2]),
         .Q(\g_row[1].g_tap[0].taps_reg[1][0][7]_0 [2]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[1].g_tap[1].taps_reg[1][1][3] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[1].g_tap[1].taps_reg[1][1][7]_0 [3]),
         .Q(\g_row[1].g_tap[0].taps_reg[1][0][7]_0 [3]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[1].g_tap[1].taps_reg[1][1][4] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[1].g_tap[1].taps_reg[1][1][7]_0 [4]),
         .Q(\g_row[1].g_tap[0].taps_reg[1][0][7]_0 [4]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[1].g_tap[1].taps_reg[1][1][5] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[1].g_tap[1].taps_reg[1][1][7]_0 [5]),
         .Q(\g_row[1].g_tap[0].taps_reg[1][0][7]_0 [5]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[1].g_tap[1].taps_reg[1][1][6] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[1].g_tap[1].taps_reg[1][1][7]_0 [6]),
         .Q(\g_row[1].g_tap[0].taps_reg[1][0][7]_0 [6]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[1].g_tap[1].taps_reg[1][1][7] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[1].g_tap[1].taps_reg[1][1][7]_0 [7]),
         .Q(\g_row[1].g_tap[0].taps_reg[1][0][7]_0 [7]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[1].taps_reg[1][2][0] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_delay[1].srl_reg[28]_0 [0]),
         .Q(\g_row[1].g_tap[1].taps_reg[1][1][7]_0 [0]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[1].taps_reg[1][2][1] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_delay[1].srl_reg[28]_0 [1]),
         .Q(\g_row[1].g_tap[1].taps_reg[1][1][7]_0 [1]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[1].taps_reg[1][2][2] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_delay[1].srl_reg[28]_0 [2]),
         .Q(\g_row[1].g_tap[1].taps_reg[1][1][7]_0 [2]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[1].taps_reg[1][2][3] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_delay[1].srl_reg[28]_0 [3]),
         .Q(\g_row[1].g_tap[1].taps_reg[1][1][7]_0 [3]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[1].taps_reg[1][2][4] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_delay[1].srl_reg[28]_0 [4]),
         .Q(\g_row[1].g_tap[1].taps_reg[1][1][7]_0 [4]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[1].taps_reg[1][2][5] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_delay[1].srl_reg[28]_0 [5]),
         .Q(\g_row[1].g_tap[1].taps_reg[1][1][7]_0 [5]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[1].taps_reg[1][2][6] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_delay[1].srl_reg[28]_0 [6]),
         .Q(\g_row[1].g_tap[1].taps_reg[1][1][7]_0 [6]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[1].taps_reg[1][2][7] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_delay[1].srl_reg[28]_0 [7]),
         .Q(\g_row[1].g_tap[1].taps_reg[1][1][7]_0 [7]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[2].g_tap[0].taps_reg[2][0][0] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[2].g_tap[0].taps_reg[2][0][7]_0 [0]),
         .Q(Q[0]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[2].g_tap[0].taps_reg[2][0][1] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[2].g_tap[0].taps_reg[2][0][7]_0 [1]),
         .Q(Q[1]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[2].g_tap[0].taps_reg[2][0][2] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[2].g_tap[0].taps_reg[2][0][7]_0 [2]),
         .Q(Q[2]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[2].g_tap[0].taps_reg[2][0][3] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[2].g_tap[0].taps_reg[2][0][7]_0 [3]),
         .Q(Q[3]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[2].g_tap[0].taps_reg[2][0][4] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[2].g_tap[0].taps_reg[2][0][7]_0 [4]),
         .Q(Q[4]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[2].g_tap[0].taps_reg[2][0][5] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[2].g_tap[0].taps_reg[2][0][7]_0 [5]),
         .Q(Q[5]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[2].g_tap[0].taps_reg[2][0][6] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[2].g_tap[0].taps_reg[2][0][7]_0 [6]),
         .Q(Q[6]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[2].g_tap[0].taps_reg[2][0][7] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[2].g_tap[0].taps_reg[2][0][7]_0 [7]),
         .Q(Q[7]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[2].g_tap[1].taps_reg[2][1][0] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[2].g_tap[1].taps_reg[2][1][7]_0 [0]),
         .Q(\g_row[2].g_tap[0].taps_reg[2][0][7]_0 [0]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[2].g_tap[1].taps_reg[2][1][1] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[2].g_tap[1].taps_reg[2][1][7]_0 [1]),
         .Q(\g_row[2].g_tap[0].taps_reg[2][0][7]_0 [1]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[2].g_tap[1].taps_reg[2][1][2] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[2].g_tap[1].taps_reg[2][1][7]_0 [2]),
         .Q(\g_row[2].g_tap[0].taps_reg[2][0][7]_0 [2]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[2].g_tap[1].taps_reg[2][1][3] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[2].g_tap[1].taps_reg[2][1][7]_0 [3]),
         .Q(\g_row[2].g_tap[0].taps_reg[2][0][7]_0 [3]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[2].g_tap[1].taps_reg[2][1][4] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[2].g_tap[1].taps_reg[2][1][7]_0 [4]),
         .Q(\g_row[2].g_tap[0].taps_reg[2][0][7]_0 [4]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[2].g_tap[1].taps_reg[2][1][5] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[2].g_tap[1].taps_reg[2][1][7]_0 [5]),
         .Q(\g_row[2].g_tap[0].taps_reg[2][0][7]_0 [5]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[2].g_tap[1].taps_reg[2][1][6] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[2].g_tap[1].taps_reg[2][1][7]_0 [6]),
         .Q(\g_row[2].g_tap[0].taps_reg[2][0][7]_0 [6]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[2].g_tap[1].taps_reg[2][1][7] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(\g_row[2].g_tap[1].taps_reg[2][1][7]_0 [7]),
         .Q(\g_row[2].g_tap[0].taps_reg[2][0][7]_0 [7]));
-  LUT1 #(
-    .INIT(2'h1)) 
-    \g_row[2].taps[2][2][7]_i_2 
-       (.I0(rst_n),
-        .O(\g_row[2].taps_reg[2][2][0]_0 ));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[2].taps_reg[2][2][0] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(px_data[0]),
         .Q(\g_row[2].g_tap[1].taps_reg[2][1][7]_0 [0]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[2].taps_reg[2][2][1] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(px_data[1]),
         .Q(\g_row[2].g_tap[1].taps_reg[2][1][7]_0 [1]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[2].taps_reg[2][2][2] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(px_data[2]),
         .Q(\g_row[2].g_tap[1].taps_reg[2][1][7]_0 [2]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[2].taps_reg[2][2][3] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(px_data[3]),
         .Q(\g_row[2].g_tap[1].taps_reg[2][1][7]_0 [3]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[2].taps_reg[2][2][4] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(px_data[4]),
         .Q(\g_row[2].g_tap[1].taps_reg[2][1][7]_0 [4]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[2].taps_reg[2][2][5] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(px_data[5]),
         .Q(\g_row[2].g_tap[1].taps_reg[2][1][7]_0 [5]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[2].taps_reg[2][2][6] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(px_data[6]),
         .Q(\g_row[2].g_tap[1].taps_reg[2][1][7]_0 [6]));
   FDCE #(
     .INIT(1'b0)) 
     \g_row[2].taps_reg[2][2][7] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
-        .CLR(\g_row[2].taps_reg[2][2][0]_0 ),
+        .CE(advance),
+        .CLR(rst_n),
         .D(px_data[7]),
         .Q(\g_row[2].g_tap[1].taps_reg[2][1][7]_0 [7]));
 endmodule
@@ -9133,25 +9804,25 @@ module mac_array
     \s1_reg[2][15] ,
     \s1_reg[3][15] ,
     \p8_a1_reg[16]_i_2 ,
-    \FSM_sequential_state_reg[0] ,
+    shift_en,
     clk,
-    \coef[0] ,
+    \coef_reg[0][7] ,
     \win[0][0] ,
-    \coef[1] ,
+    \coef_reg[1][7] ,
     \win[0][1] ,
-    \coef[2] ,
+    \coef_reg[2][7] ,
     \win[0][2] ,
-    \coef[3] ,
+    \coef_reg[3][7] ,
     \win[1][0] ,
-    \coef[4] ,
+    \coef_reg[4][7] ,
     \win[1][1] ,
-    \coef[5] ,
+    \coef_reg[5][7] ,
     \win[1][2] ,
-    \coef[6] ,
+    \coef_reg[6][7] ,
     \win[2][0] ,
-    \coef[7] ,
+    \coef_reg[7][7] ,
     \win[2][1] ,
-    \coef[8] ,
+    \coef_reg[8][7] ,
     \win[2][2] );
   output [0:0]\s1_reg[3][17] ;
   output [16:0]P;
@@ -9171,40 +9842,39 @@ module mac_array
   output [15:0]\s1_reg[2][15] ;
   output [15:0]\s1_reg[3][15] ;
   input \p8_a1_reg[16]_i_2 ;
-  input \FSM_sequential_state_reg[0] ;
+  input shift_en;
   input clk;
-  input [7:0]\coef[0] ;
+  input [7:0]\coef_reg[0][7] ;
   input [7:0]\win[0][0] ;
-  input [7:0]\coef[1] ;
+  input [7:0]\coef_reg[1][7] ;
   input [7:0]\win[0][1] ;
-  input [7:0]\coef[2] ;
+  input [7:0]\coef_reg[2][7] ;
   input [7:0]\win[0][2] ;
-  input [7:0]\coef[3] ;
+  input [7:0]\coef_reg[3][7] ;
   input [7:0]\win[1][0] ;
-  input [7:0]\coef[4] ;
+  input [7:0]\coef_reg[4][7] ;
   input [7:0]\win[1][1] ;
-  input [7:0]\coef[5] ;
+  input [7:0]\coef_reg[5][7] ;
   input [7:0]\win[1][2] ;
-  input [7:0]\coef[6] ;
+  input [7:0]\coef_reg[6][7] ;
   input [7:0]\win[2][0] ;
-  input [7:0]\coef[7] ;
+  input [7:0]\coef_reg[7][7] ;
   input [7:0]\win[2][1] ;
-  input [7:0]\coef[8] ;
+  input [7:0]\coef_reg[8][7] ;
   input [7:0]\win[2][2] ;
 
   wire [16:0]D;
-  wire \FSM_sequential_state_reg[0] ;
   wire [16:0]P;
   wire clk;
-  wire [7:0]\coef[0] ;
-  wire [7:0]\coef[1] ;
-  wire [7:0]\coef[2] ;
-  wire [7:0]\coef[3] ;
-  wire [7:0]\coef[4] ;
-  wire [7:0]\coef[5] ;
-  wire [7:0]\coef[6] ;
-  wire [7:0]\coef[7] ;
-  wire [7:0]\coef[8] ;
+  wire [7:0]\coef_reg[0][7] ;
+  wire [7:0]\coef_reg[1][7] ;
+  wire [7:0]\coef_reg[2][7] ;
+  wire [7:0]\coef_reg[3][7] ;
+  wire [7:0]\coef_reg[4][7] ;
+  wire [7:0]\coef_reg[5][7] ;
+  wire [7:0]\coef_reg[6][7] ;
+  wire [7:0]\coef_reg[7][7] ;
+  wire [7:0]\coef_reg[8][7] ;
   wire \p8_a1_reg[16]_i_2 ;
   wire p_0_out__0_n_89;
   wire p_0_out__2_n_89;
@@ -9242,6 +9912,7 @@ module mac_array
   wire [16:0]\s1_reg[2][17]_0 ;
   wire [15:0]\s1_reg[3][15] ;
   wire [0:0]\s1_reg[3][17] ;
+  wire shift_en;
   wire [7:0]\win[0][0] ;
   wire [7:0]\win[0][1] ;
   wire [7:0]\win[0][2] ;
@@ -9485,7 +10156,7 @@ module mac_array
         .ACIN({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
         .ACOUT(NLW_p_0_out_ACOUT_UNCONNECTED[29:0]),
         .ALUMODE({1'b0,1'b0,1'b0,1'b0}),
-        .B({\coef[0] [7],\coef[0] [7],\coef[0] [7],\coef[0] [7],\coef[0] [7],\coef[0] [7],\coef[0] [7],\coef[0] [7],\coef[0] [7],\coef[0] [7],\coef[0] }),
+        .B({\coef_reg[0][7] [7],\coef_reg[0][7] [7],\coef_reg[0][7] [7],\coef_reg[0][7] [7],\coef_reg[0][7] [7],\coef_reg[0][7] [7],\coef_reg[0][7] [7],\coef_reg[0][7] [7],\coef_reg[0][7] [7],\coef_reg[0][7] [7],\coef_reg[0][7] }),
         .BCIN({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
         .BCOUT(NLW_p_0_out_BCOUT_UNCONNECTED[17:0]),
         .C({1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1}),
@@ -9506,7 +10177,7 @@ module mac_array
         .CED(1'b0),
         .CEINMODE(1'b0),
         .CEM(1'b0),
-        .CEP(\FSM_sequential_state_reg[0] ),
+        .CEP(shift_en),
         .CLK(clk),
         .D({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
         .INMODE({1'b0,1'b0,1'b0,1'b0,1'b0}),
@@ -9562,7 +10233,7 @@ module mac_array
         .ACIN({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
         .ACOUT(NLW_p_0_out__0_ACOUT_UNCONNECTED[29:0]),
         .ALUMODE({1'b0,1'b0,1'b0,1'b0}),
-        .B({\coef[1] [7],\coef[1] [7],\coef[1] [7],\coef[1] [7],\coef[1] [7],\coef[1] [7],\coef[1] [7],\coef[1] [7],\coef[1] [7],\coef[1] [7],\coef[1] }),
+        .B({\coef_reg[1][7] [7],\coef_reg[1][7] [7],\coef_reg[1][7] [7],\coef_reg[1][7] [7],\coef_reg[1][7] [7],\coef_reg[1][7] [7],\coef_reg[1][7] [7],\coef_reg[1][7] [7],\coef_reg[1][7] [7],\coef_reg[1][7] [7],\coef_reg[1][7] }),
         .BCIN({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
         .BCOUT(NLW_p_0_out__0_BCOUT_UNCONNECTED[17:0]),
         .C({1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1}),
@@ -9583,7 +10254,7 @@ module mac_array
         .CED(1'b0),
         .CEINMODE(1'b0),
         .CEM(1'b0),
-        .CEP(\FSM_sequential_state_reg[0] ),
+        .CEP(shift_en),
         .CLK(clk),
         .D({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
         .INMODE({1'b0,1'b0,1'b0,1'b0,1'b0}),
@@ -9639,7 +10310,7 @@ module mac_array
         .ACIN({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
         .ACOUT(NLW_p_0_out__1_ACOUT_UNCONNECTED[29:0]),
         .ALUMODE({1'b0,1'b0,1'b0,1'b0}),
-        .B({\coef[2] [7],\coef[2] [7],\coef[2] [7],\coef[2] [7],\coef[2] [7],\coef[2] [7],\coef[2] [7],\coef[2] [7],\coef[2] [7],\coef[2] [7],\coef[2] }),
+        .B({\coef_reg[2][7] [7],\coef_reg[2][7] [7],\coef_reg[2][7] [7],\coef_reg[2][7] [7],\coef_reg[2][7] [7],\coef_reg[2][7] [7],\coef_reg[2][7] [7],\coef_reg[2][7] [7],\coef_reg[2][7] [7],\coef_reg[2][7] [7],\coef_reg[2][7] }),
         .BCIN({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
         .BCOUT(NLW_p_0_out__1_BCOUT_UNCONNECTED[17:0]),
         .C({1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1}),
@@ -9660,7 +10331,7 @@ module mac_array
         .CED(1'b0),
         .CEINMODE(1'b0),
         .CEM(1'b0),
-        .CEP(\FSM_sequential_state_reg[0] ),
+        .CEP(shift_en),
         .CLK(clk),
         .D({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
         .INMODE({1'b0,1'b0,1'b0,1'b0,1'b0}),
@@ -9716,7 +10387,7 @@ module mac_array
         .ACIN({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
         .ACOUT(NLW_p_0_out__2_ACOUT_UNCONNECTED[29:0]),
         .ALUMODE({1'b0,1'b0,1'b0,1'b0}),
-        .B({\coef[3] [7],\coef[3] [7],\coef[3] [7],\coef[3] [7],\coef[3] [7],\coef[3] [7],\coef[3] [7],\coef[3] [7],\coef[3] [7],\coef[3] [7],\coef[3] }),
+        .B({\coef_reg[3][7] [7],\coef_reg[3][7] [7],\coef_reg[3][7] [7],\coef_reg[3][7] [7],\coef_reg[3][7] [7],\coef_reg[3][7] [7],\coef_reg[3][7] [7],\coef_reg[3][7] [7],\coef_reg[3][7] [7],\coef_reg[3][7] [7],\coef_reg[3][7] }),
         .BCIN({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
         .BCOUT(NLW_p_0_out__2_BCOUT_UNCONNECTED[17:0]),
         .C({1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1}),
@@ -9737,7 +10408,7 @@ module mac_array
         .CED(1'b0),
         .CEINMODE(1'b0),
         .CEM(1'b0),
-        .CEP(\FSM_sequential_state_reg[0] ),
+        .CEP(shift_en),
         .CLK(clk),
         .D({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
         .INMODE({1'b0,1'b0,1'b0,1'b0,1'b0}),
@@ -9793,7 +10464,7 @@ module mac_array
         .ACIN({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
         .ACOUT(NLW_p_0_out__3_ACOUT_UNCONNECTED[29:0]),
         .ALUMODE({1'b0,1'b0,1'b0,1'b0}),
-        .B({\coef[4] [7],\coef[4] [7],\coef[4] [7],\coef[4] [7],\coef[4] [7],\coef[4] [7],\coef[4] [7],\coef[4] [7],\coef[4] [7],\coef[4] [7],\coef[4] }),
+        .B({\coef_reg[4][7] [7],\coef_reg[4][7] [7],\coef_reg[4][7] [7],\coef_reg[4][7] [7],\coef_reg[4][7] [7],\coef_reg[4][7] [7],\coef_reg[4][7] [7],\coef_reg[4][7] [7],\coef_reg[4][7] [7],\coef_reg[4][7] [7],\coef_reg[4][7] }),
         .BCIN({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
         .BCOUT(NLW_p_0_out__3_BCOUT_UNCONNECTED[17:0]),
         .C({1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1}),
@@ -9814,7 +10485,7 @@ module mac_array
         .CED(1'b0),
         .CEINMODE(1'b0),
         .CEM(1'b0),
-        .CEP(\FSM_sequential_state_reg[0] ),
+        .CEP(shift_en),
         .CLK(clk),
         .D({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
         .INMODE({1'b0,1'b0,1'b0,1'b0,1'b0}),
@@ -9870,7 +10541,7 @@ module mac_array
         .ACIN({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
         .ACOUT(NLW_p_0_out__4_ACOUT_UNCONNECTED[29:0]),
         .ALUMODE({1'b0,1'b0,1'b0,1'b0}),
-        .B({\coef[5] [7],\coef[5] [7],\coef[5] [7],\coef[5] [7],\coef[5] [7],\coef[5] [7],\coef[5] [7],\coef[5] [7],\coef[5] [7],\coef[5] [7],\coef[5] }),
+        .B({\coef_reg[5][7] [7],\coef_reg[5][7] [7],\coef_reg[5][7] [7],\coef_reg[5][7] [7],\coef_reg[5][7] [7],\coef_reg[5][7] [7],\coef_reg[5][7] [7],\coef_reg[5][7] [7],\coef_reg[5][7] [7],\coef_reg[5][7] [7],\coef_reg[5][7] }),
         .BCIN({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
         .BCOUT(NLW_p_0_out__4_BCOUT_UNCONNECTED[17:0]),
         .C({1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1}),
@@ -9891,7 +10562,7 @@ module mac_array
         .CED(1'b0),
         .CEINMODE(1'b0),
         .CEM(1'b0),
-        .CEP(\FSM_sequential_state_reg[0] ),
+        .CEP(shift_en),
         .CLK(clk),
         .D({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
         .INMODE({1'b0,1'b0,1'b0,1'b0,1'b0}),
@@ -9947,7 +10618,7 @@ module mac_array
         .ACIN({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
         .ACOUT(NLW_p_0_out__5_ACOUT_UNCONNECTED[29:0]),
         .ALUMODE({1'b0,1'b0,1'b0,1'b0}),
-        .B({\coef[6] [7],\coef[6] [7],\coef[6] [7],\coef[6] [7],\coef[6] [7],\coef[6] [7],\coef[6] [7],\coef[6] [7],\coef[6] [7],\coef[6] [7],\coef[6] }),
+        .B({\coef_reg[6][7] [7],\coef_reg[6][7] [7],\coef_reg[6][7] [7],\coef_reg[6][7] [7],\coef_reg[6][7] [7],\coef_reg[6][7] [7],\coef_reg[6][7] [7],\coef_reg[6][7] [7],\coef_reg[6][7] [7],\coef_reg[6][7] [7],\coef_reg[6][7] }),
         .BCIN({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
         .BCOUT(NLW_p_0_out__5_BCOUT_UNCONNECTED[17:0]),
         .C({1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1}),
@@ -9968,7 +10639,7 @@ module mac_array
         .CED(1'b0),
         .CEINMODE(1'b0),
         .CEM(1'b0),
-        .CEP(\FSM_sequential_state_reg[0] ),
+        .CEP(shift_en),
         .CLK(clk),
         .D({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
         .INMODE({1'b0,1'b0,1'b0,1'b0,1'b0}),
@@ -10024,7 +10695,7 @@ module mac_array
         .ACIN({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
         .ACOUT(NLW_p_0_out__6_ACOUT_UNCONNECTED[29:0]),
         .ALUMODE({1'b0,1'b0,1'b0,1'b0}),
-        .B({\coef[7] [7],\coef[7] [7],\coef[7] [7],\coef[7] [7],\coef[7] [7],\coef[7] [7],\coef[7] [7],\coef[7] [7],\coef[7] [7],\coef[7] [7],\coef[7] }),
+        .B({\coef_reg[7][7] [7],\coef_reg[7][7] [7],\coef_reg[7][7] [7],\coef_reg[7][7] [7],\coef_reg[7][7] [7],\coef_reg[7][7] [7],\coef_reg[7][7] [7],\coef_reg[7][7] [7],\coef_reg[7][7] [7],\coef_reg[7][7] [7],\coef_reg[7][7] }),
         .BCIN({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
         .BCOUT(NLW_p_0_out__6_BCOUT_UNCONNECTED[17:0]),
         .C({1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1}),
@@ -10045,7 +10716,7 @@ module mac_array
         .CED(1'b0),
         .CEINMODE(1'b0),
         .CEM(1'b0),
-        .CEP(\FSM_sequential_state_reg[0] ),
+        .CEP(shift_en),
         .CLK(clk),
         .D({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
         .INMODE({1'b0,1'b0,1'b0,1'b0,1'b0}),
@@ -10101,7 +10772,7 @@ module mac_array
         .ACIN({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
         .ACOUT(NLW_p_0_out__7_ACOUT_UNCONNECTED[29:0]),
         .ALUMODE({1'b0,1'b0,1'b0,1'b0}),
-        .B({\coef[8] [7],\coef[8] [7],\coef[8] [7],\coef[8] [7],\coef[8] [7],\coef[8] [7],\coef[8] [7],\coef[8] [7],\coef[8] [7],\coef[8] [7],\coef[8] }),
+        .B({\coef_reg[8][7] [7],\coef_reg[8][7] [7],\coef_reg[8][7] [7],\coef_reg[8][7] [7],\coef_reg[8][7] [7],\coef_reg[8][7] [7],\coef_reg[8][7] [7],\coef_reg[8][7] [7],\coef_reg[8][7] [7],\coef_reg[8][7] [7],\coef_reg[8][7] }),
         .BCIN({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
         .BCOUT(NLW_p_0_out__7_BCOUT_UNCONNECTED[17:0]),
         .C({1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1}),
@@ -10122,7 +10793,7 @@ module mac_array
         .CED(1'b0),
         .CEINMODE(1'b0),
         .CEM(1'b0),
-        .CEP(\FSM_sequential_state_reg[0] ),
+        .CEP(shift_en),
         .CLK(clk),
         .D({1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0,1'b0}),
         .INMODE({1'b0,1'b0,1'b0,1'b0,1'b0}),
@@ -10567,7 +11238,7 @@ module normalize
     S,
     \rounded_q_reg[6]_0 ,
     clk,
-    \FSM_sequential_state_reg[0] ,
+    shift_en,
     relu_en,
     rst_n,
     D,
@@ -10579,7 +11250,7 @@ module normalize
   output [3:0]S;
   output [2:0]\rounded_q_reg[6]_0 ;
   input clk;
-  input \FSM_sequential_state_reg[0] ;
+  input shift_en;
   input relu_en;
   input rst_n;
   input [19:0]D;
@@ -10587,7 +11258,6 @@ module normalize
   input [2:0]\out_shift_reg[2] ;
 
   wire [19:0]D;
-  wire \FSM_sequential_state_reg[0] ;
   wire [6:0]Q;
   wire [3:0]S;
   wire clk;
@@ -10614,73 +11284,74 @@ module normalize
   wire sat_d1_carry_n_1;
   wire sat_flag;
   wire sat_flag_i_1_n_0;
+  wire shift_en;
   wire [3:0]NLW_sat_d1__2_carry_CO_UNCONNECTED;
   wire [3:0]NLW_sat_d1__2_carry_O_UNCONNECTED;
   wire [3:0]NLW_sat_d1_carry_CO_UNCONNECTED;
   wire [3:0]NLW_sat_d1_carry_O_UNCONNECTED;
 
   LUT5 #(
-    .INIT(32'hABAFAAAA)) 
+    .INIT(32'hCCCECCEE)) 
     \res[0]_i_1 
-       (.I0(sat_d1__2_carry_n_1),
-        .I1(rounded_q[15]),
-        .I2(sat_d1_carry_n_1),
-        .I3(relu_en),
-        .I4(rounded_q[0]),
+       (.I0(rounded_q[0]),
+        .I1(sat_d1__2_carry_n_1),
+        .I2(relu_en),
+        .I3(sat_d1_carry_n_1),
+        .I4(rounded_q[15]),
         .O(p_0_in[0]));
   LUT5 #(
-    .INIT(32'hABAFAAAA)) 
+    .INIT(32'hCCCECCEE)) 
     \res[10]_i_1 
-       (.I0(sat_d1__2_carry_n_1),
-        .I1(rounded_q[15]),
-        .I2(sat_d1_carry_n_1),
-        .I3(relu_en),
-        .I4(rounded_q[10]),
+       (.I0(rounded_q[10]),
+        .I1(sat_d1__2_carry_n_1),
+        .I2(relu_en),
+        .I3(sat_d1_carry_n_1),
+        .I4(rounded_q[15]),
         .O(p_0_in[10]));
   LUT5 #(
-    .INIT(32'hABAFAAAA)) 
+    .INIT(32'hCCCECCEE)) 
     \res[11]_i_1 
-       (.I0(sat_d1__2_carry_n_1),
-        .I1(rounded_q[15]),
-        .I2(sat_d1_carry_n_1),
-        .I3(relu_en),
-        .I4(rounded_q[11]),
+       (.I0(rounded_q[11]),
+        .I1(sat_d1__2_carry_n_1),
+        .I2(relu_en),
+        .I3(sat_d1_carry_n_1),
+        .I4(rounded_q[15]),
         .O(p_0_in[11]));
   LUT5 #(
-    .INIT(32'hABAFAAAA)) 
+    .INIT(32'hCCCECCEE)) 
     \res[12]_i_1 
-       (.I0(sat_d1__2_carry_n_1),
-        .I1(rounded_q[15]),
-        .I2(sat_d1_carry_n_1),
-        .I3(relu_en),
-        .I4(rounded_q[12]),
+       (.I0(rounded_q[12]),
+        .I1(sat_d1__2_carry_n_1),
+        .I2(relu_en),
+        .I3(sat_d1_carry_n_1),
+        .I4(rounded_q[15]),
         .O(p_0_in[12]));
   LUT5 #(
-    .INIT(32'hABAFAAAA)) 
+    .INIT(32'hCCCECCEE)) 
     \res[13]_i_1 
-       (.I0(sat_d1__2_carry_n_1),
-        .I1(rounded_q[15]),
-        .I2(sat_d1_carry_n_1),
-        .I3(relu_en),
-        .I4(rounded_q[13]),
+       (.I0(rounded_q[13]),
+        .I1(sat_d1__2_carry_n_1),
+        .I2(relu_en),
+        .I3(sat_d1_carry_n_1),
+        .I4(rounded_q[15]),
         .O(p_0_in[13]));
   LUT5 #(
-    .INIT(32'hABAFAAAA)) 
+    .INIT(32'hAABAAAFA)) 
     \res[14]_i_1 
        (.I0(sat_d1__2_carry_n_1),
-        .I1(rounded_q[15]),
-        .I2(sat_d1_carry_n_1),
-        .I3(relu_en),
-        .I4(rounded_q[14]),
+        .I1(relu_en),
+        .I2(rounded_q[14]),
+        .I3(sat_d1_carry_n_1),
+        .I4(rounded_q[15]),
         .O(p_0_in[14]));
-  (* SOFT_HLUTNM = "soft_lutpair17" *) 
+  (* SOFT_HLUTNM = "soft_lutpair18" *) 
   LUT4 #(
-    .INIT(16'h0054)) 
+    .INIT(16'h000E)) 
     \res[15]_i_2 
-       (.I0(relu_en),
+       (.I0(rounded_q[15]),
         .I1(sat_d1_carry_n_1),
-        .I2(rounded_q[15]),
-        .I3(sat_d1__2_carry_n_1),
+        .I2(sat_d1__2_carry_n_1),
+        .I3(relu_en),
         .O(p_0_in[15]));
   LUT1 #(
     .INIT(2'h1)) 
@@ -10688,92 +11359,92 @@ module normalize
        (.I0(rst_n),
         .O(\res_reg[15]_0 ));
   LUT5 #(
-    .INIT(32'hABAFAAAA)) 
+    .INIT(32'hCCCECCEE)) 
     \res[1]_i_1 
-       (.I0(sat_d1__2_carry_n_1),
-        .I1(rounded_q[15]),
-        .I2(sat_d1_carry_n_1),
-        .I3(relu_en),
-        .I4(rounded_q[1]),
+       (.I0(rounded_q[1]),
+        .I1(sat_d1__2_carry_n_1),
+        .I2(relu_en),
+        .I3(sat_d1_carry_n_1),
+        .I4(rounded_q[15]),
         .O(p_0_in[1]));
   LUT5 #(
-    .INIT(32'hABAFAAAA)) 
+    .INIT(32'hCCCECCEE)) 
     \res[2]_i_1 
-       (.I0(sat_d1__2_carry_n_1),
-        .I1(rounded_q[15]),
-        .I2(sat_d1_carry_n_1),
-        .I3(relu_en),
-        .I4(rounded_q[2]),
+       (.I0(rounded_q[2]),
+        .I1(sat_d1__2_carry_n_1),
+        .I2(relu_en),
+        .I3(sat_d1_carry_n_1),
+        .I4(rounded_q[15]),
         .O(p_0_in[2]));
   LUT5 #(
-    .INIT(32'hABAFAAAA)) 
+    .INIT(32'hCCCECCEE)) 
     \res[3]_i_1 
-       (.I0(sat_d1__2_carry_n_1),
-        .I1(rounded_q[15]),
-        .I2(sat_d1_carry_n_1),
-        .I3(relu_en),
-        .I4(rounded_q[3]),
+       (.I0(rounded_q[3]),
+        .I1(sat_d1__2_carry_n_1),
+        .I2(relu_en),
+        .I3(sat_d1_carry_n_1),
+        .I4(rounded_q[15]),
         .O(p_0_in[3]));
   LUT5 #(
-    .INIT(32'hABAFAAAA)) 
+    .INIT(32'hCCCECCEE)) 
     \res[4]_i_1 
-       (.I0(sat_d1__2_carry_n_1),
-        .I1(rounded_q[15]),
-        .I2(sat_d1_carry_n_1),
-        .I3(relu_en),
-        .I4(rounded_q[4]),
+       (.I0(rounded_q[4]),
+        .I1(sat_d1__2_carry_n_1),
+        .I2(relu_en),
+        .I3(sat_d1_carry_n_1),
+        .I4(rounded_q[15]),
         .O(p_0_in[4]));
   LUT5 #(
-    .INIT(32'hABAFAAAA)) 
+    .INIT(32'hCCCECCEE)) 
     \res[5]_i_1 
-       (.I0(sat_d1__2_carry_n_1),
-        .I1(rounded_q[15]),
-        .I2(sat_d1_carry_n_1),
-        .I3(relu_en),
-        .I4(rounded_q[5]),
+       (.I0(rounded_q[5]),
+        .I1(sat_d1__2_carry_n_1),
+        .I2(relu_en),
+        .I3(sat_d1_carry_n_1),
+        .I4(rounded_q[15]),
         .O(p_0_in[5]));
+  (* SOFT_HLUTNM = "soft_lutpair18" *) 
   LUT5 #(
-    .INIT(32'hABAFAAAA)) 
+    .INIT(32'hCCCECCEE)) 
     \res[6]_i_1 
-       (.I0(sat_d1__2_carry_n_1),
-        .I1(rounded_q[15]),
-        .I2(sat_d1_carry_n_1),
-        .I3(relu_en),
-        .I4(rounded_q[6]),
+       (.I0(rounded_q[6]),
+        .I1(sat_d1__2_carry_n_1),
+        .I2(relu_en),
+        .I3(sat_d1_carry_n_1),
+        .I4(rounded_q[15]),
         .O(p_0_in[6]));
-  (* SOFT_HLUTNM = "soft_lutpair17" *) 
   LUT5 #(
-    .INIT(32'hABAFAAAA)) 
+    .INIT(32'hCCCECCEE)) 
     \res[7]_i_1 
-       (.I0(sat_d1__2_carry_n_1),
-        .I1(rounded_q[15]),
-        .I2(sat_d1_carry_n_1),
-        .I3(relu_en),
-        .I4(rounded_q[7]),
+       (.I0(rounded_q[7]),
+        .I1(sat_d1__2_carry_n_1),
+        .I2(relu_en),
+        .I3(sat_d1_carry_n_1),
+        .I4(rounded_q[15]),
         .O(p_0_in[7]));
   LUT5 #(
-    .INIT(32'hABAFAAAA)) 
+    .INIT(32'hCCCECCEE)) 
     \res[8]_i_1 
-       (.I0(sat_d1__2_carry_n_1),
-        .I1(rounded_q[15]),
-        .I2(sat_d1_carry_n_1),
-        .I3(relu_en),
-        .I4(rounded_q[8]),
+       (.I0(rounded_q[8]),
+        .I1(sat_d1__2_carry_n_1),
+        .I2(relu_en),
+        .I3(sat_d1_carry_n_1),
+        .I4(rounded_q[15]),
         .O(p_0_in[8]));
   LUT5 #(
-    .INIT(32'hABAFAAAA)) 
+    .INIT(32'hCCCECCEE)) 
     \res[9]_i_1 
-       (.I0(sat_d1__2_carry_n_1),
-        .I1(rounded_q[15]),
-        .I2(sat_d1_carry_n_1),
-        .I3(relu_en),
-        .I4(rounded_q[9]),
+       (.I0(rounded_q[9]),
+        .I1(sat_d1__2_carry_n_1),
+        .I2(relu_en),
+        .I3(sat_d1_carry_n_1),
+        .I4(rounded_q[15]),
         .O(p_0_in[9]));
   FDCE #(
     .INIT(1'b0)) 
     \res_reg[0] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\res_reg[15]_0 ),
         .D(p_0_in[0]),
         .Q(out_data[0]));
@@ -10781,7 +11452,7 @@ module normalize
     .INIT(1'b0)) 
     \res_reg[10] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\res_reg[15]_0 ),
         .D(p_0_in[10]),
         .Q(out_data[10]));
@@ -10789,7 +11460,7 @@ module normalize
     .INIT(1'b0)) 
     \res_reg[11] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\res_reg[15]_0 ),
         .D(p_0_in[11]),
         .Q(out_data[11]));
@@ -10797,7 +11468,7 @@ module normalize
     .INIT(1'b0)) 
     \res_reg[12] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\res_reg[15]_0 ),
         .D(p_0_in[12]),
         .Q(out_data[12]));
@@ -10805,7 +11476,7 @@ module normalize
     .INIT(1'b0)) 
     \res_reg[13] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\res_reg[15]_0 ),
         .D(p_0_in[13]),
         .Q(out_data[13]));
@@ -10813,7 +11484,7 @@ module normalize
     .INIT(1'b0)) 
     \res_reg[14] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\res_reg[15]_0 ),
         .D(p_0_in[14]),
         .Q(out_data[14]));
@@ -10821,7 +11492,7 @@ module normalize
     .INIT(1'b0)) 
     \res_reg[15] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\res_reg[15]_0 ),
         .D(p_0_in[15]),
         .Q(out_data[15]));
@@ -10829,7 +11500,7 @@ module normalize
     .INIT(1'b0)) 
     \res_reg[1] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\res_reg[15]_0 ),
         .D(p_0_in[1]),
         .Q(out_data[1]));
@@ -10837,7 +11508,7 @@ module normalize
     .INIT(1'b0)) 
     \res_reg[2] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\res_reg[15]_0 ),
         .D(p_0_in[2]),
         .Q(out_data[2]));
@@ -10845,7 +11516,7 @@ module normalize
     .INIT(1'b0)) 
     \res_reg[3] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\res_reg[15]_0 ),
         .D(p_0_in[3]),
         .Q(out_data[3]));
@@ -10853,7 +11524,7 @@ module normalize
     .INIT(1'b0)) 
     \res_reg[4] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\res_reg[15]_0 ),
         .D(p_0_in[4]),
         .Q(out_data[4]));
@@ -10861,7 +11532,7 @@ module normalize
     .INIT(1'b0)) 
     \res_reg[5] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\res_reg[15]_0 ),
         .D(p_0_in[5]),
         .Q(out_data[5]));
@@ -10869,7 +11540,7 @@ module normalize
     .INIT(1'b0)) 
     \res_reg[6] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\res_reg[15]_0 ),
         .D(p_0_in[6]),
         .Q(out_data[6]));
@@ -10877,7 +11548,7 @@ module normalize
     .INIT(1'b0)) 
     \res_reg[7] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\res_reg[15]_0 ),
         .D(p_0_in[7]),
         .Q(out_data[7]));
@@ -10885,7 +11556,7 @@ module normalize
     .INIT(1'b0)) 
     \res_reg[8] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\res_reg[15]_0 ),
         .D(p_0_in[8]),
         .Q(out_data[8]));
@@ -10893,7 +11564,7 @@ module normalize
     .INIT(1'b0)) 
     \res_reg[9] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\res_reg[15]_0 ),
         .D(p_0_in[9]),
         .Q(out_data[9]));
@@ -10957,7 +11628,7 @@ module normalize
     .INIT(1'b0)) 
     \rounded_q_reg[0] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\res_reg[15]_0 ),
         .D(D[0]),
         .Q(rounded_q[0]));
@@ -10965,7 +11636,7 @@ module normalize
     .INIT(1'b0)) 
     \rounded_q_reg[10] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\res_reg[15]_0 ),
         .D(D[10]),
         .Q(rounded_q[10]));
@@ -10973,7 +11644,7 @@ module normalize
     .INIT(1'b0)) 
     \rounded_q_reg[11] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\res_reg[15]_0 ),
         .D(D[11]),
         .Q(rounded_q[11]));
@@ -10981,7 +11652,7 @@ module normalize
     .INIT(1'b0)) 
     \rounded_q_reg[12] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\res_reg[15]_0 ),
         .D(D[12]),
         .Q(rounded_q[12]));
@@ -10989,7 +11660,7 @@ module normalize
     .INIT(1'b0)) 
     \rounded_q_reg[13] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\res_reg[15]_0 ),
         .D(D[13]),
         .Q(rounded_q[13]));
@@ -10997,7 +11668,7 @@ module normalize
     .INIT(1'b0)) 
     \rounded_q_reg[14] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\res_reg[15]_0 ),
         .D(D[14]),
         .Q(rounded_q[14]));
@@ -11005,7 +11676,7 @@ module normalize
     .INIT(1'b0)) 
     \rounded_q_reg[15] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\res_reg[15]_0 ),
         .D(D[15]),
         .Q(rounded_q[15]));
@@ -11013,7 +11684,7 @@ module normalize
     .INIT(1'b0)) 
     \rounded_q_reg[16] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\res_reg[15]_0 ),
         .D(D[16]),
         .Q(rounded_q[16]));
@@ -11021,7 +11692,7 @@ module normalize
     .INIT(1'b0)) 
     \rounded_q_reg[17] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\res_reg[15]_0 ),
         .D(D[17]),
         .Q(rounded_q[17]));
@@ -11029,7 +11700,7 @@ module normalize
     .INIT(1'b0)) 
     \rounded_q_reg[18] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\res_reg[15]_0 ),
         .D(D[18]),
         .Q(rounded_q[18]));
@@ -11037,7 +11708,7 @@ module normalize
     .INIT(1'b0)) 
     \rounded_q_reg[19] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\res_reg[15]_0 ),
         .D(D[19]),
         .Q(rounded_q[19]));
@@ -11045,7 +11716,7 @@ module normalize
     .INIT(1'b0)) 
     \rounded_q_reg[1] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\res_reg[15]_0 ),
         .D(D[1]),
         .Q(rounded_q[1]));
@@ -11053,7 +11724,7 @@ module normalize
     .INIT(1'b0)) 
     \rounded_q_reg[2] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\res_reg[15]_0 ),
         .D(D[2]),
         .Q(rounded_q[2]));
@@ -11061,7 +11732,7 @@ module normalize
     .INIT(1'b0)) 
     \rounded_q_reg[3] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\res_reg[15]_0 ),
         .D(D[3]),
         .Q(rounded_q[3]));
@@ -11069,7 +11740,7 @@ module normalize
     .INIT(1'b0)) 
     \rounded_q_reg[4] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\res_reg[15]_0 ),
         .D(D[4]),
         .Q(rounded_q[4]));
@@ -11077,7 +11748,7 @@ module normalize
     .INIT(1'b0)) 
     \rounded_q_reg[5] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\res_reg[15]_0 ),
         .D(D[5]),
         .Q(rounded_q[5]));
@@ -11085,7 +11756,7 @@ module normalize
     .INIT(1'b0)) 
     \rounded_q_reg[6] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\res_reg[15]_0 ),
         .D(D[6]),
         .Q(rounded_q[6]));
@@ -11093,7 +11764,7 @@ module normalize
     .INIT(1'b0)) 
     \rounded_q_reg[7] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\res_reg[15]_0 ),
         .D(D[7]),
         .Q(rounded_q[7]));
@@ -11101,7 +11772,7 @@ module normalize
     .INIT(1'b0)) 
     \rounded_q_reg[8] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\res_reg[15]_0 ),
         .D(D[8]),
         .Q(rounded_q[8]));
@@ -11109,7 +11780,7 @@ module normalize
     .INIT(1'b0)) 
     \rounded_q_reg[9] 
        (.C(clk),
-        .CE(\FSM_sequential_state_reg[0] ),
+        .CE(shift_en),
         .CLR(\res_reg[15]_0 ),
         .D(D[9]),
         .Q(rounded_q[9]));
@@ -11141,8 +11812,8 @@ module normalize
   LUT2 #(
     .INIT(4'h1)) 
     sat_d1__2_carry_i_4
-       (.I0(rounded_q[17]),
-        .I1(rounded_q[16]),
+       (.I0(rounded_q[16]),
+        .I1(rounded_q[17]),
         .O(sat_d1__2_carry_i_4_n_0));
   LUT2 #(
     .INIT(4'h2)) 
@@ -11183,8 +11854,8 @@ module normalize
   LUT2 #(
     .INIT(4'h8)) 
     sat_d1_carry_i_5
-       (.I0(rounded_q[17]),
-        .I1(rounded_q[16]),
+       (.I0(rounded_q[16]),
+        .I1(rounded_q[17]),
         .O(sat_d1_carry_i_5_n_0));
   LUT2 #(
     .INIT(4'h2)) 
@@ -11193,11 +11864,11 @@ module normalize
         .I1(rounded_q[14]),
         .O(sat_d1_carry_i_6_n_0));
   LUT3 #(
-    .INIT(8'hA8)) 
+    .INIT(8'hE0)) 
     sat_flag_i_1
-       (.I0(\FSM_sequential_state_reg[0] ),
-        .I1(sat_d1__2_carry_n_1),
-        .I2(sat_d1_carry_n_1),
+       (.I0(sat_d1__2_carry_n_1),
+        .I1(sat_d1_carry_n_1),
+        .I2(shift_en),
         .O(sat_flag_i_1_n_0));
   FDCE #(
     .INIT(1'b0)) 

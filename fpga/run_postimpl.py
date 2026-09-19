@@ -25,14 +25,18 @@ and `SAIF_MARK STREAM_END`; this script runs the simulation once to learn those
 times, then re-runs capturing activity over exactly that window. Reset, the
 Xilinx GSR release and the kernel load all sit outside it.
 
-IMAGE PROVENANCE: docs/06 s4 specifies the `real_neu32` vector, because power
-depends on realistic pixel statistics. That vector does not exist yet (its
-source asset is missing -- assumption A9). Until it does, this runs on a
-uniform-random image, and the report must say so: random pixels toggle MORE
-than photographic ones, which are spatially correlated, so the resulting
-dynamic power is an OVERESTIMATE. That is the safe direction for a power
-number, but it is not the specified one, and the run log records which image
-was used.
+IMAGE PROVENANCE: power depends on realistic pixel statistics, so the stimulus
+is a real photograph. docs/06 s4 nominates `real_camera_detail32_edge` (bank 0,
+Sobel Gx) -- the highest-toggle W=32 vector in the suite at 0.464 bit-flips per
+input bit per pixel transition, which makes it the most demanding realistic
+activity available rather than a flattering one. Crops are native-resolution
+windows, never resized, because resizing low-passes the image and would
+understate switching (assumption A11).
+
+If the real-image family has not been generated, this falls back to `rand_00`
+and SAYS SO on every run: uniform-random pixels toggle more than any
+photograph, so that figure overstates dynamic power -- the safe direction, but
+not a representative one.
 """
 
 from __future__ import annotations
@@ -49,9 +53,13 @@ ROOT = Path(__file__).resolve().parent.parent
 VECTORS = ROOT.joinpath("model", "vectors")
 VIVADO_BIN = Path("C:/Xilinx/Vivado/2018.2/bin")
 
-#: docs/06 s4 asks for real_neu32. Until the real-image family exists, fall
-#: back to a random image and say so loudly rather than silently.
-PREFERRED_VECTOR = "real_neu32"
+#: Nominated in docs/06 s4: the highest-toggle W=32 real-image vector in the
+#: suite (0.464 bit-flips per input bit per pixel transition). Bank 0 is
+#: Sobel Gx, which is what the single-bank netlist testbench streams.
+PREFERRED_VECTOR = "real_camera_detail32_edge"
+#: Only reached if the real-image family has not been generated. Uniform-random
+#: pixels toggle MORE than any photograph, so this overstates dynamic power --
+#: safe, but not representative, and the run says so loudly.
 FALLBACK_VECTOR = "rand_00"
 
 
@@ -82,7 +90,8 @@ def pick_vector(requested: str | None) -> tuple[str, bool]:
 def main(argv: Sequence[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--variant", default="lut", choices=("lut", "dsp"))
-    ap.add_argument("--vector", help="stimulus vector (default: real_neu32 if present)")
+    ap.add_argument("--vector",
+                    help=f"stimulus vector (default: {PREFERRED_VECTOR} if present)")
     ap.add_argument("--relu", type=int, default=0, choices=(0, 1))
     ap.add_argument("--skip-export", action="store_true",
                     help="reuse an already-exported netlist")
@@ -111,10 +120,11 @@ def main(argv: Sequence[str] | None = None) -> int:
     print(f"variant : {args.variant}")
     print(f"vector  : {vector}  (shift={shift}, relu={args.relu})")
     if not is_specified:
-        print(f"  NOTE: docs/06 s4 specifies {PREFERRED_VECTOR}, which does not exist")
-        print( "        yet (assumption A9). A uniform-random image toggles more than")
-        print( "        a photographic one, so the dynamic power below is an")
-        print( "        OVERESTIMATE -- safe, but not the specified stimulus.")
+        print(f"  NOTE: docs/06 s4 nominates {PREFERRED_VECTOR}, which is not")
+        print( "        present. A uniform-random image toggles more than a")
+        print( "        photograph, so the dynamic power below is an OVERESTIMATE")
+        print( "        -- safe, but not the nominated stimulus. Generate the real")
+        print( "        family with model/prepare_assets.py + gen_real_vectors.py.")
 
     # --- 1. export the netlist ---------------------------------------------
     if not args.skip_export:

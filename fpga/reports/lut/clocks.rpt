@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 --------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
-| Date         : Tue Sep 15 12:19:01 2026
+| Date         : Sat Sep 19 21:30:20 2026
 | Host         : Eng_Ahmed running 64-bit major release  (build 9200)
 | Command      : report_clocks -file D:/Digital_IC_Design/SSCS_Design_Competition/fpga/reports/lut/clocks.rpt
 | Design       : conv_top
@@ -22,7 +22,7 @@ Attributes
   S: Pin phase-shifted with Latency mode
 
 Clock  Period(ns)  Waveform(ns)   Attributes  Sources
-clk    8.000       {0.000 4.000}  P           {clk}
+clk    6.667       {0.000 3.333}  P           {clk}
 
 
 ====================================================

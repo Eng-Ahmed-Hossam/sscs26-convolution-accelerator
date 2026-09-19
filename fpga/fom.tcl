@@ -133,7 +133,12 @@ foreach row $rows {
     puts $fh "| LUTs | [dict get $sum luts] | `utilization.rpt` |"
     puts $fh "| Flip-flops | [dict get $sum ffs] | `utilization.rpt` |"
     puts $fh "| SRL primitives | [dict get $sum srls] | evidence of the SRL32 line-buffer mapping |"
-    puts $fh "| DSPs | [dict get $sum dsps] | must be 0 for `lut` (build gate) |"
+    if {$variant eq "lut"} {
+        set dsp_source "must be 0 for `lut` (build gate)"
+    } else {
+        set dsp_source "DSP count enters the cost term at 50x weight"
+    }
+    puts $fh "| DSPs | [dict get $sum dsps] | $dsp_source |"
     puts $fh "| BRAMs | [dict get $sum brams] | must be 0 (build gate) |"
     puts $fh "| Dynamic power P | [dict get $pw dynamic] W | $method |"
     puts $fh "| Static power | [dict get $pw static] W | |"
@@ -166,9 +171,9 @@ puts $fh "* Fmax is an estimate derived from achieved slack. The figure quoted i
 puts $fh "  report must come from a clean run AT that constraint (docs/06 s2);"
 puts $fh "  never report a frequency with WNS < 0."
 puts $fh "* Because the FoM numerator is throughput **per cycle**, a higher Fmax buys"
-puts $fh "  nothing in FoM -- it only improves absolute Mpx/s. That is the whole"
-puts $fh "  reason the LUT variant is expected to win: 9 DSPs would add 450 to the"
-puts $fh "  cost term for no numerator gain (docs/06 s6)."
+puts $fh "  nothing in FoM -- it only improves absolute Mpx/s. Compare variants using"
+puts $fh "  their measured SAIF dynamic power and complete resource cost; the DSP"
+puts $fh "  penalty can be outweighed by lower LUT count and lower power."
 close $fh
 
 puts "wrote $out"

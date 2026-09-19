@@ -1,0 +1,40 @@
+{
+  "N": 3,
+  "W": 256,
+  "asset": "img1_fullscene256",
+  "bank_labels": [
+    "gx",
+    "gy",
+    "id"
+  ],
+  "banks": [
+    0,
+    1,
+    2
+  ],
+  "crop_origin": [
+    345,
+    1144
+  ],
+  "name": "real_fullscene256_edge",
+  "num_kernels": 3,
+  "outputs_per_bank": 64516,
+  "relu_modes": [
+    0,
+    1
+  ],
+  "resized": false,
+  "shift": 0,
+  "source_image": "img1",
+  "source_mode": "raw_plus_fallback",
+  "source_resolution": [
+    1122,
+    1402
+  ],
+  "tags": [
+    "real",
+    "fullscene",
+    "w256"
+  ],
+  "toggle_density_milli": 417
+}

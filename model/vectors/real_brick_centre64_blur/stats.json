@@ -1,0 +1,50 @@
+{
+  "b0_relu0": {
+    "acc_headroom_bits": 7,
+    "acc_max": 2912,
+    "acc_min": 1176,
+    "acc_peak_abs": 2912,
+    "acc_width_declared": 20,
+    "acc_width_used": 13,
+    "level_peaks": [
+      748,
+      1114,
+      1666,
+      2736,
+      2912
+    ],
+    "out_max": 182,
+    "out_min": 74,
+    "outputs": 3844,
+    "prod_peak_abs": 748,
+    "prod_width_declared": 17,
+    "prod_width_used": 11,
+    "relu_clips": 0,
+    "sat_neg": 0,
+    "sat_pos": 0
+  },
+  "b0_relu1": {
+    "acc_headroom_bits": 7,
+    "acc_max": 2912,
+    "acc_min": 1176,
+    "acc_peak_abs": 2912,
+    "acc_width_declared": 20,
+    "acc_width_used": 13,
+    "level_peaks": [
+      748,
+      1114,
+      1666,
+      2736,
+      2912
+    ],
+    "out_max": 182,
+    "out_min": 74,
+    "outputs": 3844,
+    "prod_peak_abs": 748,
+    "prod_width_declared": 17,
+    "prod_width_used": 11,
+    "relu_clips": 0,
+    "sat_neg": 0,
+    "sat_pos": 0
+  }
+}

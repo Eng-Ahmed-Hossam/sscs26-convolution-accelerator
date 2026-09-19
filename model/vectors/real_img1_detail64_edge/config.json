@@ -1,0 +1,38 @@
+{
+  "N": 3,
+  "W": 64,
+  "asset": "img1_detail64",
+  "banks": [
+    0,
+    1,
+    2
+  ],
+  "crop_origin": [
+    431,
+    1318
+  ],
+  "name": "real_img1_detail64_edge",
+  "num_kernels": 3,
+  "outputs_per_bank": 3844,
+  "random_kernels": false,
+  "relu_default": 0,
+  "relu_modes": [
+    0,
+    1
+  ],
+  "resized": false,
+  "seed": null,
+  "shift": 0,
+  "source_image": "img1",
+  "source_resolution": [
+    1122,
+    1402
+  ],
+  "tags": [
+    "real",
+    "edge",
+    "w64"
+  ],
+  "toggle_density_milli": 419,
+  "why": "real-image edge vector from crop img1_detail64"
+}

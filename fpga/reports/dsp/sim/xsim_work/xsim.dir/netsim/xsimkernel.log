@@ -1,7 +1,7 @@
-Running: xsim.dir/netsim/xsimk.exe -simmode gui -testplusarg image=D:/Digital_IC_Design/SSCS_Design_Competition/model/vectors/rand_00/image.txt -testplusarg kernel0=D:/Digital_IC_Design/SSCS_Design_Competition/model/vectors/rand_00/kernel_b0.txt -testplusarg expected0=D:/Digital_IC_Design/SSCS_Design_Competition/model/vectors/rand_00/expected_b0_relu0.txt -testplusarg relu=0 -testplusarg shift=0 -wdb netsim.wdb -simrunnum 0 -socket 54906
+Running: xsim.dir/netsim/xsimk.exe -simmode gui -testplusarg image=D:/Digital_IC_Design/SSCS_Design_Competition/model/vectors/real_camera_detail32_edge/image.txt -testplusarg kernel0=D:/Digital_IC_Design/SSCS_Design_Competition/model/vectors/real_camera_detail32_edge/kernel_b0.txt -testplusarg expected0=D:/Digital_IC_Design/SSCS_Design_Competition/model/vectors/real_camera_detail32_edge/expected_b0_relu0.txt -testplusarg relu=0 -testplusarg shift=0 -wdb netsim.wdb -simrunnum 0 -socket 65090
 Design successfully loaded
-Design Loading Memory Usage: 13604 KB (Peak: 13604 KB)
+Design Loading Memory Usage: 13864 KB (Peak: 13864 KB)
 Design Loading CPU Usage: 15 ms
 Simulation completed
-Simulation Memory Usage: 17508 KB (Peak: 17508 KB)
-Simulation CPU Usage: 733 ms
+Simulation Memory Usage: 17840 KB (Peak: 17840 KB)
+Simulation CPU Usage: 624 ms

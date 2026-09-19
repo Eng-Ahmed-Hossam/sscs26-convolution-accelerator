@@ -1,0 +1,36 @@
+{
+  "N": 3,
+  "W": 32,
+  "asset": "brick_centre32",
+  "banks": [
+    0
+  ],
+  "crop_origin": [
+    240,
+    240
+  ],
+  "name": "real_brick_centre32_blur",
+  "num_kernels": 1,
+  "outputs_per_bank": 900,
+  "random_kernels": false,
+  "relu_default": 0,
+  "relu_modes": [
+    0,
+    1
+  ],
+  "resized": false,
+  "seed": null,
+  "shift": 4,
+  "source_image": "brick",
+  "source_resolution": [
+    512,
+    512
+  ],
+  "tags": [
+    "real",
+    "blur",
+    "w32"
+  ],
+  "toggle_density_milli": 265,
+  "why": "real-image blur vector from crop brick_centre32"
+}

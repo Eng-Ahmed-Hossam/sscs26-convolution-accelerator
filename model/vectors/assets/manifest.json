@@ -1,0 +1,580 @@
+{
+  "accepted": [
+    {
+      "crop_kind": "centre",
+      "crop_origin": [
+        240,
+        240
+      ],
+      "gradient_energy": 60966,
+      "max": 187,
+      "mean": 111,
+      "mean_gradient": 59,
+      "min": 64,
+      "name": "brick_centre32",
+      "png": "crops/brick_centre32.png",
+      "resized": false,
+      "size": 32,
+      "source": "brick",
+      "source_resolution": [
+        512,
+        512
+      ],
+      "span": 123,
+      "stimulus": "crops/brick_centre32.txt",
+      "toggle_density_milli": 265
+    },
+    {
+      "crop_kind": "centre",
+      "crop_origin": [
+        224,
+        224
+      ],
+      "gradient_energy": 145696,
+      "max": 187,
+      "mean": 104,
+      "mean_gradient": 35,
+      "min": 63,
+      "name": "brick_centre64",
+      "png": "crops/brick_centre64.png",
+      "resized": false,
+      "size": 64,
+      "source": "brick",
+      "source_resolution": [
+        512,
+        512
+      ],
+      "span": 124,
+      "stimulus": "crops/brick_centre64.txt",
+      "toggle_density_milli": 214
+    },
+    {
+      "crop_kind": "detail",
+      "crop_origin": [
+        268,
+        105
+      ],
+      "gradient_energy": 88452,
+      "max": 201,
+      "mean": 120,
+      "mean_gradient": 86,
+      "min": 70,
+      "name": "brick_detail32",
+      "png": "crops/brick_detail32.png",
+      "resized": false,
+      "size": 32,
+      "source": "brick",
+      "source_resolution": [
+        512,
+        512
+      ],
+      "span": 131,
+      "stimulus": "crops/brick_detail32.txt",
+      "toggle_density_milli": 305
+    },
+    {
+      "crop_kind": "detail",
+      "crop_origin": [
+        127,
+        94
+      ],
+      "gradient_energy": 319134,
+      "max": 205,
+      "mean": 115,
+      "mean_gradient": 77,
+      "min": 73,
+      "name": "brick_detail64",
+      "png": "crops/brick_detail64.png",
+      "resized": false,
+      "size": 64,
+      "source": "brick",
+      "source_resolution": [
+        512,
+        512
+      ],
+      "span": 132,
+      "stimulus": "crops/brick_detail64.txt",
+      "toggle_density_milli": 278
+    },
+    {
+      "crop_kind": "centre",
+      "crop_origin": [
+        240,
+        240
+      ],
+      "gradient_energy": 30564,
+      "max": 157,
+      "mean": 11,
+      "mean_gradient": 29,
+      "min": 3,
+      "name": "camera_centre32",
+      "png": "crops/camera_centre32.png",
+      "resized": false,
+      "size": 32,
+      "source": "camera",
+      "source_resolution": [
+        512,
+        512
+      ],
+      "span": 154,
+      "stimulus": "crops/camera_centre32.txt",
+      "toggle_density_milli": 165
+    },
+    {
+      "crop_kind": "centre",
+      "crop_origin": [
+        224,
+        224
+      ],
+      "gradient_energy": 233800,
+      "max": 228,
+      "mean": 27,
+      "mean_gradient": 57,
+      "min": 3,
+      "name": "camera_centre64",
+      "png": "crops/camera_centre64.png",
+      "resized": false,
+      "size": 64,
+      "source": "camera",
+      "source_resolution": [
+        512,
+        512
+      ],
+      "span": 225,
+      "stimulus": "crops/camera_centre64.txt",
+      "toggle_density_milli": 211
+    },
+    {
+      "crop_kind": "detail",
+      "crop_origin": [
+        345,
+        268
+      ],
+      "gradient_energy": 276860,
+      "max": 254,
+      "mean": 140,
+      "mean_gradient": 270,
+      "min": 29,
+      "name": "camera_detail32",
+      "png": "crops/camera_detail32.png",
+      "resized": false,
+      "size": 32,
+      "source": "camera",
+      "source_resolution": [
+        512,
+        512
+      ],
+      "span": 225,
+      "stimulus": "crops/camera_detail32.txt",
+      "toggle_density_milli": 464
+    },
+    {
+      "crop_kind": "detail",
+      "crop_origin": [
+        329,
+        270
+      ],
+      "gradient_energy": 853520,
+      "max": 255,
+      "mean": 143,
+      "mean_gradient": 208,
+      "min": 12,
+      "name": "camera_detail64",
+      "png": "crops/camera_detail64.png",
+      "resized": false,
+      "size": 64,
+      "source": "camera",
+      "source_resolution": [
+        512,
+        512
+      ],
+      "span": 243,
+      "stimulus": "crops/camera_detail64.txt",
+      "toggle_density_milli": 408
+    },
+    {
+      "crop_kind": "centre",
+      "crop_origin": [
+        135,
+        176
+      ],
+      "gradient_energy": 72186,
+      "max": 250,
+      "mean": 64,
+      "mean_gradient": 70,
+      "min": 21,
+      "name": "coins_centre32",
+      "png": "crops/coins_centre32.png",
+      "resized": false,
+      "size": 32,
+      "source": "coins",
+      "source_resolution": [
+        303,
+        384
+      ],
+      "span": 229,
+      "stimulus": "crops/coins_centre32.txt",
+      "toggle_density_milli": 289
+    },
+    {
+      "crop_kind": "centre",
+      "crop_origin": [
+        119,
+        160
+      ],
+      "gradient_energy": 424296,
+      "max": 250,
+      "mean": 90,
+      "mean_gradient": 103,
+      "min": 7,
+      "name": "coins_centre64",
+      "png": "crops/coins_centre64.png",
+      "resized": false,
+      "size": 64,
+      "source": "coins",
+      "source_resolution": [
+        303,
+        384
+      ],
+      "span": 243,
+      "stimulus": "crops/coins_centre64.txt",
+      "toggle_density_milli": 322
+    },
+    {
+      "crop_kind": "detail",
+      "crop_origin": [
+        172,
+        250
+      ],
+      "gradient_energy": 211968,
+      "max": 233,
+      "mean": 130,
+      "mean_gradient": 207,
+      "min": 11,
+      "name": "coins_detail32",
+      "png": "crops/coins_detail32.png",
+      "resized": false,
+      "size": 32,
+      "source": "coins",
+      "source_resolution": [
+        303,
+        384
+      ],
+      "span": 222,
+      "stimulus": "crops/coins_detail32.txt",
+      "toggle_density_milli": 433
+    },
+    {
+      "crop_kind": "detail",
+      "crop_origin": [
+        14,
+        302
+      ],
+      "gradient_energy": 618438,
+      "max": 234,
+      "mean": 122,
+      "mean_gradient": 150,
+      "min": 14,
+      "name": "coins_detail64",
+      "png": "crops/coins_detail64.png",
+      "resized": false,
+      "size": 64,
+      "source": "coins",
+      "source_resolution": [
+        303,
+        384
+      ],
+      "span": 220,
+      "stimulus": "crops/coins_detail64.txt",
+      "toggle_density_milli": 382
+    },
+    {
+      "crop_kind": "centre",
+      "crop_origin": [
+        545,
+        685
+      ],
+      "gradient_energy": 181704,
+      "max": 229,
+      "mean": 101,
+      "mean_gradient": 177,
+      "min": 40,
+      "name": "img1_centre32",
+      "png": "crops/img1_centre32.png",
+      "resized": false,
+      "size": 32,
+      "source": "img1",
+      "source_resolution": [
+        1122,
+        1402
+      ],
+      "span": 189,
+      "stimulus": "crops/img1_centre32.txt",
+      "toggle_density_milli": 398
+    },
+    {
+      "crop_kind": "centre",
+      "crop_origin": [
+        529,
+        669
+      ],
+      "gradient_energy": 766800,
+      "max": 229,
+      "mean": 106,
+      "mean_gradient": 187,
+      "min": 20,
+      "name": "img1_centre64",
+      "png": "crops/img1_centre64.png",
+      "resized": false,
+      "size": 64,
+      "source": "img1",
+      "source_resolution": [
+        1122,
+        1402
+      ],
+      "span": 209,
+      "stimulus": "crops/img1_centre64.txt",
+      "toggle_density_milli": 401
+    },
+    {
+      "crop_kind": "detail",
+      "crop_origin": [
+        434,
+        1069
+      ],
+      "gradient_energy": 257000,
+      "max": 250,
+      "mean": 133,
+      "mean_gradient": 250,
+      "min": 12,
+      "name": "img1_detail32",
+      "png": "crops/img1_detail32.png",
+      "resized": false,
+      "size": 32,
+      "source": "img1",
+      "source_resolution": [
+        1122,
+        1402
+      ],
+      "span": 238,
+      "stimulus": "crops/img1_detail32.txt",
+      "toggle_density_milli": 407
+    },
+    {
+      "crop_kind": "detail",
+      "crop_origin": [
+        431,
+        1318
+      ],
+      "gradient_energy": 1013864,
+      "max": 255,
+      "mean": 146,
+      "mean_gradient": 247,
+      "min": 24,
+      "name": "img1_detail64",
+      "png": "crops/img1_detail64.png",
+      "resized": false,
+      "size": 64,
+      "source": "img1",
+      "source_resolution": [
+        1122,
+        1402
+      ],
+      "span": 231,
+      "stimulus": "crops/img1_detail64.txt",
+      "toggle_density_milli": 419
+    },
+    {
+      "crop_kind": "centre",
+      "crop_origin": [
+        224,
+        224
+      ],
+      "gradient_energy": 96592,
+      "max": 119,
+      "mean": 103,
+      "mean_gradient": 23,
+      "min": 11,
+      "name": "moon_centre64",
+      "png": "crops/moon_centre64.png",
+      "resized": false,
+      "size": 64,
+      "source": "moon",
+      "source_resolution": [
+        512,
+        512
+      ],
+      "span": 108,
+      "stimulus": "crops/moon_centre64.txt",
+      "toggle_density_milli": 122
+    },
+    {
+      "crop_kind": "detail",
+      "crop_origin": [
+        433,
+        245
+      ],
+      "gradient_energy": 98390,
+      "max": 112,
+      "mean": 47,
+      "mean_gradient": 96,
+      "min": 0,
+      "name": "moon_detail32",
+      "png": "crops/moon_detail32.png",
+      "resized": false,
+      "size": 32,
+      "source": "moon",
+      "source_resolution": [
+        512,
+        512
+      ],
+      "span": 112,
+      "stimulus": "crops/moon_detail32.txt",
+      "toggle_density_milli": 204
+    },
+    {
+      "crop_kind": "detail",
+      "crop_origin": [
+        413,
+        225
+      ],
+      "gradient_energy": 307114,
+      "max": 117,
+      "mean": 60,
+      "mean_gradient": 74,
+      "min": 0,
+      "name": "moon_detail64",
+      "png": "crops/moon_detail64.png",
+      "resized": false,
+      "size": 64,
+      "source": "moon",
+      "source_resolution": [
+        512,
+        512
+      ],
+      "span": 117,
+      "stimulus": "crops/moon_detail64.txt",
+      "toggle_density_milli": 179
+    },
+    {
+      "crop_kind": "centre",
+      "crop_origin": [
+        79,
+        176
+      ],
+      "gradient_energy": 221496,
+      "max": 233,
+      "mean": 164,
+      "mean_gradient": 216,
+      "min": 2,
+      "name": "page_centre32",
+      "png": "crops/page_centre32.png",
+      "resized": false,
+      "size": 32,
+      "source": "page",
+      "source_resolution": [
+        191,
+        384
+      ],
+      "span": 231,
+      "stimulus": "crops/page_centre32.txt",
+      "toggle_density_milli": 415
+    },
+    {
+      "crop_kind": "centre",
+      "crop_origin": [
+        63,
+        160
+      ],
+      "gradient_energy": 891196,
+      "max": 237,
+      "mean": 166,
+      "mean_gradient": 217,
+      "min": 0,
+      "name": "page_centre64",
+      "png": "crops/page_centre64.png",
+      "resized": false,
+      "size": 64,
+      "source": "page",
+      "source_resolution": [
+        191,
+        384
+      ],
+      "span": 237,
+      "stimulus": "crops/page_centre64.txt",
+      "toggle_density_milli": 368
+    },
+    {
+      "crop_kind": "detail",
+      "crop_origin": [
+        87,
+        263
+      ],
+      "gradient_energy": 356202,
+      "max": 255,
+      "mean": 181,
+      "mean_gradient": 347,
+      "min": 7,
+      "name": "page_detail32",
+      "png": "crops/page_detail32.png",
+      "resized": false,
+      "size": 32,
+      "source": "page",
+      "source_resolution": [
+        191,
+        384
+      ],
+      "span": 248,
+      "stimulus": "crops/page_detail32.txt",
+      "toggle_density_milli": 426
+    },
+    {
+      "crop_kind": "detail",
+      "crop_origin": [
+        54,
+        252
+      ],
+      "gradient_energy": 1267538,
+      "max": 255,
+      "mean": 189,
+      "mean_gradient": 309,
+      "min": 0,
+      "name": "page_detail64",
+      "png": "crops/page_detail64.png",
+      "resized": false,
+      "size": 64,
+      "source": "page",
+      "source_resolution": [
+        191,
+        384
+      ],
+      "span": 255,
+      "stimulus": "crops/page_detail64.txt",
+      "toggle_density_milli": 398
+    }
+  ],
+  "crop_sizes": [
+    32,
+    64
+  ],
+  "generator": "model/prepare_assets.py",
+  "grayscale": "ITU-R BT.601 luma, integer round-half-up",
+  "min_mean_gradient": 8,
+  "min_span": 100,
+  "pix_max": 255,
+  "rejected": [
+    {
+      "crop": "moon_centre32",
+      "kind": "centre",
+      "reasons": [
+        "pixel span 52 < 100"
+      ]
+    }
+  ],
+  "resized_for_stimulus": false,
+  "source_mode": "raw_plus_fallback",
+  "source_note": "Sources are the user-supplied files in model/vectors/assets/raw/ PLUS the genuine photographs bundled with scikit-image, requested with --include-fallback. Nothing was synthesised. The bundled images carry explicit licences (see the table above) and are the safe choice for published figures.",
+  "total_accepted": 23,
+  "total_rejected": 1,
+  "used_fallback_sources": true
+}

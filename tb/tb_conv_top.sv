@@ -79,13 +79,15 @@ module tb_conv_top
   // -------------------------------------------------------------------------
   // Stimulus / expectation storage
   // -------------------------------------------------------------------------
-  int image   [0:1024*16-1];
+  // Sized from TBW, not a fixed constant: a W=256 frame is 65536 pixels,
+  // four times the old hardcoded 16384 bound.
+  int image   [0:PIXELS-1];
   int kern    [0:NUM_BANKS-1][0:N*N-1];
-  int expect_ [0:NUM_BANKS-1][0:1024*16-1];
+  int expect_ [0:NUM_BANKS-1][0:OUTS-1];
   int banks_used, shift_cfg, relu_cfg, use_bubbles, check_lat;
 
   function automatic int read_ints(input string path, input int max_n,
-                                   output int values [0:1024*16-1]);
+                                   output int values [0:PIXELS-1]);
     int fd, v, n;
     fd = $fopen(path, "r");
     if (fd == 0) $fatal(1, "tb_conv_top: cannot open %s", path);
@@ -102,7 +104,7 @@ module tb_conv_top
   // Output monitor: collects and checks every qualified beat.
   // -------------------------------------------------------------------------
   // Captured outputs, dumped as the "HW outputs" deliverable of docs/05 s3.
-  int hw_out [0:NUM_BANKS-1][0:1024*16-1];
+  int hw_out [0:NUM_BANKS-1][0:OUTS-1];
   int exp_idx, exp_bank;
   logic signed [OUT_W-1:0] sat_hi = OUT_MAX;
   logic signed [OUT_W-1:0] sat_lo = OUT_MIN;
@@ -158,7 +160,7 @@ module tb_conv_top
           $display("FAIL  output %0d is beyond the %0d expected outputs",
                    n_out, banks_used * OUTS);
       end
-      if (exp_bank < NUM_BANKS && exp_idx < 1024*16)
+      if (exp_bank < NUM_BANKS && exp_idx < OUTS)
         hw_out[exp_bank][exp_idx] = out_data;
       n_out++;
     end
@@ -412,7 +414,7 @@ module tb_conv_top
       $fatal(1, "tb_conv_top: %s holds %0d pixels, expected %0d", s_image, n_read, PIXELS);
 
     for (int b = 0; b < banks_used; b++) begin
-      int tmp [0:1024*16-1];
+      int tmp [0:PIXELS-1];
       if (!$value$plusargs($sformatf("kernel%0d=%%s", b), s_kern))
         $fatal(1, "tb_conv_top: +kernel%0d=<path> is required", b);
       n_read = read_ints(s_kern, N*N, tmp);

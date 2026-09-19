@@ -67,6 +67,13 @@ TB_SOURCES = [
     "tb/tb_conv_directed.sv",
 ]
 STAGE_DUMP = ROOT.joinpath("tb", "stage_dumps", "datapath.txt")
+WAVES = ROOT.joinpath("tb", "results", "waves")
+
+# The design default W, taken from rtl/pkg_params.sv via the Python bridge so
+# this file holds no width of its own (CONTRIBUTING rule 2).
+sys.path.insert(0, str(ROOT.joinpath("model")))
+from pkg_params import PARAMS as _PKG  # noqa: E402
+PARAMS_W_DEFAULT = _PKG.W_DEFAULT
 
 
 # ---------------------------------------------------------------------------
@@ -88,6 +95,7 @@ COVERAGE_BINS = {
     "Activation":      ["relu_clip"],
     "Kernel classes":  ["kernel_zero", "kernel_maxpos", "kernel_maxneg",
                         "kernel_mixed"],
+    "Image realism":   ["img_synthetic", "img_real"],
 }
 
 #: Justified exclusions, printed with the coverage report so a hole is never
@@ -104,8 +112,13 @@ EXCLUSIONS = {
 }
 
 
-#: The three real-image vectors docs/05_verification_plan.md s2.3 requires.
-REAL_FAMILY = ("real_lena32", "real_neu32", "real_pcb32")
+#: Minimum number of real-image vectors the sign-off gate demands. The gate
+#: counts vectors whose name marks them as real rather than naming three fixed
+#: files: the specific crops depend on which photographs are supplied, but the
+#: REQUIREMENT -- that a submission rests on real imagery, not synthetic
+#: patterns -- does not.
+MIN_REAL_VECTORS = 3
+REAL_PREFIX = "real_"
 
 
 def real_family_error(manifest: dict) -> str | None:
@@ -121,13 +134,14 @@ def real_family_error(manifest: dict) -> str | None:
     intent, while the vector list records fact, and a flag that says "included"
     over an empty list is exactly the failure mode worth catching.
     """
-    present = {v.get("name") for v in manifest.get("vectors", [])}
-    missing = [name for name in REAL_FAMILY if name not in present]
-    if missing:
-        return ("real-image family incomplete: missing "
-                + ", ".join(missing)
-                + ". docs/05 s2.3 and assumption A9 forbid substituting synthetic "
-                  "data; supply the source assets under model/vectors/assets/.")
+    real = sorted(v.get("name", "") for v in manifest.get("vectors", [])
+                  if str(v.get("name", "")).startswith(REAL_PREFIX))
+    if len(real) < MIN_REAL_VECTORS:
+        return (f"real-image family incomplete: found {len(real)} vector(s) "
+                f"named `{REAL_PREFIX}*`, need at least {MIN_REAL_VECTORS}. "
+                "docs/05 s2.3 and assumption A9 forbid substituting synthetic "
+                "data; add photographs under model/vectors/assets/raw/ and run "
+                "model/prepare_assets.py then model/gen_real_vectors.py.")
     if not manifest.get("real_family_included", False):
         return ("manifest reports real_family_included=false, so the suite was "
                 "generated with --skip-real. docs/05 s2.3 treats that as a gate "
@@ -186,6 +200,88 @@ def parse_failure(out: str) -> tuple[int, int] | None:
     return None
 
 
+
+# ---------------------------------------------------------------------------
+# Waveform capture (docs/05 s5).
+#
+# Five phenomena have to be shown as pictures in the report. Capturing them is
+# a separate, deliberately small set of runs with full signal logging: turning
+# waveform dumping on for all ~160 regression runs would cost a lot of disk and
+# wall time to record mostly identical traces.
+#
+# The dumps are ARCHIVED rather than regenerated on demand, because recovering
+# them later means re-running the simulator to get back to a state that was
+# already reached once.
+#
+# (label, vector, relu, bubbles, checklat, what the picture shows)
+# ---------------------------------------------------------------------------
+WAVE_RUNS = [
+    ("window_first", "real_camera_detail32_blur", 0, 0, 1,
+     "serpentine window filling, then the first qualified output at "
+     "T_first = (N-1)*W + N + P_PIPE"),
+    ("bank_swap", "real_camera_detail32_edge", 0, 0, 0,
+     "FLUSH->RUN bank swap: bank_sel increments and out_bank follows the "
+     "aligned metadata, 0 -> 1 -> 2"),
+    ("relu_clip", "real_camera_detail32_edge", 1, 0, 0,
+     "ReLU clipping negative Sobel responses to zero on a real image"),
+    ("saturation", "sat_pos", 0, 0, 1,
+     "both saturation rails: acc 291465 clamped to +32767 with sat_flag high "
+     "(a photograph never reaches the rails -- this needs the synthetic vector)"),
+]
+
+
+def capture_waves(vsim: str, workdir, vectors_by_name: dict, verbose: bool) -> list:
+    """Run the waveform set with full logging; return matrix rows."""
+    rows = []
+    WAVES.mkdir(parents=True, exist_ok=True)
+    for label, vname, relu, bubbles, checklat, caption in WAVE_RUNS:
+        entry = vectors_by_name.get(vname)
+        if entry is None:
+            rows.append(Row(f"WAVE {label}", "-", "-", "-", "?", "FAIL",
+                            f"vector {vname} not found"))
+            continue
+        banks = entry["num_kernels"]
+        width = int(entry.get("W", PARAMS_W_DEFAULT))
+        vdir = VECTORS.joinpath(vname)
+        wlf = WAVES.joinpath(f"{label}.wlf")
+        pargs = [f"+image={vdir.joinpath('image.txt')}", f"+banks={banks}",
+                 f"+shift={entry['shift']}", f"+relu={relu}",
+                 f"+bubbles={bubbles}", f"+checklat={checklat}"]
+        for b in range(banks):
+            pargs.append(f"+kernel{b}={vdir.joinpath(f'kernel_b{b}.txt')}")
+            pargs.append(f"+expected{b}={vdir.joinpath(f'expected_b{b}_relu{relu}.txt')}")
+        do = "add wave -r /*; run -all; quit -f"
+        # The top module name is REQUIRED as the final argument. Omitting it
+        # makes vsim report "No Design Loaded!" and exit without writing a
+        # waveform -- which looks like a capture failure rather than a
+        # malformed command line.
+        cmd = [vsim, "-c", f"-gTBW={width}", "-wlf", str(wlf), *pargs,
+               "-do", do, "tb_conv_top"]
+        rc, out = _run(cmd, workdir)
+        ok = "tb_conv_top PASSED" in out and "FAILED" not in out and wlf.is_file()
+        size_kb = wlf.stat().st_size // 1024 if wlf.is_file() else 0
+        rows.append(Row(f"WAVE {label}", str(relu), str(banks), "-",
+                        "0" if ok else "?", "PASS" if ok else "FAIL",
+                        f"{size_kb} KB  {vname}"))
+        if not ok and verbose:
+            print(out[-2000:])
+    # A caption file so the screenshots can be taken later without guessing
+    # which trace shows what.
+    cap = ["# Archived waveform captures", "",
+           "Produced by `python tb/run_regression.py --waves`. Open with",
+           "`vsim -view <file>.wlf`. Each trace is a run that also passed its",
+           "bit-exactness check, so nothing here is a picture of a broken run.",
+           ""]
+    for label, vname, relu, bubbles, checklat, caption in WAVE_RUNS:
+        cap.append(f"## `{label}.wlf`")
+        cap.append("")
+        cap.append(f"* vector `{vname}`, relu_en={relu}, bubbles={bubbles}")
+        cap.append(f"* shows: {caption}")
+        cap.append("")
+    WAVES.joinpath("README.md").write_text("\n".join(cap), encoding="utf-8")
+    return rows
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     parser.add_argument("--vector", help="run a single named vector")
@@ -197,6 +293,9 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--no-units", action="store_true",
                         help="skip the unit testbenches")
     parser.add_argument("--keep", action="store_true", help="keep the work library")
+    parser.add_argument("--waves", action="store_true",
+                        help="also capture the docs/05 s5 waveform set into "
+                             "tb/results/waves/ (archived for later screenshots)")
     parser.add_argument("--signoff", action="store_true",
                         help="enforce the full submission deliverable set, including "
                              "the real-image family (docs/05 s2.3). Development runs "
@@ -219,7 +318,26 @@ def main(argv: Sequence[str] | None = None) -> int:
                        cwd=str(ROOT))
 
     manifest = json.loads(VECTORS.joinpath("manifest.json").read_text(encoding="utf-8"))
-    vectors = [e for e in manifest["vectors"]
+
+    # Synthetic vectors carry no W of their own -- they are all built at the
+    # package default. Real-image vectors come in two sizes, so each one states
+    # its own W and the testbench is elaborated to match.
+    all_vectors = [dict(e, W=manifest.get("W", PARAMS_W_DEFAULT), family="synthetic")
+                   for e in manifest["vectors"]]
+
+    # The real-image family lives in its own manifest so that each generator
+    # owns a tree its own --check can verify byte for byte. They run in the
+    # SAME regression: the synthetic vectors hit the arithmetic corners a
+    # photograph never will, and the real ones hit the spatial statistics the
+    # synthetic ones never will. Neither replaces the other.
+    real_manifest = {}
+    real_path = VECTORS.joinpath("manifest_real.json")
+    if real_path.is_file():
+        real_manifest = json.loads(real_path.read_text(encoding="utf-8"))
+        all_vectors += [dict(e, family=e.get("family", "real"))
+                        for e in real_manifest["vectors"]]
+
+    vectors = [e for e in all_vectors
                if args.vector is None or e["name"] == args.vector]
     if not vectors:
         parser.error(f"unknown vector {args.vector!r}")
@@ -279,6 +397,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         # --- 4. the vector suite, both ReLU modes ---------------------------
         for n, entry in enumerate(vectors):
             name, banks, shift = entry["name"], entry["num_kernels"], entry["shift"]
+            width = int(entry.get("W", PARAMS_W_DEFAULT))
             vdir = VECTORS.joinpath(name)
             outdir = RESULTS.joinpath(name)
             outdir.mkdir(parents=True, exist_ok=True)
@@ -293,7 +412,8 @@ def main(argv: Sequence[str] | None = None) -> int:
                 for b in range(banks):
                     pargs.append(f"+kernel{b}={vdir.joinpath(f'kernel_b{b}.txt')}")
                     pargs.append(f"+expected{b}={vdir.joinpath(f'expected_b{b}_relu{relu}.txt')}")
-                cmd = [vsim, "-c", *pargs, "-do", "run -all; quit -f", "tb_conv_top"]
+                cmd = [vsim, "-c", f"-gTBW={width}", *pargs,
+                       "-do", "run -all; quit -f", "tb_conv_top"]
                 rc, out = _run(cmd, workdir)
 
                 ok = "tb_conv_top PASSED" in out and "FAILED" not in out
@@ -310,7 +430,12 @@ def main(argv: Sequence[str] | None = None) -> int:
                 for line in out.splitlines():
                     if "COVER " in line:
                         covered.add(line.split("COVER ", 1)[1].strip())
+                if ok:
+                    covered.add("img_real" if entry["family"] != "synthetic"
+                                else "img_synthetic")
                 note = "bubbles" if bubbles else ("latency" if checklat else "")
+                if width != PARAMS_W_DEFAULT:
+                    note = (note + " " if note else "") + f"W={width}"
                 rows.append(Row(name, str(relu), str(banks), outputs, mismatches,
                                 "PASS" if ok else "FAIL", note))
 
@@ -326,11 +451,19 @@ def main(argv: Sequence[str] | None = None) -> int:
                         print(localise(name, bank, idx, shift, relu))
 
         # --- 5. matrix -------------------------------------------------------
+        # ---- waveform capture ------------------------------------------------
+        if args.waves:
+            rows += capture_waves(vsim, workdir,
+                                  {e["name"]: e for e in all_vectors},
+                                  args.verbose if hasattr(args, "verbose") else False)
+
         # ---- sign-off gate: the real-image family ---------------------------
         # Appended BEFORE the matrix is rendered, so a failing gate is visible
         # in the table rather than only moving the exit code.
         if args.signoff:
-            problem = real_family_error(manifest)
+            problem = real_family_error(
+                {"real_family_included": bool(real_manifest.get("vectors")),
+                 "vectors": real_manifest.get("vectors", [])})
             if problem:
                 rows.append(Row("SIGNOFF real-image", "-", "-", "-", "1",
                                 "FAIL", problem))

@@ -28,7 +28,8 @@ set root       [file dirname $script_dir]
 
 # --- argument parsing -------------------------------------------------------
 set opt_variant "both"
-set opt_period  8.000
+set opt_period  6.667      ;# 150 MHz, matching fpga/constraints.xdc.
+                            ;# Overriding this re-applies the I/O delays too.
 set opt_impl    1          ;# run place & route, not synthesis alone
 set opt_w       ""         ;# optional W override for a parameter smoke build
 
@@ -96,15 +97,23 @@ proc parse_utilization {path} {
     set fh [open $path r]
     while {[gets $fh line] >= 0} {
         # Rows look like:  | Slice LUTs | 937 | 0 | 53200 | 1.76 |
-        if {[regexp {^\|\s*Slice LUTs\s*\|\s*([0-9]+)\s*\|} $line -> v]} {
+        #
+        # The trailing \* is NOT optional decoration: a POST-SYNTHESIS report
+        # writes "Slice LUTs*" (the asterisk marks an estimate) while a
+        # POST-ROUTE report writes "Slice LUTs". A regex that demanded the
+        # bare name silently returned "n/a" for every synthesis-only run --
+        # a missing number rather than a wrong one, but still a parse that
+        # failed quietly. Accept both and let the caller say which stage it
+        # read.
+        if {[regexp {^\|\s*Slice LUTs\*?\s*\|\s*([0-9]+)\s*\|} $line -> v]} {
             dict set res luts $v
-        } elseif {[regexp {^\|\s*Slice Registers\s*\|\s*([0-9]+)\s*\|} $line -> v]} {
+        } elseif {[regexp {^\|\s*Slice Registers\*?\s*\|\s*([0-9]+)\s*\|} $line -> v]} {
             dict set res ffs $v
-        } elseif {[regexp {^\|\s*LUT as Shift Register\s*\|\s*([0-9]+)\s*\|} $line -> v]} {
+        } elseif {[regexp {^\|\s*LUT as Shift Register\*?\s*\|\s*([0-9]+)\s*\|} $line -> v]} {
             dict set res srls $v
-        } elseif {[regexp {^\|\s*DSPs\s*\|\s*([0-9]+)\s*\|} $line -> v]} {
+        } elseif {[regexp {^\|\s*DSPs\*?\s*\|\s*([0-9]+)\s*\|} $line -> v]} {
             dict set res dsps $v
-        } elseif {[regexp {^\|\s*Block RAM Tile\s*\|\s*([0-9.]+)\s*\|} $line -> v]} {
+        } elseif {[regexp {^\|\s*Block RAM Tile\*?\s*\|\s*([0-9.]+)\s*\|} $line -> v]} {
             dict set res brams $v
         }
     }
@@ -113,7 +122,7 @@ proc parse_utilization {path} {
 }
 
 proc parse_timing_summary {path} {
-    if {![file exists $path]} { return [list "n/a" "n/a" "n/a"] }
+    if {![file exists $path]} { return [list "n/a" "n/a" "n/a" "n/a"] }
     set fh [open $path r]
     set data [read $fh]
     close $fh
@@ -123,13 +132,17 @@ proc parse_timing_summary {path} {
         if {[string match "*WNS(ns)*TNS(ns)*" [lindex $lines $i]]} {
             for {set j [expr {$i + 1}]} {$j < $n && $j < [expr {$i + 4}]} {incr j} {
                 set row [string trim [lindex $lines $j]]
+                # WNS TNS TNS-failing TNS-total WHS THS THS-failing ...
+                if {[regexp {^(-?[0-9]+\.[0-9]+)\s+(-?[0-9]+\.[0-9]+)\s+([0-9]+)\s+([0-9]+)\s+(-?[0-9]+\.[0-9]+)} $row -> wns tns fep tot whs]} {
+                    return [list $wns $tns $fep $whs]
+                }
                 if {[regexp {^(-?[0-9]+\.[0-9]+)\s+(-?[0-9]+\.[0-9]+)\s+([0-9]+)} $row -> wns tns fep]} {
-                    return [list $wns $tns $fep]
+                    return [list $wns $tns $fep "n/a"]
                 }
             }
         }
     }
-    return [list "n/a" "n/a" "n/a"]
+    return [list "n/a" "n/a" "n/a" "n/a"]
 }
 
 proc build_variant {variant use_dsp} {
@@ -152,6 +165,22 @@ proc build_variant {variant use_dsp} {
     }
     read_xdc [file join $script_dir constraints.xdc]
 
+    # The XDC carries the default 150 MHz clock and its I/O budget. A sweep
+    # (-period) must move BOTH: the input/output delays are a fraction of the
+    # period, so retiming the clock alone would silently leave the old budget
+    # in place and make the comparison dishonest.
+    set xdc_default 6.667
+    if {abs($opt_period - $xdc_default) > 0.0005} {
+        set io_budget [expr {$opt_period * 0.20}]
+        set_property PERIOD $opt_period [get_clocks clk]
+        set_input_delay  -clock clk $io_budget \
+            [get_ports -filter {DIRECTION == IN && NAME != clk}]
+        set_output_delay -clock clk $io_budget [get_ports -filter {DIRECTION == OUT}]
+        puts "CONSTRAINT OVERRIDE: period $opt_period ns, I/O budget $io_budget ns"
+    } else {
+        puts "CONSTRAINT: period $opt_period ns from constraints.xdc (I/O budget 20%)"
+    }
+
     # 2. out-of-context synthesis. The variant is selected by overriding the
     #    conv_top MODULE parameter -- never by editing source, and never by
     #    overriding a package constant (CONTRIBUTING rule 2).
@@ -164,6 +193,25 @@ proc build_variant {variant use_dsp} {
     write_checkpoint -force [file join $rpt post_synth.dcp]
     report_utilization -file [file join $rpt utilization_synth.rpt]
     report_utilization -hierarchical -file [file join $rpt utilization_synth_hier.rpt]
+
+    # The default build additionally publishes its post-synthesis utilization
+    # under the name the Phase 4 deferred gate asks for, so that gate has a
+    # single artefact to point at.
+    if {$variant eq "lut"} {
+        report_utilization -file [file join $root fpga reports util_default_synth.rpt]
+    }
+
+    # ---- INFERRED LATCHES -------------------------------------------------
+    # A latch means an always_comb path that does not assign on every branch.
+    # Queried from the netlist rather than grepped from the log: the log text
+    # varies between Vivado versions, a cell census does not.
+    set latches [get_cells -quiet -hierarchical -filter {REF_NAME =~ LD*}]
+    puts "COMPLIANCE post-synth: latches=[llength $latches]"
+    if {[llength $latches] != 0} {
+        foreach l $latches { puts "  LATCH: [get_property NAME $l] ([get_property REF_NAME $l])" }
+        error "COMPLIANCE FAILURE: [llength $latches] inferred latch(es). Every\
+               always_comb must assign all its outputs on all paths."
+    }
 
     # --- COMPLIANCE GATE (docs/06 s1.5) ------------------------------------
     # Checked after synthesis so the build fails fast, and again after routing.
@@ -232,8 +280,9 @@ proc build_variant {variant use_dsp} {
     set wns "n/a"
     set tns "n/a"
     set failing_ep "n/a"
+    set whs "n/a"
     if {$opt_impl} {
-        lassign [parse_timing_summary [file join $rpt timing.rpt]] wns tns failing_ep
+        lassign [parse_timing_summary [file join $rpt timing.rpt]] wns tns failing_ep whs
     }
 
     set fh [open [file join $rpt summary.txt] w]
@@ -250,10 +299,11 @@ proc build_variant {variant use_dsp} {
     puts $fh "wns_ns       $wns"
     puts $fh "tns_ns       $tns"
     puts $fh "failing_eps  $failing_ep"
+    puts $fh "whs_ns       $whs"
     close $fh
 
     puts "SUMMARY $variant: LUT=$lut_count FF=$ff_count SRL=$srl_count\
-          DSP=$dsp_count BRAM=$bram_count WNS=$wns TNS=$tns FAILING=$failing_ep"
+          DSP=$dsp_count BRAM=$bram_count WNS=$wns WHS=$whs TNS=$tns FAILING=$failing_ep"
 
     close_project
 }

@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
-| Date             : Tue Sep 15 12:19:02 2026
+| Date             : Sat Sep 19 21:30:20 2026
 | Host             : Eng_Ahmed running 64-bit major release  (build 9200)
 | Command          : report_power -file D:/Digital_IC_Design/SSCS_Design_Competition/fpga/reports/lut/power_vectorless.rpt
 | Design           : conv_top
@@ -30,14 +30,14 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.121        |
+| Total On-Chip Power (W)  | 0.128        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.018        |
+| Dynamic (W)              | 0.025        |
 | Device Static (W)        | 0.103        |
 | Effective TJA (C/W)      | 11.5         |
-| Max Ambient (C)          | 83.6         |
-| Junction Temperature (C) | 26.4         |
+| Max Ambient (C)          | 83.5         |
+| Junction Temperature (C) | 26.5         |
 | Confidence Level         | Medium       |
 | Setting File             | ---          |
 | Simulation Activity File | ---          |
@@ -52,16 +52,16 @@ Table of Contents
 +-------------------------+-----------+----------+-----------+-----------------+
 | On-Chip                 | Power (W) | Used     | Available | Utilization (%) |
 +-------------------------+-----------+----------+-----------+-----------------+
-| Clocks                  |     0.010 |        3 |       --- |             --- |
-| Slice Logic             |     0.004 |     2161 |       --- |             --- |
-|   LUT as Logic          |     0.004 |      917 |     53200 |            1.72 |
+| Clocks                  |     0.015 |        3 |       --- |             --- |
+| Slice Logic             |     0.006 |     2239 |       --- |             --- |
+|   LUT as Logic          |     0.005 |      920 |     53200 |            1.73 |
 |   CARRY4                |    <0.001 |      159 |     13300 |            1.20 |
-|   Register              |    <0.001 |      758 |    106400 |            0.71 |
+|   Register              |    <0.001 |      830 |    106400 |            0.78 |
 |   LUT as Shift Register |    <0.001 |       20 |     17400 |            0.11 |
-|   Others                |     0.000 |       10 |       --- |             --- |
-| Signals                 |     0.004 |     1617 |       --- |             --- |
+|   Others                |     0.000 |       11 |       --- |             --- |
+| Signals                 |     0.004 |     1613 |       --- |             --- |
 | Static Power            |     0.103 |          |           |                 |
-| Total                   |     0.121 |          |           |                 |
+| Total                   |     0.128 |          |           |                 |
 +-------------------------+-----------+----------+-----------+-----------------+
 
 
@@ -71,7 +71,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.026 |       0.018 |      0.007 |
+| Vccint    |       1.000 |     0.032 |       0.025 |      0.007 |
 | Vccaux    |       1.800 |     0.010 |       0.000 |      0.010 |
 | Vcco33    |       3.300 |     0.000 |       0.000 |      0.000 |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |
@@ -134,7 +134,7 @@ Table of Contents
 +-------+--------+-----------------+
 | Clock | Domain | Constraint (ns) |
 +-------+--------+-----------------+
-| clk   | clk    |             8.0 |
+| clk   | clk    |             6.7 |
 +-------+--------+-----------------+
 
 
@@ -147,12 +147,12 @@ Table of Contents
 +--------------------+-----------+
 | Name               | Power (W) |
 +--------------------+-----------+
-| conv_top           |     0.018 |
-|   u_adder_tree     |     0.003 |
+| conv_top           |     0.025 |
+|   u_adder_tree     |     0.004 |
 |   u_ctrl_fsm       |     0.002 |
-|   u_kernel_regfile |     0.005 |
-|   u_line_window    |     0.001 |
-|   u_mac_array      |     0.006 |
+|   u_kernel_regfile |     0.008 |
+|   u_line_window    |     0.002 |
+|   u_mac_array      |     0.008 |
 |   u_normalize      |    <0.001 |
 +--------------------+-----------+
 

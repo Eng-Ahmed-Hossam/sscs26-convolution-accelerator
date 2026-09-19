@@ -14,42 +14,42 @@ per frame with no stall path anywhere in the datapath.
 | Quantity | Value | Source |
 |---|---|---|
 | Throughput T | 1.0 output px/cycle | architectural, regression-proven |
-| LUTs | 937 | `utilization.rpt` |
-| Flip-flops | 758 | `utilization.rpt` |
+| LUTs | 940 | `utilization.rpt` |
+| Flip-flops | 830 | `utilization.rpt` |
 | SRL primitives | 20 | evidence of the SRL32 line-buffer mapping |
 | DSPs | 0 | must be 0 for `lut` (build gate) |
 | BRAMs | 0 | must be 0 (build gate) |
-| Dynamic power P | 0.030 W | SAIF (vector-based, post-implementation, real frame) |
+| Dynamic power P | 0.031 W | SAIF (vector-based, post-implementation, real frame) |
 | Static power | 0.103 W | |
-| Total on-chip power | 0.133 W | |
+| Total on-chip power | 0.134 W | |
 | Vivado confidence | High | |
-| Cost = LUTs + 50xDSPs + 100xBRAMs | **937** | |
-| **FoM = T / (P x Cost)** | **0.03557452863749555** | |
-| Constraint period | 8.000 ns | `constraints.xdc` |
-| WNS | 0.323 ns | `timing.rpt` |
+| Cost = LUTs + 50xDSPs + 100xBRAMs | **940** | |
+| **FoM = T / (P x Cost)** | **0.03431708991077557** | |
+| Constraint period | 6.667 ns | `constraints.xdc` |
+| WNS | 0.428 ns | `timing.rpt` |
 | TNS | 0.000 ns | `timing.rpt` |
-| Fmax estimate | 130.25921583952066 MHz | 1000/(period - WNS) |
+| Fmax estimate | 160.2820964898221 MHz | 1000/(period - WNS) |
 
 ## Variant: `dsp` (USE_DSP=1)
 
 | Quantity | Value | Source |
 |---|---|---|
 | Throughput T | 1.0 output px/cycle | architectural, regression-proven |
-| LUTs | 377 | `utilization.rpt` |
-| Flip-flops | 606 | `utilization.rpt` |
+| LUTs | 379 | `utilization.rpt` |
+| Flip-flops | 678 | `utilization.rpt` |
 | SRL primitives | 20 | evidence of the SRL32 line-buffer mapping |
-| DSPs | 9 | must be 0 for `lut` (build gate) |
+| DSPs | 9 | DSP count enters the cost term at 50x weight |
 | BRAMs | 0 | must be 0 (build gate) |
-| Dynamic power P | 0.022 W | SAIF (vector-based, post-implementation, real frame) |
+| Dynamic power P | 0.020 W | SAIF (vector-based, post-implementation, real frame) |
 | Static power | 0.103 W | |
-| Total on-chip power | 0.125 W | |
+| Total on-chip power | 0.123 W | |
 | Vivado confidence | High | |
-| Cost = LUTs + 50xDSPs + 100xBRAMs | **827** | |
-| **FoM = T / (P x Cost)** | **0.054963174672969115** | |
-| Constraint period | 8.000 ns | `constraints.xdc` |
-| WNS | 1.377 ns | `timing.rpt` |
+| Cost = LUTs + 50xDSPs + 100xBRAMs | **829** | |
+| **FoM = T / (P x Cost)** | **0.060313630880579006** | |
+| Constraint period | 6.667 ns | `constraints.xdc` |
+| WNS | 0.842 ns | `timing.rpt` |
 | TNS | 0.000 ns | `timing.rpt` |
-| Fmax estimate | 150.98897780462025 MHz | 1000/(period - WNS) |
+| Fmax estimate | 171.67381974248926 MHz | 1000/(period - WNS) |
 
 ## Notes on reading these numbers
 
@@ -60,6 +60,6 @@ per frame with no stall path anywhere in the datapath.
   report must come from a clean run AT that constraint (docs/06 s2);
   never report a frequency with WNS < 0.
 * Because the FoM numerator is throughput **per cycle**, a higher Fmax buys
-  nothing in FoM -- it only improves absolute Mpx/s. That is the whole
-  reason the LUT variant is expected to win: 9 DSPs would add 450 to the
-  cost term for no numerator gain (docs/06 s6).
+  nothing in FoM -- it only improves absolute Mpx/s. Compare variants using
+  their measured SAIF dynamic power and complete resource cost; the DSP
+  penalty can be outweighed by lower LUT count and lower power.

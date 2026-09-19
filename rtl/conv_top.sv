@@ -106,7 +106,8 @@ module conv_top
   );
 
   // -------------------------------------------------------------------------
-  // Coefficient banks. Combinational full-bank read of the active bank.
+  // Coefficient banks. Registered full-bank read of the active bank; this is
+  // a static MAC side input and does not add a pixel-data pipeline stage.
   // -------------------------------------------------------------------------
   kernel_regfile u_kernel_regfile (
     .clk      (clk),

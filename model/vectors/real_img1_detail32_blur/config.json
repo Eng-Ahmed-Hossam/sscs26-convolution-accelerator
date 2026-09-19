@@ -1,0 +1,36 @@
+{
+  "N": 3,
+  "W": 32,
+  "asset": "img1_detail32",
+  "banks": [
+    0
+  ],
+  "crop_origin": [
+    434,
+    1069
+  ],
+  "name": "real_img1_detail32_blur",
+  "num_kernels": 1,
+  "outputs_per_bank": 900,
+  "random_kernels": false,
+  "relu_default": 0,
+  "relu_modes": [
+    0,
+    1
+  ],
+  "resized": false,
+  "seed": null,
+  "shift": 4,
+  "source_image": "img1",
+  "source_resolution": [
+    1122,
+    1402
+  ],
+  "tags": [
+    "real",
+    "blur",
+    "w32"
+  ],
+  "toggle_density_milli": 407,
+  "why": "real-image blur vector from crop img1_detail32"
+}

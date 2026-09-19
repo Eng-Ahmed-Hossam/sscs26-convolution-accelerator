@@ -1,0 +1,36 @@
+{
+  "N": 3,
+  "W": 64,
+  "asset": "page_detail64",
+  "banks": [
+    0
+  ],
+  "crop_origin": [
+    54,
+    252
+  ],
+  "name": "real_page_detail64_blur",
+  "num_kernels": 1,
+  "outputs_per_bank": 3844,
+  "random_kernels": false,
+  "relu_default": 0,
+  "relu_modes": [
+    0,
+    1
+  ],
+  "resized": false,
+  "seed": null,
+  "shift": 4,
+  "source_image": "page",
+  "source_resolution": [
+    191,
+    384
+  ],
+  "tags": [
+    "real",
+    "blur",
+    "w64"
+  ],
+  "toggle_density_milli": 398,
+  "why": "real-image blur vector from crop page_detail64"
+}

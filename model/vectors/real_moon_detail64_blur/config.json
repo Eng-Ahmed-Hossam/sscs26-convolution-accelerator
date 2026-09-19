@@ -1,0 +1,36 @@
+{
+  "N": 3,
+  "W": 64,
+  "asset": "moon_detail64",
+  "banks": [
+    0
+  ],
+  "crop_origin": [
+    413,
+    225
+  ],
+  "name": "real_moon_detail64_blur",
+  "num_kernels": 1,
+  "outputs_per_bank": 3844,
+  "random_kernels": false,
+  "relu_default": 0,
+  "relu_modes": [
+    0,
+    1
+  ],
+  "resized": false,
+  "seed": null,
+  "shift": 4,
+  "source_image": "moon",
+  "source_resolution": [
+    512,
+    512
+  ],
+  "tags": [
+    "real",
+    "blur",
+    "w64"
+  ],
+  "toggle_density_milli": 179,
+  "why": "real-image blur vector from crop moon_detail64"
+}

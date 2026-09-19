@@ -3,47 +3,61 @@
 #
 # Owner : WP5.  Ref: docs/06_implementation_flow.md s1 and s2.
 #
-# Used for BOTH the out-of-context core builds (the honest core-only numbers
-# that feed the FoM) and, later, the board-demo implementation.
+# Used for the out-of-context core builds that produce the FoM numbers, and for
+# the board-demo implementation when that lands.
 #
-# Target: 125 MHz (8.0 ns). docs/06 s2 says to start here, and to try 150 MHz
-# only once WNS >= 0 with at least 0.5 ns of margin. The *reported* Fmax must
-# come from a clean run at the constraint, never from an extrapolation.
+# CLOCK TARGET
+#   150 MHz (6.667 ns). docs/06 s2 starts at 125 MHz and says to try 150 only
+#   once there is >= 0.5 ns of margin; Phase 6 begins at 150 directly and lets
+#   the measurement decide. The REPORTED Fmax must come from a clean run at the
+#   constraint that closed -- never from extrapolating a negative slack.
 #
-# NOTE ON BOARD PINS: docs/06 s1 lists UART pin locations for the demo build.
-# conv_top has no UART ports -- the demo needs a wrapper that does not exist
-# yet (docs/09_bonus_and_stretch.md). Adding pin LOCs here would fail
-# elaboration against the current top, so they belong with that wrapper when
-# it lands, in a separate demo XDC.
+#   `fpga/build.tcl -period <ns>` overrides this for the closure sweep. The
+#   override re-applies the I/O delays too, because they are a fraction of the
+#   period; the build log prints whatever it actually used.
+#
+# I/O DELAYS ARE DECLARED, DELIBERATELY
+#   An out-of-context build leaves ports unconstrained unless told otherwise,
+#   and an unconstrained port contributes no path to the timing report. Fmax
+#   measured that way describes only register-to-register logic and silently
+#   ignores everything entering or leaving the core -- a flattering number that
+#   would not survive integration. Every input except the clock, and every
+#   output, therefore carries a delay budget.
+#
+#   The budget is 20% of the clock period at each boundary, leaving 60% for the
+#   core itself. That split is a convention, not a measurement: there is no
+#   board-level timing model to derive it from yet, so it is stated here rather
+#   than hidden, and it is identical for both variants so the LUT-vs-DSP
+#   comparison stays fair.
 # ---------------------------------------------------------------------------
 
-create_clock -period 8.000 -name clk [get_ports clk]
+set clk_period 6.667
+set io_fraction 0.20
+set io_budget [expr {$clk_period * $io_fraction}]
 
-# Reset is asynchronously asserted and synchronously deasserted (A8), so it is
-# not a timed path into the fabric on the assert edge. Declaring it false here
-# keeps a reset fanning out to every flop from dominating the timing report and
-# hiding the real critical path (expected: adder_tree stage 3, or the LUT
-# multiplier -- docs/06 s2).
+create_clock -period $clk_period -name clk [get_ports clk]
+
+# All inputs except the clock itself. `remove_from_collection` is not permitted
+# inside an XDC, so the clock is excluded with a name filter instead.
+set_input_delay  -clock clk $io_budget [get_ports -filter {DIRECTION == IN && NAME != clk}]
+set_output_delay -clock clk $io_budget [get_ports -filter {DIRECTION == OUT}]
+
+# ---------------------------------------------------------------------------
+# Reset: asynchronously asserted, synchronously deasserted (assumption A8).
+# The assert edge is not a timed path into the fabric, and a reset fanning out
+# to every flop would otherwise dominate the report and hide the real critical
+# path -- which docs/06 s2 expects to be adder_tree stage 3 or a LUT multiplier.
+# ---------------------------------------------------------------------------
 set_false_path -from [get_ports rst_n]
 
 # ---------------------------------------------------------------------------
-# SRL mapping fallback (docs/06 s1).
+# SRL mapping is NOT constrained here.
 #
-# rtl/line_window.sv carries (* srl_style = "srl" *) on the two (W-N)-deep
-# delay lines. This is a belt-and-braces fallback in case the RTL attribute is
-# ever lost in a refactor: without SRL mapping the design grows ~536 flip-flops
-# and the zero-BRAM FoM claim weakens. The build gate in build.tcl is what
-# actually fails the build on BRAM != 0; this just nudges the mapping.
-#
-# NOT DONE HERE, deliberately. An XDC is a constraint file, not general Tcl:
-# Vivado rejects `if` in it with a critical warning. And SRL_STYLE has to
-# influence MAPPING, so applying it to already-synthesised cells would be too
-# late to change anything even if the syntax were accepted.
-#
-# The mechanism that actually works is the (* srl_style = "srl" *) attribute in
-# rtl/line_window.sv, applied at elaboration. The mechanism that actually
-# ENFORCES the outcome is the compliance gate in build.tcl, which errors the
-# build out if the LUT variant ever shows BRAM != 0 or DSP != 0, plus the SRL
-# count recorded in each variant summary.txt as positive evidence that the
-# delay lines really did map to shift-register primitives.
+# An XDC is a constraint file, not general Tcl, and SRL_STYLE has to influence
+# MAPPING -- applying it to already-synthesised cells would be too late. The
+# mechanism that works is the (* srl_style = "srl" *) attribute in
+# rtl/line_window.sv; the mechanism that ENFORCES the outcome is the compliance
+# gate in build.tcl, which errors the build out if the default build ever
+# reports BRAM != 0 or DSP != 0, plus the SRL count recorded in summary.txt as
+# positive evidence that the delay lines really did map to shift registers.
 # ---------------------------------------------------------------------------

@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
-| Date             : Tue Sep 15 12:50:20 2026
+| Date             : Sat Sep 19 21:33:01 2026
 | Host             : Eng_Ahmed running 64-bit major release  (build 9200)
 | Command          : report_power -file D:/Digital_IC_Design/SSCS_Design_Competition/fpga/reports/lut/power_saif.rpt
 | Design           : conv_top
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+---------------------------------------------------------------------------------+
-| Total On-Chip Power (W)  | 0.133                                                                           |
+| Total On-Chip Power (W)  | 0.134                                                                           |
 | Design Power Budget (W)  | Unspecified*                                                                    |
 | Power Budget Margin (W)  | NA                                                                              |
-| Dynamic (W)              | 0.030                                                                           |
+| Dynamic (W)              | 0.031                                                                           |
 | Device Static (W)        | 0.103                                                                           |
 | Effective TJA (C/W)      | 11.5                                                                            |
 | Max Ambient (C)          | 83.5                                                                            |
@@ -41,7 +41,7 @@ Table of Contents
 | Confidence Level         | High                                                                            |
 | Setting File             | ---                                                                             |
 | Simulation Activity File | D:/Digital_IC_Design/SSCS_Design_Competition/fpga/reports/lut/sim/conv_top.saif |
-| Design Nets Matched      | 100%   (2724/2724)                                                              |
+| Design Nets Matched      | 100%   (2801/2801)                                                              |
 +--------------------------+---------------------------------------------------------------------------------+
 * Specify Design Power Budget using, set_operating_conditions -design_power_budget <value in Watts>
 
@@ -52,16 +52,16 @@ Table of Contents
 +-------------------------+-----------+----------+-----------+-----------------+
 | On-Chip                 | Power (W) | Used     | Available | Utilization (%) |
 +-------------------------+-----------+----------+-----------+-----------------+
-| Clocks                  |     0.014 |        3 |       --- |             --- |
-| Slice Logic             |     0.009 |     2161 |       --- |             --- |
-|   LUT as Logic          |     0.007 |      917 |     53200 |            1.72 |
-|   CARRY4                |     0.001 |      159 |     13300 |            1.20 |
-|   Register              |    <0.001 |      758 |    106400 |            0.71 |
+| Clocks                  |     0.019 |        3 |       --- |             --- |
+| Slice Logic             |     0.006 |     2239 |       --- |             --- |
+|   LUT as Logic          |     0.005 |      920 |     53200 |            1.73 |
+|   CARRY4                |    <0.001 |      159 |     13300 |            1.20 |
+|   Register              |    <0.001 |      830 |    106400 |            0.78 |
 |   LUT as Shift Register |    <0.001 |       20 |     17400 |            0.11 |
-|   Others                |     0.000 |       10 |       --- |             --- |
-| Signals                 |     0.008 |     1617 |       --- |             --- |
+|   Others                |     0.000 |       11 |       --- |             --- |
+| Signals                 |     0.006 |     1613 |       --- |             --- |
 | Static Power            |     0.103 |          |           |                 |
-| Total                   |     0.133 |          |           |                 |
+| Total                   |     0.134 |          |           |                 |
 +-------------------------+-----------+----------+-----------+-----------------+
 
 
@@ -71,7 +71,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.038 |       0.030 |      0.008 |
+| Vccint    |       1.000 |     0.039 |       0.031 |      0.008 |
 | Vccaux    |       1.800 |     0.010 |       0.000 |      0.010 |
 | Vcco33    |       3.300 |     0.000 |       0.000 |      0.000 |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |
@@ -134,7 +134,7 @@ Table of Contents
 +-------+--------+-----------------+
 | Clock | Domain | Constraint (ns) |
 +-------+--------+-----------------+
-| clk   | clk    |             8.0 |
+| clk   | clk    |             6.7 |
 +-------+--------+-----------------+
 
 
@@ -147,12 +147,12 @@ Table of Contents
 +--------------------+-----------+
 | Name               | Power (W) |
 +--------------------+-----------+
-| conv_top           |     0.030 |
-|   u_adder_tree     |     0.006 |
-|   u_ctrl_fsm       |     0.001 |
-|   u_kernel_regfile |     0.007 |
+| conv_top           |     0.031 |
+|   u_adder_tree     |     0.005 |
+|   u_ctrl_fsm       |     0.002 |
+|   u_kernel_regfile |     0.009 |
 |   u_line_window    |     0.006 |
-|   u_mac_array      |     0.010 |
+|   u_mac_array      |     0.008 |
 |   u_normalize      |     0.001 |
 +--------------------+-----------+
 
