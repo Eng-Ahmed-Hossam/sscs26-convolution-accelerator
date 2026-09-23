@@ -1,6 +1,6 @@
 webtalk_init -webtalk_dir D:/Digital_IC_Design/SSCS_Design_Competition/fpga/reports/lut/sim/xsim_work/xsim.dir/netsim/webtalk/
 webtalk_register_client -client project
-webtalk_add_data -client project -key date_generated -value "Sat Sep 19 21:32:31 2026" -context "software_version_and_target_device"
+webtalk_add_data -client project -key date_generated -value "Tue Sep 22 02:12:20 2026" -context "software_version_and_target_device"
 webtalk_add_data -client project -key product_version -value "XSIM v2018.2 (64-bit)" -context "software_version_and_target_device"
 webtalk_add_data -client project -key build_version -value "2258646" -context "software_version_and_target_device"
 webtalk_add_data -client project -key os_platform -value "WIN64" -context "software_version_and_target_device"
@@ -13,7 +13,7 @@ webtalk_add_data -client project -key target_device -value "not_applicable" -con
 webtalk_add_data -client project -key target_package -value "not_applicable" -context "software_version_and_target_device"
 webtalk_add_data -client project -key target_speed -value "not_applicable" -context "software_version_and_target_device"
 webtalk_add_data -client project -key random_id -value "c103a4ce16b853b98843003d417a3f0e" -context "software_version_and_target_device"
-webtalk_add_data -client project -key project_id -value "3720940c-81b6-4d0b-8f6c-6a85db3875c6" -context "software_version_and_target_device"
+webtalk_add_data -client project -key project_id -value "0e4dd438-3db3-43f5-93cd-9f050a13c186" -context "software_version_and_target_device"
 webtalk_add_data -client project -key project_iteration -value "3" -context "software_version_and_target_device"
 webtalk_add_data -client project -key os_name -value "Microsoft Windows 8 or later , 64-bit" -context "user_environment"
 webtalk_add_data -client project -key os_release -value "major release  (build 9200)" -context "user_environment"
@@ -26,7 +26,7 @@ webtalk_add_data -client xsim -key Command -value "xsim" -context "xsim\\command
 webtalk_add_data -client xsim -key saif -value "true" -context "xsim\\usage"
 webtalk_add_data -client xsim -key runtime -value "10895 ns" -context "xsim\\usage"
 webtalk_add_data -client xsim -key iteration -value "0" -context "xsim\\usage"
-webtalk_add_data -client xsim -key Simulation_Time -value "1.03_sec" -context "xsim\\usage"
-webtalk_add_data -client xsim -key Simulation_Memory -value "21184_KB" -context "xsim\\usage"
-webtalk_transmit -clientid 1016131940 -regid "" -xml D:/Digital_IC_Design/SSCS_Design_Competition/fpga/reports/lut/sim/xsim_work/xsim.dir/netsim/webtalk/usage_statistics_ext_xsim.xml -html D:/Digital_IC_Design/SSCS_Design_Competition/fpga/reports/lut/sim/xsim_work/xsim.dir/netsim/webtalk/usage_statistics_ext_xsim.html -wdm D:/Digital_IC_Design/SSCS_Design_Competition/fpga/reports/lut/sim/xsim_work/xsim.dir/netsim/webtalk/usage_statistics_ext_xsim.wdm -intro "<H3>XSIM Usage Report</H3><BR>"
+webtalk_add_data -client xsim -key Simulation_Time -value "1.12_sec" -context "xsim\\usage"
+webtalk_add_data -client xsim -key Simulation_Memory -value "21200_KB" -context "xsim\\usage"
+webtalk_transmit -clientid 821206602 -regid "" -xml D:/Digital_IC_Design/SSCS_Design_Competition/fpga/reports/lut/sim/xsim_work/xsim.dir/netsim/webtalk/usage_statistics_ext_xsim.xml -html D:/Digital_IC_Design/SSCS_Design_Competition/fpga/reports/lut/sim/xsim_work/xsim.dir/netsim/webtalk/usage_statistics_ext_xsim.html -wdm D:/Digital_IC_Design/SSCS_Design_Competition/fpga/reports/lut/sim/xsim_work/xsim.dir/netsim/webtalk/usage_statistics_ext_xsim.wdm -intro "<H3>XSIM Usage Report</H3><BR>"
 webtalk_terminate

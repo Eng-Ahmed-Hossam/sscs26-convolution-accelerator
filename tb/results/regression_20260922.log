@@ -1,0 +1,189 @@
+# regression run 2026-09-22 00:18:42
+# seed 1
+
+VECTOR                    RELU  BANKS  OUTPUTS  MISMATCH  RESULT
+----------------------------------------------------------------
+tb_pkg_params                -      -        -         0  PASS
+tb_line_window -gTBW=8       -      -        -         0  PASS
+tb_line_window -gTBW=32      -      -        -         0  PASS
+tb_mac_array                 -      -        -         0  PASS
+tb_adder_tree                -      -        -         0  PASS
+tb_normalize                 -      -        -         0  PASS
+tb_kernel_regfile            -      -        -         0  PASS
+tb_conv_directed             -      -        -         0  PASS  midreset/b2b/rowwrap
+impulse                      0      2     1800         0  PASS  bubbles
+impulse                      1      2     1800         0  PASS
+all_zero                     0      2     1800         0  PASS
+all_zero                     1      2     1800         0  PASS  bubbles
+all_255                      0      1      900         0  PASS  bubbles
+all_255                      1      1      900         0  PASS  latency
+checkerboard                 0      1      900         0  PASS  latency
+checkerboard                 1      1      900         0  PASS  bubbles
+ramp                         0      2     1800         0  PASS  bubbles
+ramp                         1      2     1800         0  PASS
+ramp_h                       0      2     1800         0  PASS
+ramp_h                       1      2     1800         0  PASS  bubbles
+ramp_v                       0      2     1800         0  PASS  bubbles
+ramp_v                       1      2     1800         0  PASS
+identity                     0      1      900         0  PASS  latency
+identity                     1      1      900         0  PASS  bubbles
+laplacian                    0      2     1800         0  PASS  bubbles
+laplacian                    1      2     1800         0  PASS
+sat_pos                      0      1      900         0  PASS  latency
+sat_pos                      1      1      900         0  PASS  bubbles
+sat_neg                      0      1      900         0  PASS  bubbles
+sat_neg                      1      1      900         0  PASS  latency
+rand_00                      0      2     1800         0  PASS
+rand_00                      1      2     1800         0  PASS  bubbles
+rand_01                      0      1      900         0  PASS  bubbles
+rand_01                      1      1      900         0  PASS  latency
+rand_02                      0      1      900         0  PASS  latency
+rand_02                      1      1      900         0  PASS  bubbles
+rand_03                      0      3     2700         0  PASS  bubbles
+rand_03                      1      3     2700         0  PASS
+rand_04                      0      3     2700         0  PASS
+rand_04                      1      3     2700         0  PASS  bubbles
+rand_05                      0      3     2700         0  PASS  bubbles
+rand_05                      1      3     2700         0  PASS
+rand_06                      0      3     2700         0  PASS
+rand_06                      1      3     2700         0  PASS  bubbles
+rand_07                      0      4     3600         0  PASS  bubbles
+rand_07                      1      4     3600         0  PASS
+rand_08                      0      2     1800         0  PASS
+rand_08                      1      2     1800         0  PASS  bubbles
+rand_09                      0      1      900         0  PASS  bubbles
+rand_09                      1      1      900         0  PASS  latency
+rand_10                      0      1      900         0  PASS  latency
+rand_10                      1      1      900         0  PASS  bubbles
+rand_11                      0      1      900         0  PASS  bubbles
+rand_11                      1      1      900         0  PASS  latency
+rand_12                      0      4     3600         0  PASS
+rand_12                      1      4     3600         0  PASS  bubbles
+rand_13                      0      2     1800         0  PASS  bubbles
+rand_13                      1      2     1800         0  PASS
+rand_14                      0      4     3600         0  PASS
+rand_14                      1      4     3600         0  PASS  bubbles
+rand_15                      0      4     3600         0  PASS  bubbles
+rand_15                      1      4     3600         0  PASS
+rand_16                      0      3     2700         0  PASS
+rand_16                      1      3     2700         0  PASS  bubbles
+rand_17                      0      4     3600         0  PASS  bubbles
+rand_17                      1      4     3600         0  PASS
+rand_18                      0      4     3600         0  PASS
+rand_18                      1      4     3600         0  PASS  bubbles
+rand_19                      0      3     2700         0  PASS  bubbles
+rand_19                      1      3     2700         0  PASS
+real_brick_centre32_blur     0      1      900         0  PASS  latency
+real_brick_centre32_blur     1      1      900         0  PASS  bubbles
+real_brick_centre32_edge     0      3     2700         0  PASS  bubbles
+real_brick_centre32_edge     1      3     2700         0  PASS
+real_brick_centre64_blur     0      1     3844         0  PASS  latency W=64
+real_brick_centre64_blur     1      1     3844         0  PASS  bubbles W=64
+real_brick_centre64_edge     0      3    11532         0  PASS  bubbles W=64
+real_brick_centre64_edge     1      3    11532         0  PASS  W=64
+real_brick_detail32_blur     0      1      900         0  PASS  latency
+real_brick_detail32_blur     1      1      900         0  PASS  bubbles
+real_brick_detail32_edge     0      3     2700         0  PASS  bubbles
+real_brick_detail32_edge     1      3     2700         0  PASS
+real_brick_detail64_blur     0      1     3844         0  PASS  latency W=64
+real_brick_detail64_blur     1      1     3844         0  PASS  bubbles W=64
+real_brick_detail64_edge     0      3    11532         0  PASS  bubbles W=64
+real_brick_detail64_edge     1      3    11532         0  PASS  W=64
+real_camera_centre32_blur    0      1      900         0  PASS  latency
+real_camera_centre32_blur    1      1      900         0  PASS  bubbles
+real_camera_centre32_edge    0      3     2700         0  PASS  bubbles
+real_camera_centre32_edge    1      3     2700         0  PASS
+real_camera_centre64_blur    0      1     3844         0  PASS  latency W=64
+real_camera_centre64_blur    1      1     3844         0  PASS  bubbles W=64
+real_camera_centre64_edge    0      3    11532         0  PASS  bubbles W=64
+real_camera_centre64_edge    1      3    11532         0  PASS  W=64
+real_camera_detail32_blur    0      1      900         0  PASS  latency
+real_camera_detail32_blur    1      1      900         0  PASS  bubbles
+real_camera_detail32_edge    0      3     2700         0  PASS  bubbles
+real_camera_detail32_edge    1      3     2700         0  PASS
+real_camera_detail64_blur    0      1     3844         0  PASS  latency W=64
+real_camera_detail64_blur    1      1     3844         0  PASS  bubbles W=64
+real_camera_detail64_edge    0      3    11532         0  PASS  bubbles W=64
+real_camera_detail64_edge    1      3    11532         0  PASS  W=64
+real_coins_centre32_blur     0      1      900         0  PASS  latency
+real_coins_centre32_blur     1      1      900         0  PASS  bubbles
+real_coins_centre32_edge     0      3     2700         0  PASS  bubbles
+real_coins_centre32_edge     1      3     2700         0  PASS
+real_coins_centre64_blur     0      1     3844         0  PASS  latency W=64
+real_coins_centre64_blur     1      1     3844         0  PASS  bubbles W=64
+real_coins_centre64_edge     0      3    11532         0  PASS  bubbles W=64
+real_coins_centre64_edge     1      3    11532         0  PASS  W=64
+real_coins_detail32_blur     0      1      900         0  PASS  latency
+real_coins_detail32_blur     1      1      900         0  PASS  bubbles
+real_coins_detail32_edge     0      3     2700         0  PASS  bubbles
+real_coins_detail32_edge     1      3     2700         0  PASS
+real_coins_detail64_blur     0      1     3844         0  PASS  latency W=64
+real_coins_detail64_blur     1      1     3844         0  PASS  bubbles W=64
+real_coins_detail64_edge     0      3    11532         0  PASS  bubbles W=64
+real_coins_detail64_edge     1      3    11532         0  PASS  W=64
+real_img1_centre32_blur      0      1      900         0  PASS  latency
+real_img1_centre32_blur      1      1      900         0  PASS  bubbles
+real_img1_centre32_edge      0      3     2700         0  PASS  bubbles
+real_img1_centre32_edge      1      3     2700         0  PASS
+real_img1_centre64_blur      0      1     3844         0  PASS  latency W=64
+real_img1_centre64_blur      1      1     3844         0  PASS  bubbles W=64
+real_img1_centre64_edge      0      3    11532         0  PASS  bubbles W=64
+real_img1_centre64_edge      1      3    11532         0  PASS  W=64
+real_img1_detail32_blur      0      1      900         0  PASS  latency
+real_img1_detail32_blur      1      1      900         0  PASS  bubbles
+real_img1_detail32_edge      0      3     2700         0  PASS  bubbles
+real_img1_detail32_edge      1      3     2700         0  PASS
+real_img1_detail64_blur      0      1     3844         0  PASS  latency W=64
+real_img1_detail64_blur      1      1     3844         0  PASS  bubbles W=64
+real_img1_detail64_edge      0      3    11532         0  PASS  bubbles W=64
+real_img1_detail64_edge      1      3    11532         0  PASS  W=64
+real_moon_centre64_blur      0      1     3844         0  PASS  latency W=64
+real_moon_centre64_blur      1      1     3844         0  PASS  bubbles W=64
+real_moon_centre64_edge      0      3    11532         0  PASS  bubbles W=64
+real_moon_centre64_edge      1      3    11532         0  PASS  W=64
+real_moon_detail32_blur      0      1      900         0  PASS  latency
+real_moon_detail32_blur      1      1      900         0  PASS  bubbles
+real_moon_detail32_edge      0      3     2700         0  PASS  bubbles
+real_moon_detail32_edge      1      3     2700         0  PASS
+real_moon_detail64_blur      0      1     3844         0  PASS  latency W=64
+real_moon_detail64_blur      1      1     3844         0  PASS  bubbles W=64
+real_moon_detail64_edge      0      3    11532         0  PASS  bubbles W=64
+real_moon_detail64_edge      1      3    11532         0  PASS  W=64
+real_page_centre32_blur      0      1      900         0  PASS  latency
+real_page_centre32_blur      1      1      900         0  PASS  bubbles
+real_page_centre32_edge      0      3     2700         0  PASS  bubbles
+real_page_centre32_edge      1      3     2700         0  PASS
+real_page_centre64_blur      0      1     3844         0  PASS  latency W=64
+real_page_centre64_blur      1      1     3844         0  PASS  bubbles W=64
+real_page_centre64_edge      0      3    11532         0  PASS  bubbles W=64
+real_page_centre64_edge      1      3    11532         0  PASS  W=64
+real_page_detail32_blur      0      1      900         0  PASS  latency
+real_page_detail32_blur      1      1      900         0  PASS  bubbles
+real_page_detail32_edge      0      3     2700         0  PASS  bubbles
+real_page_detail32_edge      1      3     2700         0  PASS
+real_page_detail64_blur      0      1     3844         0  PASS  latency W=64
+real_page_detail64_blur      1      1     3844         0  PASS  bubbles W=64
+real_page_detail64_edge      0      3    11532         0  PASS  bubbles W=64
+real_page_detail64_edge      1      3    11532         0  PASS  W=64
+SIGNOFF real-image           -      -        -         0  PASS  all three vectors present
+
+TOTAL: 163 runs, 163 PASS, 0 FAIL
+
+FUNCTIONAL COVERAGE (procedural bins, no covergroup support)
+------------------------------------------------------------
+  FSM states       5/5  100%
+  Kernel banks     4/4  100%
+  ReLU mode        2/2  100%
+  Output shift     3/3  100%
+  Bank count       4/4  100%
+  Input gapping    2/2  100%
+  Saturation rail  2/2  100%
+  Activation       1/1  100%
+  Kernel classes   4/4  100%
+  Image realism    2/2  100%
+  TOTAL            29/29  100%
+
+Justified exclusions:
+  - shift_1/2/3/5/6: The vector suite fixes cfg_out_shift to {0, 4, 7} (docs/05 s2: 0 for integer filters, 7 for Q1.7 CNN kernels, 4 as a midpoint). The remaining shift values are exercised exhaustively at the unit level instead: model/export_stage_dumps.py sweeps every shift 0..7 with exact half-LSB ties in both signs, and tb_normalize checks all 710 records. Shift is a static config field consumed entirely inside normalize, so unit-level closure is equivalent to top-level closure.
+Simulator: ModelSim ASE 10.1d (no SVA, no covergroups -- docs/05 s6 properties run as procedural checkers)
+Elapsed: 427.9s

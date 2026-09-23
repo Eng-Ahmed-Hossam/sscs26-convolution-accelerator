@@ -1,0 +1,36 @@
+Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
+| Date         : Tue Sep 22 02:11:08 2026
+| Host         : Eng_Ahmed running 64-bit major release  (build 9200)
+| Command      : report_utilization -hierarchical -file D:/Digital_IC_Design/SSCS_Design_Competition/fpga/reports/dsp_chip/utilization_hier.rpt
+| Design       : conv_top_chip
+| Device       : 7z020clg400-1
+| Design State : Routed
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Utilization Design Information
+
+Table of Contents
+-----------------
+1. Utilization by Hierarchy
+
+1. Utilization by Hierarchy
+---------------------------
+
++----------------------+----------------+------------+------------+---------+------+-----+--------+--------+--------------+
+|       Instance       |     Module     | Total LUTs | Logic LUTs | LUTRAMs | SRLs | FFs | RAMB36 | RAMB18 | DSP48 Blocks |
++----------------------+----------------+------------+------------+---------+------+-----+--------+--------+--------------+
+| conv_top_chip        |          (top) |        380 |        360 |       0 |   20 | 734 |      0 |      0 |            9 |
+|   (conv_top_chip)    |          (top) |          0 |          0 |       0 |    0 |  57 |      0 |      0 |            0 |
+|   u_core             |       conv_top |        380 |        360 |       0 |   20 | 677 |      0 |      0 |            9 |
+|     u_adder_tree     |     adder_tree |        127 |        127 |       0 |    0 | 164 |      0 |      0 |            0 |
+|     u_ctrl_fsm       |       ctrl_fsm |         76 |         72 |       0 |    4 |  44 |      0 |      0 |            0 |
+|     u_kernel_regfile | kernel_regfile |        114 |        114 |       0 |    0 | 360 |      0 |      0 |            0 |
+|     u_line_window    |    line_window |         16 |          0 |       0 |   16 |  72 |      0 |      0 |            0 |
+|     u_mac_array      |      mac_array |         85 |         85 |       0 |    0 |   0 |      0 |      0 |            9 |
+|     u_normalize      |      normalize |         30 |         30 |       0 |    0 |  37 |      0 |      0 |            0 |
++----------------------+----------------+------------+------------+---------+------+-----+--------+--------+--------------+
+* Note: The sum of lower-level cells may be larger than their parent cells total, due to cross-hierarchy LUT combining
+
+

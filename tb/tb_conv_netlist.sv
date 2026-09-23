@@ -69,7 +69,7 @@ module tb_conv_netlist;
   // than polling for it afterwards -- polling looks for a pulse already gone.
   bit done_seen = 1'b0;
 
-  always #4 clk = ~clk;
+  always #5 clk = ~clk;
 
   always @(posedge clk) if (rst_n === 1'b1 && done === 1'b1) done_seen <= 1'b1;
 

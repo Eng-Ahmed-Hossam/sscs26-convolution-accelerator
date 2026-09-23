@@ -1,0 +1,35 @@
+Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
+| Date         : Tue Sep 22 02:09:28 2026
+| Host         : Eng_Ahmed running 64-bit major release  (build 9200)
+| Command      : report_utilization -hierarchical -file D:/Digital_IC_Design/SSCS_Design_Competition/fpga/reports/lut_chip/utilization_synth_hier.rpt
+| Design       : conv_top_chip
+| Device       : 7z020clg400-1
+| Design State : Synthesized
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Utilization Design Information
+
+Table of Contents
+-----------------
+1. Utilization by Hierarchy
+
+1. Utilization by Hierarchy
+---------------------------
+
++----------------------+----------------+------------+------------+---------+------+-----+--------+--------+--------------+
+|       Instance       |     Module     | Total LUTs | Logic LUTs | LUTRAMs | SRLs | FFs | RAMB36 | RAMB18 | DSP48 Blocks |
++----------------------+----------------+------------+------------+---------+------+-----+--------+--------+--------------+
+| conv_top_chip        |          (top) |        942 |        922 |       0 |   20 | 886 |      0 |      0 |            0 |
+|   (conv_top_chip)    |          (top) |          0 |          0 |       0 |    0 |  56 |      0 |      0 |            0 |
+|   u_core             |       conv_top |        942 |        922 |       0 |   20 | 830 |      0 |      0 |            0 |
+|     u_adder_tree     |     adder_tree |        127 |        127 |       0 |    0 | 164 |      0 |      0 |            0 |
+|     u_ctrl_fsm       |       ctrl_fsm |         84 |         80 |       0 |    4 |  44 |      0 |      0 |            0 |
+|     u_kernel_regfile | kernel_regfile |        302 |        302 |       0 |    0 | 360 |      0 |      0 |            0 |
+|     u_line_window    |    line_window |        116 |        100 |       0 |   16 |  72 |      0 |      0 |            0 |
+|     u_mac_array      |      mac_array |        375 |        375 |       0 |    0 | 153 |      0 |      0 |            0 |
+|     u_normalize      |      normalize |         23 |         23 |       0 |    0 |  37 |      0 |      0 |            0 |
++----------------------+----------------+------------+------------+---------+------+-----+--------+--------+--------------+
+
+

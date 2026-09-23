@@ -2,6 +2,7 @@ variant      lut
 use_dsp      0
 part         xc7z020clg400-1
 period_ns    6.667
+fmax_mhz     160.2820964898221
 luts         940
 lut_cells    1219
 ffs          830
@@ -11,4 +12,8 @@ brams        0
 wns_ns       0.428
 tns_ns       0.000
 failing_eps  0
+synth_wns_ns 0.982
+synth_whs_ns 0.224
+synth_tns_ns 0.000
+synth_failing_eps 0
 whs_ns       0.124

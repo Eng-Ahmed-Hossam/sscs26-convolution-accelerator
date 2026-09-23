@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2018.2 (win64) Build 2258646 Thu Jun 14 20:03:12 MDT 2018
-| Date         : Sat Sep 19 21:29:39 2026
+| Date         : Tue Sep 22 02:06:49 2026
 | Host         : Eng_Ahmed running 64-bit major release  (build 9200)
 | Command      : report_utilization -file D:/Digital_IC_Design/SSCS_Design_Competition/fpga/reports/util_default_synth.rpt
 | Design       : conv_top

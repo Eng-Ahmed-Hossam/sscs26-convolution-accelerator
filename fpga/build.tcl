@@ -32,6 +32,9 @@ set opt_period  6.667      ;# 150 MHz, matching fpga/constraints.xdc.
                             ;# Overriding this re-applies the I/O delays too.
 set opt_impl    1          ;# run place & route, not synthesis alone
 set opt_w       ""         ;# optional W override for a parameter smoke build
+# "core" = out-of-context conv_top -- the FoM flow (docs/06 s1.2).
+# "chip" = pin-level conv_top_chip with registered I/O, for the board demo.
+set opt_mode    "core"
 
 for {set i 0} {$i < [llength $argv]} {incr i} {
     set a [lindex $argv $i]
@@ -40,6 +43,7 @@ for {set i 0} {$i < [llength $argv]} {incr i} {
         -period  { incr i; set opt_period  [lindex $argv $i] }
         -w       { incr i; set opt_w       [lindex $argv $i] }
         -synth-only { set opt_impl 0 }
+        -mode    { incr i; set opt_mode [lindex $argv $i] }
         default  { puts "WARNING: ignoring unknown argument '$a'" }
     }
 }
@@ -55,6 +59,9 @@ set rtl_sources [list \
     [file join $root rtl ctrl_fsm.sv]       \
     [file join $root rtl conv_top.sv]       \
 ]
+
+#: Read only for -mode chip; the core flow must not see a second top.
+set chip_source [file join $root rtl conv_top_chip.sv]
 
 set part "xc7z020clg400-1"
 
@@ -145,14 +152,28 @@ proc parse_timing_summary {path} {
     return [list "n/a" "n/a" "n/a" "n/a"]
 }
 
+# ---------------------------------------------------------------------------
+# The clock period declared in the XDC, read straight from its `set clk_period`
+# line so this script never keeps its own copy of a value the XDC owns.
+# ---------------------------------------------------------------------------
+proc xdc_clk_period {path} {
+    if {![file exists $path]} { error "xdc_clk_period: $path missing" }
+    set fh [open $path r]
+    set data [read $fh]
+    close $fh
+    if {[regexp {(?m)^\s*set\s+clk_period\s+([0-9.]+)} $data -> v]} { return $v }
+    error "xdc_clk_period: no `set clk_period` line in $path"
+}
+
 proc build_variant {variant use_dsp} {
-    global root rtl_sources part opt_period opt_impl opt_w script_dir
+    global root rtl_sources chip_source part opt_period opt_impl opt_w script_dir opt_mode
+    set eff_period $opt_period
 
     puts "\n=============================================================="
-    puts "VARIANT $variant  (USE_DSP=$use_dsp, period ${opt_period} ns)"
+    puts "VARIANT $variant  mode=$opt_mode  (USE_DSP=$use_dsp)"
     puts "=============================================================="
 
-    set rpt [file join $root fpga reports $variant]
+    set rpt [file join $root fpga reports [expr {$opt_mode eq "chip" ? "${variant}_chip" : $variant}]]
     file mkdir $rpt
 
     create_project -in_memory -part $part
@@ -163,23 +184,40 @@ proc build_variant {variant use_dsp} {
         if {![file exists $f]} { error "BUILD ERROR: missing source $f" }
         read_verilog -sv $f
     }
-    read_xdc [file join $script_dir constraints.xdc]
+    if {$opt_mode eq "chip"} { read_verilog -sv $chip_source }
+    # ---- constraints ------------------------------------------------------
+    # The XDC owns the clock period and derives its I/O budget from it. A sweep
+    # therefore cannot be done by re-issuing set_property after read_xdc: the
+    # constraints must be in force during SYNTHESIS, and at read_xdc time there
+    # is no open design to modify. Instead the XDC is rewritten with the new
+    # period into the report directory and that file is read. Every other
+    # constraint survives verbatim, the I/O budget rescales automatically
+    # because the XDC computes it with expr, and the file that was actually
+    # used is left on disk as an auditable artefact.
+    set base_xdc [expr {$opt_mode eq "chip"
+                        ? [file join $script_dir constraints_chip.xdc]
+                        : [file join $script_dir constraints.xdc]}]
+    set xdc_default [xdc_clk_period $base_xdc]
+    set eff_period  $xdc_default
+    set used_xdc    $base_xdc
 
-    # The XDC carries the default 150 MHz clock and its I/O budget. A sweep
-    # (-period) must move BOTH: the input/output delays are a fraction of the
-    # period, so retiming the clock alone would silently leave the old budget
-    # in place and make the comparison dishonest.
-    set xdc_default 6.667
     if {abs($opt_period - $xdc_default) > 0.0005} {
-        set io_budget [expr {$opt_period * 0.20}]
-        set_property PERIOD $opt_period [get_clocks clk]
-        set_input_delay  -clock clk $io_budget \
-            [get_ports -filter {DIRECTION == IN && NAME != clk}]
-        set_output_delay -clock clk $io_budget [get_ports -filter {DIRECTION == OUT}]
-        puts "CONSTRAINT OVERRIDE: period $opt_period ns, I/O budget $io_budget ns"
+        set fh [open $base_xdc r]
+        set txt [read $fh]
+        close $fh
+        regsub {(?m)^\s*set\s+clk_period\s+[0-9.]+} $txt "set clk_period $opt_period" txt
+        set used_xdc [file join $rpt constraints_swept.xdc]
+        set fh [open $used_xdc w]
+        puts $fh "# GENERATED by build.tcl -period $opt_period -- do not edit."
+        puts $fh "# Source: fpga/constraints.xdc with clk_period rewritten."
+        puts $fh $txt
+        close $fh
+        set eff_period $opt_period
+        puts "CONSTRAINT SWEEP: $xdc_default -> $opt_period ns (via [file tail $used_xdc])"
     } else {
-        puts "CONSTRAINT: period $opt_period ns from constraints.xdc (I/O budget 20%)"
+        puts "CONSTRAINT: period $eff_period ns from constraints.xdc (I/O budget 20%)"
     }
+    read_xdc $used_xdc
 
     # 2. out-of-context synthesis. The variant is selected by overriding the
     #    conv_top MODULE parameter -- never by editing source, and never by
@@ -187,8 +225,34 @@ proc build_variant {variant use_dsp} {
     set generics "USE_DSP=$use_dsp"
     if {$opt_w ne ""} { append generics " W=$opt_w" }
 
-    synth_design -mode out_of_context -top conv_top -part $part \
-                 -generic $generics
+    # -mode chip is a FULL build: I/O buffers inserted, real pads. The core
+    # flow stays out-of-context, which is what the FoM is computed from.
+    if {$opt_mode eq "chip"} {
+        synth_design -top conv_top_chip -part $part -generic $generics
+    } else {
+        synth_design -mode out_of_context -top conv_top -part $part \
+                     -generic $generics
+    }
+
+    # Cross-check: the period the TOOL ended up with must match what this
+    # script believes it applied. A silent disagreement here is exactly what
+    # produced a 5% Fmax overstatement before.
+    set applied [get_property PERIOD [get_clocks clk]]
+    if {abs($applied - $eff_period) > 0.0005} {
+        error "CONSTRAINT MISMATCH: tool applied $applied ns but the build               recorded $eff_period ns. Fmax would be wrong; refusing to continue."
+    }
+    puts "CONSTRAINT VERIFIED: tool period $applied ns == recorded $eff_period ns"
+
+    # Timing at the SYNTHESIS stage. This is an estimate -- synthesis knows
+    # cell delays but not placement or routing, so Vivado uses wire-load
+    # guesses. It is reported anyway because "does the design meet timing?"
+    # has two answers at two stages, and a build that passes post-route but
+    # was already hopeless post-synth is worth noticing.
+    report_timing_summary -delay_type min_max -max_paths 10 \
+        -file [file join $rpt timing_synth.rpt]
+    lassign [parse_timing_summary [file join $rpt timing_synth.rpt]] \
+        swns stns sfep swhs
+    puts "TIMING post-synth  : WNS=$swns WHS=$swhs TNS=$stns FAILING=$sfep"
 
     write_checkpoint -force [file join $rpt post_synth.dcp]
     report_utilization -file [file join $rpt utilization_synth.rpt]
@@ -197,7 +261,7 @@ proc build_variant {variant use_dsp} {
     # The default build additionally publishes its post-synthesis utilization
     # under the name the Phase 4 deferred gate asks for, so that gate has a
     # single artefact to point at.
-    if {$variant eq "lut"} {
+    if {$variant eq "lut" && $opt_mode eq "core"} {
         report_utilization -file [file join $root fpga reports util_default_synth.rpt]
     }
 
@@ -289,7 +353,8 @@ proc build_variant {variant use_dsp} {
     puts $fh "variant      $variant"
     puts $fh "use_dsp      $use_dsp"
     puts $fh "part         $part"
-    puts $fh "period_ns    $opt_period"
+    puts $fh "period_ns    $eff_period"
+    puts $fh "fmax_mhz     [expr {($eff_period - $wns) > 0 ? 1000.0/($eff_period - $wns) : 0}]"
     puts $fh "luts         $lut_count"
     puts $fh "lut_cells    $lut_cells"
     puts $fh "ffs          $ff_count"
@@ -299,9 +364,14 @@ proc build_variant {variant use_dsp} {
     puts $fh "wns_ns       $wns"
     puts $fh "tns_ns       $tns"
     puts $fh "failing_eps  $failing_ep"
+    puts $fh "synth_wns_ns $swns"
+    puts $fh "synth_whs_ns $swhs"
+    puts $fh "synth_tns_ns $stns"
+    puts $fh "synth_failing_eps $sfep"
     puts $fh "whs_ns       $whs"
     close $fh
 
+    puts "TIMING post-route  : WNS=$wns WHS=$whs TNS=$tns FAILING=$failing_ep"
     puts "SUMMARY $variant: LUT=$lut_count FF=$ff_count SRL=$srl_count\
           DSP=$dsp_count BRAM=$bram_count WNS=$wns WHS=$whs TNS=$tns FAILING=$failing_ep"
 
