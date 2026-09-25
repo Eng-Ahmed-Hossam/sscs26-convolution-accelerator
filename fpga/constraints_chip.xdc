@@ -43,7 +43,7 @@
 # MMCM so the insertion delay is compensated rather than charged.
 # ---------------------------------------------------------------------------
 
-set clk_period 6.667
+set clk_period 3.966
 
 create_clock -period $clk_period -name clk [get_ports clk]
 
