@@ -1,12 +1,16 @@
-# SSCS-EDGE-CONV — Streaming 3×3 CNN Convolution Accelerator
+# SSCS-EDGE-CONV — Streaming CNN Convolution Accelerator
 
-**IEEE SSCS Egypt Chapter 2026 Student Design Competition** · Zynq-7000 `xc7z020clg400-3` · Vivado 2018.2 · standard clock 100 MHz
+**IEEE SSCS Egypt Chapter 2026 Student Design Competition** · 3×3 kernels, 4 runtime-programmable banks · Zynq-7000 `xc7z020clg400-3` · Vivado 2018.2 · standard clock 100 MHz
 
 A line-buffered FPGA convolution engine that sustains **one output pixel every
-clock cycle** with **zero BRAM**. It has four runtime-programmable banks of 8-bit
-signed 3×3 kernels and a proven-exact integer pipeline (8u in → 16s out,
-round-half-up, symmetric saturation, optional ReLU). Every output pixel is
-checked bit-exact against an integer golden model.
+clock cycle** with **zero BRAM**. It convolves 3×3 kernels whose nine 8-bit
+signed coefficients are **programmable at runtime** in four banks, so up to four
+different filters run per frame without reloading. The integer pipeline is
+proven exact (8u in → 16s out, round-half-up, symmetric saturation, optional
+ReLU), and every output pixel is checked bit-exact against an integer golden
+model. Kernel size is fixed at 3×3 by design; [§2](#2-what-is-configurable)
+explains what is configurable and why. Three of the competition's five bonus
+items are delivered and a fourth is half done ([§3](#3-competition-bonus-points)).
 
 <table>
 <tr>
@@ -31,14 +35,16 @@ bit-exactly before the figure was drawn. Details: [demo_headline_w256.md](docs/r
 ## Contents
 
 1. [Headline results](#1-headline-results)
-2. [Architecture](#2-architecture)
-3. [How it is optimized](#3-how-it-is-optimized)
-4. [Implementation results (Vivado)](#4-implementation-results-vivado)
-5. [Timing and Fmax](#5-timing-and-fmax)
-6. [Power and Figure of Merit](#6-power-and-figure-of-merit)
-7. [Verification](#7-verification)
-8. [Reproducing the results](#8-reproducing-the-results)
-9. [Repository map and status](#9-repository-map-and-status)
+2. [What is configurable](#2-what-is-configurable)
+3. [Competition bonus points](#3-competition-bonus-points)
+4. [Architecture](#4-architecture)
+5. [How it is optimized](#5-how-it-is-optimized)
+6. [Implementation results (Vivado)](#6-implementation-results-vivado)
+7. [Timing and Fmax](#7-timing-and-fmax)
+8. [Power and Figure of Merit](#8-power-and-figure-of-merit)
+9. [Verification](#9-verification)
+10. [Reproducing the results](#10-reproducing-the-results)
+11. [Repository map and status](#11-repository-map-and-status)
 
 ---
 
@@ -48,7 +54,7 @@ Two build variants come from the same RTL, selected by one parameter
 (`USE_DSP`). Both were implemented in Vivado 2018.2 on `xc7z020clg400-3`,
 first at the **100 MHz standard clock** and then at their **Fmax**. All values
 are post-implementation, from the screenshots in
-[§4](#4-implementation-results-vivado).
+[§6](#6-implementation-results-vivado).
 
 | | **`lut`** (`USE_DSP=0`) | **`dsp`** (`USE_DSP=1`) |
 |---|---|---|
@@ -71,13 +77,177 @@ Percentages are of the xc7z020 (53,200 LUT, 106,400 FF, 220 DSP).
 LUTs and 16 % faster, which makes it the higher-throughput design. The LUT
 variant uses no hard blocks at all and has the lower power, which makes it the
 FoM winner at 100 MHz, by 11 %. The power numbers carry an important caveat,
-covered in [§6](#6-power-and-figure-of-merit).
+covered in [§8](#8-power-and-figure-of-merit).
 
 ---
 
-## 2. Architecture
+## 2. What is configurable
 
-### 2.1 Top level
+The competition asks for a **programmable N×N kernel**. This design answers it
+with **N = 3**: the nine coefficient *values* are fully programmable at
+runtime, in four banks, while the kernel *size* is fixed when the hardware is
+built. The table shows what can change, and when:
+
+| Property | When it can change | How |
+|---|---|---|
+| Kernel coefficients (9 × 8-bit signed) | **Runtime** | Kernel load port (`kl_valid`, `kl_bank`, `kl_addr`, `kl_coef`). An inactive bank can be rewritten while another is streaming. |
+| Number of kernels per run (1–4) | **Runtime** | `cfg_num_kernels`, sampled at `cfg_start` |
+| ReLU on/off | **Runtime** | `cfg_relu_en` |
+| Output scaling (right shift 0–7, round-half-up) | **Runtime** | `cfg_out_shift`; e.g. 0 for integer filters, 7 for Q1.7 CNN weights |
+| Image width `W` | Build time | `conv_top` parameter `W`; verified at 32, 64 and 256 |
+| Multiplier implementation | Build time | `conv_top` parameter `USE_DSP` (0 = LUT, 1 = DSP48E1) |
+| **Kernel size `N`** | **Fixed at 3** | See below |
+
+**Why N is fixed, and how far it generalizes.** `N` is a single constant in
+[`rtl/pkg_params.sv`](rtl/pkg_params.sv), and every width in the design is
+*derived* from it: product width, accumulator width, address widths, line
+buffer depth `W−N`, border masking and output count. The integer golden model
+is fully general in `N`. It is exercised at **N = 5** to prove that the width
+formulas hold beyond 3×3 rather than being constants that happen to be right
+([assumption A7](docs/assumptions.md)).
+
+The one block that is *not* general is the adder tree. It is a hand-built,
+exactly aligned 9-input tree, and it stops elaboration with a fatal error if
+`N ≠ 3`. That is a deliberate trade ([assumption A6](docs/assumptions.md)):
+
+- A fixed tree keeps `P_PIPE = 6`, `T_first = 73` and the 20-bit exactness
+  proof constant.
+- 3×3 is the kernel size used by most modern CNN layers.
+- A 5×5 kernel would need 25 multipliers instead of 9, roughly 2.8× the
+  multiplier cost, which the FoM penalizes directly.
+
+Supporting other sizes means replacing the tree with a generated
+`ceil(log2(N²))`-level tree. After that, `P_PIPE` and `T_first` become
+functions of `N`.
+
+---
+
+## 3. Competition bonus points
+
+The competition brief lists five bonus items (transcribed in
+[docs/01](docs/01_spec_compliance.md)). Three are fully delivered, one is half
+delivered, and one is not built.
+
+| # | Bonus | Status | Evidence |
+|---|---|---|---|
+| **B1** | One output pixel per cycle, pipelined | ✅ **Delivered** | Output count and exact latency asserted in every run; 77 runs with random input gaps |
+| **B2** | Multiple kernels | ✅ **Delivered** | 4 banks; 154 runs split 66 / 18 / 58 / 12 over 1 / 2 / 3 / 4 kernels |
+| **B3** | ReLU activation | ✅ **Delivered** | Every vector runs with ReLU off *and* on: 77 + 77 runs |
+| **B4** | Board demonstration | ⬜ **Not built** | Plan and protocol in [docs/09 §4](docs/09_bonus_and_stretch.md) |
+| **B5** | Edge-detection / industrial-inspection demo | ◐ **Edge detection delivered**; CNN inspection demo not built | 24 figures rendered from RTL output, bit-exact |
+
+### B1 — One output pixel per cycle, pipelined
+
+**What the design does.** Every stage accepts a new operand every clock: the
+serpentine window shifts one pixel, nine multipliers fire in parallel, the
+tree reduces in three registered levels, and normalize finishes in two. There
+is no stall path anywhere. The only thing that can pause the pipeline is the
+*source* dropping `px_valid`, and then the whole pipe freezes together on the
+shared `shift_en` advance and resumes without losing alignment.
+
+**What that buys.** **100 Mpx/s at the 100 MHz standard clock, and 217.2
+(LUT) or 252.1 (DSP) Mpx/s at Fmax.** First output after
+`T_first = (N−1)·W + N + P_PIPE = 73` cycles at W=32.
+
+**How it is proven.** Every regression run counts qualified outputs and
+requires exactly `(W−N+1)²` per kernel: 900 at W=32, 3,844 at W=64 and 64,516
+at W=256. 33 runs additionally require the first output at exactly cycle 73
+(137 at W=64). 77 runs insert random gaps into `px_valid` and still match the
+golden model bit-for-bit, which proves the pipeline holds coherently across
+bubbles. The traces `window_first.wlf` and `fullscene256.wlf` are archived in
+`tb/results/waves/`.
+
+**Read it precisely.** 1.0 px/cycle is the rate whenever a valid window
+exists. A stride-1 convolution without padding produces `(W−2)²` outputs from
+`W²` inputs, so the frame average is 0.88 outputs per input cycle at W=32 and
+0.98 at W=256. The border rows and columns simply have no output. No cycle is
+ever lost to the accelerator itself.
+
+### B2 — Multiple kernels
+
+**What the design does.** `kernel_regfile` holds **four banks of nine
+coefficients** in flip-flops. `cfg_num_kernels` (1–4) sets how many banks one
+run uses. After each frame the FSM passes through FLUSH, swaps to the next
+bank, and the host re-streams the same frame ([assumption
+A5](docs/assumptions.md)). `out_bank` tags every output pixel with the bank
+that produced it, so the output stream is self-describing. Because only
+*inactive* banks can be written while streaming, the next set of kernels can
+be loaded during the current run with no shadow register file.
+
+**Cost.** 360 flip-flops for storage plus the read register, and no BRAM.
+
+**How it is proven.** The regression covers 1, 2, 3 and 4 kernels per run
+(66, 18, 58 and 12 runs), with distinct kernels in every bank so a bank-select
+error cannot hide. The coverage bins *Kernel banks* (4/4) and *Bank count*
+(4/4) are both closed. `tb_kernel_regfile` checks that writing one bank never
+disturbs the others. The bank swap is traced in `bank_swap.wlf`.
+
+### B3 — ReLU activation
+
+**What the design does.** `max(0, x)` is applied in normalize stage 2, after
+saturation, and bypassed by `cfg_relu_en`. It shares a pipeline stage with the
+saturation logic, so it adds **no latency**. Its cost is a 16-bit zeroing mux
+inside `normalize` (23–30 LUTs for the whole module). The order,
+saturate then ReLU, is identical in RTL and golden model, and `sat_flag` still
+reports a clamp even when ReLU then zeroes that result.
+
+**How it is proven.** Every vector runs twice, with ReLU off and on: 77 + 77
+runs, all bit-exact. The coverage bins *ReLU mode* (2/2) and *Activation*
+(1/1) are closed. `tb_normalize` checks the directed corners, and the clip
+event is traced in `relu_clip.wlf`. The last panel of the figure below is the
+Gx edge map with ReLU enabled: only positive gradients survive.
+
+![Coins: input, Sobel Gx, Sobel Gy, magnitude, identity, Gx with ReLU, all RTL output](docs/report/figures/demo_real_coins_centre64_edge.png)
+
+*One image, one run of three banks (B2): Sobel Gx, Sobel Gy and identity, then
+the gradient magnitude, then a second run with ReLU on (B3). Every panel is
+read back from RTL simulation. The identity panel reproducing the input exactly
+is itself a check.*
+
+### B4 — Board demonstration (not built)
+
+**The plan** ([docs/09 §4](docs/09_bonus_and_stretch.md)) is a UART shell on a
+PYNQ-Z2. A PC sends the coefficients, a config byte and a 32×32 image, and the
+board returns 900 16-bit results per bank. A host script compares them against
+the golden model and renders the edge map live.
+
+**What already exists.** `conv_top_chip` provides the registered-I/O top level
+that shell would wrap, and `constraints_chip.xdc` provides the constraints. The
+clock is not a risk on the board's own speed grade: the scripted flow already
+closes **150 MHz on `xc7z020clg400-1`**, the part the PYNQ-Z2 carries
+([`fpga/reports/`](fpga/reports/)), so the 100 MHz standard clock has ample
+margin there.
+
+**What is missing.** The UART shell RTL (`demo/uart_shell/`), the host script
+(`demo/host/`), and the photo plus host log the acceptance criteria require.
+
+### B5 — Edge-detection / industrial-inspection demo
+
+**(a) Edge detection: delivered.** Sobel Gx and Gy are loaded into banks 0 and
+1 and the identity kernel into bank 2. Real photographs are streamed through
+the RTL at their native resolution, never resized. 24 figures are rendered
+**from the RTL's output files, never from Python**. Each is drawn only after
+every pixel matched the golden model, and the scripts refuse to render a
+mismatching vector. The headline figure at the top of this README is the W=256
+full-scene run: 193,548 pixels across three banks, bit-exact. Its |Gx|+|Gy| map
+outlines every scratch and pit in the surface, which is exactly the
+edge-extraction step of a surface-inspection pipeline. The full set is in
+[`docs/report/figures/`](docs/report/figures/README.md).
+
+**(b) CNN-based inspection: not built.** The plan
+([docs/09 §2](docs/09_bonus_and_stretch.md)) trains a tiny CNN on the NEU
+steel-surface-defect dataset. Its first convolution layer is quantized to INT8
+and run on the accelerator, as four banks producing four feature maps with ReLU
+on and `cfg_out_shift = 7` for Q1.7 weights. The rest of the network then runs
+in Python. The hardware already supports every piece of this; what is missing
+is `model/train_demo_cnn.py`, `model/quantize_kernels.py` and the agreement
+table.
+
+---
+
+## 4. Architecture
+
+### 4.1 Top level
 
 ![Top-level architecture](docs/images/architecture/top_level.png)
 
@@ -101,7 +271,7 @@ data. It only *qualifies* it:
 configuration input. It appears in exactly one place in the hardware: the depth
 of the two delay lines. The adder tree has exactly three registered levels.
 
-### 2.2 Datapath detail
+### 4.2 Datapath detail
 
 ![Line buffers, MAC array and adder tree](docs/images/architecture/datapath_detail.png)
 
@@ -133,7 +303,7 @@ pure fixed-latency delay line.
 round-half-up by `cfg_out_shift`. Stage 2 applies symmetric saturation to
 16-bit signed, then the optional ReLU.
 
-### 2.3 Pipeline, latency, throughput
+### 4.3 Pipeline, latency, throughput
 
 | Stage | Registers | Contributes to `P_PIPE` |
 |---|---|---|
@@ -149,11 +319,11 @@ Outputs    = (W−N+1)²                = 900 per bank @ W=32               meas
 Throughput = 1.0 output px / cycle   no stall path; valid count asserted every run
 ```
 
-The coefficient read register (see [§5.3](#53-the-fix-that-unlocked-the-clock))
+The coefficient read register (see [§7.3](#73-the-fix-that-unlocked-the-clock))
 is a static side input to the multipliers, not a stage on the pixel path. That
 is why it adds **0** to `P_PIPE`.
 
-### 2.4 Fixed-point chain
+### 4.4 Fixed-point chain
 
 ```
 pixel 8u ─► zero-extend 9s ─► × coef 8s ─► product 17s ─► Σ9 ─► acc 20s ─► round ─► sat 16s ─► ReLU ─► out 16s
@@ -173,12 +343,12 @@ under-provisioned by a single bit ([docs/03](docs/03_fixed_point.md)).
 
 ---
 
-## 3. How it is optimized
+## 5. How it is optimized
 
 The FoM charges **100 per BRAM** and **50 per DSP** against **1 per LUT**. The
 design is organized around that exchange rate.
 
-### 3.1 Zero BRAM: the line buffer costs 16 LUTs
+### 5.1 Zero BRAM: the line buffer costs 16 LUTs
 
 The two delay lines hold `2 × 29 × 8 = 464` bits. A single BRAM would add
 **100** to the cost term, more than 10 % of the entire LUT variant, to store
@@ -188,7 +358,7 @@ per bit-slice per row, **16 LUTs in total**. That is visible directly in the
 DSP build's hierarchy below, where `u_line_window` is 16 LUT-as-memory and 72
 window flip-flops, and nothing else.
 
-### 3.2 Every flip-flop is accounted for
+### 5.2 Every flip-flop is accounted for
 
 The flip-flop count is not an estimate. It follows exactly from the
 architecture:
@@ -203,11 +373,11 @@ architecture:
 | `ctrl_fsm` | 44 | state, counters, latched config, metadata |
 | **Core total** | **830 / 677** | matches the `u_core` rows below to the flip-flop |
 
-The I/O wrapper (`conv_top_chip`, [§4.6](#46-the-io-wrapper)) adds exactly
+The I/O wrapper (`conv_top_chip`, [§6.6](#66-the-io-wrapper)) adds exactly
 56 more: 33 input and 23 output boundary registers, the 58 port bits minus
 `clk` and `rst_n`. That gives the totals of 886 and 734.
 
-### 3.3 Other deliberate choices
+### 5.3 Other deliberate choices
 
 | Choice | Saves | Instead of |
 |---|---|---|
@@ -221,7 +391,7 @@ The I/O wrapper (`conv_top_chip`, [§4.6](#46-the-io-wrapper)) adds exactly
 | Registered coefficient read | a long mux-into-multiplier path, with 0 cycles of latency | an extra pipeline stage |
 | DSP48E1 absorbs the product register | 153 FFs and 570 LUTs | fabric multipliers |
 
-### 3.4 Where the resources go
+### 5.4 Where the resources go
 
 <table>
 <tr>
@@ -252,9 +422,9 @@ LUT6 can serve two hierarchies and is counted in both.
 
 ---
 
-## 4. Implementation results (Vivado)
+## 6. Implementation results (Vivado)
 
-### 4.1 Method
+### 6.1 Method
 
 All runs use Vivado 2018.2 project mode with the default synthesis and
 implementation strategies, on part **`xc7z020clg400-3`**. The top level is
@@ -270,7 +440,7 @@ twice:
    variant the period is 3.966 ns, which is exactly the 10 ns standard period
    minus its 6.034 ns synthesis slack.
 
-### 4.2 Summary of every run
+### 6.2 Summary of every run
 
 | Run | Clock | Synth WNS | **Impl WNS** | Impl WHS | WPWS | LUT | FF | DSP | Slices | Dyn. power |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -287,7 +457,7 @@ LUTs (+3.1 %) and the DSP variant by 19 (+5.1 %), which is the tool buying
 speed with logic duplication. Flip-flop counts do not change at all, because
 the pipeline depth never changes.
 
-### 4.3 Standard clock: 100 MHz
+### 6.3 Standard clock: 100 MHz
 
 <table>
 <tr><th width="50%">LUT variant</th><th width="50%">DSP variant</th></tr>
@@ -334,7 +504,7 @@ column on the right edge where its 58 pins land.
 
 </details>
 
-### 4.4 Fmax: 217.2 MHz (LUT) and 252.1 MHz (DSP)
+### 6.4 Fmax: 217.2 MHz (LUT) and 252.1 MHz (DSP)
 
 <table>
 <tr><th width="50%">LUT variant: 4.604 ns · 217.2 MHz</th><th width="50%">DSP variant: 3.966 ns · 252.1 MHz</th></tr>
@@ -372,7 +542,7 @@ column on the right edge where its 58 pins land.
 
 </details>
 
-### 4.5 Check Timing
+### 6.5 Check Timing
 
 <table>
 <tr><th width="50%">LUT @ 100 MHz</th><th width="50%">DSP @ 100 MHz</th></tr>
@@ -399,7 +569,7 @@ rather than inventing external delays. Everything that matters is clean:
 
 </details>
 
-### 4.6 The I/O wrapper
+### 6.6 The I/O wrapper
 
 <table>
 <tr><th width="50%">RTL: <code>conv_top_chip</code> as elaborated</th><th width="50%">Synthesized top level</th></tr>
@@ -431,9 +601,9 @@ throughput and every verified property are untouched.
 
 ---
 
-## 5. Timing and Fmax
+## 7. Timing and Fmax
 
-### 5.1 Results
+### 7.1 Results
 
 | | `lut` | `dsp` |
 |---|---|---|
@@ -447,7 +617,7 @@ true ceiling. The DSP variant still has 0.279 ns of slack at 252.1 MHz, so
 252.1 MHz is a demonstrated **floor**. Extrapolating that slack suggests
 about 271 MHz, but that has not been run, so it is not claimed.
 
-### 5.2 What sets the limit
+### 7.2 What sets the limit
 
 The pipeline was built so that **no stage does more than one multiply or one
 add** (see the note in the datapath diagram). The longest register-to-register
@@ -464,7 +634,7 @@ flip-flops and latency, and it buys nothing in the FoM, whose throughput is
 counted per cycle. The design stops at the point where the arithmetic,
 not the control, sets the clock.
 
-### 5.3 The fix that unlocked the clock
+### 7.3 The fix that unlocked the clock
 
 During development the first timing failure came from a path that crossed a
 stage boundary:
@@ -484,9 +654,9 @@ the output holds **before** the clock edge and switches atomically **after** it.
 
 ---
 
-## 6. Power and Figure of Merit
+## 8. Power and Figure of Merit
 
-### 6.1 Power breakdown (implemented, 100 MHz)
+### 8.1 Power breakdown (implemented, 100 MHz)
 
 | | `lut` | `dsp` |
 |---|---|---|
@@ -514,7 +684,7 @@ timing.
 | `lut` | 0.015 W ÷ 100 Mpx/s = **150 pJ/px** | 0.034 W ÷ 217.2 Mpx/s = **157 pJ/px** |
 | `dsp` | 0.019 W ÷ 100 Mpx/s = **190 pJ/px** | 0.049 W ÷ 252.1 Mpx/s = **194 pJ/px** |
 
-### 6.2 The Figure of Merit
+### 8.2 The Figure of Merit
 
 ```
 FoM = Throughput / (Power × (LUTs + 50·DSPs + 100·BRAMs))
@@ -547,7 +717,7 @@ numerator, so the 100 MHz point is the one that scores best.
 
 ---
 
-## 7. Verification
+## 9. Verification
 
 `model/golden_conv.py` is the arithmetic **reference**. The RTL is correct if
 and only if it is **bit-exact** against it. There is no "accuracy percentage":
@@ -569,12 +739,6 @@ python tb/run_regression.py --signoff
 | Routed netlist, both variants | 900 pixels each | **0** |
 | Datapath stages (MAC, tree, normalize) | 710 stage records × 3 | **0** |
 | Window generator | 1,872 windows at W=8 and W=32 | **0** |
-
-![Coins: input, Sobel Gx, Sobel Gy, magnitude, identity, Gx with ReLU, all RTL output](docs/report/figures/demo_real_coins_centre64_edge.png)
-
-*Real-image vectors at W=64: Sobel Gx and Gy, gradient magnitude, the identity
-kernel (the output reproduces the input) and Gx with ReLU, all read back from
-RTL simulation.*
 
 **How the reference is protected:**
 
@@ -599,7 +763,7 @@ checkers, because ModelSim ASE 10.1d supports neither SVA nor covergroups.
 
 ---
 
-## 8. Reproducing the results
+## 10. Reproducing the results
 
 **Vivado GUI (the results in §4):**
 
@@ -631,7 +795,7 @@ configuration.
 
 ---
 
-## 9. Repository map and status
+## 11. Repository map and status
 
 | Path | Contents |
 |---|---|
@@ -648,6 +812,7 @@ configuration.
 | 1 Golden model · 2 Vectors · 3 Widths · 4 RTL · 5 Verification | ✅ complete (tags `phase1`–`phase5-complete`, `phase5-real-vectors`) |
 | 6 Synthesis & implementation | ✅ both variants met at 100 MHz; Fmax 217.2 MHz (LUT) and 252.1 MHz (DSP) |
 | 7 Sign-off | ⬜ report document, presentation, results table in [docs/10](docs/10_report_outline.md) |
+| Bonuses ([§3](#3-competition-bonus-points)) | ✅ B1, B2, B3 · ◐ B5 (edge demo done, CNN demo not built) · ⬜ B4 board demo |
 
 Conventions are in [CONTRIBUTING.md](CONTRIBUTING.md): no literal widths
 outside `pkg_params.sv`, signal names match
